@@ -43,8 +43,8 @@ const snake = {
   currnetDir: [-1, 0], //up
   isDead: false,
 };
-let chanceForDivineFruit = .07;
-let maxApplesAtOnce = 12;
+let chanceForDivineFruit = .08;
+let maxApplesAtOnce = 14;
 const requeue = [];
 const initialFps = 9;
 let fps = 12;
