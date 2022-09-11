@@ -312,10 +312,11 @@ function alerto(msg, string) {
   string = Object.keys(quotes).includes(string)
     ? quotes[string][Math.floor(Math.random() * quotes[string].length)]
     : string;
+
   const thing = document.querySelector(".alerto");
   thing.querySelector(".msg").innerText = msg;
   thing.querySelector(".also-msg").innerText = string;
-  thing.show();
+  thing.setAttribute('open', true);
 
   const highscore = localStorage.getItem("highscore");
   if (highscore) {
@@ -335,7 +336,10 @@ if (isMacLike) {
 ///                          S T U F F  and  S H I T                            ///
 ///////////////////////////////////////////////////////////////////////////////////
 
-document.querySelector(".alerto").addEventListener("close", () => {
+
+document.querySelector('.alerto').addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.querySelector(".alerto").removeAttribute("open")
   restart();
   document.querySelector(".high-score").classList.add("secret");
 });

@@ -57,6 +57,9 @@ body, html {
     overflow: hidden;
 }
 
+.alerto:not([open]) {
+    display: none;
+}
 
 .alerto {
     padding: 30px;
@@ -65,6 +68,8 @@ body, html {
     font-size: 2rem;
     max-width: 70ch;
     border-radius: 0.5em;
+    z-index: 2;
+    background-color: white;
 }
 
 .alerto .btn-wrapper {
