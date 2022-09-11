@@ -29,7 +29,7 @@ table {
     --rotation: 0;
     --transY: 0;
     --transX: 0;
-    transform: rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--transY) * 1px)) translateX(calc(var(--transX) * 1px));
+    /* transform: rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--transY) * 1px)) translateX(calc(var(--transX) * 1px)); */
     transition: transform calc(4s / var(--fps)) ease-out;
     table-layout: fixed;
     
@@ -129,45 +129,8 @@ body, html {
     display: none;
 }
 
-.advanced-switch {
-    position: absolute;
-    font-size: 2.5rem;;
-    bottom: 1rem;
-    left: 1rem;
-    background-color: rgb(77, 77, 77);
-    opacity: .3;
-    padding: 16px 24px;
-    border-radius: 10px;
-    transition: all 100ms ease-out;
-    cursor: pointer;
-    transform: scale(.97);
-    user-select: none;
-}
 
-.advanced-switch:hover {
-    opacity: .9;
-    transform: scale(.98);
-
-}
-
-.advanced-switch .desc {
-    display: inline-block;
-    transform: scaleX(0) !important;
-    transform-origin: left !important;
-    transition: all 100ms ease-out;
-}
-
-
-.advanced-switch:hover .desc {
-    transform: scaleX(1) !important;
-}
-
-.advanced-switch .content {
-    color: white;
-    margin: 0;
-}
-
-.alerto, .points, .advanced-switch {
+.alerto, .points {
     font-family: 'Inconsolata', monospace;
     line-height: 1.6em   ;
 }

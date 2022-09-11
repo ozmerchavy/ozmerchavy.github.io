@@ -50,7 +50,6 @@ const initialFps = 9;
 let fps = 12;
 let size = 40;
 const maxSpeed = 35 / Math.PI; // Why? bc its funny thats why
-let advancedMode = true;
 const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -257,12 +256,10 @@ function nextTurn() {
   if (!snake.isDead) {
     document.querySelector(".score").innerText = snake.snakeArray.length - 3;
 
-    if (advancedMode) {
-      fps = Math.min(initialFps + (snake.snakeArray.length - 3) / 4, maxSpeed);
-      size = Math.max(40 - snake.snakeArray.length, 18);
-      document.querySelector("body").style.setProperty("--size", size);
-      document.querySelector("body").style.setProperty("--fps", fps);
-    }
+    fps = Math.min(initialFps + (snake.snakeArray.length - 3) / 4, maxSpeed);
+    size = Math.max(40 - snake.snakeArray.length, 18);
+    document.querySelector("body").style.setProperty("--size", size);
+    document.querySelector("body").style.setProperty("--fps", fps);
   }
 
   if (isGodMode()) flashNearGodModeEnd(2000);
@@ -322,13 +319,6 @@ function checkKey(e) {
     requeue.push("right");
   }
 }
-
-document.querySelector(".advanced-switch").addEventListener("click", () => {
-  advancedMode = !advancedMode;
-  document.querySelector(".advanced-switch .text").innerText = advancedMode
-    ? "On"
-    : "Off";
-});
 
 /// BEING COOL AND RESPONSIVE!!
 
