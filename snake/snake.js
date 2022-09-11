@@ -45,9 +45,9 @@ let chanceForDivineFruit = .08;
 let maxApplesAtOnce = 14;
 const requeue = [];
 const initialFps = 9;
-let fps = 12;
+let fps = initialFps;
 let size = 40;
-const maxSpeed = 41 / Math.PI; // Why? bc its funny thats why
+const maxSpeed = 55 / Math.PI; // Why? bc its funny thats why
 const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
 ///////////////////////////////////////////////////////////////////////////////////
