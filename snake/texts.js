@@ -62,3 +62,4 @@ const quotes = {
         "Steve Job",
         "Ok Job not bad"
     ]
+}
