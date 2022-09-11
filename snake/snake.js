@@ -9,7 +9,6 @@ const foods = [
   "🍊",
   "🍋",
   "🍉",
-  "🍇",
   "🍓",
   "🍈",
   "🍒",
@@ -24,8 +23,17 @@ const Graphics = {
   apple: choice(foods),
   emptys: `⬛`,
   head: "🔴",
-  body: "🟢",
+  body: "⚪",
+  godBody: "🟣",
+  divineFruit: "🍇",
 };
+
+let godModeEndTime = 0; // in ms since 1970
+
+function isGodMode() {
+  return Date.now() < godModeEndTime;
+}
+
 const mapRows = 25;
 const mapCols = 25;
 let map = genMap(mapRows, mapCols);
@@ -35,16 +43,20 @@ const snake = {
   currnetDir: [-1, 0], //up
   isDead: false,
 };
+let chanceForDivineFruit = .07;
 let maxApplesAtOnce = 12;
 const requeue = [];
 const initialFps = 9;
 let fps = 12;
 let size = 40;
-const maxSpeed = 35 / Math.PI // Why? bc its funny thats why
+const maxSpeed = 35 / Math.PI; // Why? bc its funny thats why
 let advancedMode = true;
 const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
 ///////////////////////////////////////////////////////////////////////////////////
+
+
+
 function vec2dAdd(arr, arr2) {
   return [arr[0] + arr2[0], arr[1] + arr2[1]];
 }
@@ -72,10 +84,10 @@ function genMap(rows, cols) {
   return map;
 }
 
-function updateMap([x, y], valuE) {
-  map[x][y] = valuE;
-  document.getElementById(`${[x, y]}`).innerHTML = valuE;
-  document.getElementById(`${[x, y]}`).className = valuE;
+function updateMap([x, y], value) {
+  map[x][y] = value;
+  document.getElementById(`${[x, y]}`).innerHTML = value;
+  document.getElementById(`${[x, y]}`).className = value;
 }
 
 function paintMap() {
@@ -97,6 +109,7 @@ function findAvailables() {
   return availables;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////
 ///                          S N A K E   F U N C T I O N S                      ///
 ///////////////////////////////////////////////////////////////////////////////////
@@ -111,7 +124,21 @@ function rotate(currnetDir, direction) {
   return [currnetDir[1] * rotateDir[0], currnetDir[0] * rotateDir[1]];
 }
 
-function CODE_TO_MOVE_THRU_WALLS() {
+function flashNearGodModeEnd(durationMs) {
+  if (godModeEndTime - durationMs > Date.now()) return;
+
+  const msPerState = 200;
+  const timeLeft = godModeEndTime - Date.now();
+  const special = Math.floor(timeLeft / msPerState) % 2;
+  const emoji = special ? Graphics.godBody : Graphics.body;
+  for (const ij of snake.snakeArray) {
+    updateMap(ij, emoji);
+  }
+  if (!special) updateMap(snake.snakeArray[0], Graphics.head);
+}
+
+
+function maybeTransportThruWall(newHead) {
   const taboole = document.querySelector("table");
   const currentYtrans = taboole.style.getPropertyValue("--transY");
   const currentXtrans = taboole.style.getPropertyValue("--transX");
@@ -121,7 +148,6 @@ function CODE_TO_MOVE_THRU_WALLS() {
     taboole.style.setProperty("--transY", currentYtrans * -1);
   }
   if (newHead[0] < 0) {
-    console.log("greps");
     newHead[0] = map.length - 1;
     taboole.style.setProperty("--transY", currentYtrans * -1);
   }
@@ -142,21 +168,31 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   const head = snake.snakeArray[0];
   const newHead = vec2dAdd(head, snake.currnetDir);
 
+  if (thruWalls) {
+    maybeTransportThruWall(newHead);
+  }
+
   const newHeadContent = map[newHead[0]]?.[newHead[1]];
 
-  if (newHeadContent === undefined || newHeadContent == Graphics.body) {
+  if (newHeadContent === undefined || newHeadContent == Graphics.body && !isGodMode()) {
     return die();
   }
 
+  
   snake.snakeArray.unshift(newHead);
   if (newHeadContent != Graphics.apple) {
-    let lastPos = snake.snakeArray.pop();
+    const lastPos = snake.snakeArray.pop();
     updateMap(lastPos, Graphics.emptys);
   }
-  for (let sna of snake.snakeArray) {
-    updateMap(sna, Graphics.body);
+  if (newHeadContent == Graphics.divineFruit) {
+    godModeEndTime = Date.now() + 7_000; // enter (or lengthen the duration of) god mode
   }
-  updateMap(newHead, Graphics.head);
+
+  const emoji = isGodMode() ? Graphics.godBody : Graphics.body;
+  for (const ij of snake.snakeArray) {
+    updateMap(ij, emoji);
+  }
+  if (!isGodMode()) updateMap(newHead, Graphics.head);
 
   const table = document.querySelector("table");
   const transY = table.style.getPropertyValue("--transY");
@@ -196,37 +232,40 @@ function win() {
 ///////////////////////////////////////////////////////////////////////////////////
 
 function applesOrWin() {
-  let av = findAvailables();
+  const av = findAvailables();
   if (av.length == 0) {
     return win();
   } else if (
-    map.flat().filter((fatut) => fatut == Graphics.apple).length < maxApplesAtOnce
+    map.flat().filter((fatut) => fatut == Graphics.apple).length <
+    maxApplesAtOnce
   ) {
-    let ranSpot = av[Math.floor(Math.random() * av.length)];
-    updateMap(ranSpot, Graphics.apple);
+    const ranSpot = av[Math.floor(Math.random() * av.length)];
+    if (Math.random() < chanceForDivineFruit) {
+      updateMap(ranSpot, Graphics.divineFruit);
+    } else updateMap(ranSpot, Graphics.apple);
   }
 }
+
 
 function nextTurn() {
   if (snake.isDead) {
     return;
   }
   applesOrWin();
-  moveSnakeorDie({rotation: requeue.shift()});
+  moveSnakeorDie({ rotation: requeue.shift(), thruWalls: isGodMode() });
 
   if (!snake.isDead) {
     document.querySelector(".score").innerText = snake.snakeArray.length - 3;
 
     if (advancedMode) {
-      fps = Math.min(
-        initialFps + (snake.snakeArray.length - 3) / 4,
-        maxSpeed
-      );
+      fps = Math.min(initialFps + (snake.snakeArray.length - 3) / 4, maxSpeed);
       size = Math.max(40 - snake.snakeArray.length, 18);
       document.querySelector("body").style.setProperty("--size", size);
       document.querySelector("body").style.setProperty("--fps", fps);
     }
   }
+
+  if (isGodMode()) flashNearGodModeEnd(2000);
 }
 
 async function restart() {
@@ -316,7 +355,7 @@ function alerto(msg, string) {
   const thing = document.querySelector(".alerto");
   thing.querySelector(".msg").innerText = msg;
   thing.querySelector(".also-msg").innerText = string;
-  thing.setAttribute('open', true);
+  thing.setAttribute("open", true);
 
   const highscore = localStorage.getItem("highscore");
   if (highscore) {
@@ -336,10 +375,9 @@ if (isMacLike) {
 ///                          S T U F F  and  S H I T                            ///
 ///////////////////////////////////////////////////////////////////////////////////
 
-
-document.querySelector('.alerto').addEventListener('submit', (e) => {
+document.querySelector(".alerto").addEventListener("submit", (e) => {
   e.preventDefault();
-  document.querySelector(".alerto").removeAttribute("open")
+  document.querySelector(".alerto").removeAttribute("open");
   restart();
   document.querySelector(".high-score").classList.add("secret");
 });
@@ -348,12 +386,6 @@ document.onkeyup = checkKey;
 
 createTable(map);
 paintMap();
-
-/*
-setInterval(() => {
-  nextTurn();
-}, 1000 / fps);
-*/
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
