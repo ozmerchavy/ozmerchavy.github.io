@@ -24,7 +24,7 @@ const Graphics = {
   emptys: `⬛`,
   head: "🔴",
   body: "⚪",
-  godBody: "🟣",
+  godBody: "🔵",
   divineFruit: "🍇",
 };
 
