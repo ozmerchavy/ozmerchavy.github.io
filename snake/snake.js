@@ -29,10 +29,8 @@ const Graphics = {
 };
 
 let godModeEndTime = 0; // in ms since 1970
+let isGodMode = false;
 
-function isGodMode() {
-  return Date.now() < godModeEndTime;
-}
 
 const mapRows = 25;
 const mapCols = 25;
@@ -173,7 +171,7 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
 
   const newHeadContent = map[newHead[0]]?.[newHead[1]];
 
-  if (newHeadContent === undefined || newHeadContent == Graphics.body && !isGodMode()) {
+  if (newHeadContent === undefined || newHeadContent == Graphics.body && !isGodMode) {
     return die();
   }
 
@@ -185,13 +183,14 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   }
   if (newHeadContent == Graphics.divineFruit) {
     godModeEndTime = Date.now() + 7_000; // enter (or lengthen the duration of) god mode
+    isGodMode = true;
   }
 
-  const emoji = isGodMode() ? Graphics.godBody : Graphics.body;
+  const emoji = isGodMode ? Graphics.godBody : Graphics.body;
   for (const ij of snake.snakeArray) {
     updateMap(ij, emoji);
   }
-  if (!isGodMode()) updateMap(newHead, Graphics.head);
+  if (!isGodMode) updateMap(newHead, Graphics.head);
 
   const table = document.querySelector("table");
   const transY = table.style.getPropertyValue("--transY");
@@ -251,7 +250,7 @@ function nextTurn() {
     return;
   }
   applesOrWin();
-  moveSnakeorDie({ rotation: requeue.shift(), thruWalls: isGodMode() });
+  moveSnakeorDie({ rotation: requeue.shift(), thruWalls: isGodMode });
 
   if (!snake.isDead) {
     document.querySelector(".score").innerText = snake.snakeArray.length - 3;
@@ -262,7 +261,10 @@ function nextTurn() {
     document.querySelector("body").style.setProperty("--fps", fps);
   }
 
-  if (isGodMode()) flashNearGodModeEnd(2000);
+  if (isGodMode) {
+    flashNearGodModeEnd(2000);
+    isGodMode = Date.now() < godModeEndTime;
+  }
 }
 
 async function restart() {
@@ -382,8 +384,11 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 async function mainLoop() {
   await sleep(350);
   while (true) {
+    const timeStart = performance.now();
     nextTurn();
-    await sleep(1000 / fps);
+    const timePassed = performance.now() - timeStart;
+    const timeLeftToSleep = 1000 / fps - timePassed;
+    if (timeLeftToSleep > 0) await sleep(timeLeftToSleep);
   }
 }
 
