@@ -29,7 +29,7 @@ table {
     --rotation: 0;
     --transY: 0;
     --transX: 0;
-    /* transform: rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--transY) * 1px)) translateX(calc(var(--transX) * 1px)); */
+    transform: rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--transY) * 1px)) translateX(calc(var(--transX) * 1px));
     transition: transform calc(4s / var(--fps)) ease-out;
     table-layout: fixed;
     
@@ -132,5 +132,5 @@ body, html {
 
 .alerto, .points {
     font-family: 'Inconsolata', monospace;
-    line-height: 1.6em   ;
+    line-height: 1.6em;
 }

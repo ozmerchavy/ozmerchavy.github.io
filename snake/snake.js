@@ -49,7 +49,7 @@ const requeue = [];
 const initialFps = 9;
 let fps = 12;
 let size = 40;
-const maxSpeed = 35 / Math.PI; // Why? bc its funny thats why
+const maxSpeed = 41 / Math.PI; // Why? bc its funny thats why
 const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
 ///////////////////////////////////////////////////////////////////////////////////
