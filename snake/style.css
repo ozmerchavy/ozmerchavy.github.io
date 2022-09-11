@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+
+:root { 
+    font-size: .75rem;
+}
+*{
+touch-action: manipulation;
+
+}
+td {
+
+    font-size: calc(var(--size)*1px);
+    text-align: center;
+
+    box-shadow: 2px 2px 10px -5px white;
+    border-radius: 7px;
+    overflow: hidden;
+
+}
+
+[apple-device] td {
+    padding-inline: calc(calc(var(--size) / 6.667) * 1px);
+
+}
+
+
+table {
+    padding: 16px;
+    --rotation: 0;
+    --transY: 0;
+    --transX: 0;
+    --transform: rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--transY) * 1px)) translateX(calc(var(--transX) * 1px));
+    transition: transform calc(4s / var(--fps)) ease-out;
+    table-layout: fixed;
+    
+}
+
+
+table .⬛ {
+    color: transparent;
+}
+
+body {
+    --size: 30;
+    --fps: 5;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+
+.alerto {
+    padding: 30px;
+    box-shadow: 2px 2px 10px -5px gray;
+    position: absolute;
+    font-size: 2rem;
+    max-width: 70ch;
+    border-radius: 0.5em;
+}
+
+.alerto .btn-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alerto button{
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 0.5em;
+    border: none;
+    outline: none;
+    box-shadow: 2px 2px 10px -5px black;
+    background-color: rgb(243, 130, 130);
+    color: #fff;
+    font-size: 1.5em;
+    margin-left: 2ch;
+
+    transition: transform 200ms ease-out;
+}
+
+.alerto button:hover {
+    transform: scale(1.07) translateY(1px);
+}
+
+.alerto .also-msg {
+    margin-top: .836rem;
+    max-width: 55ch;
+}
+
+.points {
+    position: absolute;
+    font-size: 6rem;;
+    left: 3rem;
+    margin: 0;
+    color: #ddf;
+    padding: 0;
+}
+
+.score { 
+    top: 1rem;
+}
+
+.high-score {
+    position: absolute;
+    font-size: 5rem;;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 0;
+    color: rgb(255, 255, 255);
+    padding: 0;
+}
+
+.secret {
+    display: none;
+}
+
+.advanced-switch {
+    position: absolute;
+    font-size: 2.5rem;;
+    bottom: 1rem;
+    left: 1rem;
+    background-color: rgb(77, 77, 77);
+    opacity: .3;
+    padding: 16px 24px;
+    border-radius: 10px;
+    transition: all 100ms ease-out;
+    cursor: pointer;
+    transform: scale(.97);
+    user-select: none;
+}
+
+.advanced-switch:hover {
+    opacity: .9;
+    transform: scale(.98);
+
+}
+
+.advanced-switch .desc {
+    display: inline-block;
+    transform: scaleX(0) !important;
+    transform-origin: left !important;
+    transition: all 100ms ease-out;
+}
+
+
+.advanced-switch:hover .desc {
+    transform: scaleX(1) !important;
+}
+
+.advanced-switch .content {
+    color: white;
+    margin: 0;
+}
+
+.alerto, .points, .advanced-switch {
+    font-family: 'Inconsolata', monospace;
+    line-height: 1.6em   ;
+}

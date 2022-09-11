@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <script src="texts.js" defer></script>
+    <script src="not-snake.js" defer></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- dialog polyfill for alerto -->
+    <script src="https://raw.githubusercontent.com/GoogleChrome/dialog-polyfill/master/dist/dialog-polyfill.js"></script>
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/GoogleChrome/dialog-polyfill/master/dist/dialog-polyfill.css"/>
+
+
+    <title>Snake</title>
+    
+</head>
+
+<body>
+    <table></table>
+
+    <p class="score points">0</p>
+    <p class="high-score secret">High Score: <span class="text">12</span></p>
+
+    <div class="advanced-switch">
+       <p class="content">
+            <span class="desc">Adavanced Mode:</span> <span class="text">On</span>
+        </p>
+    </div>
+
+    <dialog class="alerto">
+        <form method="dialog">
+            <div class="btn-wrapper">
+                <h3 class="msg">you lost, sucker</h3>
+                <button type="submit">
+                    <div class="fatut">&times;</div>
+                </button>
+            </div>
+            <p class="also-msg"></p>
+        </form>
+    </dialog>
+</body>
+</html>
