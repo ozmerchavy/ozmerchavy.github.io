@@ -175,7 +175,7 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
     return die();
   }
 
-  
+
   snake.snakeArray.unshift(newHead);
   if (newHeadContent != Graphics.apple) {
     const lastPos = snake.snakeArray.pop();
@@ -288,14 +288,16 @@ async function restart() {
 
 
 
-function pauseOrunpauseGame(){
-  isPaused = !isPaused; 
+function pauseOrunpauseGame() {
+  isPaused = !isPaused;
   const pauseButton = document.querySelector("#pause")
-  if (isPaused) {pauseButton.classList.remove("secret")}
-  else {pauseButton.classList.add("secret")
+  if (isPaused) { pauseButton.classList.remove("secret"); document.querySelector(".high-score").classList.remove("secret") }
+  else {
+    pauseButton.classList.add("secret")
+    document.querySelector(".high-score").classList.add("secret")
 
   }
-} 
+}
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///                          H T M L   F U N C T I O N S                        ///
@@ -403,7 +405,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 async function mainLoop() {
   await sleep(350);
   while (true) {
-    while (isPaused){
+    while (isPaused) {
       await sleep(10)
     }
     const timeStart = performance.now();
