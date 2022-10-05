@@ -30,7 +30,7 @@ const Graphics = {
 
 let godModeEndTime = 0; // in ms since 1970
 let isGodMode = false;
-
+let isPaused = false
 
 const mapRows = 25;
 const mapCols = 25;
@@ -286,6 +286,17 @@ async function restart() {
   paintMap();
 }
 
+
+
+function pauseOrunpauseGame(){
+  isPaused = !isPaused; 
+  const pauseButton = document.querySelector("#pause")
+  if (isPaused) {pauseButton.classList.remove("secret")}
+  else {pauseButton.classList.add("secret")
+
+  }
+} 
+
 ///////////////////////////////////////////////////////////////////////////////////
 ///                          H T M L   F U N C T I O N S                        ///
 ///////////////////////////////////////////////////////////////////////////////////
@@ -320,7 +331,13 @@ function checkKey(e) {
   } else if (e.keyCode == "39") {
     requeue.push("right");
   }
+  /// pause option
+  else if (e.keyCode == "32") {
+    pauseOrunpauseGame()
+  }
 }
+
+
 
 /// BEING COOL AND RESPONSIVE!!
 
@@ -338,6 +355,8 @@ document.body.addEventListener("touchstart", (event) => {
     requeue.push("right");
   }
 });
+
+
 
 function alerto(msg, string) {
   string = Object.keys(quotes).includes(string)
@@ -384,11 +403,15 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 async function mainLoop() {
   await sleep(350);
   while (true) {
+    while (isPaused){
+      await sleep(10)
+    }
     const timeStart = performance.now();
     nextTurn();
     const timePassed = performance.now() - timeStart;
     const timeLeftToSleep = 1000 / fps - timePassed;
     if (timeLeftToSleep > 0) await sleep(timeLeftToSleep);
+
   }
 }
 

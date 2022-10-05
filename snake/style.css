@@ -111,6 +111,16 @@ body, html {
     padding: 0;
 }
 
+
+.pause {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    transform: scale(20%) translate(100%, -180%);
+    margin: 0;
+    padding: 0;
+}
+
 .score { 
     top: 1rem;
 }
