@@ -31,9 +31,23 @@ const Graphics = {
 let godModeEndTime = 0; // in ms since 1970
 let isGodMode = false;
 let isPaused = false
+let maxApplesAtOnce = 14;
+let chanceForDivineFruit = .08;
+let isTiny = false
+let mapRows = 30;
+let mapCols = 30;
 
-const mapRows = 25;
-const mapCols = 25;
+// for tiny mode 
+if (document.URL.includes("tiny")) {
+  isTiny = true
+  mapCols = 12
+  mapRows = 12
+  maxApplesAtOnce = 2
+  chanceForDivineFruit = .025;
+  document.querySelector("#scoreText").innerHTML = "Tiny " + document.querySelector("#scoreText").innerHTML
+  document.title = "Tiny Snake"
+}
+
 let map = genMap(mapRows, mapCols);
 const midMap = [Math.round(map.length / 2), Math.round(map[0].length / 2)];
 const snake = {
@@ -41,13 +55,11 @@ const snake = {
   currnetDir: [-1, 0], //up
   isDead: false,
 };
-let chanceForDivineFruit = .08;
-let maxApplesAtOnce = 14;
 const requeue = [];
 const initialFps = 9;
 let fps = initialFps;
 let size = 40;
-const maxSpeed = 55 / Math.PI; // Why? bc its funny thats why
+const maxSpeed = 65 / Math.PI; // Why? bc its funny thats why
 const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -208,10 +220,22 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
 
 function die() {
   snake.isDead = true;
-  const highscore = localStorage.getItem("highscore") || 0;
+  let highscore
+  if (isTiny) {
+    highscore = localStorage.getItem("tinyscore") || 0
+  }
+  else {
+    highscore = localStorage.getItem("highscore") || 0;
+  }
+
   const score = snake.snakeArray.length - 3;
   if (score > highscore) {
-    localStorage.setItem("highscore", score);
+    if (isTiny) {
+      localStorage.setItem("tinyscore", score)
+    }
+    else {
+      localStorage.setItem("highscore", score);
+    }
     alerto(`You have a new record of ${score}!`, "machmi");
   } else {
     alerto("You die, you loser piece of sh*t", "maaliv");
@@ -220,7 +244,13 @@ function die() {
 
 function win() {
   const score = snake.snakeArray.length - 3;
-  localStorage.setItem("highscore", score);
+  if (isTiny) {
+    localStorage.setItem("tinyscore", score);
+  }
+  else {
+    localStorage.setItem("highscore", score);
+
+  }
   snake.isDead == true;
   alerto("You won you magnificent creature", "machmi");
 }
@@ -291,6 +321,7 @@ async function restart() {
 function pauseOrunpauseGame() {
   isPaused = !isPaused;
   const pauseButton = document.querySelector("#pause")
+
   if (isPaused) { pauseButton.classList.remove("secret"); document.querySelector(".high-score").classList.remove("secret") }
   else {
     pauseButton.classList.add("secret")
@@ -298,6 +329,9 @@ function pauseOrunpauseGame() {
 
   }
 }
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///                          H T M L   F U N C T I O N S                        ///
@@ -337,6 +371,14 @@ function checkKey(e) {
   else if (e.keyCode == "32") {
     pauseOrunpauseGame()
   }
+  else if (e.keyCode == "84") {
+    if (!isTiny){
+    document.location+="?tiny"
+    }
+    else{
+      document.location=document.location.href.split("?tiny")[0]
+    }
+  }
 }
 
 
@@ -369,8 +411,11 @@ function alerto(msg, string) {
   thing.querySelector(".msg").innerText = msg;
   thing.querySelector(".also-msg").innerText = string;
   thing.setAttribute("open", true);
-
-  const highscore = localStorage.getItem("highscore");
+  let highscore;
+  if (isTiny) {
+    highscore = localStorage.getItem("tinyscore")
+  }
+  else highscore = localStorage.getItem("highscore");
   if (highscore) {
     document.querySelector(".high-score .text").innerText = highscore;
     document.querySelector(".high-score").classList.remove("secret");
