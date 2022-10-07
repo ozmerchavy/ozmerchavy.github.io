@@ -240,6 +240,7 @@ function die() {
   } else {
     alerto("You die, you loser piece of sh*t", "maaliv");
   }
+  document.querySelector(".high-score").classList.remove("secret");
 }
 
 function win() {

@@ -43,7 +43,6 @@ table .⬛ {
 body {
     --size: 30;
     --fps: 5;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,6 +54,9 @@ body, html {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    height:100%; 
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .alerto:not([open]) {
@@ -127,13 +129,23 @@ body, html {
 
 .high-score {
     position: absolute;
-    font-size: 5rem;;
+    font-size: 5rem;
     margin-left: auto;
     margin-right: auto;
     bottom: 0;
     color: rgb(255, 255, 255);
     padding: 0;
 }
+
+@media (max-width:900px){
+    
+.high-score {
+    font-size: 3.5rem;
+    bottom: -20px;
+}
+
+}
+
 
 .secret {
     display: none;
