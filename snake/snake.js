@@ -48,7 +48,7 @@ if (document.URL.includes("tiny")) {
   document.title = "Tiny Snake"
 }
 //// redirecting mobiles to tiny snake
-if (detectMob){
+if ((detectMob())){
   if (!isTiny){
     document.location+="?tiny"
     }
@@ -71,7 +71,7 @@ const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 ///////////////////////////////////////////////////////////////////////////////////
 
 function detectMob() {
-  return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
+  return (  window.innerWidth <= 800 );
 }
 
 function vec2dAdd(arr, arr2) {
