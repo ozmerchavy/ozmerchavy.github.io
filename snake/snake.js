@@ -40,12 +40,18 @@ let mapCols = 30;
 // for tiny mode 
 if (document.URL.includes("tiny")) {
   isTiny = true
-  mapCols = 12
-  mapRows = 12
+  mapCols = 11
+  mapRows = 11
   maxApplesAtOnce = 2
   chanceForDivineFruit = .025;
   document.querySelector("#scoreText").innerHTML = "Tiny " + document.querySelector("#scoreText").innerHTML
   document.title = "Tiny Snake"
+}
+//// redirecting mobiles to tiny snake
+if (detectMob){
+  if (!isTiny){
+    document.location+="?tiny"
+    }
 }
 
 let map = genMap(mapRows, mapCols);
@@ -64,7 +70,9 @@ const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-
+function detectMob() {
+  return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
+}
 
 function vec2dAdd(arr, arr2) {
   return [arr[0] + arr2[0], arr[1] + arr2[1]];
