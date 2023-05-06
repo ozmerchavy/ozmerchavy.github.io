@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FPS Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+</html>
+</link>
+</head>
+
+<body>
+    <h1>FPS Calculator</h1>
+
+    <form  action="javascript:void(0)" >
+        <div class= "box">
+    <label for="camera">Select Camera:</label>
+    <select id="camera" onchange="updateSensorInfo();">
+      <option value="">Select a camera</option>
+    </select>
+   
+
+    <label for="width">Width:</label>
+    <input type="range" id="width" name="width" min="1" max="" onchange="updateHeightMax()" oninput="updateNumber(this.value, 'width-value')">
+    <span class='sliderVal' id="width-value"></span>
+    
+    <label for="height">Height:</label>
+    <input type="range" id="height" name="height" min="1" max="" onchange="updateWidthMax();" oninput="updateNumber(this.value, 'height-value')">
+    <span class='sliderVal' id="height-value"></span>
+
+
+
+   <div class="smallSelects">
+    <div> <label for="interface">Interface:</label>
+        <select id="interface">
+        </select>
+    </div>
+   <div><label for="links">Links:</label>
+    <select id="links">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="4">4</option>
+    </select>
+   </div>
+    <div> <label for="bitness">Bitness:</label>
+        <select id="bitness">
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+        </select></div>
+   
+</div> 
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="rapperesult"> <div id="result"></div></div>
+</div>
+    </form>/>
+  
+  
+
+
+<script src="consts.mjs"></script>
+<script src="functions.mjs"></script>
+  <script>
+
+        const say = console.log
+        let sensorInfo = {};
+
+
+        function updateNumber(value, elementId) {
+            document.getElementById(elementId).innerHTML = value;
+        }
+        function updateSensorInfo() {
+            var camera = document.getElementById("camera").value;
+            sensorInfo = sensor(camera);
+            document.getElementById("width").max = sensorInfo['Sensor Height (V)'];
+            document.getElementById("height").max = sensorInfo['Sensor Width (H)'];
+            // Set default values for width and height
+            document.getElementById("width").value = 1;
+            document.getElementById("height").value = 1;
+        }
+
+        function updateHeightMax() {
+            document.getElementById("height").max = sensorInfo['Max Width (H)'];
+        }
+
+        function updateWidthMax() {
+            document.getElementById("width").max = sensorInfo['Max Height (V)'];
+        }
+
+        function calculate() {
+            const camera = document.getElementById("camera").value;
+            const width = +document.getElementById("width").value;
+            const height = +document.getElementById("height").value;
+            const interface = document.getElementById("interface").value;
+            const links = +document.getElementById("links").value;
+            const bitness = +document.getElementById("bitness").value;
+            const resultDiv = document.getElementById("result");
+            for (const element of [camera, width, height, interface, links, bitness]){
+                if (!element || element == ''){
+                    resultDiv.innerHTML = `Some of the fields are missing`
+                    return undefined
+                }
+            }
+            // Call getSensorProperties() function with selected values
+            const result = getSensorProperties(camera, width, height, interface, links, bitness);
+
+            resultDiv.innerHTML = Math.round(result*1000)/1000 + " fps"
+            return result
+        }
+
+
+        let cameras = getAllcamerasNames();
+        for (var i = 0; i < cameras.length; i++) {
+            var option = document.createElement("option");
+            option.text = cameras[i];
+            document.getElementById("camera").add(option);
+        }
+
+        for (let i = 0; i < interfaces.length; i++) {
+            var option = document.createElement("option");
+            option.text = interfaces[i];
+            document.getElementById("interface").add(option);
+        }
+
+
+
+    </script>
+</body>
