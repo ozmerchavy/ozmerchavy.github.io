@@ -1,88 +1,123 @@
+@import url('https://fonts.cdnfonts.com/css/khand');:root {
+    font-family: 'Khand', system-ui, sans-serif;
+    --kaya-blue: #004975;
+    --kaya-gray: #DFDFDF;
+
+
+}
+
 
 body {
     margin: 0;
     padding: 0;
-    font-family: system-ui, sans-serif;
-    background-color: #ecedf5;
-  }
-  
+    background-color: var(--kaya-gray);
+    color: var(--kaya-blue);
 
-  h1 {
+}
+
+
+h1 {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 1rem;
-  }
-  
-  form {
-    max-width: 600px;
-    margin:auto;
-    background-color: #f2f2f4;
-    padding: 1rem;
-    border-radius: 20px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  }
 
-  .box{
+}
+
+form {
+    width: min(500px, 85%);
+    margin: auto;
+    background-color: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+
+.box {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 2rem;
     width: 85%;
     margin: auto;
     text-align: center;
 
-  }
+}
 
 
-
- input, select {
+input,
+select {
     background-color: #f7f6f9;
     height: 2rem;
     border-radius: 5px;
     outline: none;
+    font-family: 'Khand', system-ui, sans-serif;
+    color: var(--kaya-blue);
 
-  }
+
+}
 
 
-.smallSelects{
+.smallSelects {
     display: flex;
     flex-direction: row;
     margin: auto;
     width: 100%;
-    
+
 }
 
-div.smallSelects div{
- 
-   flex-grow: 1;
+div.smallSelects div {
+
+    flex-grow: 1;
 }
 
-  button {
+button {
     font-size: 1.2rem;
+    font-family: 'Khand';
     background-color: #2196F3;
     color: white;
     border: none;
     padding: 0.8rem 1.5rem;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background-color: #0e82d7;
+}
+
+
+
+
+.ranger{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+.ranger input[type='number']{
+width: 8ch;
+text-align: middle;
+}
+
+.ranger input[type='range']{
+  flex-grow: 2;  
   }
   
+
+
   #result {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    color: #f2f2f4;
-  }
+    color: white;
+}
 
-  .sliderVal {
-    margin-bottom: 3rem;
-  }    
 
-  .rapperesult{
-    background-color: #003c66;
+.rapperesult {
+    background-color:var(--kaya-blue);
     text-align: center;
-    
-  }
+    width: 85%;
+    margin: auto;
+
+}
