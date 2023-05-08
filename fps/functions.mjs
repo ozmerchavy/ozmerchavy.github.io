@@ -23,7 +23,7 @@ function getSensorProperties(cameraAndMode, height, width, interfaceSelection, l
     const LVDSLines = sensorInfo['Multiplexer CH']
     const LVDSLinesTotal = sensorInfo['Multiplexer CH Total']
     const readoutBlackLines = 14 // /////////// SHOULD PROBABLY BE IN SENSOR INFO CURRENTLY IS NOT
-    const lineSize = bitness * height
+    const lineSize = bitness * width
     const lineRate = totalBandwidth / lineSize
     const shortesSensorLineTime = 1 / lineRate
     const shortestLineTime = (shortesSensorLineTime * LVDSLines) / (LVDSLinesTotal * CLK_PIX_Period)
@@ -31,7 +31,7 @@ function getSensorProperties(cameraAndMode, height, width, interfaceSelection, l
     const lineULength = Math.ceil(Math.max(shortestSensorLineTimes, Math.ceil(shortestLineTime))/4)*4
     const actualLineTime = lineULength * CLK_PIX_Period * LVDSLinesTotal / LVDSLines
     const TFOT = sensorInfo['fps_line_duration_factor'] * lineULength * CLK_PIX_Period
-    const TRD = (width + readoutBlackLines + sensorInfo['fps_min_line_count']) * actualLineTime
+    const TRD = (height + readoutBlackLines + sensorInfo['fps_min_line_count']) * actualLineTime
     const TFRM = TFOT + TRD
     const maxFPS = 1 / TFRM
 
