@@ -18,10 +18,13 @@ function getFps_main(cameraAndMode, width, height,  interfaceSelection, links, b
     const sensorInfo = sensor(cameraAndMode)
     const type = sensorInfo['type']
     let result
-    switch(type){
-        case "x5xx":result =  getFps_x5xx(sensorInfo, width, height,  interfaceSelection, links, bitness);
-        case "45xx": result =  getFps_45xx(sensorInfo, width, height,  interfaceSelection, links, bitness)
+    if (type == "x5xx"){
+        result =  getFps_x5xx(sensorInfo, width, height,  interfaceSelection, links, bitness);
     }
+    else if (type==="45xx"){
+        result =  getFps_45xx(sensorInfo, width, height,  interfaceSelection, links, bitness)
+    }
+    
 
     return Math.floor(result)
 }
