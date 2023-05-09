@@ -14,8 +14,22 @@ function getAllcamerasNames() {
 }
 
 
-function getSensorProperties(cameraAndMode, width, height,  interfaceSelection, links, bitness) {
+function getFps_main(cameraAndMode, width, height,  interfaceSelection, links, bitness){
     const sensorInfo = sensor(cameraAndMode)
+    const type = sensorInfo['type']
+    switch(type){
+        case "x5xx":return getFps_x5xx(sensorInfo, width, height,  interfaceSelection, links, bitness);
+        case "45xx": return getFps_45xx(sensorInfo, width, height,  interfaceSelection, links, bitness)
+    }
+
+
+    
+
+
+}
+
+
+function getFps_x5xx(sensorInfo, width, height,  interfaceSelection, links, bitness ) {
     const bandwidth = interfacesBandwidth[interfaceSelection]
     const totalBandwidth = links * bandwidth * 10 ** 9
     const CLK_PIX = sensorInfo['Sensor Clock']
@@ -39,3 +53,12 @@ function getSensorProperties(cameraAndMode, width, height,  interfaceSelection, 
 
 }
 
+
+
+function getFps_45xx(sensorInfo, width, height,  interfaceSelection, links, bitness){
+
+
+    return 190
+
+
+}

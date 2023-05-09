@@ -139,7 +139,7 @@
                 }
             }
             // Call getSensorProperties() function with selected values
-            const result = getSensorProperties(camera, width, height, interface, links, bitness);
+            const result = getFps_main(camera, width, height, interface, links, bitness);
 
             resultDiv.innerHTML = Math.round(result * 1000) / 1000 + " fps"
             addwiggle()
