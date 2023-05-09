@@ -38,7 +38,7 @@ form {
 
 @media(min-width:600px) {
     form {
-        padding: 3rem;
+        padding: 4rem;
     }
 
 }
@@ -47,25 +47,34 @@ form {
 .box {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 3rem;
     width: 85%;
     margin: auto;
     text-align: center;
 
 }
 
+#camera{
+    padding: 8px;
+    height: unset;
+}
+
 
 input,
 select {
     background-color: #f7f6f9;
-    height: 2rem;
     border-radius: 5px;
     outline: none;
     font-family: 'Khand', system-ui, sans-serif;
     color: var(--kaya-blue);
-
-
+    font-size: 1rem;
+    height: 2rem;
 }
+
+
+
+
+
 
 
 .smallSelects {
@@ -81,7 +90,7 @@ div.smallSelects div {
     flex-grow: 1;
 }
 
-button {
+/* button {
     font-size: 1.2rem;
     font-family: 'Khand';
     background-color: #2196F3;
@@ -90,7 +99,7 @@ button {
     padding: 0.8rem 1.5rem;
     border-radius: 5px;
     cursor: pointer;
-}
+} */
 
 button:hover {
     background-color: #0e82d7;
