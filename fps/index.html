@@ -21,36 +21,36 @@
         <div class="box">
 
 
-            <select id="camera" onchange="updateSensorInfo();">
+            <select id="camera" oninput="stateValidate();">
                 <option value="">Select a camera</option>
             </select>
 
 
             <div class="ranger">
                 <label for="height">Height:</label>
-                <input type="range" id="height" name="height" min="100" max="" onchange="updateHeightMax();"
-                    oninput="updateNumber(this.value, 'height-value'); calculate()">
+                <input type="range" id="height" name="height" min="100" max="" onchange="stateValidate();"
+                    oninput="updateNumber(this.value, 'height-value'); stateValidate()">
                 <input type="number" class='sliderVal' id="height-value"
-                    oninput="validateHeightMax(this.value, 'height-value'); updateNumber(this.value, 'height'); calculate()"></input>
+                    oninput="updateNumber(this.value, 'height'); stateValidate();"></input>
             </div>
 
             <div class="ranger">
                 <label for="width">Width:</label>
-                <input type="range" id="width" name="width" min="100" max="" onchange="updateWidthMax(); "
-                    oninput="updateNumber(this.value, 'width-value');calculate()">
+                <input type="range" id="width" name="width" min="100" max="" onchange="stateValidate(); "
+                    oninput="updateNumber(this.value, 'width-value');stateValidate()">
                 <input type="number" class='sliderVal' id="width-value"
-                    oninput="validateWidthMax(this.value,'width-value'); updateNumber(this.value, 'width'); calculate()"></input>
+                    oninput="updateNumber(this.value, 'width'); stateValidate()"></input>
             </div>
 
 
             <div class="smallSelects">
                 <div>
                     <label for="interface">Interface:</label>
-                    <select id="interface" onchange="calculate()"></select>
+                    <select id="interface" onchange="stateValidate()"></select>
                 </div>
                 <div>
                     <label for="links">Links:</label>
-                    <select id="links" onchange="calculate()">
+                    <select id="links" onchange="stateValidate()">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="4">4</option>
@@ -58,7 +58,7 @@
                 </div>
                 <div>
                     <label for="bitness">Bit Depth:</label>
-                    <select id="bitness" onchange="calculate()">
+                    <select id="bitness" onchange="stateValidate()">
                         <option value="8">8</option>
                         <option value="10">10</option>
                         <option value="12">12</option>
@@ -77,44 +77,36 @@
     
     const say = console.log
         let sensorInfo = {};
+        const widthSlider =  document.getElementById("width")
+        const widthInput =  document.getElementById("width-value")
+        const heightSlider =  document.getElementById("height")
+        const heightInput =  document.getElementById("height-value")
 
+        function stateValidate(){
+            const camera = document.getElementById("camera").value;
+            sensorInfo = sensor(camera);
+            const heightMax = sensorInfo['Max Height (V)']
+            const widthMax = sensorInfo['Max Width (H)']
+            heightSlider.max = heightMax;
+            widthSlider.max = widthMax;
+            dontExceedMax(heightInput, heightMax)
+            dontExceedMax(heightSlider, heightMax)
+            dontExceedMax(widthInput, widthMax)
+            dontExceedMax(widthSlider, widthMax)
+            calculate()
+
+        }
+
+        function dontExceedMax(element, max){
+            if (element.value > max){
+                element.value = max
+            }
+        }
 
         function updateNumber(value, elementId) {
             document.getElementById(elementId).value = value;
         }
 
-
-
-        function updateSensorInfo() {
-            let camera = document.getElementById("camera").value;
-            sensorInfo = sensor(camera);
-            document.getElementById("width").max = sensorInfo['Sensor Height (V)'];
-            document.getElementById("height").max = sensorInfo['Sensor Width (H)'];
-            // Set default values for width and height
-        
-        }
-
-        function updateHeightMax() {
-            document.getElementById("height").max = sensorInfo['Max Height (V)'];
-        }
-
-        function updateWidthMax() {
-            document.getElementById("width").max = sensorInfo['Max Width (H)'];
-        }
-
-        function validateHeightMax(num, elementId) {
-            const max = sensorInfo['Max Height (V)']
-            if (num > max) {
-                updateNumber(max, elementId)
-            }
-        }
-
-        function validateWidthMax(num, elementId) {
-            const max = sensorInfo['Max Width (H)']
-            if (num > max) {
-                updateNumber(max, elementId)
-            }
-        }
 
         function addwiggle() {
             const element = document.getElementById("result")
