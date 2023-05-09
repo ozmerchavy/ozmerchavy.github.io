@@ -17,15 +17,13 @@ function getAllcamerasNames() {
 function getFps_main(cameraAndMode, width, height,  interfaceSelection, links, bitness){
     const sensorInfo = sensor(cameraAndMode)
     const type = sensorInfo['type']
+    let result
     switch(type){
-        case "x5xx":return getFps_x5xx(sensorInfo, width, height,  interfaceSelection, links, bitness);
-        case "45xx": return getFps_45xx(sensorInfo, width, height,  interfaceSelection, links, bitness)
+        case "x5xx":result =  getFps_x5xx(sensorInfo, width, height,  interfaceSelection, links, bitness);
+        case "45xx": result =  getFps_45xx(sensorInfo, width, height,  interfaceSelection, links, bitness)
     }
 
-
-    
-
-
+    return Math.floor(result)
 }
 
 
@@ -56,9 +54,27 @@ function getFps_x5xx(sensorInfo, width, height,  interfaceSelection, links, bitn
 
 
 function getFps_45xx(sensorInfo, width, height,  interfaceSelection, links, bitness){
+    const bandwidth = interfacesBandwidth[interfaceSelection]  
+    const totalBandwidth = links * bandwidth * 10 ** 9
+    const CLK_PIX = sensorInfo['Sensor Clock'] / bitness
+    const CLK_PIX_Period = 1 / CLK_PIX
+    const SOL_EOL = 8
+    const pixelPerClock = Math.ceil(width / sensorInfo['Total used MUX'] / 2) * 4
+    const readoutBlackLines = 0  
+    const lineSize = bitness * width
+    const lineRate = totalBandwidth / lineSize
+    const shortesProtocolLineTime = 1 / lineRate
+    const shortestLineTime = shortesProtocolLineTime / CLK_PIX_Period
+    //if there is an error it would likely happen likely here:
+    const min_line_time = sensorInfo[`${bitness}bit min line time`] || 0 /// Doesnt appear in the excel. Since not all cams have min line time, || 0
+    const sensorLineTime = Math.max(SOL_EOL + pixelPerClock, Math.ceil(min_line_time/4)*4) / 2
+    const shortestSensorLineTimes = Math.max(sensorLineTime,Math.ceil(shortestLineTime) )
+    const actualLineTime = shortestSensorLineTimes * CLK_PIX_Period
+    const TFOT = sensorInfo['FOT in lines']  * shortestSensorLineTimes * CLK_PIX_Period
+    const TRD = (height + readoutBlackLines) * actualLineTime
+    const TFRM = TFOT + TRD
+    const maxFPS = 1 / TFRM
 
-
-    return 190
-
+    return maxFPS
 
 }
