@@ -109,7 +109,23 @@ button:hover {
 }
 
 .ranger input[type='range'] {
-    flex-grow: 2;
+    flex-grow: 1;
+}
+
+
+input[type=range] {
+    -webkit-appearance: none;
+    background-color: var(--kaya-gray);
+    height: 10px;
+    border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+     -webkit-appearance: none;
+    background-color: var(--kaya-blue);
+    border-radius: 2px;
+    width: 10px;
+    height: 22px;
 }
 
 
@@ -138,3 +154,10 @@ button:hover {
     margin: auto;
 
 }
+
+
+
+
+/* 000000000000000000000000000000000000000000 */
+
+

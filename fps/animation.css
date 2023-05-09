@@ -1,5 +1,5 @@
 .wiggle {
-    animation: wiggle 2s infinite;
+    animation: wiggle .5s ease;
   }
   
   /* Keyframes */
@@ -26,6 +26,7 @@
       transform: rotateZ(0);
     }
   }
+
  
   
   
