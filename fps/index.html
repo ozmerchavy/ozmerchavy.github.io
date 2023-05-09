@@ -83,14 +83,15 @@
             document.getElementById(elementId).value = value;
         }
 
+
+
         function updateSensorInfo() {
             let camera = document.getElementById("camera").value;
             sensorInfo = sensor(camera);
             document.getElementById("width").max = sensorInfo['Sensor Height (V)'];
             document.getElementById("height").max = sensorInfo['Sensor Width (H)'];
             // Set default values for width and height
-            document.getElementById("width").value = 1;
-            document.getElementById("height").value = 1;
+        
         }
 
         function updateHeightMax() {

@@ -113,8 +113,9 @@ button:hover {
 }
 
 .ranger input[type='number'] {
-    width: 8ch;
-    text-align: middle;
+    width: 7ch;
+    text-align: center;
+
 }
 
 .ranger input[type='range'] {
