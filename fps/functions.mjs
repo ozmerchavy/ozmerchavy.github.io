@@ -14,7 +14,7 @@ function getAllcamerasNames() {
 }
 
 
-function getSensorProperties(cameraAndMode, height, width, interfaceSelection, links, bitness) {
+function getSensorProperties(cameraAndMode, width, height,  interfaceSelection, links, bitness) {
     const sensorInfo = sensor(cameraAndMode)
     const bandwidth = interfacesBandwidth[interfaceSelection]
     const totalBandwidth = links * bandwidth * 10 ** 9
