@@ -57,7 +57,7 @@
                     </select>
                 </div>
                 <div>
-                    <label for="bitness">Bitness:</label>
+                    <label for="bitness">Bit Depth:</label>
                     <select id="bitness" onchange="calculate()">
                         <option value="8">8</option>
                         <option value="10">10</option>
@@ -141,6 +141,7 @@
             const result = getSensorProperties(camera, width, height, interface, links, bitness);
 
             resultDiv.innerHTML = Math.round(result * 1000) / 1000 + " fps"
+            addwiggle()
             return result
         }
 
@@ -157,7 +158,7 @@
             option.text = interfaces[i];
             document.getElementById("interface").add(option);
         }
-        
+
         </script>
 </body>
 
