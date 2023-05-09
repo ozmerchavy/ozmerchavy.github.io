@@ -27,10 +27,18 @@ form {
     width: min(500px, 85%);
     margin: auto;
     background-color: white;
-    padding: 3rem;
+    padding: 1rem;
     border-radius: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    
+
+}
+
+
+@media(min-width:600px) {
+    form {
+        padding: 3rem;
+    }
+
 }
 
 
@@ -87,26 +95,28 @@ button:hover {
 }
 
 
-
-
-.ranger{
+.ranger {
     display: flex;
     gap: 1em;
     align-items: center;
 }
 
-.ranger input[type='number']{
-width: 8ch;
-text-align: middle;
+.ranger input[type='number'] {
+    width: 8ch;
+    text-align: middle;
 }
 
-.ranger input[type='range']{
-  flex-grow: 2;  
-  }
-  
+.ranger input[type='range'] {
+    flex-grow: 2;
+}
 
 
-  #result {
+.ranger label {
+    width: 7ch;
+}
+
+
+#result {
     font-size: 1rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -115,7 +125,7 @@ text-align: middle;
 
 
 .rapperesult {
-    background-color:var(--kaya-blue);
+    background-color: var(--kaya-blue);
     text-align: center;
     width: 85%;
     margin: auto;
