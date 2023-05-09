@@ -9,69 +9,71 @@
 </head>
 
 </html>
-</link>
 </head>
 
 <body>
     <h1>FPS Calculator</h1>
 
-    <form  action="javascript:void(0)" >
-        <div class= "box">
-   
 
-    <select id="camera" onchange="updateSensorInfo();">
-      <option value="">Select a camera</option>
-    </select>
-   
-    <div class="ranger">
-    <label for="width">Width:</label>
-    <input type="range" id="width" name="width" min="1" max="" onchange="updateWidthMax(); " oninput="updateNumber(this.value, 'width-value');calculate()">
-    <input type="number" class='sliderVal' id="width-value"  oninput="validateWidthMax(this.value,'width-value'); updateNumber(this.value, 'width'); calculate()"></input>
-    </div>
-
-    <div class="ranger">
-    <label for="height">Height:</label>
-    <input type="range" id="height" name="height" min="1" max="" onchange="updateHeightMax();" oninput="updateNumber(this.value, 'height-value'); calculate()">
-    <input type="number" class='sliderVal' id="height-value" oninput="validateHeightMax(this.value, 'height-value'); updateNumber(this.value, 'height'); calculate()"></input>
-    </div>
+    <form action="javascript:void(0)">
+        <div class="box">
 
 
+            <select id="camera" onchange="updateSensorInfo();">
+                <option value="">Select a camera</option>
+            </select>
 
-   <div class="smallSelects">
-    <div> <label for="interface">Interface:</label>
-        <select id="interface" onchange="calculate()">
-        </select>
-    </div>
-   <div><label for="links">Links:</label>
-    <select id="links"  onchange="calculate()">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="4">4</option>
-    </select>
-   </div>
-    <div> <label for="bitness">Bitness:</label>
-        <select id="bitness"  onchange="calculate()">
-          <option value="8">8</option>
-          <option value="10">10</option>
-          <option value="12">12</option>
-        </select></div>
-   
-</div> 
 
-    <button onclick="addwiggle(); calculate()">Calculate</button>
+            <div class="ranger">
+                <label for="height">Height:</label>
+                <input type="range" id="height" name="height" min="1" max="" onchange="updateHeightMax();"
+                    oninput="updateNumber(this.value, 'height-value'); calculate()">
+                <input type="number" class='sliderVal' id="height-value"
+                    oninput="validateHeightMax(this.value, 'height-value'); updateNumber(this.value, 'height'); calculate()"></input>
+            </div>
 
-    <div class="rapperesult"><div id="result"></div></div>
-</div>
+            <div class="ranger">
+                <label for="width">Width:</label>
+                <input type="range" id="width" name="width" min="1" max="" onchange="updateWidthMax(); "
+                    oninput="updateNumber(this.value, 'width-value');calculate()">
+                <input type="number" class='sliderVal' id="width-value"
+                    oninput="validateWidthMax(this.value,'width-value'); updateNumber(this.value, 'width'); calculate()"></input>
+            </div>
+
+
+            <div class="smallSelects">
+                <div>
+                    <label for="interface">Interface:</label>
+                    <select id="interface" onchange="calculate()"></select>
+                </div>
+                <div>
+                    <label for="links">Links:</label>
+                    <select id="links" onchange="calculate()">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="bitness">Bitness:</label>
+                    <select id="bitness" onchange="calculate()">
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+            </div>
+            <button onclick="addwiggle(); calculate()">Calculate</button>
+            <div class="rapperesult">
+                <div id="result"></div>
+            </div>
+        </div>
     </form>
-  
-  
-
-
-<script src="consts.mjs"></script>
-<script src="functions.mjs"></script>
-  <script>
-
-        const say = console.log
+    <script src="consts.mjs"></script>
+    <script src="functions.mjs"></script>
+    <script>
+    
+    const say = console.log
         let sensorInfo = {};
 
 
@@ -97,38 +99,38 @@
             document.getElementById("width").max = sensorInfo['Max Width (H)'];
         }
 
-        function validateHeightMax(num, elementId){
+        function validateHeightMax(num, elementId) {
             const max = sensorInfo['Max Height (V)']
-            if (num>max){
+            if (num > max) {
                 updateNumber(max, elementId)
             }
         }
-        
-        function validateWidthMax(num, elementId){
+
+        function validateWidthMax(num, elementId) {
             const max = sensorInfo['Max Width (H)']
-            if (num>max){
+            if (num > max) {
                 updateNumber(max, elementId)
             }
         }
 
         function addwiggle() {
-                const element =  document.getElementById("result")
-               element.classList.add("wiggle");
-                setTimeout(function() {
-                    element.classList.remove("wiggle");
-                    }, 1300);
-            }
+            const element = document.getElementById("result")
+            element.classList.add("wiggle");
+            setTimeout(function () {
+                element.classList.remove("wiggle");
+            }, 1300);
+        }
 
         function calculate() {
             const camera = document.getElementById("camera").value;
-            const width = +document.getElementById("width").value;
-            const height = +document.getElementById("height").value;
+            const width = + document.getElementById("width").value;
+            const height = + document.getElementById("height").value;
             const interface = document.getElementById("interface").value;
-            const links = +document.getElementById("links").value;
-            const bitness = +document.getElementById("bitness").value;
+            const links = + document.getElementById("links").value;
+            const bitness = + document.getElementById("bitness").value;
             const resultDiv = document.getElementById("result");
-            for (const element of [camera, width, height, interface, links, bitness]){
-                if (!element || element == ''){
+            for (const element of [camera, width, height, interface, links, bitness]) {
+                if (!element || element == '') {
                     resultDiv.innerHTML = `Some of the fields are missing`
                     return undefined
                 }
@@ -136,7 +138,7 @@
             // Call getSensorProperties() function with selected values
             const result = getSensorProperties(camera, width, height, interface, links, bitness);
 
-            resultDiv.innerHTML = Math.round(result*1000)/1000 + " fps"
+            resultDiv.innerHTML = Math.round(result * 1000) / 1000 + " fps"
             return result
         }
 
@@ -153,8 +155,8 @@
             option.text = interfaces[i];
             document.getElementById("interface").add(option);
         }
-
-
-
-    </script>
+        
+        </script>
 </body>
+
+</html>
