@@ -20,10 +20,17 @@
     <form action="javascript:void(0)">
         <div class="box">
 
-
-            <select id="camera" oninput="stateValidate();">
-                <option value="">Select a camera</option>
-            </select>
+            <div class="selectbox">
+                <select class = "selectush" id="camera" oninput="updateModes();stateValidate();">
+                    <option value="">Select a camera</option>
+                </select>
+    
+                <select class= "selectush" id="modes" oninput="stateValidate();">
+                    <option value="">Mode</option>
+                </select>
+            </div>
+       
+            
 
 
             <div class="ranger">
@@ -84,7 +91,8 @@
 
         function stateValidate(){
             const camera = document.getElementById("camera").value;
-            sensorInfo = sensor(camera);
+            const mode = document.getElementById("modes").value;
+            sensorInfo = sensor(camera, mode);
             const heightMax = sensorInfo['Max Height (V)']
             const widthMax = sensorInfo['Max Width (H)']
             heightSlider.max = heightMax;
@@ -118,20 +126,22 @@
 
         function calculate() {
             const camera = document.getElementById("camera").value;
+            const mode = document.getElementById("modes").value
+            console.log(camera, mode);
             const width = + document.getElementById("width").value;
             const height = + document.getElementById("height").value;
             const interface = document.getElementById("interface").value;
             const links = + document.getElementById("links").value;
             const bitness = + document.getElementById("bitness").value;
             const resultDiv = document.getElementById("result");
-            for (const element of [camera, width, height, interface, links, bitness]) {
+            for (const element of [camera, mode, width, height, interface, links, bitness]) {
                 if (!element || element == '') {
                     resultDiv.innerHTML = `Some of the fields are missing`
                     return undefined
                 }
             }
             // Call getSensorProperties() function with selected values
-            const result = getFps_main(camera, width, height, interface, links, bitness);
+            const result = getFps_main(camera,mode, width, height, interface, links, bitness);
 
             resultDiv.innerHTML = result + " fps"
             addwiggle()
@@ -144,6 +154,18 @@
             var option = document.createElement("option");
             option.text = cameras[i];
             document.getElementById("camera").add(option);
+        }
+
+        function updateModes(){
+            const camera = document.getElementById("camera").value;
+            const modes = getModes(camera) 
+            document.getElementById("modes").innerHTML = ""
+            for (let i = 0; i < modes.length; i++) {
+            let option = document.createElement("option");
+            option.text = modes[i];
+            document.getElementById("modes").add(option);
+        }
+
         }
 
         for (let i = 0; i < interfaces.length; i++) {

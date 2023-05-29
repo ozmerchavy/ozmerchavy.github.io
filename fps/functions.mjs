@@ -1,12 +1,24 @@
-function sensor(nameWithSpeed) {
-    say(nameWithSpeed.toLowerCase())
-    const sensies = sensors.filter(x => x.Sensor.toLowerCase().includes(nameWithSpeed.toLowerCase()))
+
+
+
+
+function sensor(sensor, mode){
+    const sensies = sensors.filter(x => x.Sensor.toLowerCase().includes(sensor.toLowerCase()))
     if (!sensies) {
-        console.error(`Could not find sensor ${nameWithSpeed}!`)
+        console.error(`Could not find sensorOld ${nameWithSpeed}!`)
         return
     }
-    return sensies[0]
+    return sensies[0][mode]
 }
+
+function getModes(sensor){
+    const rightSensor = sensors.filter(x => x.Sensor.toLowerCase().includes(sensor.toLowerCase()))
+    const sens = rightSensor[0]
+    return Object.keys(sens).filter(x=>x!="Sensor")
+
+}
+
+
 
 function getAllcamerasNames() {
     return sensors.map(s => s.Sensor)
@@ -14,8 +26,8 @@ function getAllcamerasNames() {
 }
 
 
-function getFps_main(cameraAndMode, width, height,  interfaceSelection, links, bitness){
-    const sensorInfo = sensor(cameraAndMode)
+function getFps_main(camera, mode, width, height,  interfaceSelection, links, bitness){
+    const sensorInfo = sensor(camera, mode)
     const type = sensorInfo['type']
     let result
     if (type == "x5xx"){

@@ -55,9 +55,20 @@ form {
 
 }
 
-#camera{
+
+.selectbox{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin: auto;
+    width: 100%;
+
+}
+
+.selectush{
     padding: 8px;
     height: unset;
+    flex-grow: 1;
 }
 
 
