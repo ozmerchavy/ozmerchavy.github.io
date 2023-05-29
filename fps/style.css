@@ -172,13 +172,17 @@ input[type="range"]::-webkit-slider-thumb {
 .rapperesult {
     background-color: var(--kaya-blue);
     text-align: center;
-    width: 85%;
+    width: 70%;
     margin: auto;
 
 }
 
 
 
+.hidden {
+    scale: 0;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.6s all;
+}
 
 /* 000000000000000000000000000000000000000000 */
 

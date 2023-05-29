@@ -3,7 +3,7 @@
 
 
 function sensor(sensor, mode){
-    const sensies = sensors.filter(x => x.Sensor.toLowerCase().includes(sensor.toLowerCase()))
+    const sensies = sensors.filter(x => x.Sensor.toLowerCase() == (sensor.toLowerCase()))
     if (!sensies) {
         console.error(`Could not find sensorOld ${nameWithSpeed}!`)
         return
@@ -11,8 +11,13 @@ function sensor(sensor, mode){
     return sensies[0][mode]
 }
 
+
+function hexa(num){
+    return Math.ceil(parseInt(num, 16))
+}
+
 function getModes(sensor){
-    const rightSensor = sensors.filter(x => x.Sensor.toLowerCase().includes(sensor.toLowerCase()))
+    const rightSensor = sensors.filter(x => x.Sensor.toLowerCase() == (sensor.toLowerCase()))
     const sens = rightSensor[0]
     return Object.keys(sens).filter(x=>x!="Sensor")
 
@@ -35,6 +40,10 @@ function getFps_main(camera, mode, width, height,  interfaceSelection, links, bi
     }
     else if (type==="45xx"){
         result =  getFps_45xx(sensorInfo, width, height,  interfaceSelection, links, bitness)
+    }
+    else if (type =="25x"){
+        result =  getFps_25x(sensorInfo, width, height,  interfaceSelection, links, bitness)
+
     }
     
 
@@ -93,3 +102,28 @@ function getFps_45xx(sensorInfo, width, height,  interfaceSelection, links, bitn
     return maxFPS
 
 }
+
+function getFps_25x(sensorInfo, width, height,  interfaceSelection, links, bitness){
+
+
+    const bandwidth = interfacesBandwidth[interfaceSelection]  // note the cxp3 in this excel was 2.5 instead of 2.4
+    const sampleClock = sensorInfo['Sample clock (Mhz)']
+    const shortestHSYNC2Mhzclocks = Math.ceil(hexa(sensorInfo[`HSYNC ${bitness}bit datasheet`])/sensorInfo["Number of ticks for generating 2MHz clock"])
+    const shortestHSYNCus = shortestHSYNC2Mhzclocks / sampleClock
+    const bitsPerLine = bitness * width
+    const lineDurationLimited = bitsPerLine / (bandwidth * 1000)
+    const lineDurationSensor = Math.max(lineDurationLimited, shortestHSYNCus)
+    const HSYNCActual = Math.ceil(lineDurationSensor * sampleClock)
+    const lineDurationActual = HSYNCActual/ sampleClock
+    const blankLines = hexa(sensorInfo['VMAX (datasheet)']) - sensorInfo['Max Height (V)']
+    const totalFrameTime =  lineDurationActual * (height + blankLines)
+    const frameRate = 1000000 / totalFrameTime    
+    return frameRate
+
+}
+
+
+
+
+
+

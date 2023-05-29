@@ -55,7 +55,7 @@
                     <label for="interface">Interface:</label>
                     <select id="interface" onchange="stateValidate()"></select>
                 </div>
-                <div>
+                <div id ="linkDaddy">
                     <label for="links">Links:</label>
                     <select id="links" onchange="stateValidate()">
                         <option value="1">1</option>
@@ -93,6 +93,7 @@
             const camera = document.getElementById("camera").value;
             const mode = document.getElementById("modes").value;
             sensorInfo = sensor(camera, mode);
+            document.getElementById("linkDaddy").classList.toggle("hidden", sensorInfo["type"]== "25x")
             const heightMax = sensorInfo['Max Height (V)']
             const widthMax = sensorInfo['Max Width (H)']
             heightSlider.max = heightMax;
@@ -142,8 +143,11 @@
             }
             // Call getSensorProperties() function with selected values
             const result = getFps_main(camera,mode, width, height, interface, links, bitness);
-
             resultDiv.innerHTML = result + " fps"
+            if (isNaN(result)){
+                resultDiv.innerHTML = "This Bit depth is not available for this Camera"
+            }
+            
             addwiggle()
             return result
         }
@@ -172,6 +176,7 @@
             var option = document.createElement("option");
             option.text = interfaces[i];
             document.getElementById("interface").add(option);
+    
         }
 
         </script>

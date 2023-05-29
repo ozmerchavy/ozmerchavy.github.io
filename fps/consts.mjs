@@ -210,14 +210,200 @@ const sensors = [
             "FOT in lines": 16,
             "type": "45xx"
         }
+    }, {
+        "Sensor": "Iron 250",
+
+        "All Pixels": {
+            "type": "25x",
+            "Max Width (H)": "2448",
+            "Max Height (V)": "2048",
+            "VMAX (datasheet)": "82e",
+            "HSYNC 8bit datasheet": "0D9",
+            "HSYNC 10bit datasheet": "0F5",
+            "HSYNC 12bit datasheet": "18C",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1,
+            "Sample clock (Mhz)": 74.25
+
+
+        },
+        "1/2 Subsampling": {
+            "type": "25x",
+            "Max Width (H)": "1220",
+            "Max Height (V)": "1024",
+            "VMAX (datasheet)": "42a",
+            "HSYNC 8bit datasheet": "0da",
+            "HSYNC 10bit datasheet": "104",
+            "HSYNC 12bit datasheet": "18c",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1,
+            "Sample clock (Mhz)": 74.25
+        },
+        "Vertical 2pxl FD Binning": {
+            "type": "25x",
+            "Max Width (H)": "2448",
+            "Max Height (V)": "1024",
+            "VMAX (datasheet)": "42a",
+            "HSYNC 8bit datasheet": "0d9",
+            "HSYNC 10bit datasheet": "0f5",
+            "HSYNC 12bit datasheet": "18c",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1, 
+            "Sample clock (Mhz)": 74.25
+        }
+    }, {
+        "Sensor": "Iron 252",
+        "All Pixels": {
+            "type": "25x",
+            "Max Width (H)": "2048",
+            "Max Height (V)": "1536",
+            "VMAX (datasheet)": "62e",
+            "HSYNC 8bit datasheet": "0D9",
+            "HSYNC 10bit datasheet": "0F5",
+            "HSYNC 12bit datasheet": "18C",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1, 
+            "Sample clock (Mhz)": 74.25
+        },
+        "1/2 Subsampling": {
+            "type": "25x",
+            "Max Width (H)": "1024",
+            "Max Height (V)": "768",
+            "VMAX (datasheet)": "32A",
+            "HSYNC 8bit datasheet": "0d9",
+            "HSYNC 10bit datasheet": "0f5",
+            "HSYNC 12bit datasheet": "18c",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1, 
+            "Sample clock (Mhz)": 74.25
+        },
+        "Vertical 2pxl FD Binning": {
+            "type": "25x",
+            "Max Width (H)": "2048",
+            "Max Height (V)": "768",
+            "VMAX (datasheet)": "32a",
+            "HSYNC 8bit datasheet": "0d9",
+            "HSYNC 10bit datasheet": "0f5",
+            "HSYNC 12bit datasheet": "18c",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1, 
+            "Sample clock (Mhz)": 74.25
+        }
+    }, {
+        "Sensor": "Iron 253",
+        
+        "All Pixels": {
+            "type": "25x",
+            "Max Width (H)": "4096",
+            "Max Height (V)": "3000",
+            "VMAX (datasheet)": "bf6",
+            "HSYNC 8bit datasheet": "163",
+            "HSYNC 10bit datasheet": "177",
+            "HSYNC 12bit datasheet": "20a",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1, 
+            "Sample clock (Mhz)": 74.25
+        },
+        "1/2 Subsampling": {
+            "type": "25x",
+            "Max Width (H)": "2048",
+            "Max Height (V)": "1500",
+            "VMAX (datasheet)": "616",
+            "HSYNC 8bit datasheet": "163",
+            "HSYNC 10bit datasheet": "177",
+            "HSYNC 12bit datasheet": "20a",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1, 
+            "Sample clock (Mhz)": 74.25
+        }
+    }, {
+        "Sensor": "Iron 255",
+        "All Pixels": {
+            "type": "25x",
+            "Max Width (H)": "4096",
+            "Max Height (V)": "2160",
+            "VMAX (datasheet)": "8b6",
+            "HSYNC 8bit datasheet": "163",
+            "HSYNC 10bit datasheet": "177",
+            "HSYNC 12bit datasheet": "20a",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1, 
+            "Sample clock (Mhz)": 74.25
+        },
+
+        "1/2 Subsampling": {
+            "type": "25x",
+            "Max Width (H)": "2048",
+            "Max Height (V)": "1080",
+            "VMAX (datasheet)": "476",
+            "HSYNC 8bit datasheet": "164",
+            "HSYNC 10bit datasheet": "177",
+            "HSYNC 12bit datasheet": "20a",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1, 
+            "Sample clock (Mhz)": 74.25
+        },
+        "Vertical 2pxl FD Binning": {
+            "type": "25x",
+            "Max Width (H)": "4096",
+            "Max Height (V)": "1080",
+            "VMAX (datasheet)": "476",
+            "HSYNC 8bit datasheet": "164",
+            "HSYNC 10bit datasheet": "177",
+            "HSYNC 12bit datasheet": "20a",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1, 
+            "Sample clock (Mhz)": 74.25
+        },
+
+        "2x2 vertical FD Binning": {
+            "type": "25x",
+            "Max Width (H)": "2048",
+            "Max Height (V)": "1080",
+            "VMAX (datasheet)": "476",
+            "HSYNC 8bit datasheet": "164",
+            "HSYNC 10bit datasheet": "177",
+            "HSYNC 12bit datasheet": "20a",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1, 
+            "Sample clock (Mhz)": 74.25
+        }
+    }, {
+        "Sensor": "Iron 305",
+        "All Pixels": {
+            "type": "25x",
+            "Max Width (H)": "4096",
+            "Max Height (V)": "2160",
+            "VMAX (datasheet)": "8b6",
+            "HSYNC 8bit datasheet": "none",
+            "HSYNC 10bit datasheet": "none",
+            "HSYNC 12bit datasheet": "20a",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1, 
+            "Sample clock (Mhz)": 74.25
+        },
+
+        "1/2 Subsampling": {
+            "type": "25x",
+            "Max Width (H)": "2048",
+            "Max Height (V)": "1080",
+            "VMAX (datasheet)": "NONE",
+            "HSYNC 8bit datasheet": "NONE",
+            "HSYNC 10bit datasheet": "NONE",
+            "HSYNC 12bit datasheet": "20a",
+            "Sensor clock MHz": 74.25,
+            "Number of ticks for generating 2MHz clock": 1, 
+            "Sample clock (Mhz)": 74.25
+        }
     }
+
 
 ]
 
 const interfacesBandwidth = {
     CXP12: 9.8,
     CXP6: 4.9,
-    CXP3: 2.4
+    CXP3: 2.4,
 
 }
 const interfaces = Object.keys(interfacesBandwidth)
