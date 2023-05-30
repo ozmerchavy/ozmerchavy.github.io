@@ -107,7 +107,7 @@
         }
 
         function dontExceedMax(element, max){
-            if (element.value > max){
+            if (Number(element.value) > Number(max)){
                 element.value = max
             }
         }
