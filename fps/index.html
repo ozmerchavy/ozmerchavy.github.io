@@ -21,7 +21,7 @@
         <div class="box">
 
             <div class="selectbox">
-                <select class = "selectush" id="camera" oninput="updateModes();stateValidate();">
+                <select class = "selectush" id="camera" oninput="updateModes();stateValidate();resetWidthandHeight();">
                     <option value="">Select a camera</option>
                 </select>
     
@@ -88,6 +88,7 @@
         const widthInput =  document.getElementById("width-value")
         const heightSlider =  document.getElementById("height")
         const heightInput =  document.getElementById("height-value")
+      
 
         function stateValidate(){
             const camera = document.getElementById("camera").value;
@@ -104,6 +105,16 @@
             dontExceedMax(widthSlider, widthMax)
             calculate()
 
+        }
+
+        function resetWidthandHeight(){
+
+            heightInput.value= sensorInfo['Max Height (V)']
+            heightSlider.value = sensorInfo['Max Height (V)']
+            widthInput.value = sensorInfo['Max Width (H)']
+            widthSlider.value = sensorInfo['Max Width (H)']
+
+            stateValidate()
         }
 
         function dontExceedMax(element, max){
