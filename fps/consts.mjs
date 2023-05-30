@@ -248,7 +248,7 @@ const sensors = [
             "HSYNC 10bit datasheet": "0f5",
             "HSYNC 12bit datasheet": "18c",
             "Sensor clock MHz": 74.25,
-            "Number of ticks for generating 2MHz clock": 1, 
+            "Number of ticks for generating 2MHz clock": 1,
             "Sample clock (Mhz)": 74.25
         }
     }, {
@@ -262,7 +262,7 @@ const sensors = [
             "HSYNC 10bit datasheet": "0F5",
             "HSYNC 12bit datasheet": "18C",
             "Sensor clock MHz": 74.25,
-            "Number of ticks for generating 2MHz clock": 1, 
+            "Number of ticks for generating 2MHz clock": 1,
             "Sample clock (Mhz)": 74.25
         },
         "1/2 Subsampling": {
@@ -274,7 +274,7 @@ const sensors = [
             "HSYNC 10bit datasheet": "0f5",
             "HSYNC 12bit datasheet": "18c",
             "Sensor clock MHz": 74.25,
-            "Number of ticks for generating 2MHz clock": 1, 
+            "Number of ticks for generating 2MHz clock": 1,
             "Sample clock (Mhz)": 74.25
         },
         "Vertical 2pxl FD Binning": {
@@ -286,12 +286,12 @@ const sensors = [
             "HSYNC 10bit datasheet": "0f5",
             "HSYNC 12bit datasheet": "18c",
             "Sensor clock MHz": 74.25,
-            "Number of ticks for generating 2MHz clock": 1, 
+            "Number of ticks for generating 2MHz clock": 1,
             "Sample clock (Mhz)": 74.25
         }
     }, {
         "Sensor": "Iron 253",
-        
+
         "All Pixels": {
             "type": "25x",
             "Max Width (H)": "4096",
@@ -301,7 +301,7 @@ const sensors = [
             "HSYNC 10bit datasheet": "177",
             "HSYNC 12bit datasheet": "20a",
             "Sensor clock MHz": 74.25,
-            "Number of ticks for generating 2MHz clock": 1, 
+            "Number of ticks for generating 2MHz clock": 1,
             "Sample clock (Mhz)": 74.25
         },
         "1/2 Subsampling": {
@@ -313,7 +313,7 @@ const sensors = [
             "HSYNC 10bit datasheet": "177",
             "HSYNC 12bit datasheet": "20a",
             "Sensor clock MHz": 74.25,
-            "Number of ticks for generating 2MHz clock": 1, 
+            "Number of ticks for generating 2MHz clock": 1,
             "Sample clock (Mhz)": 74.25
         }
     }, {
@@ -327,7 +327,7 @@ const sensors = [
             "HSYNC 10bit datasheet": "177",
             "HSYNC 12bit datasheet": "20a",
             "Sensor clock MHz": 74.25,
-            "Number of ticks for generating 2MHz clock": 1, 
+            "Number of ticks for generating 2MHz clock": 1,
             "Sample clock (Mhz)": 74.25
         },
 
@@ -340,7 +340,7 @@ const sensors = [
             "HSYNC 10bit datasheet": "177",
             "HSYNC 12bit datasheet": "20a",
             "Sensor clock MHz": 74.25,
-            "Number of ticks for generating 2MHz clock": 1, 
+            "Number of ticks for generating 2MHz clock": 1,
             "Sample clock (Mhz)": 74.25
         },
         "Vertical 2pxl FD Binning": {
@@ -352,7 +352,7 @@ const sensors = [
             "HSYNC 10bit datasheet": "177",
             "HSYNC 12bit datasheet": "20a",
             "Sensor clock MHz": 74.25,
-            "Number of ticks for generating 2MHz clock": 1, 
+            "Number of ticks for generating 2MHz clock": 1,
             "Sample clock (Mhz)": 74.25
         },
 
@@ -365,7 +365,7 @@ const sensors = [
             "HSYNC 10bit datasheet": "177",
             "HSYNC 12bit datasheet": "20a",
             "Sensor clock MHz": 74.25,
-            "Number of ticks for generating 2MHz clock": 1, 
+            "Number of ticks for generating 2MHz clock": 1,
             "Sample clock (Mhz)": 74.25
         }
     }, {
@@ -379,7 +379,7 @@ const sensors = [
             "HSYNC 10bit datasheet": "none",
             "HSYNC 12bit datasheet": "20a",
             "Sensor clock MHz": 74.25,
-            "Number of ticks for generating 2MHz clock": 1, 
+            "Number of ticks for generating 2MHz clock": 1,
             "Sample clock (Mhz)": 74.25
         },
 
@@ -392,9 +392,43 @@ const sensors = [
             "HSYNC 10bit datasheet": "NONE",
             "HSYNC 12bit datasheet": "20a",
             "Sensor clock MHz": 74.25,
-            "Number of ticks for generating 2MHz clock": 1, 
+            "Number of ticks for generating 2MHz clock": 1,
             "Sample clock (Mhz)": 74.25
         }
+    }, {
+        "Sensor": "Iron 3265",
+        "Normal Speed": {
+            "type": "3265",
+            "Sensor Height (V)": 7000,
+            "Sensor Width (H)": 9536,
+            "Max Height (V)": 7000,
+            "Max Width (H)": 9344,
+            "Multiplexer CH": 28,
+            "Multiplexer CH Total": 56,
+            "Sensor Clock": 80000000,
+            "min line duration": 180,
+            "min exposure ticks": 1068,
+            "fps_line_duration_factor": 6,
+            "fps_min_line_count": 10
+
+        },
+
+        "High Speed": {
+            "type": "3265",
+            "Sensor Height (V)": 7000,
+            "Sensor Width (H)": 9536,
+            "Max Height (V)": 7000,
+            "Max Width (H)": 9344,
+            "Multiplexer CH": 56,
+            "Multiplexer CH Total": 56,
+            "Sensor Clock": 90000000,
+            "min line duration": 180,
+            "min exposure ticks": 1068,
+            "fps_line_duration_factor": 6,
+            "fps_min_line_count": 10
+        }
+
+
     }
 
 
@@ -403,7 +437,7 @@ const sensors = [
 const interfacesBandwidth = {
     CXP12: 9.8,
     CXP6: 4.9,
-    CXP3: 2.4,
+    CXP3: 2.4
 
 }
 const interfaces = Object.keys(interfacesBandwidth)
