@@ -138,6 +138,9 @@ const sensors = [
             "12bit min line time": 193,
             "Total used MUX": 40,
             "FOT in lines": 16,
+            "8bit FOT in lines": 19,
+            "10bit FOT in lines": 13,
+            "12bit FOT in lines": 9,
             "type": "45xx"
         },
         "Binning2x2": {
@@ -149,6 +152,9 @@ const sensors = [
             "8bit min line time": null,
             "10bit min line time": null,
             "12bit min line time": null,
+            "8bit FOT in lines": 21,
+            "10bit FOT in lines": 15,
+            "12bit FOT in lines": 11,
             "Total used MUX": 40,
             "FOT in lines": 16,
             "type": "45xx"
@@ -164,6 +170,9 @@ const sensors = [
             "8bit min line time": 65,
             "10bit min line time": 106,
             "12bit min line time": 187,
+            "8bit FOT in lines": 19,
+            "10bit FOT in lines": 13,
+            "12bit FOT in lines": 9,
             "Total used MUX": 40,
             "FOT in lines": 16,
             "type": "45xx"
@@ -178,6 +187,10 @@ const sensors = [
             "8bit min line time": null,
             "10bit min line time": null,
             "12bit min line time": null,
+            "8bit FOT in lines": 21,
+            "10bit FOT in lines": 15,
+            "12bit FOT in lines": 11,
+
             "Total used MUX": 40,
             "FOT in lines": 16,
             "type": "45xx"
@@ -193,7 +206,14 @@ const sensors = [
             "8bit min line time": 68,
             "10bit min line time": 106,
             "12bit min line time": 187,
+            'special 4502 8bit adjusment': 5,
+            'special 4502 10bit adjusment': 8,
+
             "Total used MUX": 40,
+            "8bit FOT in lines": 9,
+            "10bit FOT in lines": 9,
+            "12bit FOT in lines": 7,
+
             "FOT in lines": 16,
             "type": "45xx"
         },
@@ -206,7 +226,12 @@ const sensors = [
             "8bit min line time": null,
             "10bit min line time": null,
             "12bit min line time": null,
+            'special 4502 8bit adjusment': 5,
+            'special 4502 10bit adjusment': 8,
             "Total used MUX": 40,
+            "8bit FOT in lines": 13,
+            "10bit FOT in lines": 13,
+            "12bit FOT in lines": 11,
             "FOT in lines": 16,
             "type": "45xx"
         }

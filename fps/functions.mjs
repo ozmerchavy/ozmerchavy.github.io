@@ -86,8 +86,12 @@ function getFps_45xx(sensorInfo, width, height,  interfaceSelection, links, bitn
     const totalBandwidth = links * bandwidth * 10 ** 9
     const CLK_PIX = sensorInfo['Sensor Clock'] / bitness
     const CLK_PIX_Period = 1 / CLK_PIX
-    const SOL_EOL = 8
-    const pixelPerClock = Math.ceil(width / sensorInfo['Total used MUX'] / 2) * 4
+    let SOL_EOL = 4
+    //// If it is binning, should be equal to 2!
+    if (!sensorInfo['8bit min line time']){ /// In the binning mode the 8bit min line times are null
+        SOL_EOL = 2
+    }
+    const pixelPerClock = Math.ceil(sensorInfo['Max Width (H)'] / sensorInfo['Total used MUX'] / 2) * 4
     const readoutBlackLines = 0  
     const lineSize = bitness * width
     const lineRate = totalBandwidth / lineSize
@@ -98,9 +102,15 @@ function getFps_45xx(sensorInfo, width, height,  interfaceSelection, links, bitn
     const sensorLineTime = Math.max(SOL_EOL + pixelPerClock, Math.ceil(min_line_time/4)*4) / 2
     const shortestSensorLineTimes = Math.max(sensorLineTime,Math.ceil(shortestLineTime) )
     const actualLineTime = shortestSensorLineTimes * CLK_PIX_Period
-    const TFOT = sensorInfo['FOT in lines']  * shortestSensorLineTimes * CLK_PIX_Period
-    const TRD = (height + readoutBlackLines) * actualLineTime
-    const TFRM = TFOT + TRD
+    /// weird adjusment for 4502 idk, from excel
+    let adjusmentNumber = 10
+    if (sensorInfo[`special 4502 ${bitness}bit adjusment`]){
+        adjusmentNumber = sensorInfo[`special 4502 ${bitness}bit adjusment`]
+    }
+    const TFOT = adjusmentNumber / 1000000
+    const TFOTactual = TFOT + sensorInfo[`${bitness}bit FOT in lines`] * actualLineTime * 4
+    const TRD = (height + readoutBlackLines) * actualLineTime 
+    const TFRM = TFOTactual + TRD
     const maxFPS = 1 / TFRM
 
     return maxFPS
