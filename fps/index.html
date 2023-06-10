@@ -94,7 +94,6 @@
             const camera = document.getElementById("camera").value;
             const mode = document.getElementById("modes").value;
             sensorInfo = sensor(camera, mode);
-            document.getElementById("linkDaddy").classList.toggle("hidden", sensorInfo["type"]== "25x")
             const heightMax = sensorInfo['Max Height (V)']
             const widthMax = sensorInfo['Max Width (H)']
             heightSlider.max = heightMax;
@@ -103,7 +102,29 @@
             dontExceedMax(heightSlider, heightMax)
             dontExceedMax(widthInput, widthMax)
             dontExceedMax(widthSlider, widthMax)
+            /// custom things to hide or add to prams based on sensor
+            document.getElementById("linkDaddy").classList.toggle("hidden", sensorInfo["type"]== "25x")
+            mode == "High Speed" && (camera == "Iron 3265" || sensorInfo["type"] == "x5xx") ? disableOption("bitness", "12") : enableOption("bitness", "12")
+            sensorInfo["type"] == "x5xx" && mode == "Normal Speed" ? disableOption("links", "4") : enableOption("links", "4")
+
             calculate()
+
+        }
+
+
+        function disableOption(selectID, optionInnerText){
+            document.querySelectorAll(`#${selectID}`)[0].selectedIndex = 0;
+            const opt = [...document.querySelectorAll(`#${selectID} option`)].filter(x=>x.innerText == optionInnerText)[0]
+            opt.disabled = true
+            opt.style.color = "rgba(0, 0, 0, 0.2)"
+
+        }
+        
+        function enableOption(selectID, optionInnerText){
+            const opt = [...document.querySelectorAll(`#${selectID} option`)].filter(x=>x.innerText == optionInnerText)[0]
+            opt.disabled = false
+            opt.style.color = ""
+
 
         }
 
@@ -162,6 +183,9 @@
             addwiggle()
             return result
         }
+
+
+        
 
 
         let cameras = getAllcamerasNames();
