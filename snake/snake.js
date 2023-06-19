@@ -69,6 +69,10 @@ const maxSpeed = 65 / Math.PI; // Why? bc its funny thats why
 const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
 ///////////////////////////////////////////////////////////////////////////////////
+///                       U S E F U L      F U N C T I O N S                    ///
+///////////////////////////////////////////////////////////////////////////////////
+
+
 
 function detectMob() {
   return (  window.innerWidth <= 800 );
@@ -100,6 +104,8 @@ function genMap(rows, cols) {
   }
   return map;
 }
+
+
 
 function updateMap([x, y], value) {
   map[x][y] = value;
