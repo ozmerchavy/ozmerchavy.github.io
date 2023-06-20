@@ -277,7 +277,7 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
 
   const emoji = isGodMode ? Graphics.godBody : Graphics.body;
   for (const ij of snake.snakeArray) {
-    updateMap(ij,  Graphics.body);
+    updateMap(ij,  emoji);
   }
   if (!isGodMode) updateMap(newHead, Graphics.head);
 
