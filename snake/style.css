@@ -10,6 +10,7 @@ touch-action: manipulation;
 td {
 
     font-size: calc(var(--size)*1px);
+
     text-align: center;
 
     box-shadow: 2px 2px 10px -5px white;

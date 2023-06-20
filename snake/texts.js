@@ -61,5 +61,14 @@ const quotes = {
         "Good Job", 
         "Steve Job",
         "Ok Job not bad"
+    ],
+    "tunnelStage":[
+        "The longest tunnel in the world is the Gotthard Base Tunnel in Switzerland, measuring 35.5 miles (57 kilometers) in length.",
+        "The Channel Tunnel, also known as the Eurotunnel, connects England and France and is the longest undersea tunnel in the world, spanning 23.5 miles (37.9 kilometers).",
+        "The world's first underground railway, the London Underground, opened in 1863 and is commonly referred to as the Tube.",
+        "The Tokyo Bay Aqua-Line in Japan is an underwater tunnel that combines a bridge and tunnel, allowing vehicles to travel over the sea.",
+        "The Fréjus Road Tunnel, located between France and Italy, is one of the oldest vehicular tunnels in the world, opened in 1980.",
+        "Tunnel boring machines (TBMs) are commonly used for excavating tunnels. They are enormous machines that can be hundreds of meters long and can bore through various types of rock and soil."      
+
     ]
 }

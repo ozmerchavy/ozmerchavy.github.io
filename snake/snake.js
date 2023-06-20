@@ -1,81 +1,107 @@
-///////////////////////////////////////////////////////////////////////////////////
-///                             V A R I A B L E S                               ///
-///////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////
+// /                             V A R I A B L E S                               ///
+// /////////////////////////////////////////////////////////////////////////////////
+
+const say = console.log
 
 const foods = [
-  "🍏",
-  "🍎",
-  "🍐",
-  "🍊",
-  "🍋",
-  "🍉",
-  "🍓",
-  "🍈",
-  "🍒",
-  "🍑",
-  "🍍",
-  "🥝",
-  "🥑",
-  "🍅",
+    "🍏",
+    "🍎",
+    "🍐",
+    "🍊",
+    "🍋",
+    "🍉",
+    "🍓",
+    "🍈",
+    "🍒",
+    "🍑",
+    "🍍",
+    "🥝",
+    "🥑",
+    "🍅",
 ];
 
+
+const defaultValues = {
+  emptysCells: `⬛`,
+  chanceForDivineFruit: .1,
+  maxApplesAtOnce: 14,
+  mapRows: 30,
+  mapCols: 30,
+  initialFps: 9, 
+  maxSpeed: 65/ Math.PI
+
+
+}
+
 const Graphics = {
-  apple: choice(foods),
-  emptys: `⬛`,
-  head: "🔴",
-  body: "⚪",
-  godBody: "🔵",
-  divineFruit: "🍇",
+    apple: choice(foods),
+    emptys: defaultValues.emptysCells,
+    head: "🔴",
+    body: "⚪",
+    godBody: "🔵",
+    divineFruit: "🍇",
+    nothing: "🔞",
+    door: "🚪"
 };
 
 let godModeEndTime = 0; // in ms since 1970
 let isGodMode = false;
 let isPaused = false
-let maxApplesAtOnce = 14;
-let chanceForDivineFruit = .08;
+let maxApplesAtOnce = defaultValues.maxApplesAtOnce;
+let chanceForDivineFruit = defaultValues.chanceForDivineFruit;
 let isTiny = false
-let mapRows = 30;
-let mapCols = 30;
+let mapRows = defaultValues.mapRows;
+let mapCols = defaultValues.mapCols;
 
-// for tiny mode 
+
+
+// for tiny mode
 if (document.URL.includes("tiny")) {
-  isTiny = true
-  mapCols = 11
-  mapRows = 11
-  maxApplesAtOnce = 2
-  chanceForDivineFruit = .025;
-  document.querySelector("#scoreText").innerHTML = "Tiny " + document.querySelector("#scoreText").innerHTML
-  document.title = "Tiny Snake"
+    isTiny = true
+    mapCols = 11
+    mapRows = 11
+    maxApplesAtOnce = 2
+    chanceForDivineFruit = .08;
+    document.querySelector("#scoreText").innerHTML = "Tiny " + document.querySelector("#scoreText").innerHTML
+    document.title = "Tiny Snake"
 }
-//// redirecting mobiles to tiny snake
-if ((detectMob())){
-  if (!isTiny){
-    document.location+="?tiny"
+// // redirecting mobiles to tiny snake
+if ((detectMob())) {
+    if (! isTiny) {
+        document.location += "?tiny"
     }
 }
 
 let map = genMap(mapRows, mapCols);
-const midMap = [Math.round(map.length / 2), Math.round(map[0].length / 2)];
+let midMap = findMid(map)
 const snake = {
-  snakeArray: [midMap, vec2dAdd(midMap, [1, 0]), vec2dAdd(midMap, [2, 0])],
-  currnetDir: [-1, 0], //up
-  isDead: false,
+    snakeArray: [
+        midMap, vec2dAdd(midMap, [1, 0]),
+        vec2dAdd(midMap, [2, 0])
+    ],
+    currnetDir: [
+        -1, 0
+    ], // up
+    isDead: false,
+    score: 0,
+    level: 0
 };
 const requeue = [];
-const initialFps = 9;
-let fps = initialFps;
+let initialFps = defaultValues.initialFps
+let fps = defaultValues.initialFps;
 let size = 40;
-const maxSpeed = 65 / Math.PI; // Why? bc its funny thats why
+let maxSpeed = defaultValues.maxSpeed
 const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
-///////////////////////////////////////////////////////////////////////////////////
-///                       U S E F U L      F U N C T I O N S                    ///
-///////////////////////////////////////////////////////////////////////////////////
 
+// /////////////////////////////////////////////////////////////////////////////////
+// /                       U S E F U L      F U N C T I O N S                    ///
+// /////////////////////////////////////////////////////////////////////////////////
 
 
 function detectMob() {
-  return (  window.innerWidth <= 800 );
+    return(window.innerWidth<= 800 );
 }
 
 function vec2dAdd(arr, arr2) {
@@ -94,6 +120,10 @@ function clamp(x, min, max) {
 ///                          M A P   F U N C T I O N S                          ///
 ///////////////////////////////////////////////////////////////////////////////////
 
+function findMid(map){
+  return  [Math.round(map.length / 2), Math.round(map[0].length / 2)]
+}
+
 function genMap(rows, cols) {
   let map = [];
   for (let i = 0; i < rows; i++) {
@@ -103,6 +133,33 @@ function genMap(rows, cols) {
     }
   }
   return map;
+}
+
+
+
+// would simply switch the map
+function switchToNewMap(rows, cols){
+  map = genMap(rows, cols)
+
+  const newMid = findMid(map)
+  snake.snakeArray = [
+    newMid, vec2dAdd(newMid, [1, 0]), vec2dAdd(newMid, [2, 0])];
+
+  snake.currnetDir = [-1, 0]; //up
+
+  snake.isDead = false;
+  createTable(map)
+  let table = document.querySelector("table");
+
+  table.style.setProperty("--transY", 0);
+  table.style.setProperty("--transX", 0);
+
+  // nextTurn()
+  paintMap();
+  
+
+
+
 }
 
 
@@ -197,8 +254,11 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
 
   const newHeadContent = map[newHead[0]]?.[newHead[1]];
 
-  if (newHeadContent === undefined || newHeadContent == Graphics.body && !isGodMode) {
-    return die();
+  if (newHeadContent === undefined || newHeadContent == Graphics.nothing || newHeadContent == Graphics.body && !isGodMode) {
+     return die();
+  }
+  else if (newHeadContent == Graphics.door){
+    return nextStage()
   }
 
 
@@ -207,6 +267,9 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
     const lastPos = snake.snakeArray.pop();
     updateMap(lastPos, Graphics.emptys);
   }
+  else if (newHeadContent == Graphics.apple){
+    snake.score +=1 
+  }
   if (newHeadContent == Graphics.divineFruit) {
     godModeEndTime = Date.now() + 7_000; // enter (or lengthen the duration of) god mode
     isGodMode = true;
@@ -214,7 +277,7 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
 
   const emoji = isGodMode ? Graphics.godBody : Graphics.body;
   for (const ij of snake.snakeArray) {
-    updateMap(ij, emoji);
+    updateMap(ij,  Graphics.body);
   }
   if (!isGodMode) updateMap(newHead, Graphics.head);
 
@@ -223,12 +286,10 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   const transX = table.style.getPropertyValue("--transX");
 
   table.style.setProperty(
-    "--transY",
-    Number(transY) - size * snake.currnetDir[0]
+    "--transY", Number(transY) - size * snake.currnetDir[0]
   );
   table.style.setProperty(
-    "--transX",
-    Number(transX) - size * snake.currnetDir[1]
+    "--transX", Number(transX) - size * snake.currnetDir[1]
   );
 }
 
@@ -242,7 +303,7 @@ function die() {
     highscore = localStorage.getItem("highscore") || 0;
   }
 
-  const score = snake.snakeArray.length - 3;
+  const score = snake.score
   if (score > highscore) {
     if (isTiny) {
       localStorage.setItem("tinyscore", score)
@@ -258,7 +319,9 @@ function die() {
 }
 
 function win() {
-  const score = snake.snakeArray.length - 3;
+
+  //due to bugs, suspended
+  const score = snake.score
   if (isTiny) {
     localStorage.setItem("tinyscore", score);
   }
@@ -266,8 +329,8 @@ function win() {
     localStorage.setItem("highscore", score);
 
   }
-  snake.isDead == true;
-  alerto("You won you magnificent creature", "machmi");
+  // snake.isDead == true;
+  // alerto("You won you magnificent creature", "machmi");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -295,10 +358,14 @@ function nextTurn() {
     return;
   }
   applesOrWin();
+  if(!isTiny){
+    maybeOpenDoor()
+
+  }
   moveSnakeorDie({ rotation: requeue.shift(), thruWalls: isGodMode });
 
   if (!snake.isDead) {
-    document.querySelector(".score").innerText = snake.snakeArray.length - 3;
+    document.querySelector(".score").innerText = snake.score
 
     fps = Math.min(initialFps + (snake.snakeArray.length - 3) / 4, maxSpeed);
     size = Math.max(40 - snake.snakeArray.length, 18);
@@ -313,19 +380,19 @@ function nextTurn() {
 }
 
 async function restart() {
-  map = genMap(mapRows, mapCols);
-  snake.snakeArray = [
-    midMap,
-    vec2dAdd(midMap, [1, 0]),
-    vec2dAdd(midMap, [2, 0]),
-  ];
-  let table = document.querySelector("table");
+  Graphics.emptys = defaultValues.emptysCells
+  switchToNewMap(defaultValues.mapRows,defaultValues.mapCols)
+  
+  maxApplesAtOnce = defaultValues.maxApplesAtOnce;
+  maxSpeed = defaultValues.maxSpeed
+  chanceForDivineFruit = defaultValues.chanceForDivineFruit
+  initialFps = defaultValues.initialFps
 
-  table.style.setProperty("--transY", 0);
-  table.style.setProperty("--transX", 0);
-
+  snake.level = 0 
+   
+  
   snake.currnetDir = [-1, 0]; //up
-
+  snake.score = 0 
   await sleep(350);
   snake.isDead = false;
   paintMap();
@@ -345,8 +412,16 @@ function pauseOrunpauseGame() {
   }
 }
 
+function maybeOpenDoor(){
+  console.log("New stage functionality is in a different file, so this function is gonna get ran over");
+  console.log("I kept this function so this js fle could work by itself");
 
+}
 
+function nextStage(){
+  console.log("New stage functionality is in a different file, so this function is gonna get ran over");
+  console.log("I kept this function so this js fle could work by itself");
+}
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///                          H T M L   F U N C T I O N S                        ///
@@ -451,7 +526,10 @@ if (isMacLike) {
 document.querySelector(".alerto").addEventListener("submit", (e) => {
   e.preventDefault();
   document.querySelector(".alerto").removeAttribute("open");
-  restart();
+  if (snake.isDead){
+    restart();
+
+  }
   document.querySelector(".high-score").classList.add("secret");
 });
 
@@ -472,9 +550,6 @@ async function mainLoop() {
     nextTurn();
     const timePassed = performance.now() - timeStart;
     const timeLeftToSleep = 1000 / fps - timePassed;
-    if (timeLeftToSleep > 0) await sleep(timeLeftToSleep);
+    if (timeLeftToSleep> 0)await sleep(timeLeftToSleep);
 
-  }
-}
-
-mainLoop();
+}}mainLoop();
