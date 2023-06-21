@@ -61,11 +61,13 @@ let mapCols = defaultValues.mapCols;
 
 // for tiny mode
 if (document.URL.includes("tiny")) {
+
+  //levels disabled (later)
     isTiny = true
-    mapCols = 11
-    mapRows = 11
-    maxApplesAtOnce = 2
-    chanceForDivineFruit = .08;
+    defaultValues.mapCols = 11
+    defaultValues.mapRows = 11
+    defaultValues.maxApplesAtOnce = 2
+    defaultValues.chanceForDivineFruit = .08;
     document.querySelector("#scoreText").innerHTML = "Tiny " + document.querySelector("#scoreText").innerHTML
     document.title = "Tiny Snake"
 }
