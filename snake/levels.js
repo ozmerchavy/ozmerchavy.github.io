@@ -43,7 +43,9 @@ const stages = [
         alertoText: "The weird cave, get to 192 points for next stage",
         doorSymbol: "⛰",
         tableEmptys: "🟩",
-        bgColorTable: "#00d26a"
+        bgColorTable: "#00d26a",
+        apple: "🍓"
+
 
 
 
