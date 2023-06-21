@@ -389,7 +389,6 @@ function nextTurn() {
 
 async function restart() {
   Graphics.emptys = defaultValues.emptysCells
-  switchToNewMap(defaultValues.mapRows,defaultValues.mapCols)
   
   maxApplesAtOnce = defaultValues.maxApplesAtOnce;
   maxSpeed = defaultValues.maxSpeed
@@ -397,6 +396,8 @@ async function restart() {
   initialFps = defaultValues.initialFps
   Graphics.bgColor = defaultValues.bgColor
   Graphics.bgColorTable = defaultValues.bgColorTable
+  switchToNewMap(defaultValues.mapRows,defaultValues.mapCols)
+
 
   snake.level = 0 
    
