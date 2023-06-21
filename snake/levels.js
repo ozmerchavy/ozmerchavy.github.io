@@ -16,7 +16,7 @@ const stages = [
     
     },
     {
-        levelName: "dizzy",
+        levelName: "Dizzy",
         levelNo: 1,
         rows: 22,
         cols: 19,
@@ -31,13 +31,13 @@ const stages = [
 
     }, 
     {
-        levelName: "huge cave",
+        levelName: "Huge Cave",
         levelNo: 2,
         rows: 200,
         cols: 20,
         maxAppples: 50, 
         chanceForDivineFruit: .1,
-        level_fps: 10,
+        level_fps: 11,
         maxSpeed: 22,
         minScoretoGetDoor: 140,
         alertoText: "The weird cave, get to 192 points for next stage",
@@ -70,19 +70,34 @@ const stages = [
     {
         levelName: "Hell",
         levelNo: 4,
-        rows: 35,
-        cols: 35,
+        rows: 40,
+        cols: 40,
         maxAppples: 20, 
         chanceForDivineFruit: .01,
-        level_fps: 8,
+        level_fps: 10,
         maxSpeed: 26,
-        minScoretoGetDoor: 202,
-        alertoText: "Good luck and stuff",
+        minScoretoGetDoor: 215,
+        alertoText: "Good luck and stuff. You could be saved very shortly, look for the cloud.",
         doorSymbol: "💀",
         tableEmptys: "💀",
         bgColor: "#910000",
         apple:"😭"
 
+    },
+    {
+        levelName: "Heaven",
+        levelNo: 5,
+        rows: 20,
+        cols: 20,
+        maxAppples: 35, 
+        chanceForDivineFruit: .01,
+        level_fps: 10,
+        maxSpeed: 20,
+        minScoretoGetDoor: 230,
+        alertoText: "Here is heaven, enjoy!",
+        doorSymbol: "☁️",
+        bgColorTable: "#f4cfd3 ", 
+        apple:"🌈"
 
     }
 
@@ -118,6 +133,10 @@ function createDoor() {
     const level = stages[snake.level]
     if (level.tableEmptys){
         Graphics.emptys = level.tableEmptys
+    }
+    else{
+        Graphics.emptys = defaultValues.emptysCells
+
     }
     if (level.bgColor){
         Graphics.bgColor = level.bgColor
