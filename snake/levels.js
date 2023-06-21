@@ -11,7 +11,8 @@ const stages = [
         minScoretoGetDoor: 60,
         alertoText: "Get to 100 points for next stage",
         doorSymbol: "🚅", 
-        TableColor: "🟫"
+        tableEmptys: "🟫",
+        bgColorTable: "#6d4534"
     
     },
     {
@@ -26,7 +27,7 @@ const stages = [
         minScoretoGetDoor: 100,
         alertoText: "Try to get to 140 points",
         doorSymbol: "🎡",
-        TableColor: "⬛"
+        tableEmptys: "⬛",
 
     }, 
     {
@@ -41,7 +42,9 @@ const stages = [
         minScoretoGetDoor: 140,
         alertoText: "The weird cave, get to 192 points for next stage",
         doorSymbol: "⛰",
-        TableColor: "🟩"
+        tableEmptys: "🟩",
+        bgColorTable: "#00d26a"
+
 
 
     },
@@ -57,9 +60,10 @@ const stages = [
         minScoretoGetDoor: 192,
         alertoText: "In the Banana world it is hard to even eat one banana. you need to get to 202 to get out.",
         doorSymbol: "🍌",
-        TableColor: "🟨",
+        tableEmptys: "🟨",
         bgColor: "#5c521b",
-        apple:"🍌"
+        apple:"🍌",
+        bgColorTable: "#f4e8b8"
 
 
     },
@@ -75,7 +79,7 @@ const stages = [
         minScoretoGetDoor: 202,
         alertoText: "Good luck and stuff",
         doorSymbol: "💀",
-        TableColor: "💀",
+        tableEmptys: "💀",
         bgColor: "#910000",
         apple:"😭"
 
@@ -112,8 +116,8 @@ function createDoor() {
 // / called once a  door is entered
  function nextStage() {
     const level = stages[snake.level]
-    if (level.TableColor){
-        Graphics.emptys = level.TableColor
+    if (level.tableEmptys){
+        Graphics.emptys = level.tableEmptys
     }
     if (level.bgColor){
         Graphics.bgColor = level.bgColor
@@ -123,6 +127,13 @@ function createDoor() {
     }
     if (level.apple){
         Graphics.apple = level.apple
+    }
+    if (level.bgColorTable){
+        Graphics.bgColorTable = level.bgColorTable
+    }
+    else {
+        Graphics.bgColorTable = defaultValues.bgColorTable
+
     }
 
 
