@@ -44,10 +44,11 @@ table .⬛ {
 body {
     --size: 30;
     --fps: 5;
+    --bgColor: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: var(--bgColor);
 
 }
 

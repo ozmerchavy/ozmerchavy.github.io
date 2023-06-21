@@ -11,12 +11,12 @@ const stages = [
         minScoretoGetDoor: 60,
         alertoText: "Get to 100 points for next stage",
         doorSymbol: "🚅", 
-        newGraphics: "🟫"
+        TableColor: "🟫"
     
     },
     {
         levelName: "dizzy",
-        levelNo: 0,
+        levelNo: 1,
         rows: 22,
         cols: 19,
         maxAppples: 20, 
@@ -26,12 +26,12 @@ const stages = [
         minScoretoGetDoor: 100,
         alertoText: "Try to get to 140 points",
         doorSymbol: "🎡",
-        newGraphics: "⬛"
+        TableColor: "⬛"
 
     }, 
     {
         levelName: "huge cave",
-        levelNo: 0,
+        levelNo: 2,
         rows: 200,
         cols: 20,
         maxAppples: 50, 
@@ -39,12 +39,49 @@ const stages = [
         level_fps: 10,
         maxSpeed: 22,
         minScoretoGetDoor: 140,
-        alertoText: "The weird cave",
+        alertoText: "The weird cave, get to 192 points for next stage",
         doorSymbol: "⛰",
-        newGraphics: "🟩"
+        TableColor: "🟩"
+
+
+    },
+    {
+        levelName: "Banana World",
+        levelNo: 3,
+        rows: 20,
+        cols: 20,
+        maxAppples: 2, 
+        chanceForDivineFruit: .01,
+        level_fps: 20,
+        maxSpeed: 25,
+        minScoretoGetDoor: 192,
+        alertoText: "In the Banana world it is hard to even eat one banana. you need to get to 202 to get out.",
+        doorSymbol: "🍌",
+        TableColor: "🟨",
+        bgColor: "#5c521b",
+        apple:"🍌"
+
+
+    },
+    {
+        levelName: "Hell",
+        levelNo: 4,
+        rows: 30,
+        cols: 30,
+        maxAppples: 10, 
+        chanceForDivineFruit: .01,
+        level_fps: 8,
+        maxSpeed: 26,
+        minScoretoGetDoor: 202,
+        alertoText: "Good luck and stuff",
+        doorSymbol: "💀",
+        TableColor: "💀",
+        bgColor: "#910000",
+        apple:"😭"
 
 
     }
+
 
 ]
 
@@ -75,9 +112,20 @@ function createDoor() {
 // / called once a  door is entered
  function nextStage() {
     const level = stages[snake.level]
-    if (level.newGraphics){
-        Graphics.emptys = level.newGraphics
+    if (level.TableColor){
+        Graphics.emptys = level.TableColor
     }
+    if (level.bgColor){
+        Graphics.bgColor = level.bgColor
+    }
+    else{
+        Graphics.bgColor = defaultValues.bgColor
+    }
+    if (level.apple){
+        Graphics.apple = level.apple
+    }
+
+
     switchToNewMap(level.rows, level.cols)
     snake.level += 1
     maxApplesAtOnce = level.maxAppples

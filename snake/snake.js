@@ -29,7 +29,8 @@ const defaultValues = {
   mapRows: 30,
   mapCols: 30,
   initialFps: 9, 
-  maxSpeed: 65/ Math.PI
+  maxSpeed: 65/ Math.PI,
+  bgColor: "black"
 
 
 }
@@ -42,7 +43,9 @@ const Graphics = {
     godBody: "🔵",
     divineFruit: "🍇",
     nothing: "🔞",
-    door: "🚪"
+    door: "🚪",
+    bgColor: defaultValues.bgColor
+
 };
 
 let godModeEndTime = 0; // in ms since 1970
@@ -387,6 +390,7 @@ async function restart() {
   maxSpeed = defaultValues.maxSpeed
   chanceForDivineFruit = defaultValues.chanceForDivineFruit
   initialFps = defaultValues.initialFps
+  Graphics.bgColor = defaultValues.bgColor
 
   snake.level = 0 
    
@@ -447,6 +451,8 @@ function createTable(tableData) {
   table.appendChild(tableBody);
 
   document.querySelector("table").outerHTML = table.outerHTML;
+  document.querySelector("body").style.setProperty("--bgColor", Graphics.bgColor);
+
 }
 
 function checkKey(e) {
