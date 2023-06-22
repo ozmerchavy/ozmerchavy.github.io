@@ -43,6 +43,10 @@ table {
 table .⬛ {
     color: transparent;
 }
+table .⬜️ {
+    color: transparent;
+    background-color: var(--bgColor);
+}
 
 body {
     --size: 30;
