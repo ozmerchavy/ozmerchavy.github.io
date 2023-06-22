@@ -36,6 +36,9 @@ const defaultValues = {
 
 }
 
+
+// changing names here would affect Levels as well (translating the GUI)
+// note that ⬛ and ⬜️ have css of their own
 const Graphics = {
     apple: choice(foods),
     emptys: defaultValues.emptysCells,
@@ -43,7 +46,7 @@ const Graphics = {
     body: "⚪",
     godBody: "🔵",
     divineFruit: "🍇",
-    nothing: "🔞",
+    nothing: "⬜️",
     door: "🚪",
     bgColor: defaultValues.bgColor,
     bgColorTable: defaultValues.bgColorTable,
@@ -428,6 +431,13 @@ function pauseOrunpauseGame() {
   }
 }
 
+function pauseGame(){
+  isPaused = true;
+  const pauseButton = document.querySelector("#pause")
+  pauseButton.classList.remove("secret"); document.querySelector(".high-score").classList.remove("secret") 
+
+}
+
 function maybeOpenDoor(){
   console.log("New stage functionality is in a different file, so this function is gonna get ran over");
   console.log("I kept this function so this js fle could work by itself");
@@ -572,3 +582,4 @@ async function mainLoop() {
     if (timeLeftToSleep> 0)await sleep(timeLeftToSleep);
 
 }}mainLoop();
+

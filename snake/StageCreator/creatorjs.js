@@ -40,17 +40,14 @@ function range(n) {
   colsInput.addEventListener("input", updateHtmlTable);
   document.addEventListener("readystatechange", updateHtmlTable);
   
-  const Graphics = {
+  const relevantGraphics = {
     apple: "🍏",
-    head: "🔴",
-    body: "⚪",
-    godBody: "🔵",
     divineFruit: "🍇",
-    nothing: "🔞",
-    door: "🚪",
+    empty: "⬛",
+    nothing: "⬜️"
   };
   
-  Object.entries(Graphics).forEach(([name, emoji]) => {
+  Object.entries(relevantGraphics).forEach(([name, emoji]) => {
     const option = document.createElement("option");
     option.innerText = `${emoji} ${name}`;
     option.value = emoji;
@@ -70,7 +67,7 @@ function range(n) {
       const row = [];
       range(numCols).forEach(() => {
         const cell = tableDiv.querySelector(`:nth-child(${++idx})`);
-        row.push(cell.innerText || "⬜️");
+        row.push(cell.innerText || relevantGraphics.empty);
       });
       arr2d.push(row);
     });
