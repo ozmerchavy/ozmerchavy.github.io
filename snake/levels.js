@@ -12,7 +12,7 @@ const stages = [
         alertoText: "Get to 100 points for next stage",
         doorSymbol: "🚅",
         tableEmptys: "🟫",
-        bgColorTable: "#6d4534"
+        bgColorTable: "#6d4534",
 
     },
     {
@@ -125,7 +125,21 @@ const bonusStages = [{
         apple: "🥕",
         map: greenFieldMap
 
-    }]
+    },
+    {
+        levelName: "Shadow Corn",
+        level_fps: 7,
+        maxSpeed: 10,
+        alertoText: "Scary!",
+        bgColorTable: "#ccac9f",
+        bgColor:"#093a07",
+        apple: "🌽",
+        map: shadowMap
+
+    }
+
+
+]
 
 let n = 0
 
@@ -161,6 +175,8 @@ function createDoor(isBonuStage = false) {
 
 
 // / called once a  door is entered
+// if is bonus stage is false goes to next level
+// if it is true, gives random bonus level. if it is a string it finds this specific level 
 function newStage(isBonuStage = false) {
     let level
     let levelMap
@@ -168,7 +184,9 @@ function newStage(isBonuStage = false) {
         level = choice(bonusStages)
     } else {
         level = stages[snake.level]
-
+    }
+    if (typeof(isBonuStage) == "string"){
+      level = stages.find(stage => stage.levelName === isBonuStage) || bonusStages.find(stage => stage.levelName === isBonuStage)
     }
 
     if (level.apple) {
