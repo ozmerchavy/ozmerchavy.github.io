@@ -1,3 +1,7 @@
+
+//// TO DO: In some stages (with lots of apples) make zoom not change
+
+
 // /////////////////////////////////////////////////////////////////////////////////
 // /                             V A R I A B L E S                               ///
 // /////////////////////////////////////////////////////////////////////////////////
@@ -32,6 +36,7 @@ const defaultValues = {
   maxSpeed: 65/ Math.PI,
   bgColor: "black",
   bgColorTable: "",
+  disableSizeChange: false
 
 
 }
@@ -52,9 +57,8 @@ const Graphics = {
     bgColor: defaultValues.bgColor,
     bgColorTable: defaultValues.bgColorTable,
     bonusDoor: "🚪",
-    doorOutBonusStage: "🔑"
-
-    
+    doorOutBonusStage: "🔑",
+    disableSizeChange: false
 
 };
 
@@ -174,6 +178,8 @@ function switchToNewMap(newmap){
   let table = document.querySelector("table");
   table.style.setProperty("--transY", 0);
   table.style.setProperty("--transX", 0);
+  Graphics.disableSizeChange = defaultValues.disableSizeChange
+
 
   // nextTurn()
   paintMap();
@@ -395,7 +401,11 @@ function nextTurn() {
 
     fps = Math.min(initialFps + (snake.snakeArray.length - 3) / 4, maxSpeed);
     size = Math.max(40 - snake.snakeArray.length, 18);
+    if (Graphics.disableSizeChange){
+      size = 22
+    }
     document.querySelector("body").style.setProperty("--size", size);
+
     document.querySelector("body").style.setProperty("--fps", fps);
   }
 

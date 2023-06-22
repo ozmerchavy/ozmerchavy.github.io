@@ -182,6 +182,7 @@ function newStage(isBonuStage = false) {
     let levelMap
     if (isBonuStage) {
         level = choice(bonusStages)
+
     } else {
         level = stages[snake.level]
     }
@@ -204,6 +205,7 @@ function newStage(isBonuStage = false) {
     }
    
     switchToNewMap(levelMap)
+    Graphics.disableSizeChange = true
     snake.level += 1
     maxApplesAtOnce = level.maxAppples || 0
     chanceForDivineFruit = level.chanceForDivineFruit || 0
