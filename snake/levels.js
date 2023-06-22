@@ -107,13 +107,14 @@ const stages = [
 const bonusStages = [{
         levelName: "Dragons",
         minScoretoGetDoor: 60,
-        level_fps: 8,
+        level_fps: 3,
         maxSpeed: 10,
-        alertoText: "Get to 100 points for next stage",
-        doorSymbol: "🚅",
-        tableEmptys: "",
-        bgColorTable: "#a7d1d6",
-        map: BonusExample
+        alertoText: "The HARDEST bonus level!",
+        doorSymbol: "🐉",
+        bgColorTable: "#e5d5e8",
+        bgColor:"#120c37",
+        apple: "🍔",
+        map: DragonsMap
 
     }]
 
