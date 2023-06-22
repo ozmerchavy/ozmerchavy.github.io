@@ -103,14 +103,13 @@ const stages = [
 ]
 
 
-  
+  // cant have own's door btw
 const bonusStages = [{
         levelName: "Dragons",
         minScoretoGetDoor: 60,
         level_fps: 3,
         maxSpeed: 10,
         alertoText: "The HARDEST bonus level!",
-        doorSymbol: "🐉",
         bgColorTable: "#e5d5e8",
         bgColor:"#120c37",
         apple: "🍔",
