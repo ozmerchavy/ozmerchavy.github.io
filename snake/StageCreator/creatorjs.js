@@ -1,7 +1,22 @@
 function range(n) {
     return [...Array(n).keys()];
   }
-  
+
+  function findMid(map) {
+    return [Math.round(map.length / 2), Math.round(map[0].length / 2)];
+  }
+  function genMap(rows, cols) {
+    let map = [];
+    for (let i = 0; i < rows; i++) {
+      map.push([]);
+      for (let o = 0; o < cols; o++) {
+        map[i].push("Graphics.emptys");
+      }
+    }
+    return map;
+  }
+
+
   const rowsInput = document.querySelector("#rows-input");
   const colsInput = document.querySelector("#cols-input");
   const tableDiv = document.querySelector(".table");
@@ -34,6 +49,8 @@ function range(n) {
     }
     tableDiv.style.setProperty("--num-rows", numRows);
     tableDiv.style.setProperty("--num-cols", numCols);
+    addSnakeToTable(numRows, numCols);
+
   }
   
   rowsInput.addEventListener("input", updateHtmlTable);
@@ -43,9 +60,9 @@ function range(n) {
   const relevantGraphics = {
     apple: "🍏",
     divineFruit: "🍇",
-    empty: "⬛",
-    nothing: "⬜️"
-  };
+    nothing: "⬜️",
+    doorOutBonusStage: "🔑"
+  }
   
   Object.entries(relevantGraphics).forEach(([name, emoji]) => {
     const option = document.createElement("option");
@@ -67,10 +84,17 @@ function range(n) {
       const row = [];
       range(numCols).forEach(() => {
         const cell = tableDiv.querySelector(`:nth-child(${++idx})`);
-        row.push(cell.innerText || relevantGraphics.empty);
+        if (cell.innerText == "🔴" || cell.innerText == "⚪" ){
+          cell.innerText = ""
+        }
+        row.push(cell.innerText || "⬛");
       });
       arr2d.push(row);
     });
+    if (!arr2d.flat().includes(relevantGraphics.doorOutBonusStage)){
+      alert("You forgot to include a door out!")
+      return
+    } 
   
     resultElm.innerText = `[
   ${arr2d.map((row) => `  ${JSON.stringify(row)}`).join(",\n")},
@@ -80,4 +104,23 @@ function range(n) {
       .writeText(resultElm.innerText)
       .then(() => alert("copied to clipboard!"));
   });
+  
+
+  function addSnakeToTable(numRows, numCols) {
+    const table = document.querySelector(".table");
+  
+    const [middleRowIndex, middleColIndex] = findMid(genMap(numRows, numCols));
+  
+    const cells = table.querySelectorAll(".cell");
+    const middleCellIndex = middleRowIndex * numCols + middleColIndex;
+    cells[middleCellIndex].textContent ="🔴";
+   cells[middleCellIndex+numCols].textContent = "⚪";
+   cells[middleCellIndex+numCols*2].textContent = "⚪";
+  }
+  
+  // Call the function to add "x" to the table
+  
+
+  
+ 
   

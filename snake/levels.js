@@ -102,12 +102,13 @@ const stages = [
 
 ]
 
+
   
 const bonusStages = [{
         levelName: "Dragons",
         minScoretoGetDoor: 60,
-        level_fps: 12,
-        maxSpeed: 15,
+        level_fps: 8,
+        maxSpeed: 10,
         alertoText: "Get to 100 points for next stage",
         doorSymbol: "🚅",
         tableEmptys: "",
@@ -128,13 +129,19 @@ function maybeOpenDoor() {
         }
         createDoor()
     }
+
+    if (Math.random() < (chanceForBonusStage + snake.level/100) && !isSecretDoorOpenAlready && !isTiny){
+        createDoor(true)
+        isSecretDoorOpenAlready = true
+    }
 }
 
-function createDoor() {
+function createDoor(isBonuStage = false) {
     const av = findAvailables();
+    const door = isBonuStage? Graphics.bonusDoor : Graphics.door
     if (!map.flat().includes(Graphics.door)) {
         const ranSpot = av[Math.floor(Math.random() * av.length)];
-        updateMap(ranSpot, Graphics.door)
+        updateMap(ranSpot, door)
     }
 }
 
@@ -158,18 +165,22 @@ function newStage(isBonuStage = false) {
     Graphics.bgColorTable = level.bgColorTable || defaultValues.bgColorTable
     if (level.map) {
         /// MUST Copy or it would touch the original variable and change the apples making it untranslatable
-        const mapCopy = JSON.parse(JSON.stringify(level.map))
+        const mapCopy = copy(level.map)
         levelMap = translateBonusMaps(mapCopy)
     } else {
         levelMap = genMap(level.rows, level.cols)
     }
-    
+   
     switchToNewMap(levelMap)
     snake.level += 1
     maxApplesAtOnce = level.maxAppples || 0
     chanceForDivineFruit = level.chanceForDivineFruit || 0
     initialFps = level.level_fps || defaultValues.initialFps
     maxSpeed = level.maxSpeed || defaultValues.maxSpeed
+    if(isBonuStage){
+        isSecretDoorOpenAlready = true
+    }
+
     if (isBonuStage) {
         alerto(`Bonus Stage: ${
             level.levelName
@@ -192,7 +203,8 @@ function translateBonusMaps(bMap) {
         "🍏": "apple",
         "🍇": "divineFruit",
         "⬛": "emptys",
-        "⬜️": "nothing"
+        "⬜️": "nothing",
+        "🔑": "doorOutBonusStage"
 
     }
 
@@ -209,5 +221,4 @@ function translateBonusMaps(bMap) {
     return bMap
 
 }
-
 

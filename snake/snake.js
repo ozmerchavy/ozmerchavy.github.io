@@ -39,6 +39,7 @@ const defaultValues = {
 
 // changing names here would affect Levels as well (translating the GUI)
 // note that ⬛ and ⬜️ have css of their own
+// make sure there are no identical graphics when come to different kinds of doors
 const Graphics = {
     apple: choice(foods),
     emptys: defaultValues.emptysCells,
@@ -47,10 +48,12 @@ const Graphics = {
     godBody: "🔵",
     divineFruit: "🍇",
     nothing: "⬜️",
-    door: "🚪",
+    door: "🚅",
     bgColor: defaultValues.bgColor,
     bgColorTable: defaultValues.bgColorTable,
-    bonusDoor: "🚪"
+    bonusDoor: "🚪",
+    doorOutBonusStage: "🔑"
+
     
 
 };
@@ -63,6 +66,8 @@ let chanceForDivineFruit = defaultValues.chanceForDivineFruit;
 let isTiny = false
 let mapRows = defaultValues.mapRows;
 let mapCols = defaultValues.mapCols;
+const chanceForBonusStage = 0.01
+let isSecretDoorOpenAlready = false
 
 
 
@@ -128,6 +133,11 @@ function clamp(x, min, max) {
   return Math.max(min, Math.min(x, max));
 }
 
+
+function copy(thing){
+  return JSON.parse(JSON.stringify(thing))
+}
+
 ///////////////////////////////////////////////////////////////////////////////////
 ///                          M A P   F U N C T I O N S                          ///
 ///////////////////////////////////////////////////////////////////////////////////
@@ -159,9 +169,9 @@ function switchToNewMap(newmap){
   snake.currnetDir = [-1, 0]; //up
 
   snake.isDead = false;
+  isSecretDoorOpenAlready = false
   createTable(map)
   let table = document.querySelector("table");
-
   table.style.setProperty("--transY", 0);
   table.style.setProperty("--transX", 0);
 
@@ -269,7 +279,8 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   if (newHeadContent === undefined || (newHeadContent == Graphics.nothing || newHeadContent == Graphics.body) && !isGodMode) {
      return die();
   }
-  else if (newHeadContent == Graphics.door){
+  // for now after bonus stages you also get to next level
+  else if (newHeadContent == Graphics.door ||newHeadContent == Graphics.doorOutBonusStage ){
     return newStage(false)
   }
   else if (newHeadContent == Graphics.bonusDoor){
