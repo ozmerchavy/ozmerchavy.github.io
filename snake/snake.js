@@ -70,7 +70,7 @@ let chanceForDivineFruit = defaultValues.chanceForDivineFruit;
 let isTiny = false
 let mapRows = defaultValues.mapRows;
 let mapCols = defaultValues.mapCols;
-let chanceForBonusStage = 0.001
+let chanceForBonusStage = 0.0001
 let isSecretDoorOpenAlready = false
 
 
@@ -400,9 +400,9 @@ function nextTurn() {
     document.querySelector(".score").innerText = snake.score
 
     fps = Math.min(initialFps + (snake.snakeArray.length - 3) / 4, maxSpeed);
-    size = Math.max(40 - snake.snakeArray.length, 18);
+    size = Math.max(36 - snake.snakeArray.length, 18);
     if (Graphics.disableSizeChange){
-      size = 22
+      size = 20
     }
     document.querySelector("body").style.setProperty("--size", size);
 

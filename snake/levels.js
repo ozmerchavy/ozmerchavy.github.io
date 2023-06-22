@@ -42,7 +42,7 @@ const stages = [
         minScoretoGetDoor: 140,
         alertoText: "The weird cave, get to 192 points for next stage",
         doorSymbol: "⛰",
-        tableEmptys: "🟩",
+        tableEmptys: "⬛",
         bgColorTable: "#078b4a",
         apple: "🍓"
 
@@ -135,11 +135,32 @@ const bonusStages = [{
         bgColor:"#093a07",
         apple: "🌽",
         map: shadowMap
-
+    },
+    {
+        levelName: "Watermelon",
+        level_fps: 6,
+        maxSpeed: 7,
+        alertoText: "Yum.",
+        bgColorTable: "#f3bcbc",
+        bgColor:"#2b875b",
+        apple: "🍉",
+        map: watermelon
+    },
+    {
+        levelName: "Oz Design",
+        level_fps: 6,
+        maxSpeed: 7,
+        alertoText: "This game was designed by Oz",
+        bgColorTable: "#f3bcbc",
+        bgColor:"#2b875b",
+        map: ozDesign
     }
+  
+
 
 
 ]
+
 
 let n = 0
 
@@ -157,7 +178,7 @@ function maybeOpenDoor() {
     }
 
      
-    let enhancedCahnceforBonuStage = chanceForBonusStage + (snake.level)/1000
+    let enhancedCahnceforBonuStage = chanceForBonusStage + (snake.level)/10000
     if (Math.random() < enhancedCahnceforBonuStage && !isSecretDoorOpenAlready && !isTiny){
         createDoor(true)
         isSecretDoorOpenAlready = true
@@ -205,7 +226,10 @@ function newStage(isBonuStage = false) {
     }
    
     switchToNewMap(levelMap)
-    Graphics.disableSizeChange = true
+    if (isBonuStage){
+        Graphics.disableSizeChange = true
+
+    }
     snake.level += 1
     maxApplesAtOnce = level.maxAppples || 0
     chanceForDivineFruit = level.chanceForDivineFruit || 0
