@@ -127,6 +127,8 @@ const bonusStages = [{
 
     }]
 
+let n = 0
+
 
 // runs every turn
 function maybeOpenDoor() {
@@ -140,7 +142,12 @@ function maybeOpenDoor() {
         createDoor()
     }
 
-    if (Math.random() < (chanceForBonusStage + snake.level/100) && !isSecretDoorOpenAlready && !isTiny){
+     
+    let enhancedCahnceforBonuStage = chanceForBonusStage + (snake.level)/1000
+    n++
+    say(n)
+    say(enhancedCahnceforBonuStage)
+    if (Math.random() < enhancedCahnceforBonuStage && !isSecretDoorOpenAlready && !isTiny){
         createDoor(true)
         isSecretDoorOpenAlready = true
     }
