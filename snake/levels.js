@@ -203,7 +203,7 @@ function translateBonusMaps(bMap) {
         "🍏": "apple",
         "🍇": "divineFruit",
         "⬛": "emptys",
-        "⬜️": "nothing",
+        "🟦": "nothing",
         "🔑": "doorOutBonusStage"
 
     }

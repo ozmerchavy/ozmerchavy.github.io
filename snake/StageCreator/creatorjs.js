@@ -22,7 +22,9 @@ function range(n) {
   const tableDiv = document.querySelector(".table");
   const selectEmoji = document.querySelector("#emoji-select");
   const btnExport = document.querySelector("#btn-export");
+  const btnaddSnake = document.querySelector("#addSnake");
   const resultElm = document.querySelector(".result");
+  
   
   function updateHtmlTable() {
     const numRows = Number(rowsInput.value);
@@ -49,18 +51,19 @@ function range(n) {
     }
     tableDiv.style.setProperty("--num-rows", numRows);
     tableDiv.style.setProperty("--num-cols", numCols);
-    addSnakeToTable(numRows, numCols);
-
   }
   
   rowsInput.addEventListener("input", updateHtmlTable);
   colsInput.addEventListener("input", updateHtmlTable);
   document.addEventListener("readystatechange", updateHtmlTable);
+  btnaddSnake.addEventListener("click",addSnakeToTable )
+
+
   
   const relevantGraphics = {
     apple: "🍏",
     divineFruit: "🍇",
-    nothing: "⬜️",
+    nothing: "🟦",
     doorOutBonusStage: "🔑"
   }
   
@@ -69,6 +72,7 @@ function range(n) {
     option.innerText = `${emoji} ${name}`;
     option.value = emoji;
     selectEmoji.appendChild(option);
+    
   });
   
   function cellClicked(cell) {
@@ -106,21 +110,20 @@ function range(n) {
   });
   
 
-  function addSnakeToTable(numRows, numCols) {
+  function addSnakeToTable() {
+    const numRows = Number(rowsInput.value);
+    const numCols = Number(colsInput.value);
     const table = document.querySelector(".table");
   
     const [middleRowIndex, middleColIndex] = findMid(genMap(numRows, numCols));
   
     const cells = table.querySelectorAll(".cell");
     const middleCellIndex = middleRowIndex * numCols + middleColIndex;
+
     cells[middleCellIndex].textContent ="🔴";
    cells[middleCellIndex+numCols].textContent = "⚪";
    cells[middleCellIndex+numCols*2].textContent = "⚪";
   }
   
-  // Call the function to add "x" to the table
-  
 
-  
- 
-  
+
