@@ -66,7 +66,7 @@ let chanceForDivineFruit = defaultValues.chanceForDivineFruit;
 let isTiny = false
 let mapRows = defaultValues.mapRows;
 let mapCols = defaultValues.mapCols;
-const chanceForBonusStage = 0.01
+let chanceForBonusStage = 0.002
 let isSecretDoorOpenAlready = false
 
 
