@@ -31,7 +31,7 @@ const defaultValues = {
   initialFps: 9, 
   maxSpeed: 65/ Math.PI,
   bgColor: "black",
-  bgColorTable: ""
+  bgColorTable: "",
 
 
 }
@@ -46,7 +46,8 @@ const Graphics = {
     nothing: "🔞",
     door: "🚪",
     bgColor: defaultValues.bgColor,
-    bgColorTable: defaultValues.bgColorTable
+    bgColorTable: defaultValues.bgColorTable,
+    bonusDoor: "🚪"
     
 
 };
@@ -76,7 +77,7 @@ if (document.URL.includes("tiny")) {
 }
 // // redirecting mobiles to tiny snake
 if ((detectMob())) {
-    if (! isTiny) {
+    if (! isTiny) { 
         document.location += "?tiny"
     }
 }
@@ -146,9 +147,8 @@ function genMap(rows, cols) {
 
 
 // would simply switch the map
-function switchToNewMap(rows, cols){
-  map = genMap(rows, cols)
-
+function switchToNewMap(newmap){
+  map =  newmap
   const newMid = findMid(map)
   snake.snakeArray = [
     newMid, vec2dAdd(newMid, [1, 0]), vec2dAdd(newMid, [2, 0])];
@@ -166,9 +166,10 @@ function switchToNewMap(rows, cols){
   paintMap();
   
 
-
-
 }
+
+
+
 
 
 
@@ -266,7 +267,10 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
      return die();
   }
   else if (newHeadContent == Graphics.door){
-    return nextStage()
+    return newStage(false)
+  }
+  else if (newHeadContent == Graphics.bonusDoor){
+    return newStage(true)
   }
 
 
@@ -396,7 +400,8 @@ async function restart() {
   initialFps = defaultValues.initialFps
   Graphics.bgColor = defaultValues.bgColor
   Graphics.bgColorTable = defaultValues.bgColorTable
-  switchToNewMap(defaultValues.mapRows,defaultValues.mapCols)
+  const oldMap = genMap(defaultValues.mapRows,defaultValues.mapCols)
+  switchToNewMap(oldMap)
 
 
   snake.level = 0 
@@ -429,7 +434,7 @@ function maybeOpenDoor(){
 
 }
 
-function nextStage(){
+function newStage(){
   console.log("New stage functionality is in a different file, so this function is gonna get ran over");
   console.log("I kept this function so this js fle could work by itself");
 }

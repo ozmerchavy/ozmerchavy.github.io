@@ -105,6 +105,22 @@ const stages = [
 
 
 ]
+const bonusStages = [
+    {
+        levelName: "Dragons",
+        minScoretoGetDoor: 60,
+        level_fps: 12,
+        maxSpeed: 15,
+        alertoText: "Get to 100 points for next stage",
+        doorSymbol: "🚅", 
+        tableEmptys: "",
+        bgColorTable: "#a7d1d6",
+        map: BonusExample
+    
+    }]
+
+    
+
 
 
 
@@ -131,43 +147,43 @@ function createDoor() {
 
 
 // / called once a  door is entered
- function nextStage() {
-    const level = stages[snake.level]
-    if (level.tableEmptys){
-        Graphics.emptys = level.tableEmptys
+ function newStage(isBonuStage = false) {
+    let level
+    let levelMap
+    if (isBonuStage){
+        level = choice(bonusStages)
     }
     else{
-        Graphics.emptys = defaultValues.emptysCells
+        level = stages[snake.level]
 
     }
-    if (level.bgColor){
-        Graphics.bgColor = level.bgColor
-    }
-    else{
-        Graphics.bgColor = defaultValues.bgColor
-    }
+    
     if (level.apple){
         Graphics.apple = level.apple
     }
-    if (level.bgColorTable){
-        Graphics.bgColorTable = level.bgColorTable
+    Graphics.emptys = level.tableEmptys || defaultValues.emptysCells
+    Graphics.bgColor = level.bgColor || defaultValues.bgColor
+    Graphics.bgColorTable = level.bgColorTable || defaultValues.bgColorTable
+    levelMap = level.map || genMap(level.rows, level.cols)
+    switchToNewMap(levelMap)
+    snake.level += 1
+    maxApplesAtOnce = level.maxAppples || 0
+    chanceForDivineFruit = level.chanceForDivineFruit || 0
+    initialFps = level.level_fps || defaultValues.initialFps
+    maxSpeed = level.maxSpeed || defaultValues.maxSpeed
+    if (isBonuStage){
+        alerto(`Bonus Stage: ${level.levelName}!`, level.alertoText)
+
     }
     else {
-        Graphics.bgColorTable = defaultValues.bgColorTable
-
+        alerto(`New Stage: ${level.levelName}!`, level.alertoText)
     }
-
-
-    switchToNewMap(level.rows, level.cols)
-    snake.level += 1
-    maxApplesAtOnce = level.maxAppples
-    chanceForDivineFruit = level.chanceForDivineFruit
-    initialFps = level.level_fps
-    maxSpeed = level.maxSpeed
-    alerto(`New Stage: ${level.levelName}!`, level.alertoText)
     nextTurn()
     pauseOrunpauseGame()
 
 }
+
+
+
 
 
