@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="creatorStyle.css" />
+    <script src="creatorjs.js" defer></script>
+    <title>Table Creator</title>
+  </head>
+  <body>
+    <h1>Table Creator</h1>
+
+    <header>
+      <label>
+        Num Rows <input type="number" id="rows-input" value="24" />
+      </label>
+      <label>
+        Num Cols <input type="number" id="cols-input" value="18" />
+      </label>
+      <label>
+        Current Emoji
+        <select id="emoji-select"></select>
+      </label>
+      <button id="btn-export">Export</button>
+    </header>
+
+    <main>
+      <div class="table"></div>
+    </main>
+
+    <footer>
+      <pre class="result"></pre>
+    </footer>
+  </body>
+</html>
