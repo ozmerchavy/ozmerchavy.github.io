@@ -266,7 +266,7 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
 
   const newHeadContent = map[newHead[0]]?.[newHead[1]];
 
-  if (newHeadContent === undefined || newHeadContent == Graphics.nothing || newHeadContent == Graphics.body && !isGodMode) {
+  if (newHeadContent === undefined || (newHeadContent == Graphics.nothing || newHeadContent == Graphics.body) && !isGodMode) {
      return die();
   }
   else if (newHeadContent == Graphics.door){

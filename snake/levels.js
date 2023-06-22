@@ -157,10 +157,13 @@ function newStage(isBonuStage = false) {
     Graphics.bgColor = level.bgColor || defaultValues.bgColor
     Graphics.bgColorTable = level.bgColorTable || defaultValues.bgColorTable
     if (level.map) {
-        levelMap = translateBonusMaps(level.map)
+        /// MUST Copy or it would touch the original variable and change the apples making it untranslatable
+        const mapCopy = JSON.parse(JSON.stringify(level.map))
+        levelMap = translateBonusMaps(mapCopy)
     } else {
         levelMap = genMap(level.rows, level.cols)
     }
+    
     switchToNewMap(levelMap)
     snake.level += 1
     maxApplesAtOnce = level.maxAppples || 0
@@ -194,16 +197,15 @@ function translateBonusMaps(bMap) {
     }
 
     for (let row = 0; row < bMap.length; row++) {
-        for (let col = 0; col < map[row].length; col++) {
+        for (let col = 0; col < bMap[row].length; col++) {
             const value = bMap[row][col]
             const translatedValue = Graphics[GUISymbols[value]]
             if (!translatedValue) {
-                console.error(`I cannot translate ${value} from the map you made to a Graphic I know. Here are the Graphics that are available:\n ${Graphics}`)
+                console.error(`I cannot translate ${value} from the map you made (in ${row}, ${col}) to a Graphic I know. Here are the Graphics that are available:\n ${Graphics}`)
             }
             bMap[row][col] = translatedValue
         }
     }
-    say(bMap)
     return bMap
 
 }
