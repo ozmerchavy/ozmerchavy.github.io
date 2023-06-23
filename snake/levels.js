@@ -33,17 +33,17 @@ const stages = [
     {
         levelName: "Huge Cave",
         levelNo: 2,
-        rows: 200,
+        rows: 100,
         cols: 20,
         maxAppples: 55,
-        chanceForDivineFruit: .15,
+        chanceForDivineFruit: .2,
         level_fps: 11,
         maxSpeed: 22,
         minScoretoGetDoor: 140,
-        alertoText: "The weird cave, get to 192 points for next stage",
+        alertoText: "The weird cave, get to 190 points for next stage",
         doorSymbol: "⛰",
         tableEmptys: "⬛",
-        bgColorTable: "#078b4a",
+        bgColorTable: "#191f03",
         apple: "🍓"
 
 
@@ -57,7 +57,7 @@ const stages = [
         chanceForDivineFruit: .01,
         level_fps: 20,
         maxSpeed: 23,
-        minScoretoGetDoor: 192,
+        minScoretoGetDoor: 190,
         alertoText: "In the Banana world it is hard to even eat one banana. you need to get to 202 to get out.",
         doorSymbol: "🍌",
         tableEmptys: "🟨",
