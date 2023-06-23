@@ -97,7 +97,6 @@ function range(n) {
     });
     if (!arr2d.flat().includes(relevantGraphics.doorOutBonusStage)){
       alert("You forgot to include a door out!")
-      return
     } 
   
     resultElm.innerText = `[
