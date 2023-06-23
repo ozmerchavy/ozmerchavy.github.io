@@ -33,8 +33,8 @@ table {
     --rotation: 0;
     --transY: 0;
     --transX: 0;
-    transform: rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--transY) * 1.8px)) translateX(calc(var(--transX) * 1.8px));
-    transition: transform calc(4s / var(--fps)) ease-out;
+    transform: rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--transY) * 1.9px)) translateX(calc(var(--transX) * 1.9px));
+    transition: transform calc(3.5s / var(--fps)) ease-out;
     table-layout: fixed;
     
 }

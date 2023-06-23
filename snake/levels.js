@@ -92,10 +92,26 @@ const stages = [
         level_fps: 10,
         maxSpeed: 20,
         minScoretoGetDoor: 230,
-        alertoText: "Here is heaven, enjoy!",
+        alertoText: "Here is heaven, enjoy! and get to 350 points!! it is possible with bonus stages",
         doorSymbol: "☁️",
         bgColorTable: "#f4cfd3 ",
-        apple: "🌈"
+
+    },
+    {
+        levelName: "Mint",
+        levelNo: 6,
+        rows: 35,
+        cols: 35,
+        maxAppples: 35,
+        chanceForDivineFruit: .01,
+        level_fps: 11,
+        maxSpeed: 23,
+        minScoretoGetDoor: 350,
+        alertoText: "Here is heaven, enjoy!",
+        doorSymbol: "🚅",
+        bgColor: "black",
+        bgColorTable: "#37622d ",
+        apple: "🌿"
 
     }
 
@@ -150,10 +166,20 @@ const bonusStages = [{
         levelName: "Oz Design",
         level_fps: 6,
         maxSpeed: 7,
-        alertoText: "This game was designed by Oz",
+        alertoText: "This Snake game was designed by Oz",
         bgColorTable: "#f3bcbc",
         bgColor:"#2b875b",
         map: ozDesign
+    },
+    {
+        levelName: "Sunny",
+        level_fps: 5,
+        maxSpeed: 15,
+        alertoText: "Why is it so warm?",
+        apple: "🌞",
+        bgColorTable: "#ffae50",
+        bgColor:"#8e5818",
+        map: sunny
     }
   
 
