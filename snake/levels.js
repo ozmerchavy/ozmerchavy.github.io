@@ -20,7 +20,7 @@ const stages = [
         rows: 22,
         cols: 19,
         maxAppples: 20,
-        chanceForDivineFruit: .2,
+        chanceForDivineFruit: .25,
         level_fps: 20,
         maxSpeed: 27,
         minScoretoGetDoor: 100,
@@ -93,14 +93,12 @@ const stages = [
         alertoText: "Here is heaven, enjoy! and get to 335 points(!!) it is possible with bonus stages",
         doorSymbol: "🌈",
         apple: "🌈",
-        bgColorTable: "#f4cfd3 ",
+        bgColorTable: "#513538 ",
 
     },
     {
         levelName: "Mint",
         levelNo: 6,
-        rows: 35,
-        cols: 35,
         maxAppples: 35,
         chanceForDivineFruit: .01,
         level_fps: 11,
@@ -110,7 +108,8 @@ const stages = [
         doorSymbol: "🌿",
         bgColor: "black",
         bgColorTable: "#37622d ",
-        apple: "🌿"
+        apple: "🌿", 
+        map: half
 
     }
 
