@@ -11,8 +11,7 @@ const stages = [
         minScoretoGetDoor: 60,
         alertoText: "Get to 100 points for next stage",
         doorSymbol: "🚅",
-        tableEmptys: "🟫",
-        bgColorTable: "#6d4534",
+        bgColorTable: "#361e13",
 
     },
     {
@@ -51,17 +50,16 @@ const stages = [
     {
         levelName: "Banana World",
         levelNo: 3,
-        rows: 20,
-        cols: 20,
-        maxAppples: 2,
+        rows: 25,
+        cols: 25,
+        maxAppples: 25,
         chanceForDivineFruit: .01,
         level_fps: 20,
         maxSpeed: 23,
         minScoretoGetDoor: 190,
-        alertoText: "In the Banana world it is hard to even eat one banana. you need to get to 202 to get out.",
+        alertoText: "In the Banana world it is hard to even eat one banana. you need to get to 215 to get out.",
         doorSymbol: "🍌",
-        tableEmptys: "🟨",
-        bgColor: "#5c521b",
+        bgColor: "#181502",
         apple: "🍌",
         bgColorTable: "#f4e8b8"
 
@@ -85,15 +83,16 @@ const stages = [
     }, {
         levelName: "Heaven",
         levelNo: 5,
-        rows: 20,
-        cols: 20,
-        maxAppples: 35,
+        rows: 50,
+        cols: 50,
+        maxAppples: 45,
         chanceForDivineFruit: .01,
-        level_fps: 10,
+        level_fps: 8,
         maxSpeed: 20,
         minScoretoGetDoor: 230,
-        alertoText: "Here is heaven, enjoy! and get to 350 points!! it is possible with bonus stages",
-        doorSymbol: "☁️",
+        alertoText: "Here is heaven, enjoy! and get to 335 points(!!) it is possible with bonus stages",
+        doorSymbol: "🌈",
+        apple: "🌈",
         bgColorTable: "#f4cfd3 ",
 
     },
@@ -106,7 +105,7 @@ const stages = [
         chanceForDivineFruit: .01,
         level_fps: 11,
         maxSpeed: 23,
-        minScoretoGetDoor: 350,
+        minScoretoGetDoor: 335,
         alertoText: "You are literally addicated if you made it here, you need help",
         doorSymbol: "🌿",
         bgColor: "black",
@@ -177,7 +176,7 @@ const bonusStages = [{
         maxSpeed: 15,
         alertoText: "Why is it so warm?",
         apple: "🌞",
-        bgColorTable: "#ffae50",
+        bgColorTable: "black",
         bgColor:"#ffd8ac",
         map: sunny
     }
