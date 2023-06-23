@@ -255,7 +255,7 @@ function newStage(isBonuStage = false) {
         Graphics.disableSizeChange = true
 
     }
-    snake.level += 1
+    if (!isBonuStage){snake.level += 1}
     maxApplesAtOnce = level.maxAppples || 0
     chanceForDivineFruit = level.chanceForDivineFruit || 0
     initialFps = level.level_fps || defaultValues.initialFps
