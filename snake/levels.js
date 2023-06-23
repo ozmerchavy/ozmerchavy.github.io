@@ -107,8 +107,8 @@ const stages = [
         level_fps: 11,
         maxSpeed: 23,
         minScoretoGetDoor: 350,
-        alertoText: "Here is heaven, enjoy!",
-        doorSymbol: "🚅",
+        alertoText: "You are literally addicated if you made it here, you need help",
+        doorSymbol: "🌿",
         bgColor: "black",
         bgColorTable: "#37622d ",
         apple: "🌿"
@@ -178,7 +178,7 @@ const bonusStages = [{
         alertoText: "Why is it so warm?",
         apple: "🌞",
         bgColorTable: "#ffae50",
-        bgColor:"#8e5818",
+        bgColor:"#ffd8ac",
         map: sunny
     }
   
