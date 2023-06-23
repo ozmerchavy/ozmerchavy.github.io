@@ -107,7 +107,7 @@ const stages = [
         alertoText: "You are literally addicated if you made it here, you need help",
         doorSymbol: "🌿",
         bgColor: "black",
-        bgColorTable: "#37622d ",
+        bgColorTable: "#113209 ",
         apple: "🌿", 
         map: half
 
