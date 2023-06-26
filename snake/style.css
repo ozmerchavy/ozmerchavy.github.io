@@ -48,9 +48,9 @@ table .⬜️ {
     background-color: var(--bgColor);
 }
 
-table.🔑{
-    background-color: #ddf;
-}
+table .🔑 {
+    border: 0.2px solid white;
+  }
 
 body {
     --size: 30;
