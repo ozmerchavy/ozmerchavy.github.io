@@ -285,7 +285,7 @@ function translateBonusMaps(bMap) {
         "🍏": "apple",
         "🍇": "divineFruit",
         "⬛": "emptys",
-        "🟦": "nothing",
+        "🟦": "wall",
         "🔑": "doorOutBonusStage"
 
     }
@@ -338,7 +338,7 @@ function getParam(key) {
     const colorB = getParam("b")
     const colorT = getParam("t")
     
-    if (colorB && colorT){ //we need them to both exist and differ of "nothing" will look bad bc its transparent
+    if (colorB && colorT){ //we need them to both exist and differ of "wall" will look bad bc its transparent
       defaultValues.bgColor = colorB
       defaultValues.bgColorTable = colorT
   

@@ -69,7 +69,7 @@ btnaddSnake.addEventListener("click", addSnakeToTable)
 const relevantGraphics = {
     apple: "🍏",
     divineFruit: "🍇",
-    nothing: "🟦",
+    wall: "🟦",
     doorOutBonusStage: "🔑"
 }
 
@@ -146,8 +146,8 @@ btnShare.addEventListener("click", () => {
     if (map.flat().includes(relevantGraphics.doorOutBonusStage)) {
       alert("please don't include a key in sharable map")
   }
-  if (map.flat().includes(relevantGraphics.nothing && bgColor == '' ||  bgColorTable == '')) {
-    alert("please choose bg colors since the 'nothing's are transparent")
+  if (map.flat().includes(relevantGraphics.wall && bgColor == '' ||  bgColorTable == '')) {
+    alert("please choose bg colors since the 'wall's are transparent")
 }
   const link =  `${document.location.host}/snake/?m=${zippedMapString}&b=${bgColor}&t=${bgColorTable}`
   resultElm.innerText = link

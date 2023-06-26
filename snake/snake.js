@@ -51,7 +51,7 @@ const Graphics = {
 	body: "⚪",
 	godBody: "🔵",
 	divineFruit: "🍇",
-	nothing: "⬜️",
+	wall: "⬜️",
 	door: "🚅",
 	bgColor: defaultValues.bgColor,
 	bgColorTable: defaultValues.bgColorTable,
@@ -286,7 +286,7 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
 
   const newHeadContent = map[newHead[0]]?.[newHead[1]];
 
-  if (newHeadContent === undefined || (newHeadContent == Graphics.nothing || newHeadContent == Graphics.body) && !isGodMode) {
+  if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body) && !isGodMode) {
      return die();
   }
   // for now after bonus stages you also get to next level
