@@ -585,15 +585,14 @@ function getParam(key){
 }
 
 
-function unzipCustomode(){
+function unzipMap(){
 }
 
-let custoMode = getParam("c")
-if (custoMode){
-  custoMode = unzipCustomode(custoMode)
-  map = custoMode.map
-  defaultValues.bgColor = custoMode.bgColor
-  defaultValues.bgColorTable = custoMode.bgColorTable
+const custoMap = getParam("m")
+if (custoMap){
+  map = unzipMap(custoMap)
+  defaultValues.bgColor = getParam("b").bgColor
+  defaultValues.bgColorTable = getParam("t").bgColorTable
 }
 
 
