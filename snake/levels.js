@@ -127,7 +127,11 @@ const stages = [
         bgColor: "black",
         bgColorTable: "#00000080 ",
         apple: "👽", 
-        bgImage: "galaxy"
+        bgImage: "galaxy",
+        stageFunction: ()=>{
+            snake.life += 1
+            alerto("Welcome to space", "the aliens are giiving you one extra life! ❤️")
+        },
 
     }
 
@@ -198,7 +202,6 @@ const bonusStages = [{
         map: sunny
     }
   
-
 
 
 ]
@@ -320,10 +323,14 @@ function newStage(isBonuStage = false) {
             level.levelName
         }!`, level.alertoText)
     }
+    if (level.stageFunction){
+        level.stageFunction()
+    }
     nextTurn()
     pauseGame()
 
 }
+
 
 
 

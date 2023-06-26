@@ -76,6 +76,9 @@ let isSecretDoorOpenAlready = false
 let custuMapasString = ""
 let custoMap = ""
 
+/// to do: expand this feature:
+
+
 
 // for tiny mode
 if (document.URL.includes("tiny") && !custuMapasString) { // levels disabled (later)
@@ -104,7 +107,7 @@ const snake = {
 	currnetDir: [
 		-1, 0
 	], // up
-	isDead: false,
+	life: 1,
 	score: 0,
 	level: 0
 };
@@ -174,7 +177,7 @@ function switchToNewMap(newmap){
 
   snake.currnetDir = [-1, 0]; //up
 
-  snake.isDead = false;
+  snake.life = 1;
   isSecretDoorOpenAlready = false
   createTable(map)
   let table = document.querySelector("table");
@@ -290,7 +293,16 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   const newHeadContent = map[newHead[0]]?.[newHead[1]];
 
   if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body) && !isGodMode) {
-     return die();
+    snake.life--
+    if (snake.life == 0){
+      return die();
+    }
+    else {
+      godModeEndTime = Date.now() + 3_000; // enter (or lengthen the duration of) god mode
+      isGodMode = true;
+      return
+    }
+     
   }
 
   else if (custoMap && newHeadContent == Graphics.doorOutBonusStage){
@@ -339,7 +351,6 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
 }
 
 function die() {
-  snake.isDead = true;
   let highscore
   if (isTiny) {
     highscore = localStorage.getItem("tinyscore") || 0
@@ -375,12 +386,10 @@ function win() {
     localStorage.setItem("highscore", score);
 
   }
-  // snake.isDead == true;
-  // alerto("You won you magnificent creature", "machmi");
 }
 
 function winCustomStage(){
-  snake.isDead = true
+  snake.life = 0
   alerto("Congrats! You won this custom stage", "congratulations")
 }
 
@@ -405,7 +414,7 @@ function applesOrWin() {
 
 
 function nextTurn() {
-  if (snake.isDead) {
+  if (snake.life == 0) {
     return;
   }
   applesOrWin();
@@ -415,7 +424,7 @@ function nextTurn() {
   }
   moveSnakeorDie({ rotation: requeue.shift(), thruWalls: isGodMode });
 
-  if (!snake.isDead) {
+  if (snake.life > 0) {
     document.querySelector(".score").innerText = snake.score
 
     fps = Math.min(initialFps + (snake.snakeArray.length - 3) / 4, maxSpeed);
@@ -461,7 +470,7 @@ async function restart() {
   snake.currnetDir = [-1, 0]; //up
   snake.score = 0 
   await sleep(350);
-  snake.isDead = false;
+  snake.life = 1;
   paintMap();
 }
 
@@ -632,7 +641,7 @@ if (isMacLike) {
 document.querySelector(".alerto").addEventListener("submit", (e) => {
   e.preventDefault();
   document.querySelector(".alerto").removeAttribute("open");
-  if (snake.isDead){
+  if (snake.life == 0){
     restart();
     
 
