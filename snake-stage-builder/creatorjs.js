@@ -139,7 +139,7 @@ colorBG.addEventListener("input", () => {
 
 btnShare.addEventListener("click", () => {
     const map = designToArray()
-    const zippedMapString = zipMap(map)
+    const zippedMapString = compressMap(map)
     const bgColor =  body.style.backgroundColor
     const bgColorTable = tableDiv.style.backgroundColor
 
@@ -171,6 +171,3 @@ function addSnakeToTable() {
 
 
 
-function zipMap (m) {
-  return m
-}

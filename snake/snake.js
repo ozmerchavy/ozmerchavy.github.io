@@ -71,10 +71,11 @@ let mapRows = defaultValues.mapRows;
 let mapCols = defaultValues.mapCols;
 let chanceForBonusStage = 0.0001
 let isSecretDoorOpenAlready = false
+let custuMapasString = ""
 
 
 // for tiny mode
-if (document.URL.includes("tiny")) { // levels disabled (later)
+if (document.URL.includes("tiny") && !custuMapasString) { // levels disabled (later)
 	isTiny = true
 	defaultValues.mapCols = 11
 	defaultValues.mapRows = 11
@@ -115,6 +116,8 @@ const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 // /////////////////////////////////////////////////////////////////////////////////
 // /                       U S E F U L      F U N C T I O N S                    ///
 // /////////////////////////////////////////////////////////////////////////////////
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 
 function detectMob() {
@@ -425,7 +428,14 @@ async function restart() {
   initialFps = defaultValues.initialFps
   Graphics.bgColor = defaultValues.bgColor
   Graphics.bgColorTable = defaultValues.bgColorTable
-  const oldMap = genMap(defaultValues.mapRows, defaultValues.mapCols)
+  let oldMap
+  if (!custuMapasString){
+     oldMap = genMap(defaultValues.mapRows, defaultValues.mapCols)
+
+  }
+  else{
+    oldMap = JSON.parse(custuMapasString)
+  }
   switchToNewMap(oldMap)
 
 
@@ -586,26 +596,54 @@ function getParam(key){
 
 
 
-function unzipMap(m){
-  return m
-}
-
 
 /// MAKE SURE THERE IS NO GEN MAP ON RESTART() WHEN SNAKE DIES
 /// SAVE OLD MAP AS JSON STRINGIFY AND ON RESTART JUST TAKE IT
 /// in like "custom map" var and then make restart check if exists every time
 
+
+function translateCustomMaps(bMap) {
+  const GUISymbols = {
+      "🍏": "apple",
+      "🍇": "divineFruit",
+      "⬛": "emptys",
+      "🟦": "nothing",
+      "🔑": "doorOutBonusStage"
+
+  }
+
+  for (let row = 0; row < bMap.length; row++) {
+      for (let col = 0; col < bMap[row].length; col++) {
+          const value = bMap[row][col]
+          const translatedValue = Graphics[GUISymbols[value]]
+          if (!translatedValue) {
+              console.error(`I cannot translate ${value} from the map you made (in ${row}, ${col}) to a Graphic I know. Here are the Graphics that are available:\n ${Graphics}`)
+          }
+          bMap[row][col] = translatedValue
+      }
+  }
+  return bMap
+
+}
+
+
 const custoMap = getParam("m")
 if (custoMap){
-  map = unzipMap(custoMap)
+  defaultValues.chanceForDivineFruit = 0
+  defaultValues.maxApplesAtOnce = 0
+  defaultValues.disableSizeChange = true
+  map = translateCustomMaps(unzipMap(custoMap))
+  
+  custuMapasString = JSON.stringify(map)
   const colorB = getParam("b")
   const colorT = getParam("t")
+  
   if (colorB && colorT){ //we need them to both exist and differ of "nothing" will look bad bc its transparent
     defaultValues.bgColor = colorB
     defaultValues.bgColorTable = colorT
-    defaultValues.chanceForDivineFruit = 0
-    defaultValues.maxApplesAtOnce = 0
+
   }
+  restart()
 }
 
 
@@ -633,7 +671,6 @@ document.onkeyup = checkKey;
 createTable(map);
 paintMap();
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function mainLoop() {
   await sleep(350);
