@@ -238,7 +238,17 @@ const bonusStages = [{
         bgColor:"#310e08",
         apple: "🔥",
         map: hazyRedMap
-    }
+    },
+    {
+        levelName: "Candyland",
+        level_fps: 8,
+        maxSpeed: 12,
+        alertoText: "Enter the sweetest world!",
+        bgColorTable: "#fde2e2",
+        bgColor: "#ff6b6b",
+        apple: "🍭",
+        map: candylandMAp
+      },
 
   
 

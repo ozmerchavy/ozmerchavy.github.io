@@ -402,6 +402,7 @@ function addLife(){
 function reduceLife(){
   snake.life--
   if (snake.life == 0){
+    document.querySelector("#life").innerText = ""
     return die()
   }
   document.querySelector("#life").innerText = "❤️".repeat(snake.life -1)
