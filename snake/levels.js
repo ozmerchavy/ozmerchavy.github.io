@@ -330,14 +330,18 @@ function getParam(key) {
 
 custoMap = getParam("m")
   if (custoMap){
-    defaultValues.chanceForDivineFruit = 0
-    defaultValues.maxApplesAtOnce = 0
+    const numberApples = getParam("a")
+    defaultValues.maxApplesAtOnce = Number(numberApples)
+    if (!numberApples){
+        defaultValues.chanceForDivineFruit = 0
+    }
     defaultValues.disableSizeChange = true
     map = translateBonusMaps(unzipMap(custoMap))
     
     custuMapasString = JSON.stringify(map)
     const colorB = getParam("b")
     const colorT = getParam("t")
+
     
     if (colorB && colorT){ //we need them to both exist and differ of "wall" will look bad bc its transparent
       defaultValues.bgColor = colorB

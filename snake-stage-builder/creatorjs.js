@@ -31,6 +31,8 @@ const resultElm = document.querySelector(".result");
 const colorTable = document.querySelector("#table-color");
 const colorBG = document.querySelector("#background-color");
 const body = document.querySelector("body")
+const appleselect = document.querySelector("#maxApples")
+
 
 
 function updateHtmlTable() {
@@ -145,6 +147,8 @@ btnShare.addEventListener("click", () => {
     const bgColor = colorBG.value
     const bgColorTable = colorTable.value
     const flatmap = map.flat()
+    const numApples = appleselect.value
+
 
     if (flatmap.includes(relevantGraphics.wall) && !flatmap.includes("🔴")){
         alert("click 'Add Snake' to see where the snake would appear on the screen at game start")
@@ -158,7 +162,7 @@ btnShare.addEventListener("click", () => {
     } else {
         const link = `${
             document.location.host
-        }/snake/?m=${zippedMapString}&b=${bgColor}&t=${bgColorTable}`
+        }/snake/?m=${zippedMapString}&b=${bgColor}&t=${bgColorTable}&a=${numApples}`
         resultElm.innerText = link
         navigator.clipboard.writeText(resultElm.innerText).then(() => alert("copied link to clipboard!"));
     }
