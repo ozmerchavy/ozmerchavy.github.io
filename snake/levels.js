@@ -130,8 +130,24 @@ const stages = [
         bgImage: "galaxy",
         stageFunction: ()=>{
             addLife()
-        },
+        }
+    },
 
+        {
+            levelName: "Another World",
+            levelNo: 8,
+            maxAppples: 15,
+            chanceForDivineFruit: .005,
+            level_fps: 12,
+            maxSpeed: 25,
+            minScoretoGetDoor: 500,
+            alertoText: "You got to a different world.",
+            doorSymbol: "🏕️ ",
+            bgColorTable: "#5f5f4477",
+            apple: "✨", 
+            bgImage: "anotherWorld",
+            map: anotherWorldMap
+    
     }
 
 
