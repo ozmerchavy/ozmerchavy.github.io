@@ -52,6 +52,10 @@ table .🔑 {
     border: 0.2px solid white;
   }
 
+  table .❤️ {
+    border: 0.2px solid white;
+  }
+
 body {
     --size: 30;
     --fps: 5;
