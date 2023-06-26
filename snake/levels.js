@@ -313,6 +313,10 @@ function newStage(isBonuStage = false) {
 // /////////////////////////////////////////////////////////////////////////////////    
 
 function getParam(key) {
+    if (!window.location.href.includes("&")){
+        return
+    }
+
     const queryString = window.location.href.split("?")[1]    ; // Remove the leading "?"
     const params = queryString.split('&');
   
