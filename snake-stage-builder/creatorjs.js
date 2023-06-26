@@ -66,6 +66,7 @@ document.addEventListener("readystatechange", updateHtmlTable);
 btnaddSnake.addEventListener("click", addSnakeToTable)
 
 
+
 const relevantGraphics = {
     apple: "🍏",
     divineFruit: "🍇",
@@ -78,6 +79,7 @@ Object.entries(relevantGraphics).forEach(([name, emoji]) => {
     option.innerText = `${emoji} ${name}`;
     option.value = emoji;
     selectEmoji.appendChild(option);
+    
 
 });
 
@@ -142,11 +144,16 @@ btnShare.addEventListener("click", () => {
     const zippedMapString = compressMap(map)
     const bgColor = colorBG.value
     const bgColorTable = colorTable.value
+    const flatmap = map.flat()
 
-    if (!map.flat().includes(relevantGraphics.doorOutBonusStage)) {
+    if (flatmap.includes(relevantGraphics.wall) && !flatmap.includes("🔴")){
+        alert("click 'Add Snake' to see where the snake would appear on the screen at game start")
+    }
+
+    if (!flatmap.includes(relevantGraphics.doorOutBonusStage)) {
         alert("You did not add a key. They will only win if they eat enough apples")
     }
-    if (map.flat().includes(relevantGraphics.wall) && colorBG.value == colorTable.value) {
+    if (flatmap.includes(relevantGraphics.wall) && colorBG.value == colorTable.value) {
         alert("background color cannot stay the same as table color if you have a wall, becasuse it would be transparent")
     } else {
         const link = `${
@@ -174,3 +181,4 @@ function addSnakeToTable() {
     cells[middleCellIndex + numCols].textContent = "⚪";
     cells[middleCellIndex + numCols * 2].textContent = "⚪";
 }
+
