@@ -140,8 +140,8 @@ colorBG.addEventListener("input", () => {
 btnShare.addEventListener("click", () => {
     const map = designToArray()
     const zippedMapString = compressMap(map)
-    const bgColor =  body.style.backgroundColor
-    const bgColorTable = tableDiv.style.backgroundColor
+    const bgColor =  colorBG.value
+    const bgColorTable = colorTable.value
 
     if (map.flat().includes(relevantGraphics.doorOutBonusStage)) {
       alert("please don't include a key in sharable map")
@@ -149,7 +149,7 @@ btnShare.addEventListener("click", () => {
   if (map.flat().includes(relevantGraphics.nothing && bgColor == '' ||  bgColorTable == '')) {
     alert("please choose bg colors since the 'nothing's are transparent")
 }
-  const link =  `https://ozmerchavy2.github.io/snake/?m=${zippedMapString}&b=${bgColor}&t=${bgColorTable}`
+  const link =  `${document.location.host}/snake/?m=${zippedMapString}&b=${bgColor}&t=${bgColorTable}`
   resultElm.innerText = link
   navigator.clipboard.writeText(resultElm.innerText).then(() => alert("copied link to clipboard!"));
 

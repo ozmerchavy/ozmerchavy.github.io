@@ -309,25 +309,25 @@ function translateBonusMaps(bMap) {
 
 // /////////////////////////////////////////////////////////////////////////////////
 // /                              C U S T O M       M A P                        ///
-// /////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////    
 
-function getParam(key){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const p = urlParams.get(key)
-    return p 
+function getParam(key) {
+    const queryString = window.location.href.split("?")[1]    ; // Remove the leading "?"
+    const params = queryString.split('&');
   
+    for (const param of params) {
+      const [paramKey, paramValue] = param.split('=');
+      if (paramKey === key) {
+        const decodedValue = decodeURIComponent(paramValue);
+        return decodedValue;
+      }
+    }
+  
+    return null;
   }
   
 
-  
-  /// MAKE SURE THERE IS NO GEN MAP ON RESTART() WHEN SNAKE DIES
-  /// SAVE OLD MAP AS JSON STRINGIFY AND ON RESTART JUST TAKE IT
-  /// in like "custom map" var and then make restart check if exists every time
-  
-
-  
-  const custoMap = getParam("m")
+ const custoMap = getParam("m")
   if (custoMap){
     defaultValues.chanceForDivineFruit = 0
     defaultValues.maxApplesAtOnce = 0
