@@ -293,17 +293,10 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   const newHeadContent = map[newHead[0]]?.[newHead[1]];
 
   if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body) && !isGodMode) {
-    snake.life--
-    if (snake.life == 0){
-      return die();
-    }
-    else {
-      godModeEndTime = Date.now() + 3_000; // enter (or lengthen the duration of) god mode
-      isGodMode = true;
-      return
+    return reduceLife()
+   
     }
      
-  }
 
   else if (custoMap && newHeadContent == Graphics.doorOutBonusStage){
     return winCustomStage()
@@ -391,6 +384,24 @@ function win() {
 function winCustomStage(){
   snake.life = 0
   alerto("Congrats! You won this custom stage", "congratulations")
+}
+
+
+function addLife(){
+  snake.life++
+  document.querySelector("#life").innerText = "❤️".repeat(snake.life - 1)
+}
+
+
+function reduceLife(){
+  snake.life--
+  if (snake.life == 0){
+    return die()
+  }
+  document.querySelector("#life").innerText = "❤️".repeat(snake.life -1)
+  godModeEndTime = Date.now() + 3_000; // enter (or lengthen the duration of) god mode
+  isGodMode = true;
+  
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

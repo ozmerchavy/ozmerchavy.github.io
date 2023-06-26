@@ -163,6 +163,19 @@ body, html {
 
 .score { 
     top: 1rem;
+    
+}
+
+.life { 
+    top: 10rem;
+    position: absolute;
+    font-size: 2rem;;
+    left: 3rem;
+    margin: 0;
+    color: #ddf;
+    padding: 0;
+    writing-mode: vertical-rl;
+
 }
 
 .high-score {
