@@ -11,7 +11,7 @@ const stages = [
         minScoretoGetDoor: 60,
         alertoText: "Get to 100 points for next stage",
         doorSymbol: "🚅",
-        bgColorTable: "#361e13",
+        bgColorTable: "#361e13"
 
     },
     {
@@ -93,10 +93,9 @@ const stages = [
         alertoText: "Here is heaven, enjoy! and get to 335 points(!!) it is possible with bonus stages",
         doorSymbol: "🌈",
         apple: "🌈",
-        bgColorTable: "#513538 ",
+        bgColorTable: "#513538 "
 
-    },
-    {
+    }, {
         levelName: "Mint",
         levelNo: 6,
         maxAppples: 35,
@@ -108,11 +107,10 @@ const stages = [
         doorSymbol: "🌿",
         bgColor: "black",
         bgColorTable: "#113209 ",
-        apple: "🌿", 
+        apple: "🌿",
         map: half
 
-    },
-    {
+    }, {
         levelName: "Outer Space!",
         levelNo: 7,
         rows: 50,
@@ -126,42 +124,41 @@ const stages = [
         doorSymbol: "🛸",
         bgColor: "black",
         bgColorTable: "#00000080 ",
-        apple: "👽", 
+        apple: "👽",
         bgImage: "galaxy",
-        stageFunction: ()=>{
+        stageFunction: () => {
             addLife()
         }
-    },
+    }, {
+        levelName: "Another World",
+        levelNo: 8,
+        maxAppples: 15,
+        chanceForDivineFruit: .005,
+        level_fps: 12,
+        maxSpeed: 25,
+        minScoretoGetDoor: 500,
+        alertoText: "You got to a different world.",
+        doorSymbol: "🏕️ ",
+        bgColorTable: "#5f5f4477",
+        apple: "✨",
+        bgImage: "anotherWorld",
+        map: anotherWorldMap
 
-        {
-            levelName: "Another World",
-            levelNo: 8,
-            maxAppples: 15,
-            chanceForDivineFruit: .005,
-            level_fps: 12,
-            maxSpeed: 25,
-            minScoretoGetDoor: 500,
-            alertoText: "You got to a different world.",
-            doorSymbol: "🏕️ ",
-            bgColorTable: "#5f5f4477",
-            apple: "✨", 
-            bgImage: "anotherWorld",
-            map: anotherWorldMap
-    
     }
 
 
 ]
 
 
-  // cant have own's door btw
-const bonusStages = [{
+// cant have own's door btw
+const bonusStages = [
+    {
         levelName: "Dragons",
         level_fps: 3,
         maxSpeed: 10,
         alertoText: "The HARDEST bonus level!",
         bgColorTable: "#e5d5e8",
-        bgColor:"#120c37",
+        bgColor: "#120c37",
         apple: "🍔",
         map: DragonsMap
 
@@ -172,7 +169,7 @@ const bonusStages = [{
         maxSpeed: 10,
         alertoText: "Enjoy!",
         bgColorTable: "#75ffc5",
-        bgColor:"#3f9bfc",
+        bgColor: "#3f9bfc",
         apple: "🥕",
         map: greenFieldMap
 
@@ -183,7 +180,7 @@ const bonusStages = [{
         maxSpeed: 10,
         alertoText: "Scary!",
         bgColorTable: "#ccac9f",
-        bgColor:"#093a07",
+        bgColor: "#093a07",
         apple: "🌽",
         map: shadowMap
     },
@@ -193,53 +190,46 @@ const bonusStages = [{
         maxSpeed: 7,
         alertoText: "Yum.",
         bgColorTable: "#f3bcbc",
-        bgColor:"#2b875b",
+        bgColor: "#2b875b",
         apple: "🍉",
         map: watermelon
-    },
-    {
+    }, {
         levelName: "Oz Design",
         level_fps: 6,
         maxSpeed: 7,
         alertoText: "This Snake game was designed by Oz",
         bgColorTable: "#f3bcbc",
-        bgColor:"#2b875b",
+        bgColor: "#2b875b",
         map: ozDesign
-    },
-    {
+    }, {
         levelName: "Sunny",
         level_fps: 5,
         maxSpeed: 15,
         alertoText: "Why is it so warm?",
         apple: "🌞",
         bgColorTable: "black",
-        bgColor:"#ffd8ac",
+        bgColor: "#ffd8ac",
         map: sunny
-    },
-    {
-        levelName: "lifeless", 
+    }, {
+        levelName: "lifeless",
         alertoText: "You can go through the wall with the divine fruit",
         bgColor: '#f0b2b2',
         bgColorTable: '#140505',
-        map: tryGetLife 
-    },
-    {
-        levelName: "Sky Hue", 
+        map: tryGetLife
+    }, {
+        levelName: "Sky Hue",
         alertoText: "You can go through the wall with the divine fruit",
         bgColor: '#90e8f3',
         bgColorTable: '#e5f2ff',
-        map: farFromHeartMap 
-    },
-
-    {
+        map: farFromHeartMap
+    }, {
         levelName: "Hazy Red",
         alertoText: "The life is hiding!",
         bgColorTable: "#754a00",
-        bgColor:"#310e08",
+        bgColor: "#310e08",
         apple: "🔥",
         map: hazyRedMap
-    },
-    {
+    }, {
         levelName: "Candyland",
         level_fps: 8,
         maxSpeed: 12,
@@ -248,15 +238,39 @@ const bonusStages = [{
         bgColor: "#ff6b6b",
         apple: "🍭",
         map: candylandMAp
-      },
+    }, {
+        levelName: "Enchanted Forest",
+        level_fps: 6,
+        maxSpeed: 9,
+        alertoText: "Discover the magic of the forest!",
+        bgColorTable: "#d1ecd1",
+        bgColor: "#157f15",
+        apple: "🍄",
+        map: forestMAp
 
-  
+    }, {
+        levelName: "Neon City",
+        level_fps: 15,
+        maxSpeed: 20,
+        alertoText: "Explore the vibrant metropolis!",
+        bgColorTable: "#111111",
+        bgColor: "#ff00ff",
+        apple: "💡",
+        map: NeonCityMap
+    },
+    {
+        levelName: "Underwater Adventure",
+        level_fps: 7,
+        maxSpeed: 15,
+        alertoText: "Dive into the depths of the ocean!",
+        bgColorTable: "#b3d1ff",
+        bgColor: "#0e2072",
+        apple: "🐠",
+        map: oceanmap
+      }
 
 
 ]
-
-
-
 
 
 // get maps made with the GUI make them into normal maps with current Graphic Object
@@ -275,7 +289,7 @@ function translateBonusMaps(bMap) {
         for (let col = 0; col < bMap[row].length; col++) {
             const value = bMap[row][col]
             const translatedValue = Graphics[GUISymbols[value]]
-            if (!translatedValue) {
+            if (! translatedValue) {
                 console.error(`I cannot translate ${value} from the map you made (in ${row}, ${col}) to a Graphic I know. Here are the Graphics that are available:\n ${Graphics}`)
             }
             bMap[row][col] = translatedValue
@@ -284,8 +298,6 @@ function translateBonusMaps(bMap) {
     return bMap
 
 }
-
-
 
 
 // runs every turn
@@ -300,9 +312,9 @@ function maybeOpenDoor() {
         createDoor()
     }
 
-     
-    let enhancedCahnceforBonuStage = chanceForBonusStage + (snake.level)/10000
-    if (Math.random() < enhancedCahnceforBonuStage && !isSecretDoorOpenAlready && !isTiny){
+
+    let enhancedCahnceforBonuStage = chanceForBonusStage + (snake.level) / 10000
+    if (Math.random() < enhancedCahnceforBonuStage && !isSecretDoorOpenAlready && !isTiny) {
         createDoor(true)
         isSecretDoorOpenAlready = true
     }
@@ -310,7 +322,7 @@ function maybeOpenDoor() {
 
 function createDoor(isBonuStage = false) {
     const av = findAvailables();
-    const door = isBonuStage? Graphics.bonusDoor : Graphics.door
+    const door = isBonuStage ? Graphics.bonusDoor : Graphics.door
     if (!map.flat().includes(Graphics.door)) {
         const ranSpot = av[Math.floor(Math.random() * av.length)];
         updateMap(ranSpot, door)
@@ -320,7 +332,7 @@ function createDoor(isBonuStage = false) {
 
 // / called once a  door is entered
 // if is bonus stage is false goes to next level
-// if it is true, gives random bonus level. if it is a string it finds this specific level 
+// if it is true, gives random bonus level. if it is a string it finds this specific level
 function newStage(isBonuStage = false) {
     let level
     let levelMap
@@ -330,8 +342,12 @@ function newStage(isBonuStage = false) {
     } else {
         level = stages[snake.level]
     }
-    if (typeof(isBonuStage) == "string"){
-      level = stages.find(stage => stage.levelName === isBonuStage) || bonusStages.find(stage => stage.levelName === isBonuStage)
+    if (typeof(isBonuStage) == "string") {
+        if (isBonuStage == "test") {
+            level = bonusStages[bonusStages.length - 1]
+        } else {
+            level = stages.find(stage => stage.levelName === isBonuStage) || bonusStages.find(stage => stage.levelName === isBonuStage)
+        }
     }
 
     if (level.apple) {
@@ -341,25 +357,26 @@ function newStage(isBonuStage = false) {
     Graphics.bgColor = level.bgColor || defaultValues.bgColor
     Graphics.bgColorTable = level.bgColorTable || defaultValues.bgColorTable
     Graphics.bgImage = level.bgImage || defaultValues.bgImage
-    if (level.map) {
-        /// MUST Copy or it would touch the original variable and change the apples making it untranslatable
+    if (level.map) { // / MUST Copy or it would touch the original variable and change the apples making it untranslatable
         const mapCopy = copy(level.map)
         levelMap = translateBonusMaps(mapCopy)
     } else {
         levelMap = genMap(level.rows, level.cols)
     }
-   
+
     switchToNewMap(levelMap)
-    if (isBonuStage){
+    if (isBonuStage) {
         Graphics.disableSizeChange = true
 
     }
-    if (!isBonuStage){snake.level += 1}
+    if (! isBonuStage) {
+        snake.level += 1
+    }
     maxApplesAtOnce = level.maxAppples || 0
     chanceForDivineFruit = level.chanceForDivineFruit || 0
     initialFps = level.level_fps || defaultValues.initialFps
     maxSpeed = level.maxSpeed || defaultValues.maxSpeed
-    if(isBonuStage){
+    if (isBonuStage) {
         isSecretDoorOpenAlready = true
     }
 
@@ -373,7 +390,7 @@ function newStage(isBonuStage = false) {
             level.levelName
         }!`, level.alertoText)
     }
-    if (level.stageFunction){
+    if (level.stageFunction) {
         level.stageFunction()
     }
     nextTurn()
@@ -382,54 +399,49 @@ function newStage(isBonuStage = false) {
 }
 
 
-
-
 // /////////////////////////////////////////////////////////////////////////////////
 // /                              C U S T O M       M A P                        ///
-// /////////////////////////////////////////////////////////////////////////////////    
+// /////////////////////////////////////////////////////////////////////////////////
 
 function getParam(key) {
-    if (!window.location.href.includes("&")){
+    if (!window.location.href.includes("&")) {
         return
     }
 
-    const queryString = window.location.href.split("?")[1]    ; // Remove the leading "?"
+    const queryString = window.location.href.split("?")[1]; // Remove the leading "?"
     const params = queryString.split('&');
-  
+
     for (const param of params) {
-      const [paramKey, paramValue] = param.split('=');
-      if (paramKey === key) {
-        const decodedValue = decodeURIComponent(paramValue);
-        return decodedValue;
-      }
+        const [paramKey, paramValue] = param.split('=');
+        if (paramKey === key) {
+            const decodedValue = decodeURIComponent(paramValue);
+            return decodedValue;
+        }
     }
-  
+
     return null;
-  }
-  
+}
+
 
 custoMap = getParam("m")
-  if (custoMap){
+if (custoMap) {
     const numberApples = getParam("a")
     defaultValues.maxApplesAtOnce = Number(numberApples)
-    if (!numberApples){
+    if (! numberApples) {
         defaultValues.chanceForDivineFruit = 0
     }
     defaultValues.disableSizeChange = true
     map = translateBonusMaps(unzipMap(custoMap))
-    
+
     custuMapasString = JSON.stringify(map)
     const colorB = getParam("b")
     const colorT = getParam("t")
 
-    
-    if (colorB && colorT){ //we need them to both exist and differ of "wall" will look bad bc its transparent
-      defaultValues.bgColor = colorB
-      defaultValues.bgColorTable = colorT
-  
+
+    if (colorB && colorT) { // we need them to both exist and differ of "wall" will look bad bc its transparent
+        defaultValues.bgColor = colorB
+        defaultValues.bgColorTable = colorT
+
     }
     restart()
-  }
-  
-  
-  
+}
