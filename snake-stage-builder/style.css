@@ -40,3 +40,14 @@ body {
   header div, h1, p {
     margin: auto;
   }
+
+
+  pre {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    max-width: 700px;
+    margin: auto;
+    word-wrap: break-word;
+    background-color: rgb(0 50 0 / .03);;
+
+  }
