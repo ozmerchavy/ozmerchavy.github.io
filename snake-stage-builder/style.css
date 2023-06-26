@@ -37,6 +37,6 @@ body {
     gap: 20px
   }
 
-  header div, h1 {
+  header div, h1, p {
     margin: auto;
   }
