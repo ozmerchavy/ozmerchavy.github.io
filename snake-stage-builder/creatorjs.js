@@ -109,6 +109,7 @@ function designToArray() {
         });
         arr2d.push(row);
     });
+
     return arr2d
 }
 
@@ -149,10 +150,6 @@ btnShare.addEventListener("click", () => {
     const flatmap = map.flat()
     const numApples = appleselect.value
 
-
-    if (flatmap.includes(relevantGraphics.wall) && !flatmap.includes("🔴")){
-        alert("click 'Add Snake' to see where the snake would appear on the screen at game start")
-    }
 
     if (!flatmap.includes(relevantGraphics.doorOutBonusStage)) {
         alert("You did not add a key. They will only win if they eat enough apples")
