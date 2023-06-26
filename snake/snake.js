@@ -467,14 +467,27 @@ async function restart() {
 function pauseOrunpauseGame() {
   isPaused = !isPaused;
   const pauseButton = document.querySelector("#pause")
+  const backButton = document.querySelector("#back")
 
-  if (isPaused) { pauseButton.classList.remove("secret"); document.querySelector(".high-score").classList.remove("secret") }
+  if (isPaused) { pauseButton.classList.remove("secret"); document.querySelector(".high-score").classList.remove("secret") 
+    if (custoMap){
+      backButton.classList.remove("secret")
+    }
+
+}
   else {
     pauseButton.classList.add("secret")
     document.querySelector(".high-score").classList.add("secret")
+    if (custoMap){
+      backButton.classList.add("secret")
+    }
+
+}
 
   }
-}
+
+
+  
 
 function pauseGame(){
   isPaused = true;
@@ -482,6 +495,14 @@ function pauseGame(){
   pauseButton.classList.remove("secret"); document.querySelector(".high-score").classList.remove("secret") 
 
 }
+
+
+document.querySelector("#back").addEventListener("click",()=>{
+  location.replace(window.location.href.split("?")[0])
+}
+
+
+ )
 
 function maybeOpenDoor(){
   console.log("New stage functionality is in a different file, so this function is gonna get ran over");
@@ -493,6 +514,9 @@ function newStage(){
   console.log("New stage functionality is in a different file, so this function is gonna get ran over");
   console.log("I kept this function so this js fle could work by itself");
 }
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///                          H T M L   F U N C T I O N S                        ///

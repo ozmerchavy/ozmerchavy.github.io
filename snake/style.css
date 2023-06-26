@@ -137,6 +137,26 @@ body, html {
     padding: 0;
 }
 
+
+.back {
+    transform: scale(2%);
+    position: absolute;
+    top: -35rem;
+    right: -36rem;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+
+}
+
+.back:hover{
+    transform: scale(3%);
+    cursor: pointer;
+
+
+}
+
 .score { 
     top: 1rem;
 }
