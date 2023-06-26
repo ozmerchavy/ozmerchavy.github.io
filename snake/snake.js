@@ -585,8 +585,15 @@ function getParam(key){
 }
 
 
-function unzipMap(){
+
+function unzipMap(m){
+  return m
 }
+
+
+/// MAKE SURE THERE IS NO GEN MAP ON RESTART() WHEN SNAKE DIES
+/// SAVE OLD MAP AS JSON STRINGIFY AND ON RESTART JUST TAKE IT
+/// in like "custom map" var and then make restart check if exists every time
 
 const custoMap = getParam("m")
 if (custoMap){
@@ -596,8 +603,9 @@ if (custoMap){
   if (colorB && colorT){ //we need them to both exist and differ of "nothing" will look bad bc its transparent
     defaultValues.bgColor = colorB
     defaultValues.bgColorTable = colorT
+    defaultValues.chanceForDivineFruit = 0
+    defaultValues.maxApplesAtOnce = 0
   }
-
 }
 
 
