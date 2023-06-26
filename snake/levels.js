@@ -216,7 +216,8 @@ function translateBonusMaps(bMap) {
         "🍇": "divineFruit",
         "⬛": "emptys",
         "🟦": "wall",
-        "🔑": "doorOutBonusStage"
+        "🔑": "doorOutBonusStage",
+        "❤️": "heart"
 
     }
 

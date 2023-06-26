@@ -73,7 +73,8 @@ const relevantGraphics = {
     apple: "🍏",
     divineFruit: "🍇",
     wall: "🟦",
-    doorOutBonusStage: "🔑"
+    doorOutBonusStage: "🔑", 
+    heart: "❤️"
 }
 
 Object.entries(relevantGraphics).forEach(([name, emoji]) => {

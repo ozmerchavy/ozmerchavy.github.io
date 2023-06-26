@@ -59,7 +59,8 @@ const Graphics = {
 	bonusDoor: "🚪",
 	doorOutBonusStage: "🔑",
 	disableSizeChange: false,
-  bgImage: ""
+  bgImage: "",
+  heart: "❤️"
 
 };
 
@@ -296,6 +297,11 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
     return reduceLife()
    
     }
+
+  else if (newHeadContent == Graphics.heart){
+    addLife()
+  }
+  
      
 
   else if (custoMap && newHeadContent == Graphics.doorOutBonusStage){
