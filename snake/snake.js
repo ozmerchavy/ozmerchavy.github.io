@@ -591,8 +591,13 @@ function unzipMap(){
 const custoMap = getParam("m")
 if (custoMap){
   map = unzipMap(custoMap)
-  defaultValues.bgColor = getParam("b").bgColor
-  defaultValues.bgColorTable = getParam("t").bgColorTable
+  const colorB = getParam("b")
+  const colorT = getParam("t")
+  if (colorB && colorT){ //we need them to both exist and differ of "nothing" will look bad bc its transparent
+    defaultValues.bgColor = colorB
+    defaultValues.bgColorTable = colorT
+  }
+
 }
 
 
