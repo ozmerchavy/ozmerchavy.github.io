@@ -129,29 +129,32 @@ btnExport.addEventListener("click", () => {
 
 
 colorTable.addEventListener("input", () => {
-    tableDiv.style.backgroundColor =  colorTable.value
+    tableDiv.style.backgroundColor = colorTable.value
 })
 
 colorBG.addEventListener("input", () => {
-  body.style.backgroundColor =  colorBG.value
+    body.style.backgroundColor = colorBG.value
 })
 
 
 btnShare.addEventListener("click", () => {
     const map = designToArray()
     const zippedMapString = compressMap(map)
-    const bgColor =  colorBG.value
+    const bgColor = colorBG.value
     const bgColorTable = colorTable.value
 
-    if (map.flat().includes(relevantGraphics.doorOutBonusStage)) {
-      alert("please don't include a key in sharable map")
-  }
-  if (map.flat().includes(relevantGraphics.wall && bgColor == '' ||  bgColorTable == '')) {
-    alert("please choose bg colors since the 'wall's are transparent")
-}
-  const link =  `${document.location.host}/snake/?m=${zippedMapString}&b=${bgColor}&t=${bgColorTable}`
-  resultElm.innerText = link
-  navigator.clipboard.writeText(resultElm.innerText).then(() => alert("copied link to clipboard!"));
+    if (!map.flat().includes(relevantGraphics.doorOutBonusStage)) {
+        alert("You did not add a key. They will only win if they eat enough apples")
+    }
+    if (map.flat().includes(relevantGraphics.wall) && colorBG.value == colorTable.value) {
+        alert("background color cannot stay the same as table color if you have a wall, becasuse it would be transparent")
+    } else {
+        const link = `${
+            document.location.host
+        }/snake/?m=${zippedMapString}&b=${bgColor}&t=${bgColorTable}`
+        resultElm.innerText = link
+        navigator.clipboard.writeText(resultElm.innerText).then(() => alert("copied link to clipboard!"));
+    }
 
 
 });
@@ -171,6 +174,3 @@ function addSnakeToTable() {
     cells[middleCellIndex + numCols].textContent = "⚪";
     cells[middleCellIndex + numCols * 2].textContent = "⚪";
 }
-
-
-

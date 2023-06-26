@@ -186,7 +186,35 @@ const bonusStages = [{
 ]
 
 
-let n = 0
+
+
+
+// get maps made with the GUI make them into normal maps with current Graphic Object
+function translateBonusMaps(bMap) {
+    const GUISymbols = {
+        "🍏": "apple",
+        "🍇": "divineFruit",
+        "⬛": "emptys",
+        "🟦": "wall",
+        "🔑": "doorOutBonusStage"
+
+    }
+
+    for (let row = 0; row < bMap.length; row++) {
+        for (let col = 0; col < bMap[row].length; col++) {
+            const value = bMap[row][col]
+            const translatedValue = Graphics[GUISymbols[value]]
+            if (!translatedValue) {
+                console.error(`I cannot translate ${value} from the map you made (in ${row}, ${col}) to a Graphic I know. Here are the Graphics that are available:\n ${Graphics}`)
+            }
+            bMap[row][col] = translatedValue
+        }
+    }
+    return bMap
+
+}
+
+
 
 
 // runs every turn
@@ -194,7 +222,7 @@ function maybeOpenDoor() {
     if (snake.level >= stages.length) {
         return
     }
-    if (snake.score >= stages[snake.level].minScoretoGetDoor) {
+    if (!custoMap && snake.score >= stages[snake.level].minScoretoGetDoor) {
         if (stages[snake.level].doorSymbol) {
             Graphics.door = stages[snake.level].doorSymbol
         }
@@ -277,33 +305,6 @@ function newStage(isBonuStage = false) {
     pauseGame()
 
 }
-
-
-// get maps made with the GUI make them into normal maps with current Graphic Object
-function translateBonusMaps(bMap) {
-    const GUISymbols = {
-        "🍏": "apple",
-        "🍇": "divineFruit",
-        "⬛": "emptys",
-        "🟦": "wall",
-        "🔑": "doorOutBonusStage"
-
-    }
-
-    for (let row = 0; row < bMap.length; row++) {
-        for (let col = 0; col < bMap[row].length; col++) {
-            const value = bMap[row][col]
-            const translatedValue = Graphics[GUISymbols[value]]
-            if (!translatedValue) {
-                console.error(`I cannot translate ${value} from the map you made (in ${row}, ${col}) to a Graphic I know. Here are the Graphics that are available:\n ${Graphics}`)
-            }
-            bMap[row][col] = translatedValue
-        }
-    }
-    return bMap
-
-}
-
 
 
 

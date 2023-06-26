@@ -289,8 +289,14 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body) && !isGodMode) {
      return die();
   }
+
+  else if (custoMap && newHeadContent == Graphics.doorOutBonusStage){
+    return winCustomStage()
+  }
+
+
   // for now after bonus stages you also get to next level
-  else if (newHeadContent == Graphics.door ||newHeadContent == Graphics.doorOutBonusStage ){
+  else if (newHeadContent == Graphics.door || newHeadContent == Graphics.doorOutBonusStage ){
     return newStage(false)
   }
   else if (newHeadContent == Graphics.bonusDoor){
@@ -358,6 +364,7 @@ function win() {
 
   //due to bugs, suspended
   const score = snake.score
+  console.log("won!")
   if (isTiny) {
     localStorage.setItem("tinyscore", score);
   }
@@ -367,6 +374,10 @@ function win() {
   }
   // snake.isDead == true;
   // alerto("You won you magnificent creature", "machmi");
+}
+
+function winCustomStage(){
+  alerto("Congrats! You won this custom stage", "congratulations")
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
