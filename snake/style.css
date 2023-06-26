@@ -57,10 +57,14 @@ body {
     --fps: 5;
     --bgColor: black;
     --bgColorTable: "";
+    
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--bgColor);
+    background-repeat: no-repeat;
+    background-size: cover;
+  
 
 }
 

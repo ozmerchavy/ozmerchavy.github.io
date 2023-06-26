@@ -35,7 +35,8 @@ const defaultValues = {
 	maxSpeed: 65 / Math.PI,
 	bgColor: "black",
 	bgColorTable: "",
-	disableSizeChange: false
+	disableSizeChange: false,
+  bgImage: ""
 
 
 }
@@ -57,7 +58,8 @@ const Graphics = {
 	bgColorTable: defaultValues.bgColorTable,
 	bonusDoor: "🚪",
 	doorOutBonusStage: "🔑",
-	disableSizeChange: false
+	disableSizeChange: false,
+  bgImage: ""
 
 };
 
@@ -441,6 +443,7 @@ async function restart() {
   initialFps = defaultValues.initialFps
   Graphics.bgColor = defaultValues.bgColor
   Graphics.bgColorTable = defaultValues.bgColorTable
+  Graphics.bgImage = defaultValues.bgImage
   let oldMap
   if (!custuMapasString){
      oldMap = genMap(defaultValues.mapRows, defaultValues.mapCols)
@@ -544,6 +547,8 @@ function createTable(tableData) {
   document.querySelector("table").outerHTML = table.outerHTML;
   document.querySelector("body").style.setProperty("--bgColor", Graphics.bgColor);
   document.querySelector("body").style.setProperty("--bgColorTable", Graphics.bgColorTable);
+  document.body.style.backgroundImage = `url('extra-media/${Graphics.bgImage}.jpg')`;
+
 
 }
 

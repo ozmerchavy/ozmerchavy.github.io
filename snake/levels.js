@@ -111,6 +111,24 @@ const stages = [
         apple: "🌿", 
         map: half
 
+    },
+    {
+        levelName: "Outer Space!",
+        levelNo: 7,
+        rows: 50,
+        cols: 50,
+        maxAppples: 50,
+        chanceForDivineFruit: .01,
+        level_fps: 12,
+        maxSpeed: 25,
+        minScoretoGetDoor: 400,
+        alertoText: "Welcome to the world of aliens",
+        doorSymbol: "🛸",
+        bgColor: "black",
+        bgColorTable: "#00000080 ",
+        apple: "👽", 
+        bgImage: "galaxy"
+
     }
 
 
@@ -269,6 +287,7 @@ function newStage(isBonuStage = false) {
     Graphics.emptys = level.tableEmptys || defaultValues.emptysCells
     Graphics.bgColor = level.bgColor || defaultValues.bgColor
     Graphics.bgColorTable = level.bgColorTable || defaultValues.bgColorTable
+    Graphics.bgImage = level.bgImage || defaultValues.bgImage
     if (level.map) {
         /// MUST Copy or it would touch the original variable and change the apples making it untranslatable
         const mapCopy = copy(level.map)
