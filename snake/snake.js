@@ -1,5 +1,4 @@
-
-//// TO DO: In some stages (with lots of apples) make zoom not change
+// // TO DO: In some stages (with lots of apples) make zoom not change
 
 
 // /////////////////////////////////////////////////////////////////////////////////
@@ -9,34 +8,34 @@
 const say = console.log
 
 const foods = [
-    "🍏",
-    "🍎",
-    "🍐",
-    "🍊",
-    "🍋",
-    "🍉",
-    "🍓",
-    "🍈",
-    "🍒",
-    "🍑",
-    "🍍",
-    "🥝",
-    "🥑",
-    "🍅",
+	"🍏",
+	"🍎",
+	"🍐",
+	"🍊",
+	"🍋",
+	"🍉",
+	"🍓",
+	"🍈",
+	"🍒",
+	"🍑",
+	"🍍",
+	"🥝",
+	"🥑",
+	"🍅",
 ];
 
 
 const defaultValues = {
-  emptysCells: `⬛`,
-  chanceForDivineFruit: .1,
-  maxApplesAtOnce: 14,
-  mapRows: 30,
-  mapCols: 30,
-  initialFps: 9, 
-  maxSpeed: 65/ Math.PI,
-  bgColor: "black",
-  bgColorTable: "",
-  disableSizeChange: false
+	emptysCells: `⬛`,
+	chanceForDivineFruit: .1,
+	maxApplesAtOnce: 14,
+	mapRows: 30,
+	mapCols: 30,
+	initialFps: 9,
+	maxSpeed: 65 / Math.PI,
+	bgColor: "black",
+	bgColorTable: "",
+	disableSizeChange: false
 
 
 }
@@ -46,19 +45,19 @@ const defaultValues = {
 // note that ⬛ and ⬜️ have css of their own
 // make sure there are no identical graphics when come to different kinds of doors
 const Graphics = {
-    apple: choice(foods),
-    emptys: defaultValues.emptysCells,
-    head: "🔴",
-    body: "⚪",
-    godBody: "🔵",
-    divineFruit: "🍇",
-    nothing: "⬜️",
-    door: "🚅",
-    bgColor: defaultValues.bgColor,
-    bgColorTable: defaultValues.bgColorTable,
-    bonusDoor: "🚪",
-    doorOutBonusStage: "🔑",
-    disableSizeChange: false
+	apple: choice(foods),
+	emptys: defaultValues.emptysCells,
+	head: "🔴",
+	body: "⚪",
+	godBody: "🔵",
+	divineFruit: "🍇",
+	nothing: "⬜️",
+	door: "🚅",
+	bgColor: defaultValues.bgColor,
+	bgColorTable: defaultValues.bgColorTable,
+	bonusDoor: "🚪",
+	doorOutBonusStage: "🔑",
+	disableSizeChange: false
 
 };
 
@@ -74,39 +73,36 @@ let chanceForBonusStage = 0.0001
 let isSecretDoorOpenAlready = false
 
 
-
 // for tiny mode
-if (document.URL.includes("tiny")) {
-
-  //levels disabled (later)
-    isTiny = true
-    defaultValues.mapCols = 11
-    defaultValues.mapRows = 11
-    defaultValues.maxApplesAtOnce = 2
-    defaultValues.chanceForDivineFruit = .08;
-    document.querySelector("#scoreText").innerHTML = "Tiny " + document.querySelector("#scoreText").innerHTML
-    document.title = "Tiny Snake"
+if (document.URL.includes("tiny")) { // levels disabled (later)
+	isTiny = true
+	defaultValues.mapCols = 11
+	defaultValues.mapRows = 11
+	defaultValues.maxApplesAtOnce = 2
+	defaultValues.chanceForDivineFruit = .08;
+	document.querySelector("#scoreText").innerHTML = "Tiny " + document.querySelector("#scoreText").innerHTML
+	document.title = "Tiny Snake"
 }
 // // redirecting mobiles to tiny snake
 if ((detectMob())) {
-    if (! isTiny) { 
-        document.location += "?tiny"
-    }
+	if (! isTiny) {
+		document.location += "?tiny"
+	}
 }
 
 let map = genMap(mapRows, mapCols);
 let midMap = findMid(map)
 const snake = {
-    snakeArray: [
-        midMap, vec2dAdd(midMap, [1, 0]),
-        vec2dAdd(midMap, [2, 0])
-    ],
-    currnetDir: [
-        -1, 0
-    ], // up
-    isDead: false,
-    score: 0,
-    level: 0
+	snakeArray: [
+		midMap, vec2dAdd(midMap, [1, 0]),
+		vec2dAdd(midMap, [2, 0])
+	],
+	currnetDir: [
+		-1, 0
+	], // up
+	isDead: false,
+	score: 0,
+	level: 0
 };
 const requeue = [];
 let initialFps = defaultValues.initialFps
@@ -122,7 +118,7 @@ const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
 
 function detectMob() {
-    return(window.innerWidth<= 800 );
+	return(window.innerWidth<= 800 );
 }
 
 function vec2dAdd(arr, arr2) {
@@ -218,6 +214,11 @@ function findAvailables() {
 }
 
 
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////
 ///                          S N A K E   F U N C T I O N S                      ///
 ///////////////////////////////////////////////////////////////////////////////////
@@ -309,7 +310,7 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
 
   const emoji = isGodMode ? Graphics.godBody : Graphics.body;
   for (const ij of snake.snakeArray) {
-    updateMap(ij,  emoji);
+    updateMap(ij, emoji);
   }
   if (!isGodMode) updateMap(newHead, Graphics.head);
 
@@ -424,7 +425,7 @@ async function restart() {
   initialFps = defaultValues.initialFps
   Graphics.bgColor = defaultValues.bgColor
   Graphics.bgColorTable = defaultValues.bgColorTable
-  const oldMap = genMap(defaultValues.mapRows,defaultValues.mapCols)
+  const oldMap = genMap(defaultValues.mapRows, defaultValues.mapCols)
   switchToNewMap(oldMap)
 
 
@@ -569,6 +570,37 @@ if (isMacLike) {
   document.body.setAttribute("apple-device", true);
 }
 
+
+
+// /////////////////////////////////////////////////////////////////////////////////
+// /                              C U S T O M       M A P                        ///
+// /////////////////////////////////////////////////////////////////////////////////
+
+function getParam(key){
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const p = urlParams.get(key)
+  return p 
+
+}
+
+
+function unzipCustomode(){
+}
+
+let custoMode = getParam("c")
+if (custoMode){
+  custoMode = unzipCustomode(custoMode)
+  map = custoMode.map
+  defaultValues.bgColor = custoMode.bgColor
+  defaultValues.bgColorTable = custoMode.bgColorTable
+}
+
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////
 ///                          S T U F F  and  S H I T                            ///
 ///////////////////////////////////////////////////////////////////////////////////
@@ -578,6 +610,7 @@ document.querySelector(".alerto").addEventListener("submit", (e) => {
   document.querySelector(".alerto").removeAttribute("open");
   if (snake.isDead){
     restart();
+    
 
   }
   document.querySelector(".high-score").classList.add("secret");
@@ -603,4 +636,3 @@ async function mainLoop() {
     if (timeLeftToSleep> 0)await sleep(timeLeftToSleep);
 
 }}mainLoop();
-
