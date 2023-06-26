@@ -418,7 +418,7 @@ function nextTurn() {
 
     fps = Math.min(initialFps + (snake.snakeArray.length - 3) / 4, maxSpeed);
     size = Math.max(36 - snake.snakeArray.length, 18);
-    if (Graphics.disableSizeChange){
+    if (Graphics.disableSizeChange || map.length > 150){
       size = 20
     }
     document.querySelector("body").style.setProperty("--size", size);
