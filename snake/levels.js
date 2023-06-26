@@ -199,7 +199,15 @@ const bonusStages = [{
         bgColorTable: "black",
         bgColor:"#ffd8ac",
         map: sunny
+    },
+    {
+        levelName: "lifeless", 
+        alertoText: "You can go through the wall with the divine fruit",
+        bgColorTable: '#f0b2b2',
+        bgColorTable: '#140505',
+        map: tryGetLife
     }
+
   
 
 
