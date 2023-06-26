@@ -328,7 +328,7 @@ function getParam(key) {
   }
   
 
- const custoMap = getParam("m")
+custoMap = getParam("m")
   if (custoMap){
     defaultValues.chanceForDivineFruit = 0
     defaultValues.maxApplesAtOnce = 0

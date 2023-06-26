@@ -48,6 +48,10 @@ table .⬜️ {
     background-color: var(--bgColor);
 }
 
+table.🔑{
+    background-color: #ddf;
+}
+
 body {
     --size: 30;
     --fps: 5;

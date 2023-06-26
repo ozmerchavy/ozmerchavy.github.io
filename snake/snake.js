@@ -72,6 +72,7 @@ let mapCols = defaultValues.mapCols;
 let chanceForBonusStage = 0.0001
 let isSecretDoorOpenAlready = false
 let custuMapasString = ""
+let custoMap = ""
 
 
 // for tiny mode
