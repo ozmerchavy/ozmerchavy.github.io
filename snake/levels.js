@@ -206,7 +206,15 @@ const bonusStages = [{
         bgColor: '#f0b2b2',
         bgColorTable: '#140505',
         map: tryGetLife 
-    }
+    },
+    {
+        levelName: "Sky Hue", 
+        alertoText: "You can go through the wall with the divine fruit",
+        bgColor: '#90e8f3',
+        bgColorTable: '#e5f2ff',
+        map: farFromHeartMap 
+    },
+
 
   
 
