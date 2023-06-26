@@ -122,15 +122,14 @@ const stages = [
         level_fps: 12,
         maxSpeed: 25,
         minScoretoGetDoor: 400,
-        alertoText: "Welcome to the world of aliens",
+        alertoText: "The aliens are giving you one extra life!! ❤️",
         doorSymbol: "🛸",
         bgColor: "black",
         bgColorTable: "#00000080 ",
         apple: "👽", 
         bgImage: "galaxy",
         stageFunction: ()=>{
-            snake.life += 1
-            alerto("Welcome to space", "the aliens are giiving you one extra life! ❤️")
+            addLife()
         },
 
     }
