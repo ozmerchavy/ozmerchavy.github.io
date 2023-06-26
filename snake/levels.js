@@ -304,3 +304,47 @@ function translateBonusMaps(bMap) {
 
 }
 
+
+
+
+// /////////////////////////////////////////////////////////////////////////////////
+// /                              C U S T O M       M A P                        ///
+// /////////////////////////////////////////////////////////////////////////////////
+
+function getParam(key){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const p = urlParams.get(key)
+    return p 
+  
+  }
+  
+
+  
+  /// MAKE SURE THERE IS NO GEN MAP ON RESTART() WHEN SNAKE DIES
+  /// SAVE OLD MAP AS JSON STRINGIFY AND ON RESTART JUST TAKE IT
+  /// in like "custom map" var and then make restart check if exists every time
+  
+
+  
+  const custoMap = getParam("m")
+  if (custoMap){
+    defaultValues.chanceForDivineFruit = 0
+    defaultValues.maxApplesAtOnce = 0
+    defaultValues.disableSizeChange = true
+    map = translateBonusMaps(unzipMap(custoMap))
+    
+    custuMapasString = JSON.stringify(map)
+    const colorB = getParam("b")
+    const colorT = getParam("t")
+    
+    if (colorB && colorT){ //we need them to both exist and differ of "nothing" will look bad bc its transparent
+      defaultValues.bgColor = colorB
+      defaultValues.bgColorTable = colorT
+  
+    }
+    restart()
+  }
+  
+  
+  

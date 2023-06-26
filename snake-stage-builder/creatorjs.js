@@ -146,6 +146,9 @@ btnShare.addEventListener("click", () => {
     if (map.flat().includes(relevantGraphics.doorOutBonusStage)) {
       alert("please don't include a key in sharable map")
   }
+  if (map.flat().includes(relevantGraphics.nothing && bgColor == '' ||  bgColorTable == '')) {
+    alert("please choose bg colors since the 'nothing's are transparent")
+}
   const link =  `https://ozmerchavy2.github.io/snake/?m=${zippedMapString}&b=${bgColor}&t=${bgColorTable}`
   resultElm.innerText = link
   navigator.clipboard.writeText(resultElm.innerText).then(() => alert("copied link to clipboard!"));
