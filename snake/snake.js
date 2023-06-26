@@ -377,6 +377,7 @@ function win() {
 }
 
 function winCustomStage(){
+  snake.isDead = true
   alerto("Congrats! You won this custom stage", "congratulations")
 }
 
