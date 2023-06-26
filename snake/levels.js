@@ -215,6 +215,14 @@ const bonusStages = [{
         map: farFromHeartMap 
     },
 
+    {
+        levelName: "Hazy Red",
+        alertoText: "The life is hiding!",
+        bgColorTable: "#754a00",
+        bgColor:"#310e08",
+        apple: "🔥",
+        map: hazyRedMap
+    }
 
   
 
