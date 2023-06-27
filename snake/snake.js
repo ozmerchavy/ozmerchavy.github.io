@@ -37,7 +37,6 @@ const defaultValues = {
 	bgColorTable: "",
 	disableSizeChange: false,
   bgImage: "",
-  apple: choice(foods)
 
 
 }
@@ -185,7 +184,7 @@ function switchToNewMap(newmap){
   let table = document.querySelector("table");
   table.style.setProperty("--transY", 0);
   table.style.setProperty("--transX", 0);
-  Graphics.apple = defaultValues.apple
+  Graphics.apple = choice(foods)
   Graphics.disableSizeChange = defaultValues.disableSizeChange
   stageFunctionEveryTurn = () =>{}
 
