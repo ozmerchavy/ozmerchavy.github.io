@@ -72,7 +72,7 @@ let chanceForDivineFruit = defaultValues.chanceForDivineFruit;
 let isTiny = false
 let mapRows = defaultValues.mapRows;
 let mapCols = defaultValues.mapCols;
-let chanceForBonusStage = 0.0001
+let chanceForBonusStage = 0.0005
 let isSecretDoorOpenAlready = false
 let custuMapasString = ""
 let custoMap = ""
@@ -431,7 +431,9 @@ function applesOrWin() {
 }
 
 
+
 function nextTurn() {
+  
   if (snake.life == 0) {
     return;
   }
@@ -447,7 +449,7 @@ function nextTurn() {
 
     fps = Math.min(initialFps + (snake.snakeArray.length - 3) / 4, maxSpeed);
     size = Math.max(36 - snake.snakeArray.length, 18);
-    if (Graphics.disableSizeChange || map.length > 90){
+    if (Graphics.disableSizeChange || (map.length > 50 || map[0].length > 50)){
       size = 20
     }
     document.querySelector("body").style.setProperty("--size", size);
