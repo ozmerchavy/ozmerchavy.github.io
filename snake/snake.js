@@ -76,6 +76,7 @@ let chanceForBonusStage = 0.0002
 let isSecretDoorOpenAlready = false
 let custuMapasString = ""
 let custoMap = ""
+let stageFunctionEveryTurn = ()=>{}
 
 /// to do: expand this feature:
 
@@ -184,6 +185,7 @@ function switchToNewMap(newmap){
   table.style.setProperty("--transY", 0);
   table.style.setProperty("--transX", 0);
   Graphics.disableSizeChange = defaultValues.disableSizeChange
+  stageFunctionEveryTurn = () =>{}
 
 
   // nextTurn()
@@ -346,6 +348,9 @@ function moveSnakeorDie({snake= snake, rotation = undefined, thruWalls = false }
   table.style.setProperty(
     "--transX", Number(transX) - (1.09*size) * snake.currnetDir[1]
   );
+
+  stageFunctionEveryTurn()
+
 }
 
 function die() {
@@ -538,14 +543,14 @@ document.querySelector("#back").addEventListener("click",()=>{
  )
 
 function maybeOpenDoor(){
-  console.log("New stage functionality is in a different file, so this function is gonna get ran over");
-  console.log("I kept this function so this js fle could work by itself");
+  //New stage functionality is in a different file, so this function is gonna get ran over
+  //I kept this function so this js fle could work by itself
 
 }
 
 function newStage(){
-  console.log("New stage functionality is in a different file, so this function is gonna get ran over");
-  console.log("I kept this function so this js fle could work by itself");
+  //New stage functionality is in a different file, so this function is gonna get ran over
+  //I kept this function so this js fle could work by itself
 }
 
 

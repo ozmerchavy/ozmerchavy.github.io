@@ -11,7 +11,11 @@ const stages = [
         minScoretoGetDoor: 60,
         alertoText: "Get to 100 points for next stage",
         doorSymbol: "🚅",
-        bgColorTable: "#361e13"
+        bgColorTable: "#361e13",
+        stageFunctionEveryTurn: ()=>{
+            console.log("aha")
+        }
+        
 
     },
     {
@@ -142,7 +146,8 @@ const stages = [
         bgColorTable: "#5f5f4477",
         apple: "✨",
         bgImage: "anotherWorld",
-        map: anotherWorldMap
+        map: anotherWorldMap,
+       
 
     }
 
@@ -273,6 +278,9 @@ const bonusStages = [
 ]
 
 
+
+
+
 // get maps made with the GUI make them into normal maps with current Graphic Object
 function translateBonusMaps(bMap) {
     const GUISymbols = {
@@ -391,6 +399,9 @@ function newStage(isBonuStage = false) {
     if (level.stageFunction) {
         level.stageFunction()
     }
+    if (level.stageFunctionEveryTurn){
+        stageFunctionEveryTurn = level.stageFunctionEveryTurn
+    }
     nextTurn()
     pauseGame()
 
@@ -443,3 +454,11 @@ if (custoMap) {
     }
     restart()
 }
+
+
+// /////////////////////////////////////////////////////////////////////////////////
+// /                              E X S T R A       B S                          ///
+// /////////////////////////////////////////////////////////////////////////////////
+
+
+// runs every turn 
