@@ -311,7 +311,7 @@ function maybeOpenDoor() {
         createDoor()
     }
 
-    let enhancedCahnceforBonuStage = chanceForBonusStage + (0.0002 / (Math.abs(15-snake.level))) 
+    let enhancedCahnceforBonuStage = chanceForBonusStage + (0.00025 / (Math.abs(15-snake.level))) 
     if (Math.random() < enhancedCahnceforBonuStage && !isSecretDoorOpenAlready && !isTiny) {
         createDoor(true)
         isSecretDoorOpenAlready = true
