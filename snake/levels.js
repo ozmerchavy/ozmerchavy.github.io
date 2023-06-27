@@ -147,7 +147,6 @@ const stages = [
         map: anotherWorldMap,
         stageFunctionRunOnce: ()=>{
             window.turns = 0 
-            fps = 3
 
         },
         stageFunctionEveryTurn: ()=>{
