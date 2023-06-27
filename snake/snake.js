@@ -349,7 +349,6 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
     "--transX", Number(transX) - (1.09*size) * snake.currnetDir[1]
   );
 
-  stageFunctionEveryTurn()
 
 }
 
@@ -465,6 +464,8 @@ function nextTurn() {
     flashNearGodModeEnd(2000);
     isGodMode = Date.now() < godModeEndTime;
   }
+  stageFunctionEveryTurn()
+
 }
 
 async function restart() {
