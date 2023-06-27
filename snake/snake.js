@@ -112,7 +112,7 @@ const snake = {
 	score: 0,
 	level: 0
 };
-const requeue = [];
+let requeue = [];
 let initialFps = defaultValues.initialFps
 let fps = defaultValues.initialFps;
 let size = 40;
@@ -177,7 +177,7 @@ function switchToNewMap(newmap){
     newMid, vec2dAdd(newMid, [1, 0]), vec2dAdd(newMid, [2, 0])];
 
   snake.currnetDir = [-1, 0]; //up
-
+  requeue = [] // restarting snake should reset the action queue
   isSecretDoorOpenAlready = false
   createTable(map)
   let table = document.querySelector("table");
@@ -341,10 +341,10 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   const transX = table.style.getPropertyValue("--transX");
 
   table.style.setProperty(
-    "--transY", Number(transY) - size * snake.currnetDir[0]
+    "--transY", Number(transY) - (1.09*size) * snake.currnetDir[0]
   );
   table.style.setProperty(
-    "--transX", Number(transX) - size * snake.currnetDir[1]
+    "--transX", Number(transX) - (1.09*size) * snake.currnetDir[1]
   );
 }
 
@@ -448,7 +448,7 @@ function nextTurn() {
 
     fps = Math.min(initialFps + (snake.snakeArray.length - 3) / 4, maxSpeed);
     size = Math.max(36 - snake.snakeArray.length, 18);
-    if (Graphics.disableSizeChange || (map.length >= 50 || map[0].length >= 50)){
+    if (Graphics.disableSizeChange || (map.length >= 45 || map[0].length >= 45)){
       size = 20
     }
     document.querySelector("body").style.setProperty("--size", size);
@@ -512,6 +512,8 @@ function pauseOrunpauseGame() {
     if (custoMap){
       backButton.classList.add("secret")
     }
+    requeue = [] //clean all the moves
+
 
 }
 
