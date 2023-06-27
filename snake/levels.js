@@ -60,7 +60,7 @@ const stages = [
         maxSpeed: 23,
         minScoretoGetDoor: 190,
         alertoText: "In the Banana world it is hard to even eat one banana. you need to get to 215 to get out.",
-        doorSymbol: "🍌",
+        doorSymbol: "🌻",
         bgColor: "#181502",
         apple: "🍌",
         bgColorTable: "#f4e8b8"
@@ -76,7 +76,7 @@ const stages = [
         level_fps: 10,
         maxSpeed: 26,
         minScoretoGetDoor: 215,
-        alertoText: "Good luck and stuff. You could be saved very shortly, look for the cloud, you only need 230 points.",
+        alertoText: "Good luck and stuff. You could be saved very shortly, look for the rainbow, you only need 230 points.",
         doorSymbol: "💀",
         tableEmptys: "💀",
         bgColor: "#910000",
@@ -94,7 +94,7 @@ const stages = [
         minScoretoGetDoor: 230,
         alertoText: "Here is heaven, enjoy! and get to 335 points(!!) it is possible with bonus stages",
         doorSymbol: "🌈",
-        apple: "🌈",
+        apple: "☁️",
         bgColorTable: "#513538 "
 
     }, {
