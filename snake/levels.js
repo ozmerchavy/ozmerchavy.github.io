@@ -101,7 +101,7 @@ const stages = [
         levelName: "Mint",
         levelNo: 6,
         maxAppples: 35,
-        chanceForDivineFruit: .01,
+        chanceForDivineFruit: .013,
         level_fps: 11,
         maxSpeed: 23,
         minScoretoGetDoor: 335,
@@ -334,7 +334,7 @@ function maybeOpenDoor() {
         createDoor()
     }
 
-    let enhancedCahnceforBonuStage = chanceForBonusStage + (0.00025 / (Math.abs(15-snake.level))) 
+    let enhancedCahnceforBonuStage = chanceForBonusStage + (0.0003 / (Math.abs(20-snake.level))) 
     if (Math.random() < enhancedCahnceforBonuStage && !isSecretDoorOpenAlready && !isTiny) {
         createDoor(true)
         isSecretDoorOpenAlready = true
