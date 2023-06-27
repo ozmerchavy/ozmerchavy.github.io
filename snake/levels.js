@@ -299,7 +299,6 @@ function translateBonusMaps(bMap) {
 
 }
 
-
 // runs every turn
 function maybeOpenDoor() {
     if (snake.level >= stages.length) {
@@ -312,8 +311,7 @@ function maybeOpenDoor() {
         createDoor()
     }
 
-
-    let enhancedCahnceforBonuStage = chanceForBonusStage + (snake.level) / 5000
+    let enhancedCahnceforBonuStage = chanceForBonusStage + (0.0002 / (Math.abs(15-snake.level))) 
     if (Math.random() < enhancedCahnceforBonuStage && !isSecretDoorOpenAlready && !isTiny) {
         createDoor(true)
         isSecretDoorOpenAlready = true
