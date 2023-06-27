@@ -281,7 +281,7 @@ function maybeTransportThruWall(newHead) {
   }
 }
 
-function moveSnakeorDie({snake= snake, rotation = undefined, thruWalls = false } = {}) {
+function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   if (rotation == "right" || rotation == "left") {
     snake.currnetDir = rotate(snake.currnetDir, rotation);
   }
@@ -446,7 +446,7 @@ function nextTurn() {
     maybeOpenDoor()
 
   }
-  moveSnakeorDie({ snake: snake, rotation: requeue.shift(), thruWalls: isGodMode });
+  moveSnakeorDie({  rotation: requeue.shift(), thruWalls: isGodMode });
 
   if (snake.life > 0) {
     document.querySelector(".score").innerText = snake.score

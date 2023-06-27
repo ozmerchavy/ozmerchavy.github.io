@@ -12,9 +12,7 @@ const stages = [
         alertoText: "Get to 100 points for next stage",
         doorSymbol: "🚅",
         bgColorTable: "#361e13",
-        stageFunctionEveryTurn: ()=>{
-            console.log("aha")
-        }
+
         
 
     },
@@ -130,7 +128,7 @@ const stages = [
         bgColorTable: "#00000080 ",
         apple: "👽",
         bgImage: "galaxy",
-        stageFunction: () => {
+        stageFunctionRunOnce: () => {
             addLife()
         }
     }, {
@@ -147,6 +145,22 @@ const stages = [
         apple: "✨",
         bgImage: "anotherWorld",
         map: anotherWorldMap,
+        stageFunctionRunOnce: ()=>{
+            window.turns = 0 
+            fps = 3
+
+        },
+        stageFunctionEveryTurn: ()=>{
+            if (window.turns == 4){
+                snaka = copy(snake)
+
+            }
+            window.turns ++
+            if (window.turns > 20 ){
+            }
+ 
+        }
+
        
 
     }
@@ -396,8 +410,8 @@ function newStage(isBonuStage = false) {
             level.levelName
         }!`, level.alertoText)
     }
-    if (level.stageFunction) {
-        level.stageFunction()
+    if (level.stageFunctionRunOnce) {
+        level.stageFunctionRunOnce()
     }
     if (level.stageFunctionEveryTurn){
         stageFunctionEveryTurn = level.stageFunctionEveryTurn
