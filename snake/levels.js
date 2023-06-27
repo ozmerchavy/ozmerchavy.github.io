@@ -8,7 +8,7 @@ const stages = [
         chanceForDivineFruit: .14,
         level_fps: 12,
         maxSpeed: 22,
-        minScoretoGetDoor: 60,
+        minScoretoGetDoor: 1,
         alertoText: "Get to 100 points for next stage",
         doorSymbol: "🚅",
         bgColorTable: "#361e13"

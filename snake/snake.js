@@ -178,7 +178,6 @@ function switchToNewMap(newmap){
 
   snake.currnetDir = [-1, 0]; //up
 
-  snake.life = 1;
   isSecretDoorOpenAlready = false
   createTable(map)
   let table = document.querySelector("table");
