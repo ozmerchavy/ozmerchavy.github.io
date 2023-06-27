@@ -169,6 +169,8 @@ const stages = [
 
 
 // cant have own's door btw
+// MAKE SURE stage apples and door ain't the same 
+
 const bonusStages = [
     {
         levelName: "Dragons",
