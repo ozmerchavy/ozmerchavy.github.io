@@ -74,7 +74,7 @@ const stages = [
         level_fps: 10,
         maxSpeed: 26,
         minScoretoGetDoor: 215,
-        alertoText: "Good luck and stuff. You could be saved very shortly, look for the cloud.",
+        alertoText: "Good luck and stuff. You could be saved very shortly, look for the cloud, you only need 230 points.",
         doorSymbol: "💀",
         tableEmptys: "💀",
         bgColor: "#910000",
