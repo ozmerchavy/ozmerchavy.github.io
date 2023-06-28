@@ -653,6 +653,7 @@ function retrieveGame() {
     if (snake.level == 0){
         pauseGame()
         alerto("Not yet!", "You can only use saves after tunnel stage!")
+        return
     }
     const retrievedData = JSON.parse(retrieved)
     if (Number(retrievedData.saves) == 0) {
