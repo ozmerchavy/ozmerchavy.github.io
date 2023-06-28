@@ -151,12 +151,25 @@ const stages = [
         },
         stageFunctionEveryTurn: ()=>{
             if (window.turns == 4){
-                snaka = copy(snake)
+                window.snaka = {
+                    snakeArray: [
+                        midMap, vec2dAdd(midMap, [1, 0]),
+                        vec2dAdd(midMap, [2, 0])
+                    ],
+                    currnetDir: [
+                        -1, 0
+                    ], // up
+                }
+                window.snakaBackUp = copy(snake)
+
+               
 
             }
             window.turns ++
-            if (window.turns > 20 ){
+            if (window.turns > 20 ){    
+                moveSNAKA({snake: window.snaka, backupSnake: window.snakaBackUp })
             }
+
  
         }
 
@@ -471,9 +484,69 @@ if (custoMap) {
 }
 
 
+
+
 // /////////////////////////////////////////////////////////////////////////////////
 // /                              E X S T R A       B S                          ///
 // /////////////////////////////////////////////////////////////////////////////////
 
+// for complex custom shit
 
-// runs every turn 
+// this function rotates snake-like things, its a helper function
+function __rotateSNAKA(currnetDir, direction) {
+    let rotateDir = direction == "right" ? [1, -1] : [-1, 1];  
+    return [currnetDir[1] * rotateDir[0], currnetDir[0] * rotateDir[1]];
+  }
+
+
+
+// this function moves a SNAKA after it is created, needs to run every turn
+function moveSNAKA({ snaka = window.snaka, rotation = undefined, body = "🌺", headGraphics = "🏵️", backupSnake = {} } = {}) {
+ 
+    if (rotation == "right" || rotation == "left") {
+      snaka.currnetDir = __rotateSNAKA(snaka.currnetDir, rotation);
+    }
+      else if (Math.random()>0.9){
+          snaka.currnetDir = __rotateSNAKA(snaka.currnetDir, choice(["right", "left"]));
+  
+      }
+    const head = snaka.snakeArray[0];
+    const newHead = vec2dAdd(head, snaka.currnetDir);
+  
+  
+    const newHeadContent = map[newHead[0]]?.[newHead[1]];
+  
+
+    // if bumps into things, it is going to move and actually avoid them if it can
+    if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
+       moveSNAKA({snaka = snaka, rotation = choice(["right", "left"])} = {})
+       return
+      }
+
+
+    // snaka dies if you touch her
+    if (JSON.stringify(snaka.snakeArray).includes(snake.snakeArray[0])){
+        snaka.snakeArray = backupSnake.snakeArray
+        snaka.currnetDir = backupSnake.currnetDir
+        return
+    }
+  
+  
+  
+    snaka.snakeArray.unshift(newHead);
+    if (newHeadContent != Graphics.apple) {
+      const lastPos = snaka.snakeArray.pop();
+      updateMap(lastPos, Graphics.emptys);
+    }
+   
+    const emoji = body
+    for (const ij of snaka.snakeArray) {
+      updateMap(ij, emoji);
+    }
+    updateMap(newHead, headGraphics);
+
+
+  
+  
+  }
+
