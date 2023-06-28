@@ -167,7 +167,7 @@ const stages = [
             }
             window.turns ++
             if (window.turns > 20 ){    
-                moveSNAKA({snake: window.snaka, backupSnake: window.snakaBackUp })
+                // moveSNAKA({snake: window.snaka, backupSnake: window.snakaBackUp })
             }
 
  
