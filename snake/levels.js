@@ -152,29 +152,14 @@ const stages = [
         map: anotherWorldMap,
         stageFunctionRunOnce: ()=>{
             window.turns = 0 
+            window.snaka = createSnaka("🌺", "🏵️"),
+            window.snakaBackUp = copy(snaka)
 
         },
         stageFunctionEveryTurn: ()=>{
-            if (window.turns == 4){
-                window.snaka = {
-                    snakeArray: [
-                        midMap, vec2dAdd(midMap, [1, 0]),
-                        vec2dAdd(midMap, [2, 0])
-                    ],
-                    currnetDir: [
-                        -1, 0
-                    ],
-
-                },
-                window.snakaBackUp = copy(snaka)
-                
-
-               
-
-            }
             window.turns ++
-            if (window.turns > 20 ){    
-                moveSNAKA({snake: window.snaka, backupSnake: window.snakaBackUp })
+            if (window.turns > 30 ){    
+                moveSNAKA(snaka, undefined, window.snakaBackUp)
             }
 
  
@@ -510,14 +495,32 @@ function __rotateSNAKA(currnetDir, direction) {
     return [currnetDir[1] * rotateDir[0], currnetDir[0] * rotateDir[1]];
   }
 
+function createSnaka(body, head, cantEatApples= false, diesIfTouchesSnake = true){
+    const snaka =  {
+        snakeArray: [
+            midMap, vec2dAdd(midMap, [1, 0]),
+            vec2dAdd(midMap, [2, 0])
+        ],
+        currnetDir: [
+            -1, 0
+        ],
+        body: body, 
+        head: head,
+        diesIfTouchesSnake: true,
+        cantEatApples: cantEatApples
 
+    }
+
+    return snaka
+}
 
 
 
 
 // this function moves a SNAKA after it is created, needs to run every turn
-function moveSNAKA({ snaka = window.snaka, rotation = undefined, body = "🌺", headGraphics = "🏵️", backupSnake = {} } = {}) {
- 
+function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIfGotStuck=0) {
+    
+
     if (rotation == "right" || rotation == "left") {
       snaka.currnetDir = __rotateSNAKA(snaka.currnetDir, rotation);
     }
@@ -525,32 +528,37 @@ function moveSNAKA({ snaka = window.snaka, rotation = undefined, body = "🌺", 
           snaka.currnetDir = __rotateSNAKA(snaka.currnetDir, choice(["right", "left"]));
   
       }
-    const head = snaka.snakeArray[0];
-    const newHead = vec2dAdd(head, snaka.currnetDir);
+    const headloc = snaka.snakeArray[0];
+    const newHead = vec2dAdd(headloc, snaka.currnetDir);
   
   
     const newHeadContent = map[newHead[0]]?.[newHead[1]];
   
 
-    // if bumps into things, it is going to move and actually avoid them if it can
+    // trying to avoid things
     if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
-       moveSNAKA({snaka = snaka, rotation = choice(["right", "left"])} = {})
+    if (triesIfGotStuck < 20){
+        /// preventing stack overflow
+        moveSNAKA(snaka, choice(["right", "left"]), backupSnaka,triesIfGotStuck+1)
+    }
        return
       }
 
 
     // snaka dies if you touch her
-    if (JSON.stringify(snaka.snakeArray).includes(snake.snakeArray[0])){
+    if (snaka.diesIfTouchesSnake && JSON.stringify(snaka.snakeArray).includes(snake.snakeArray[0])){
         for (const ij of snaka.snakeArray) {
             updateMap(ij, Graphics.apple);
           }
-        
+        // game becomes faster every time she dies
         if (fps< maxSpeed){
             fps+= 1
-
         }
-        snaka.snakeArray = copy(backupSnake.snakeArray)
-        snaka.currnetDir = backupSnake.currnetDir
+        if (backupSnaka){
+   snaka.snakeArray = copy(backupSnaka.snakeArray)
+        snaka.currnetDir = backupSnaka.currnetDir
+        }
+     
         
         return
     }
@@ -558,15 +566,15 @@ function moveSNAKA({ snaka = window.snaka, rotation = undefined, body = "🌺", 
   
   
     snaka.snakeArray.unshift(newHead);
-    if (newHeadContent != Graphics.apple) {
+    if (snaka.cantEatApples || (newHeadContent != Graphics.apple)) {
       const lastPos = snaka.snakeArray.pop();
       updateMap(lastPos, Graphics.emptys);
     }
    
     for (const ij of snaka.snakeArray) {
-      updateMap(ij, body);
+      updateMap(ij, snaka.body);
     }
-    updateMap(newHead, headGraphics);
+    updateMap(newHead, snaka.head);
 
 
   
