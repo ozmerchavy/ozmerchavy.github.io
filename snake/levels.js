@@ -149,7 +149,23 @@ const stages = [
         bgColorTable: "#5f5f4477",
         apple: "✨",
         bgImage: "anotherWorld",
-        map: anotherWorldMap,
+        map: anotherWorldMap
+    },
+    {
+        levelName: "First Love",
+        levelNo: 9,
+        rows: 40,
+        cols: 40,
+        maxAppples: 40,
+        chanceForDivineFruit: .02,
+        level_fps: 8,
+        maxSpeed: 20,
+        minScoretoGetDoor: 562,
+        alertoText: "Welcome to a very special level",
+        doorSymbol: "💜",
+        apple: "💖",
+        bgColorTable: "#674264",
+        bgColor: "#2d0b1b",
         stageFunctionRunOnce: ()=>{
             window.turns = 0 
             window.snaka = createSnaka("🌺", "🏵️"),
@@ -158,16 +174,47 @@ const stages = [
         },
         stageFunctionEveryTurn: ()=>{
             window.turns ++
-            if (window.turns > 30 ){    
+            
+            if (window.turns >= 20 && !window.byeSnaka){    
                 moveSNAKA(snaka, undefined, window.snakaBackUp)
+            }
+            if (window.turns == 20){
+                specialerto("This is snaka", "She is very shy, and very hungry. Your goal is to let her eat 40 apples. Every time you touch her she will start over")
+            }
+            if (window.snaka.snakeArray.length > 40 && !window.byeSnaka){
+                pauseGame()
+                alerto("Snaka is so happy!", "thanks for keeping her safe. She gave you ❤️ and all her score. You need 650 for next level")
+                addLife()
+                for (const ij of snaka.snakeArray) {
+                    updateMap(ij, Graphics.apple);
+                  }
+                window.byeSnaka = true
+                snake.score += 40
             }
 
  
         }
 
-       
+    },
+    {
+        levelName: "Big Game",
+        levelNo: 9,
+        rows: 50,
+        cols: 50,
+        maxAppples: 40,
+        chanceForDivineFruit: .14,
+        level_fps: 12,
+        maxSpeed: 24,
+        minScoretoGetDoor: 650,
+        alertoText: "Get to 750 points for next stage",
+        doorSymbol: "🚅",
 
     }
+
+
+    
+
+
 
 
 ]
@@ -484,11 +531,10 @@ if (custoMap) {
 
 
 // /////////////////////////////////////////////////////////////////////////////////
-// /                              E X S T R A       B S                          ///
+// /                          S N A K A   F U N C T I O N S                      ///
 // /////////////////////////////////////////////////////////////////////////////////
 
-// for complex custom shit
-
+// allows you to add another snakes to game, they move randomly for now
 // this function rotates snake-like things, its a helper function
 function __rotateSNAKA(currnetDir, direction) {
     let rotateDir = direction == "right" ? [1, -1] : [-1, 1];  
@@ -576,8 +622,39 @@ function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIf
     }
     updateMap(newHead, snaka.head);
 
-
-  
   
   }
+
+
+
+// /////////////////////////////////////////////////////////////////////////////////
+// /                         O T H E R    F U N C T I O N S                      ///
+// /////////////////////////////////////////////////////////////////////////////////
+
+
+function specialerto(title, msg){
+    pauseGame()
+    const taboole = document.querySelector("table");
+    const currentYtrans = taboole.style.getPropertyValue("--transY");
+    const currentXtrans = taboole.style.getPropertyValue("--transX");
+    const currentZoom = taboole.style.getPropertyValue("--size");
+    const currentRotation = taboole.style.getPropertyValue("--rotation");
+    taboole.style.setProperty("--transY", 0);
+    taboole.style.setProperty("--transX", 140);
+    taboole.style.setProperty("--size", 30);
+    taboole.style.setProperty("--rotation", 0);
+    window.isRotated = true
+    alerto(title, msg)
+    document.querySelector(".alerto").addEventListener("submit", (e) => {
+        if (window.isRotated){
+            document.querySelector(".alerto").removeAttribute("open");
+            taboole.style.setProperty("--transX", currentXtrans )
+              taboole.style.setProperty("--transY", currentYtrans )
+              taboole.style.setProperty("--rotation", currentRotation )
+              taboole.style.setProperty("--size", currentZoom )
+              window.isRotated = false
+        }
+      });
+
+}
 
