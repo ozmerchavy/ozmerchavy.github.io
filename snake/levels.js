@@ -17,8 +17,22 @@ const stages = [
         alertoText: "Get to 100 points for next stage",
         doorSymbol: "🚅",
         bgColorTable: "#361e13",
+        stageFunctionRunOnce: () => {
+            if (localStorage.getItem("saved_game")) {
+                const saves = JSON.parse(localStorage.getItem("saved_game")).saves
+                if (saves > 0){
+                    pauseGame()
+                    alerto(`Try to get to 140 points`, `You have a saved game with ${saves} saves! you can get there any time if you click 's'`)
+    
+                }
+            }
+            document.body.addEventListener("keyup", function (event) {
+                if (event.key === 's' || event.keyCode === 83) {
+                    retrieveGame()
+                }
+            })
+        }
 
-        
 
     },
     {
@@ -34,6 +48,7 @@ const stages = [
         alertoText: "Try to get to 140 points",
         doorSymbol: "🎡",
         tableEmptys: "⬛"
+       
 
     },
     {
@@ -150,8 +165,7 @@ const stages = [
         apple: "✨",
         bgImage: "anotherWorld",
         map: anotherWorldMap
-    },
-    {
+    }, {
         levelName: "First Love",
         levelNo: 9,
         rows: 40,
@@ -166,37 +180,42 @@ const stages = [
         apple: "💖",
         bgColorTable: "#674264",
         bgColor: "#2d0b1b",
-        stageFunctionRunOnce: ()=>{
-            window.turns = 0 
+        stageFunctionRunOnce: () => {
+            window.turns = 0
             window.snaka = createSnaka("🌺", "🏵️"),
             window.snakaBackUp = copy(snaka)
 
         },
-        stageFunctionEveryTurn: ()=>{
+        stageFunctionEveryTurn: () => {
             window.turns ++
-            
-            if (window.turns >= 20 && !window.byeSnaka){    
+
+            if (window.turns >= 20 && !window.byeSnaka) {
                 moveSNAKA(snaka, undefined, window.snakaBackUp)
             }
-            if (window.turns == 20){
+            if (window.turns == 20) {
                 specialerto("This is snaka", "She is very shy, and very hungry. Your goal is to let her eat 40 apples. Every time you touch her she will start over")
             }
-            if (window.snaka.snakeArray.length > 40 && !window.byeSnaka){
+            if (window.snaka.snakeArray.length > 42 && !window.byeSnaka) {
                 pauseGame()
-                alerto("Snaka is so happy!", "thanks for keeping her safe. She gave you ❤️ and all her score. You need 650 for next level")
+                let stringIftheWerentSavedbefore = ""
+                if (!localStorage.getItem("saved_game")) {
+                    stringIftheWerentSavedbefore = "when you die and restart, you will be instructed in tunnel stage regarding SAVES."
+                }
+                
+                alerto("Snaka is so happy!", `thanks for keeping her safe. She gave you ❤️, her score, and TWO SAVES to space level. ${stringIftheWerentSavedbefore} Keep going now!`)
                 addLife()
+                saveGame(2, 8, 400)
                 for (const ij of snaka.snakeArray) {
                     updateMap(ij, Graphics.apple);
-                  }
+                }
                 window.byeSnaka = true
                 snake.score += 40
             }
 
- 
+
         }
 
-    },
-    {
+    }, {
         levelName: "Big Game",
         levelNo: 9,
         rows: 50,
@@ -208,20 +227,18 @@ const stages = [
         minScoretoGetDoor: 650,
         alertoText: "Get to 750 points for next stage",
         doorSymbol: "🚅",
+        stageFunctionRunOnce: () => {
+            localStorage.setItem("saved_game", JSON.stringify(snake))
+        }
 
     }
-
-
-    
-
-
 
 
 ]
 
 
 // cant have own's door btw
-// MAKE SURE stage apples and door ain't the same 
+// MAKE SURE stage apples and door ain't the same
 
 const bonusStages = [
     {
@@ -329,8 +346,7 @@ const bonusStages = [
         bgColor: "#ff00ff",
         apple: "💡",
         map: NeonCityMap
-    },
-    {
+    }, {
         levelName: "Underwater Adventure",
         level_fps: 7,
         maxSpeed: 15,
@@ -339,18 +355,15 @@ const bonusStages = [
         bgColor: "#0e2072",
         apple: "🐠",
         map: oceanmap
-      }
+    }
 
 
 ]
 
 
-
-
 // /////////////////////////////////////////////////////////////////////////////////
 // /                          B A S I C   F U N C T I O N S                      ///
 // /////////////////////////////////////////////////////////////////////////////////
-
 
 
 // get maps made with the GUI make them into normal maps with current Graphic Object
@@ -391,7 +404,7 @@ function maybeOpenDoor() {
         createDoor()
     }
 
-    let enhancedCahnceforBonuStage = chanceForBonusStage + (0.0003 / (Math.abs(20-snake.level))) 
+    let enhancedCahnceforBonuStage = chanceForBonusStage + (0.0003 / (Math.abs(20 - snake.level)))
     if (Math.random() < enhancedCahnceforBonuStage && !isSecretDoorOpenAlready && !isTiny) {
         createDoor(true)
         isSecretDoorOpenAlready = true
@@ -471,7 +484,7 @@ function newStage(isBonuStage = false) {
     if (level.stageFunctionRunOnce) {
         level.stageFunctionRunOnce()
     }
-    if (level.stageFunctionEveryTurn){
+    if (level.stageFunctionEveryTurn) {
         stageFunctionEveryTurn = level.stageFunctionEveryTurn
     }
     nextTurn()
@@ -528,8 +541,6 @@ if (custoMap) {
 }
 
 
-
-
 // /////////////////////////////////////////////////////////////////////////////////
 // /                          S N A K A   F U N C T I O N S                      ///
 // /////////////////////////////////////////////////////////////////////////////////
@@ -537,12 +548,15 @@ if (custoMap) {
 // allows you to add another snakes to game, they move randomly for now
 // this function rotates snake-like things, its a helper function
 function __rotateSNAKA(currnetDir, direction) {
-    let rotateDir = direction == "right" ? [1, -1] : [-1, 1];  
-    return [currnetDir[1] * rotateDir[0], currnetDir[0] * rotateDir[1]];
-  }
+    let rotateDir = direction == "right" ? [1, -1] : [-1, 1];
+    return [
+        currnetDir[1] * rotateDir[0],
+        currnetDir[0] * rotateDir[1]
+    ];
+}
 
-function createSnaka(body, head, cantEatApples= false, diesIfTouchesSnake = true){
-    const snaka =  {
+function createSnaka(body, head, cantEatApples = false, diesIfTouchesSnake = true) {
+    const snaka = {
         snakeArray: [
             midMap, vec2dAdd(midMap, [1, 0]),
             vec2dAdd(midMap, [2, 0])
@@ -550,7 +564,7 @@ function createSnaka(body, head, cantEatApples= false, diesIfTouchesSnake = true
         currnetDir: [
             -1, 0
         ],
-        body: body, 
+        body: body,
         head: head,
         diesIfTouchesSnake: true,
         cantEatApples: cantEatApples
@@ -561,78 +575,111 @@ function createSnaka(body, head, cantEatApples= false, diesIfTouchesSnake = true
 }
 
 
-
-
 // this function moves a SNAKA after it is created, needs to run every turn
-function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIfGotStuck=0) {
-    
+function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIfGotStuck = 0) {
+
 
     if (rotation == "right" || rotation == "left") {
-      snaka.currnetDir = __rotateSNAKA(snaka.currnetDir, rotation);
+        snaka.currnetDir = __rotateSNAKA(snaka.currnetDir, rotation);
+    } else if (Math.random() > 0.9) {
+        snaka.currnetDir = __rotateSNAKA(snaka.currnetDir, choice(["right", "left"]));
+
     }
-      else if (Math.random()>0.9){
-          snaka.currnetDir = __rotateSNAKA(snaka.currnetDir, choice(["right", "left"]));
-  
-      }
     const headloc = snaka.snakeArray[0];
     const newHead = vec2dAdd(headloc, snaka.currnetDir);
-  
-  
-    const newHeadContent = map[newHead[0]]?.[newHead[1]];
-  
+
+
+    const newHeadContent = map[newHead[0]] ?. [newHead[1]];
+
 
     // trying to avoid things
     if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
-    if (triesIfGotStuck < 20){
-        /// preventing stack overflow
-        moveSNAKA(snaka, choice(["right", "left"]), backupSnaka,triesIfGotStuck+1)
+        if (triesIfGotStuck < 20) { // / preventing stack overflow
+            moveSNAKA(snaka, choice(["right", "left"]), backupSnaka, triesIfGotStuck + 1)
+        }
+        return
     }
-       return
-      }
 
 
     // snaka dies if you touch her
-    if (snaka.diesIfTouchesSnake && JSON.stringify(snaka.snakeArray).includes(snake.snakeArray[0])){
+    if (snaka.diesIfTouchesSnake && JSON.stringify(snaka.snakeArray).includes(snake.snakeArray[0])) {
         for (const ij of snaka.snakeArray) {
             updateMap(ij, Graphics.apple);
-          }
+        }
         // game becomes faster every time she dies
-        if (fps< maxSpeed){
-            fps+= 1
+        if (fps < maxSpeed) {
+            fps += 1
         }
-        if (backupSnaka){
-   snaka.snakeArray = copy(backupSnaka.snakeArray)
-        snaka.currnetDir = backupSnaka.currnetDir
+        if (backupSnaka) {
+            snaka.snakeArray = copy(backupSnaka.snakeArray)
+            snaka.currnetDir = backupSnaka.currnetDir
         }
-     
-        
+
+
         return
     }
-  
-  
-  
+
+
     snaka.snakeArray.unshift(newHead);
     if (snaka.cantEatApples || (newHeadContent != Graphics.apple)) {
-      const lastPos = snaka.snakeArray.pop();
-      updateMap(lastPos, Graphics.emptys);
+        const lastPos = snaka.snakeArray.pop();
+        updateMap(lastPos, Graphics.emptys);
     }
-   
+
     for (const ij of snaka.snakeArray) {
-      updateMap(ij, snaka.body);
+        updateMap(ij, snaka.body);
     }
     updateMap(newHead, snaka.head);
 
-  
-  }
 
+}
 
 
 // /////////////////////////////////////////////////////////////////////////////////
 // /                         O T H E R    F U N C T I O N S                      ///
 // /////////////////////////////////////////////////////////////////////////////////
 
+// (saves only level and score)
+function saveGame(saves = 2, specificLevel = false, specificScore = false) {
+    localStorage.setItem("saved_game", JSON.stringify({score: specificScore || snake.score, level: specificLevel || snake.level, saves: saves}))
+}
 
-function specialerto(title, msg){
+function retrieveGame() {
+    const retrieved = localStorage.getItem("saved_game")
+    if (! retrieved) {
+        return
+    }
+
+    if (snake.level == 0){
+        pauseGame()
+        alerto("Not yet!", "You can only use saves after tunnel stage!")
+    }
+    const retrievedData = JSON.parse(retrieved)
+    if (Number(retrievedData.saves) == 0) {
+        pauseGame()
+        alerto("No saves", "You are out of saves! try to earn them!")
+        return
+
+    }
+
+    snake.score = Number(retrievedData.score)
+    if (retrievedData.level >= 0) {
+        snake.level = retrievedData.level - 1 // becuase we now do nextstage which adds back a level
+        localStorage.setItem("saved_game", JSON.stringify({
+            score: Number(retrievedData.score),
+            level: Number(retrievedData.level),
+            saves: Number(retrievedData.saves) - 1
+        }))
+
+        newStage()
+
+    }
+
+
+}
+
+
+function specialerto(title, msg) {
     pauseGame()
     const taboole = document.querySelector("table");
     const currentYtrans = taboole.style.getPropertyValue("--transY");
@@ -646,15 +693,14 @@ function specialerto(title, msg){
     window.isRotated = true
     alerto(title, msg)
     document.querySelector(".alerto").addEventListener("submit", (e) => {
-        if (window.isRotated){
+        if (window.isRotated) {
             document.querySelector(".alerto").removeAttribute("open");
-            taboole.style.setProperty("--transX", currentXtrans )
-              taboole.style.setProperty("--transY", currentYtrans )
-              taboole.style.setProperty("--rotation", currentRotation )
-              taboole.style.setProperty("--size", currentZoom )
-              window.isRotated = false
+            taboole.style.setProperty("--transX", currentXtrans)
+            taboole.style.setProperty("--transY", currentYtrans)
+            taboole.style.setProperty("--rotation", currentRotation)
+            taboole.style.setProperty("--size", currentZoom)
+            window.isRotated = false
         }
-      });
+    });
 
 }
-
