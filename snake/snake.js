@@ -184,7 +184,6 @@ function switchToNewMap(newmap){
   let table = document.querySelector("table");
   table.style.setProperty("--transY", 0);
   table.style.setProperty("--transX", 0);
-  Graphics.apple = choice(foods)
   Graphics.disableSizeChange = defaultValues.disableSizeChange
   stageFunctionEveryTurn = () =>{}
 
@@ -479,6 +478,8 @@ async function restart() {
   Graphics.bgColor = defaultValues.bgColor
   Graphics.bgColorTable = defaultValues.bgColorTable
   Graphics.bgImage = defaultValues.bgImage
+  Graphics.apple = choice(foods)
+
   let oldMap
   if (!custuMapasString){
      oldMap = genMap(defaultValues.mapRows, defaultValues.mapCols)
