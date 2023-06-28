@@ -1,3 +1,8 @@
+// /////////////////////////////////////////////////////////////////////////////////
+// /                             V A R I A B L E S                               ///
+// /////////////////////////////////////////////////////////////////////////////////
+
+
 const stages = [
     {
         levelName: "Tunnels",
@@ -158,16 +163,18 @@ const stages = [
                     ],
                     currnetDir: [
                         -1, 0
-                    ], // up
-                }
-                window.snakaBackUp = copy(snake)
+                    ],
+
+                },
+                window.snakaBackUp = copy(snaka)
+                
 
                
 
             }
             window.turns ++
             if (window.turns > 20 ){    
-                // moveSNAKA({snake: window.snaka, backupSnake: window.snakaBackUp })
+                moveSNAKA({snake: window.snaka, backupSnake: window.snakaBackUp })
             }
 
  
@@ -306,6 +313,11 @@ const bonusStages = [
 ]
 
 
+
+
+// /////////////////////////////////////////////////////////////////////////////////
+// /                          B A S I C   F U N C T I O N S                      ///
+// /////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -500,6 +512,9 @@ function __rotateSNAKA(currnetDir, direction) {
 
 
 
+
+
+
 // this function moves a SNAKA after it is created, needs to run every turn
 function moveSNAKA({ snaka = window.snaka, rotation = undefined, body = "🌺", headGraphics = "🏵️", backupSnake = {} } = {}) {
  
@@ -526,8 +541,17 @@ function moveSNAKA({ snaka = window.snaka, rotation = undefined, body = "🌺", 
 
     // snaka dies if you touch her
     if (JSON.stringify(snaka.snakeArray).includes(snake.snakeArray[0])){
-        snaka.snakeArray = backupSnake.snakeArray
+        for (const ij of snaka.snakeArray) {
+            updateMap(ij, Graphics.apple);
+          }
+        
+        if (fps< maxSpeed){
+            fps+= 1
+
+        }
+        snaka.snakeArray = copy(backupSnake.snakeArray)
         snaka.currnetDir = backupSnake.currnetDir
+        
         return
     }
   
@@ -539,9 +563,8 @@ function moveSNAKA({ snaka = window.snaka, rotation = undefined, body = "🌺", 
       updateMap(lastPos, Graphics.emptys);
     }
    
-    const emoji = body
     for (const ij of snaka.snakeArray) {
-      updateMap(ij, emoji);
+      updateMap(ij, body);
     }
     updateMap(newHead, headGraphics);
 
