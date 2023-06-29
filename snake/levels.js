@@ -254,19 +254,19 @@ const stages = [
     stageFunctionEveryTurn: () => {
         window.turns ++
 
-        if (window.turns >= 15 && !window.byeSnaka) {
+        if (window.turns >= 5 && !window.byeSnaka) {
             moveSNAKA(snaka, undefined, window.snakaBackUp)
         }
-        if (window.turns == 20) {
+        if (window.turns == 10) {
             specialerto("Snaka is stuck!", "We got to save her!", 450, -250, 40, {title: "Use the divine fruits", msg: "", x: 630, y: 430, size: 42})
 
         }
-        if (window.turns == 21){
+        if (window.turns == 11){
             Graphics.disableSizeChange
             say(window.isRotated)
 
         }
-        if (window.snaka.snakeArray[0][0] < 6 && !window.byeSnaka) {
+        if (!window.byeSnaka && (window.snaka.snakeArray[0][0] < 6 || window.snaka.snakeArray[0][1] > 4 )) {
             pauseGame()
             
             alerto("You saved snaka!!", `Thanks for keeping her safe. She gave you a ❤️, 50 points, and THREE SAVES to space level.  Keep going now! you need 850 points`)
