@@ -248,7 +248,7 @@ const stages = [
     stageFunctionRunOnce: () => {
         window.turns = 0
         window.snaka = createSnaka("🌺", "🏵️", true, false, [[32,3], [33,3], [34,3]]),
-        window.snakaBackUp = copy(snaka)
+        window.snakaBackUp = copy(window.snaka)
 
     },
     stageFunctionEveryTurn: () => {
@@ -617,7 +617,7 @@ function createSnaka(body, head, cantEatApples = false, diesIfTouchesSnake = tru
         ],
         body: body,
         head: head,
-        diesIfTouchesSnake: true,
+        diesIfTouchesSnake: diesIfTouchesSnake,
         cantEatApples: cantEatApples
 
     }
