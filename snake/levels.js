@@ -193,7 +193,7 @@ const stages = [
                 moveSNAKA(snaka, undefined, window.snakaBackUp)
             }
             if (window.turns == 20) {
-                specialerto("This is snaka", "She is very shy, and very hungry. Your goal is to let her eat 40 apples. Every time you touch her she will start over")
+                specialerto("This is snaka", "She is very shy, and very hungry. Your goal is to let her eat 40 apples. Every time you touch her she will start over", 140, 0, 30)
             }
             if (window.snaka.snakeArray.length > 42 && !window.byeSnaka) {
                 pauseGame()
@@ -231,6 +231,53 @@ const stages = [
             localStorage.setItem("saved_game", JSON.stringify(snake))
         }
 
+    },
+    {levelName: "Jail",
+    levelNo: 10,
+    maxAppples: 0,
+    chanceForDivineFruit: 0,
+    level_fps: 8,
+    maxSpeed: 20,
+    minScoretoGetDoor: 750,
+    alertoText: "How did we end up here??",
+    doorSymbol: "🔗",
+    apple: "🚬",
+    bgColorTable: "#211212",
+    bgColor: "#473e3e",
+    map: jail,
+    stageFunctionRunOnce: () => {
+        window.turns = 0
+        window.snaka = createSnaka("🌺", "🏵️", true, false, [[32,3], [33,3], [34,3]]),
+        window.snakaBackUp = copy(snaka)
+
+    },
+    stageFunctionEveryTurn: () => {
+        window.turns ++
+
+        if (window.turns >= 15 && !window.byeSnaka) {
+            moveSNAKA(snaka, undefined, window.snakaBackUp)
+        }
+        if (window.turns == 20) {
+            specialerto("Snaka is stuck!", "We got to save her using the divine fruits!", 450, -250, 40)
+            Graphics.disableSizeChange = true
+
+        }
+        if (window.snaka.snakeArray[0][0] < 6 && !window.byeSnaka) {
+            pauseGame()
+            
+            alerto("You saved snaka!!", `Thanks for keeping her safe. She gave you a ❤️, 50 points, and THREE SAVES to space level.  Keep going now! you need 850 points`)
+            maxApplesAtOnce = 20
+            addLife()
+            saveGame(3, 8, 400)
+            for (const ij of snaka.snakeArray) {
+                updateMap(ij, Graphics.apple);
+            }
+            window.byeSnaka = true
+            snake.score += 50
+        }
+
+
+    }
     }
 
 
@@ -555,7 +602,7 @@ function __rotateSNAKA(currnetDir, direction) {
     ];
 }
 
-function createSnaka(body, head, cantEatApples = false, diesIfTouchesSnake = true) {
+function createSnaka(body, head, cantEatApples = false, diesIfTouchesSnake = true, initialArray=false) {
     const snaka = {
         snakeArray: [
             midMap, vec2dAdd(midMap, [1, 0]),
@@ -569,6 +616,9 @@ function createSnaka(body, head, cantEatApples = false, diesIfTouchesSnake = tru
         diesIfTouchesSnake: true,
         cantEatApples: cantEatApples
 
+    }
+    if (initialArray){
+       snaka.snakeArray = initialArray     
     }
 
     return snaka
@@ -680,16 +730,17 @@ function retrieveGame() {
 }
 
 
-function specialerto(title, msg) {
+function specialerto(title, msg, x, y, size) {
     pauseGame()
     const taboole = document.querySelector("table");
     const currentYtrans = taboole.style.getPropertyValue("--transY");
     const currentXtrans = taboole.style.getPropertyValue("--transX");
     const currentZoom = taboole.style.getPropertyValue("--size");
     const currentRotation = taboole.style.getPropertyValue("--rotation");
-    taboole.style.setProperty("--transY", 0);
-    taboole.style.setProperty("--transX", 140);
-    taboole.style.setProperty("--size", 30);
+    
+    taboole.style.setProperty("--transX", x);
+    taboole.style.setProperty("--transY", y);
+    taboole.style.setProperty("--size", size);
     taboole.style.setProperty("--rotation", 0);
     window.isRotated = true
     alerto(title, msg)
