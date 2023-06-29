@@ -258,8 +258,12 @@ const stages = [
             moveSNAKA(snaka, undefined, window.snakaBackUp)
         }
         if (window.turns == 20) {
-            specialerto("Snaka is stuck!", "We got to save her using the divine fruits!", 450, -250, 40)
-            Graphics.disableSizeChange = true
+            specialerto("Snaka is stuck!", "We got to save her!", 450, -250, 40, {title: "Use the divine fruits", msg: "", x: 630, y: 430, size: 42})
+
+        }
+        if (window.turns == 21){
+            Graphics.disableSizeChange
+            say(window.isRotated)
 
         }
         if (window.snaka.snakeArray[0][0] < 6 && !window.byeSnaka) {
@@ -730,7 +734,7 @@ function retrieveGame() {
 }
 
 
-function specialerto(title, msg, x, y, size) {
+function specialerto(title, msg, x, y, size, nextAlerto = undefined) {
     pauseGame()
     const taboole = document.querySelector("table");
     const currentYtrans = taboole.style.getPropertyValue("--transY");
@@ -745,6 +749,7 @@ function specialerto(title, msg, x, y, size) {
     window.isRotated = true
     alerto(title, msg)
     document.querySelector(".alerto").addEventListener("submit", (e) => {
+   
         if (window.isRotated) {
             document.querySelector(".alerto").removeAttribute("open");
             taboole.style.setProperty("--transX", currentXtrans)
@@ -752,7 +757,14 @@ function specialerto(title, msg, x, y, size) {
             taboole.style.setProperty("--rotation", currentRotation)
             taboole.style.setProperty("--size", currentZoom)
             window.isRotated = false
+            if (nextAlerto != undefined){
+                return specialerto(nextAlerto.title, nextAlerto.msg, nextAlerto.x, nextAlerto.y, nextAlerto.size, nextAlerto.nextAlerto)
+            }
+
         }
+       
+
     });
+
 
 }

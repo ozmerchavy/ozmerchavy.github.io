@@ -601,7 +601,10 @@ function checkKey(e) {
   else if (e.keyCode == "32") {
     //close dialogue box
     document.querySelector(".alerto").dispatchEvent( new Event("submit"))
-    pauseOrunpauseGame()
+    if (!window.isRotated){ // we dont want it to unpause during specialelertos in a row
+      pauseOrunpauseGame()
+
+    }
 
   }
   else if (e.keyCode == "84") {
