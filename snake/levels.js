@@ -263,7 +263,7 @@ const stages = [
         }
         if (window.turns == 11){
             Graphics.disableSizeChange
-            say(window.isRotated)
+            say(window.isInSpecialerto)
 
         }
         if (!window.byeSnaka && (window.snaka.snakeArray[0][0] < 6 || window.snaka.snakeArray[0][1] > 4 )) {
@@ -746,20 +746,23 @@ function specialerto(title, msg, x, y, size, nextAlerto = undefined) {
     taboole.style.setProperty("--transY", y);
     taboole.style.setProperty("--size", size);
     taboole.style.setProperty("--rotation", 0);
-    window.isRotated = true
+    window.isInSpecialerto = true
     alerto(title, msg)
+    window.isInSpecialerto = false
+
     document.querySelector(".alerto").addEventListener("submit", (e) => {
+
    
-        if (window.isRotated) {
+        if (window.isInSpecialerto) {
             document.querySelector(".alerto").removeAttribute("open");
             taboole.style.setProperty("--transX", currentXtrans)
             taboole.style.setProperty("--transY", currentYtrans)
             taboole.style.setProperty("--rotation", currentRotation)
             taboole.style.setProperty("--size", currentZoom)
-            window.isRotated = false
             if (nextAlerto != undefined){
                 return specialerto(nextAlerto.title, nextAlerto.msg, nextAlerto.x, nextAlerto.y, nextAlerto.size, nextAlerto.nextAlerto)
             }
+
 
         }
        
