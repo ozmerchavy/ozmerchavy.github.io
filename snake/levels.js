@@ -193,9 +193,9 @@ const stages = [
                 moveSNAKA(snaka, undefined, window.snakaBackUp)
             }
             if (window.turns == 20) {
-                specialerto("This is snaka", "She is very shy, and very hungry. Your goal is to let her eat 40 apples. Every time you touch her she will start over", 140, 0, 30)
+                specialerto("This is snaka", "She is very shy, and very hungry. Your goal is to let her eat 31 apples. Every time you touch her she will start over", 140, 0, 30)
             }
-            if (window.snaka.snakeArray.length > 42 && !window.byeSnaka) {
+            if (window.snaka.snakeArray.length > 31 && !window.byeSnaka) {
                 pauseGame()
                 let stringIftheWerentSavedbefore = ""
                 if (!localStorage.getItem("saved_game")) {
@@ -209,7 +209,7 @@ const stages = [
                     updateMap(ij, Graphics.apple);
                 }
                 window.byeSnaka = true
-                snake.score += 40
+                snake.score += 31
             }
 
 
