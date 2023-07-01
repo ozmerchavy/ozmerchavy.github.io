@@ -601,7 +601,7 @@ function checkKey(e) {
   else if (e.keyCode == "32") {
     //close dialogue box
     document.querySelector(".alerto").dispatchEvent( new Event("submit"))
-    if (!window.isRotated){ // we dont want it to unpause during specialelertos in a row
+    if (!window.isInSpecialerto){ // we dont want it to unpause during specialelertos in a row
       pauseOrunpauseGame()
 
     }
@@ -656,6 +656,7 @@ function alerto(msg, string) {
     document.querySelector(".high-score .text").innerText = highscore;
     document.querySelector(".high-score").classList.remove("secret");
   }
+
 }
 
 /////////////// Responsiveness for Macs and iPhones  //////////////////////////////

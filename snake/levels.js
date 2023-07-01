@@ -263,7 +263,6 @@ const stages = [
         }
         if (window.turns == 11){
             Graphics.disableSizeChange
-            say(window.isInSpecialerto)
 
         }
         if (!window.byeSnaka && (window.snaka.snakeArray[0][0] < 6 || window.snaka.snakeArray[0][1] > 4 )) {
@@ -735,39 +734,51 @@ function retrieveGame() {
 
 
 function specialerto(title, msg, x, y, size, nextAlerto = undefined) {
-    pauseGame()
+    pauseGame();
+  
     const taboole = document.querySelector("table");
-    const currentYtrans = taboole.style.getPropertyValue("--transY");
-    const currentXtrans = taboole.style.getPropertyValue("--transX");
-    const currentZoom = taboole.style.getPropertyValue("--size");
-    const currentRotation = taboole.style.getPropertyValue("--rotation");
-    
+    const currentStyles = {
+      transX: taboole.style.getPropertyValue("--transX"),
+      transY: taboole.style.getPropertyValue("--transY"),
+      size: taboole.style.getPropertyValue("--size"),
+      rotation: taboole.style.getPropertyValue("--rotation")
+    };
+  
     taboole.style.setProperty("--transX", x);
     taboole.style.setProperty("--transY", y);
     taboole.style.setProperty("--size", size);
     taboole.style.setProperty("--rotation", 0);
-    window.isInSpecialerto = true
-    alerto(title, msg)
-    window.isInSpecialerto = false
-
-    document.querySelector(".alerto").addEventListener("submit", (e) => {
-
-   
-        if (window.isInSpecialerto) {
-            document.querySelector(".alerto").removeAttribute("open");
-            taboole.style.setProperty("--transX", currentXtrans)
-            taboole.style.setProperty("--transY", currentYtrans)
-            taboole.style.setProperty("--rotation", currentRotation)
-            taboole.style.setProperty("--size", currentZoom)
-            if (nextAlerto != undefined){
-                return specialerto(nextAlerto.title, nextAlerto.msg, nextAlerto.x, nextAlerto.y, nextAlerto.size, nextAlerto.nextAlerto)
-            }
-
-
+  
+    window.isInSpecialerto = true;
+    window.nextAlertoObj = nextAlerto;
+  
+    alerto(title, msg);
+  
+    const formSubmitHandler = (e) => {
+      e.preventDefault();
+  
+      if (window.isInSpecialerto) {
+        const alertoElement = document.querySelector(".alerto");
+        alertoElement.removeEventListener("submit", formSubmitHandler);
+        alertoElement.removeAttribute("open");
+  
+        taboole.style.setProperty("--transX", currentStyles.transX);
+        taboole.style.setProperty("--transY", currentStyles.transY);
+        taboole.style.setProperty("--rotation", currentStyles.rotation);
+        taboole.style.setProperty("--size", currentStyles.size);
+  
+        if (!window.nextAlertoObj) {
+          window.isInSpecialerto = false;
+        } else {
+          const nextAlerto = window.nextAlertoObj;
+          specialerto(nextAlerto.title, nextAlerto.msg, nextAlerto.x, nextAlerto.y, nextAlerto.size, nextAlerto.nextAlerto);
         }
-       
-
-    });
-
-
-}
+      }
+    };
+  
+    const alertoForm = document.querySelector(".alerto");
+    if (alertoForm) {
+      alertoForm.addEventListener("submit", formSubmitHandler);
+    }
+  }
+  
