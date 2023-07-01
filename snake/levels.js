@@ -694,6 +694,11 @@ function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIf
 
 // (saves only level and score)
 function saveGame(saves = 2, specificLevel = false, specificScore = false) {
+    const retrieved = localStorage.getItem("saved_game")
+    if (retrieved){
+        const retrievedData = JSON.parse(retrieved)
+        saves += Number(retrievedData.saves)
+    }
     localStorage.setItem("saved_game", JSON.stringify({score: specificScore || snake.score, level: specificLevel || snake.level, saves: saves}))
 }
 
