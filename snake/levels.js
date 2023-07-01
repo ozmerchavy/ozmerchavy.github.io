@@ -249,7 +249,7 @@ const stages = [
         window.turns = 0
         window.snaka = createSnaka("🌺", "🏵️", true, false, [[32,3], [33,3], [34,3]]),
         window.snakaBackUp = copy(window.snaka)
-
+        window.byeSnaka = false
     },
     stageFunctionEveryTurn: () => {
         window.turns ++
