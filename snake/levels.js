@@ -261,8 +261,8 @@ const stages = [
             specialerto("Snaka is stuck!", "We got to save her!", 450, -250, 40, {title: "Use the divine fruits", msg: "", x: 630, y: 430, size: 42})
 
         }
-        if (window.turns == 11){
-            Graphics.disableSizeChange
+        if (window.turns == 13){
+            Graphics.disableSizeChange = true
 
         }
         if (!window.byeSnaka && (window.snaka.snakeArray[0][0] < 6 || window.snaka.snakeArray[0][1] > 4 )) {
