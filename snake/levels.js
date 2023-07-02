@@ -125,8 +125,8 @@ const stages = [
         level_fps: 11,
         maxSpeed: 23,
         minScoretoGetDoor: 335,
-        alertoText: "You are literally addicated if you made it here, you need help",
-        doorSymbol: "🌿",
+        alertoText: "You are literally addicated if you made it here, you need help and 400 points.",
+        doorSymbol: "🌱",
         bgColor: "black",
         bgColorTable: "#113209 ",
         apple: "🌿",
@@ -142,7 +142,7 @@ const stages = [
         level_fps: 12,
         maxSpeed: 25,
         minScoretoGetDoor: 400,
-        alertoText: "The aliens are giving you one extra life!! ❤️",
+        alertoText: "The aliens are giving you one extra life!! ❤️ you need 500 points",
         doorSymbol: "🛸",
         bgColor: "black",
         bgColorTable: "#00000080 ",
@@ -154,12 +154,12 @@ const stages = [
     }, {
         levelName: "Another World",
         levelNo: 8,
-        maxAppples: 15,
-        chanceForDivineFruit: .005,
+        maxAppples: 25,
+        chanceForDivineFruit: .008,
         level_fps: 12,
         maxSpeed: 25,
         minScoretoGetDoor: 500,
-        alertoText: "You got to a different world.",
+        alertoText: "You got to a different world. (Get 562 points)",
         doorSymbol: "🏕️ ",
         bgColorTable: "#5f5f4477",
         apple: "✨",
@@ -202,7 +202,7 @@ const stages = [
                     stringIftheWerentSavedbefore = "when you die and restart, you will be instructed in tunnel stage regarding SAVES."
                 }
                 
-                alerto("Snaka is so happy!", `thanks for keeping her safe. She gave you ❤️, her score, and TWO SAVES to space level. ${stringIftheWerentSavedbefore} Keep going now!`)
+                alerto("Snaka is so happy!", `thanks for keeping her safe. She gave you ❤️, her score, and TWO SAVES to space level. ${stringIftheWerentSavedbefore} Keep going now to 650!`)
                 addLife()
                 saveGame(2, 8, 400)
                 for (const ij of snaka.snakeArray) {
