@@ -405,6 +405,16 @@ const bonusStages = [
         bgColor: "#0e2072",
         apple: "🐠",
         map: oceanmap
+    }, 
+    {
+        levelName: "Acropolis",
+        level_fps: 9,
+        maxSpeed: 14,
+        alertoText: "It is a blast from the past",
+        bgColorTable: "#0e157c",
+        bgColor: "#dfd8d8",
+        apple: "🥙",
+        map: temple
     }
 
 
