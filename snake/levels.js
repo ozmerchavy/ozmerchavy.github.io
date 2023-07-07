@@ -281,9 +281,62 @@ const stages = [
 
 
     }
+    },
+
+    {
+
+        levelName: "On the Run",
+        levelNo: 11,
+        rows: 10,
+        cols: 500,
+        maxAppples: 0,
+        chanceForDivineFruit: 0,
+        level_fps: 10,
+        maxSpeed: 20, 
+        minScoretoGetDoor: 850,
+        alertoText: "The police is after you. RUN!",
+        doorSymbol: "🦌",
+        apple: choice(foods),
+        bgColorTable: "#02290C",
+        bgImage:"run",
+        bgColor: "#000000",
+        customSnakeArr: [[3, 2], [3,3], [3,4]],
+        customSnakeDir: [0,1],
+        disableRotation: true, 
+        stageFunctionRunOnce: ()=>{
+            window.turns = 0
+            document.querySelector("table").style.setProperty("--transX", 20*265)
+            window.snaka = createSnaka("🌺", "🏵️", true, false, [[5,2], [5,3], [5,4]])
+            window.snaka.currentDir = [0,1]
+            window.snakaBackUp = copy(window.snaka)
+
+
+        }, 
+        
+        stageFunctionEveryTurn:()=>{
+            window.turns++
+            let snakasTrust = 0.7 
+            let efficiency = 0.9
+            let behavior = undefined
+            let ran = Math.random()
+                if (ran <= snakasTrust){
+                    behavior = "follow"
+                }
+                else if (ran < efficiency){
+                    behavior = "abs_right"
+                }
+                moveSNAKA(window.snaka, behavior, undefined, 1 )
+
+            
+            
+
+
+
+
+
     }
 
-
+    }
 ]
 
 
@@ -515,9 +568,22 @@ function newStage(isBonuStage = false) {
         levelMap = genMap(level.rows, level.cols)
     }
 
-    switchToNewMap(levelMap)
+    let customSnakeArr = false
+    let customSnakeDir = false
+
+    if (level.customSnakeArr){
+        customSnakeArr = level.customSnakeArr
+    }
+    if (level.customSnakeDir){
+        customSnakeDir = level.customSnakeDir
+    }
+    switchToNewMap(levelMap, customSnakeArr, customSnakeDir)
     if (isBonuStage) {
         Graphics.disableSizeChange = true
+
+    }
+    if (level.disableRotation){
+        Graphics.disableRotation = true
 
     }
     if (! isBonuStage) {
@@ -607,11 +673,12 @@ if (custoMap) {
 
 // allows you to add another snakes to game, they move randomly for now
 // this function rotates snake-like things, its a helper function
-function __rotateSNAKA(currnetDir, direction) {
+function __rotateSNAKA(currentDir, direction) {
+  
     let rotateDir = direction == "right" ? [1, -1] : [-1, 1];
     return [
-        currnetDir[1] * rotateDir[0],
-        currnetDir[0] * rotateDir[1]
+        currentDir[1] * rotateDir[0],
+        currentDir[0] * rotateDir[1]
     ];
 }
 
@@ -621,13 +688,14 @@ function createSnaka(body, head, cantEatApples = false, diesIfTouchesSnake = tru
             midMap, vec2dAdd(midMap, [1, 0]),
             vec2dAdd(midMap, [2, 0])
         ],
-        currnetDir: [
+        currentDir: [
             -1, 0
         ],
         body: body,
         head: head,
         diesIfTouchesSnake: diesIfTouchesSnake,
-        cantEatApples: cantEatApples
+        cantEatApples: cantEatApples, 
+        isDead: false
 
     }
     if (initialArray){
@@ -640,18 +708,43 @@ function createSnaka(body, head, cantEatApples = false, diesIfTouchesSnake = tru
 
 // this function moves a SNAKA after it is created, needs to run every turn
 function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIfGotStuck = 0) {
+    if (snaka.isDead){
+        return
+    }
+    
 
+    if (rotation == "straight"){
+        //do nothing to currentdir
+    }
+    else if (rotation == "right" || rotation == "left") {
+        snaka.currentDir = __rotateSNAKA(snaka.currentDir, rotation);
+    }
+    else if (rotation == "follow"){
 
-    if (rotation == "right" || rotation == "left") {
-        snaka.currnetDir = __rotateSNAKA(snaka.currnetDir, rotation);
-    } else if (Math.random() > 0.9) {
-        snaka.currnetDir = __rotateSNAKA(snaka.currnetDir, choice(["right", "left"]));
+        if (!String(snake.snakeArray).includes(String(snaka.snakeArray[0]))){
+        // if follows snake, braking the follow if he touches her to avoid colliding
+            snaka.currentDir = snake.currentDir
+        }
+ 
 
     }
+    else if (rotation == "mirror"){
+        snaka.currentDir[0] = snake.currentDir[0] * -1
+        snaka.currentDir[1] = snake.currentDir[1] * -1
+    }
+    else if (rotation && rotation.includes("abs_")){
+        const direct = rotation.split("abs_")[1]
+        snaka.currentDir = directsVecs[direct]
+    }
+
+     else if (Math.random() > 0.9) {
+        snaka.currentDir = __rotateSNAKA(snaka.currentDir, choice(["right", "left"]));
+
+    }
+    
+    
     const headloc = snaka.snakeArray[0];
-    const newHead = vec2dAdd(headloc, snaka.currnetDir);
-
-
+    const newHead = vec2dAdd(headloc, snaka.currentDir);
     const newHeadContent = map[newHead[0]] ?. [newHead[1]];
 
 
@@ -664,10 +757,12 @@ function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIf
     }
 
 
+
     // snaka dies if you touch her
     if (snaka.diesIfTouchesSnake && JSON.stringify(snaka.snakeArray).includes(snake.snakeArray[0])) {
         for (const ij of snaka.snakeArray) {
             updateMap(ij, Graphics.apple);
+            snaka.isDead = true
         }
         // game becomes faster every time she dies
         if (fps < maxSpeed) {
@@ -675,7 +770,8 @@ function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIf
         }
         if (backupSnaka) {
             snaka.snakeArray = copy(backupSnaka.snakeArray)
-            snaka.currnetDir = backupSnaka.currnetDir
+            snaka.currentDir = backupSnaka.currentDir
+            snaka.isDead = false
         }
 
 

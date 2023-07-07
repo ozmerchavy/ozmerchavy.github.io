@@ -35,6 +35,7 @@ const defaultValues = {
 	bgColor: "black",
 	bgColorTable: "",
 	disableSizeChange: false,
+  disableRotation: false, 
   bgImage: "",
 
 
@@ -58,6 +59,7 @@ const Graphics = {
 	bonusDoor: "🚪",
 	doorOutBonusStage: "🔑",
 	disableSizeChange: false,
+  disableRotation: false, 
   bgImage: "",
   heart: "❤️"
 
@@ -105,7 +107,7 @@ const snake = {
 		midMap, vec2dAdd(midMap, [1, 0]),
 		vec2dAdd(midMap, [2, 0])
 	],
-	currnetDir: [
+	currentDir: [
 		-1, 0
 	], // up
 	life: 1,
@@ -119,6 +121,14 @@ let size = 40;
 let maxSpeed = defaultValues.maxSpeed
 const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
+
+
+const directsVecs = {
+  "up": [-1,0], 
+  "right": [0,1],
+  "down": [1,0],
+  "left": [0, -1]    
+}
 
 // /////////////////////////////////////////////////////////////////////////////////
 // /                       U S E F U L      F U N C T I O N S                    ///
@@ -170,13 +180,25 @@ function genMap(rows, cols) {
 
 
 // would simply switch the map
-function switchToNewMap(newmap){
+function switchToNewMap(newmap, customSnakeArr = false,  customSnakeDir = false){
   map =  newmap
   const newMid = findMid(map)
-  snake.snakeArray = [
-    newMid, vec2dAdd(newMid, [1, 0]), vec2dAdd(newMid, [2, 0])];
+  if (customSnakeArr){
+    snake.snakeArray = customSnakeArr
+  
+  }
+  else {
+    snake.snakeArray = [
+      newMid, vec2dAdd(newMid, [1, 0]), vec2dAdd(newMid, [2, 0])];
+  }
+  if (customSnakeDir){
+    snake.currentDir = customSnakeDir
+  }
+  else {
+    snake.currentDir = [-1, 0]; //up
 
-  snake.currnetDir = [-1, 0]; //up
+  }
+
   requeue = [] // restarting snake should reset the action queue
   isSecretDoorOpenAlready = false
   createTable(map)
@@ -184,6 +206,7 @@ function switchToNewMap(newmap){
   table.style.setProperty("--transY", 0);
   table.style.setProperty("--transX", 0);
   Graphics.disableSizeChange = defaultValues.disableSizeChange
+  Graphics.disableRotation = defaultValues.disableRotation
   stageFunctionEveryTurn = () =>{}
 
 
@@ -233,14 +256,16 @@ function findAvailables() {
 ///                          S N A K E   F U N C T I O N S                      ///
 ///////////////////////////////////////////////////////////////////////////////////
 
-function rotate(currnetDir, direction) {
+function rotate(currentDir, direction) {
   let rotateDir = direction == "right" ? [1, -1] : [-1, 1];
-  let ro = document.querySelector("table").style.getPropertyValue("--rotation");
-  document
-    .querySelector("table")
-    .style.setProperty("--rotation", Number(ro) + rotateDir[0] * 90);
+  if (!Graphics.disableRotation){
+    let ro = document.querySelector("table").style.getPropertyValue("--rotation");
+    document
+      .querySelector("table")
+      .style.setProperty("--rotation", Number(ro) + rotateDir[0] * 90);  
+  }
 
-  return [currnetDir[1] * rotateDir[0], currnetDir[0] * rotateDir[1]];
+  return [currentDir[1] * rotateDir[0], currentDir[0] * rotateDir[1]];
 }
 
 function flashNearGodModeEnd(durationMs) {
@@ -282,10 +307,10 @@ function maybeTransportThruWall(newHead) {
 
 function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   if (rotation == "right" || rotation == "left") {
-    snake.currnetDir = rotate(snake.currnetDir, rotation);
+    snake.currentDir = rotate(snake.currentDir, rotation);
   }
   const head = snake.snakeArray[0];
-  const newHead = vec2dAdd(head, snake.currnetDir);
+  const newHead = vec2dAdd(head, snake.currentDir);
 
   if (thruWalls) {
     maybeTransportThruWall(newHead);
@@ -342,14 +367,17 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   const transX = table.style.getPropertyValue("--transX");
 
   table.style.setProperty(
-    "--transY", Number(transY) - (1.09*size) * snake.currnetDir[0]
+    "--transY", Number(transY) - (1.09*size) * snake.currentDir[0]
   );
   table.style.setProperty(
-    "--transX", Number(transX) - (1.09*size) * snake.currnetDir[1]
+    "--transX", Number(transX) - (1.09*size) * snake.currentDir[1]
   );
+
 
 
 }
+
+
 
 function die() {
   let highscore
@@ -493,7 +521,7 @@ async function restart() {
   snake.level = 0 
    
   
-  snake.currnetDir = [-1, 0]; //up
+  snake.currentDir = [-1, 0]; //up
   snake.score = 0 
   await sleep(350);
   snake.life = 1;
