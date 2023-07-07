@@ -315,15 +315,17 @@ const stages = [
         
         stageFunctionEveryTurn:()=>{
             window.turns++
-            let snakasTrust = 0.7 
-            let efficiency = 0.9
-            let behavior = undefined
+
+
+
+            let snakasTrust = 0.1
+            let behavior
             let ran = Math.random()
                 if (ran <= snakasTrust){
-                    behavior = "follow"
+                    behavior = `towards_snake`
                 }
-                else if (ran < efficiency){
-                    behavior = "abs_right"
+                else {
+                    behavior = "straight"
                 }
                 moveSNAKA(window.snaka, behavior, undefined, 1 )
 
@@ -682,7 +684,7 @@ function __rotateSNAKA(currentDir, direction) {
     ];
 }
 
-function createSnaka(body, head, cantEatApples = false, diesIfTouchesSnake = true, initialArray=false) {
+function createSnaka(body, head, cantEatApples = false, diesIfTouchesSnake = true, initialArray=false, hasPredators = true) {
     const snaka = {
         snakeArray: [
             midMap, vec2dAdd(midMap, [1, 0]),
@@ -695,7 +697,8 @@ function createSnaka(body, head, cantEatApples = false, diesIfTouchesSnake = tru
         head: head,
         diesIfTouchesSnake: diesIfTouchesSnake,
         cantEatApples: cantEatApples, 
-        isDead: false
+        isDead: false,
+        hasPredator: hasPredators
 
     }
     if (initialArray){
@@ -719,10 +722,10 @@ function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIf
     else if (rotation == "right" || rotation == "left") {
         snaka.currentDir = __rotateSNAKA(snaka.currentDir, rotation);
     }
-    else if (rotation == "follow"){
+    else if (rotation == "imitate"){
 
         if (!String(snake.snakeArray).includes(String(snaka.snakeArray[0]))){
-        // if follows snake, braking the follow if he touches her to avoid colliding
+        // if imitates snake, braking the imitate if he touches her to avoid colliding
             snaka.currentDir = snake.currentDir
         }
  
@@ -735,6 +738,17 @@ function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIf
     else if (rotation && rotation.includes("abs_")){
         const direct = rotation.split("abs_")[1]
         snaka.currentDir = directsVecs[direct]
+    }
+    else if (rotation && rotation.includes("towards_")){
+        let target = rotation.split("towards_")[1]
+        if (target == "snake"){
+            target = snake.snakeArray[snake.snakeArray.length-1]
+        }
+        else {
+            target = JSON.parse(target)
+
+        }
+        snaka.currentDir = getDirection(snaka.snakeArray[0], target)
     }
 
      else if (Math.random() > 0.9) {
@@ -792,6 +806,8 @@ function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIf
 
 
 }
+
+
 
 
 // /////////////////////////////////////////////////////////////////////////////////

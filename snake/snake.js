@@ -37,6 +37,7 @@ const defaultValues = {
 	disableSizeChange: false,
   disableRotation: false, 
   bgImage: "",
+  snakaPredator: "🚨"
 
 
 }
@@ -61,7 +62,8 @@ const Graphics = {
 	disableSizeChange: false,
   disableRotation: false, 
   bgImage: "",
-  heart: "❤️"
+  heart: "❤️",
+  snakaPredator: defaultValues.snakaPredator
 
 };
 
@@ -157,6 +159,23 @@ function clamp(x, min, max) {
 function copy(thing){
   return JSON.parse(JSON.stringify(thing))
 }
+
+
+//get best direction Vector
+function getDirection(object, target) {
+ 
+  const [objX, objY] = object;
+  const [targetX, targetY] = target;
+  const diffX = targetX - objX;
+  const diffY = targetY - objY;
+
+  if (Math.abs(diffX) > Math.abs(diffY)) {
+    return [diffX > 0 ? 1 : -1, 0];
+  } else {
+    return [0, diffY > 0 ? 1 : -1];
+  }
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///                          M A P   F U N C T I O N S                          ///
@@ -497,7 +516,7 @@ function nextTurn() {
 
 async function restart() {
   Graphics.emptys = defaultValues.emptysCells
-  
+  Graphics.snakaPredator = defaultValues.snakaPredator
   maxApplesAtOnce = defaultValues.maxApplesAtOnce;
   maxSpeed = defaultValues.maxSpeed
   chanceForDivineFruit = defaultValues.chanceForDivineFruit
