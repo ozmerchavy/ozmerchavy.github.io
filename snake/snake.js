@@ -344,7 +344,6 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   }
 
   const newHeadContent = map[newHead[0]]?.[newHead[1]];
-
   if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body) && !isGodMode) {
     return reduceLife()
    
@@ -353,6 +352,16 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
   else if (newHeadContent == Graphics.heart){
     addLife()
   }
+
+
+  else if (newHeadContent.includes("<img")){
+    const gunpic = newHeadContent.split(`extra-media/`)[1].split(".jpg")[0]
+    const gun = findGunByImage(gunpic)
+    gun.emmo += gun.defaultEmmo
+    const equipindex = snake.equipment.push(gun)
+    equip(equipindex)
+
+  } 
   
      
 
@@ -536,10 +545,7 @@ async function restart() {
   Graphics.bgColorTable = defaultValues.bgColorTable
   Graphics.bgImage = defaultValues.bgImage
   Graphics.apple = choice(foods)
-  document.querySelector("#emmo").innerText = ""
-  document.querySelector("#gun").innerText = ""
-
-
+  equip(0)
 
   let oldMap
   if (!custuMapasString){
@@ -625,7 +631,29 @@ function moveSNAKA(){
 
 }
 
+function findGunByImage(image) {
+  for (const weapon in weapons) {
+    if (weapons.hasOwnProperty(weapon)) {
+      const weaponObj = weapons[weapon];
+      if (weaponObj.image === image) {
+        return weaponObj;
+      }
+    }
+  }
+  return null; // Return null if no matching gun is found
+}
 
+function equip(idx){
+  snake.currentlyEquipped = snake.equipment[idx]
+  document.querySelector("#emmo").innerText = ""
+  document.querySelector("#gun").innerText = ""
+  if (snake.currentlyEquipped){
+    const gun = snake.currentlyEquipped
+    document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
+    document.querySelector("#gun").src = `extra-media/${gun.image}.jpg`
+  }
+
+}
 ///////////////////////////////////////////////////////////////////////////////////
 ///                          H T M L   F U N C T I O N S                        ///
 ///////////////////////////////////////////////////////////////////////////////////
@@ -687,15 +715,7 @@ function checkKey(e) {
 
   else if (e.key === "s"){
     let idx = snake.equipment.indexOf(snake.currentlyEquipped) + 1
-    snake.currentlyEquipped = snake.equipment[idx]
-    document.querySelector("#emmo").innerText = ""
-    document.querySelector("#gun").innerText = ""
-    if (snake.currentlyEquipped){
-      const gun = snake.currentlyEquipped
-      document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
-      document.querySelector("#gun").src = `extra-media/${gun.image}.jpg`
-    }
-    
+    equip(idx)    
 
   }
 

@@ -3,7 +3,8 @@ const weapons = {
      image: "gun",
      bulletEmoji: "📍" ,
      speed: 2,
-     emmo: 30,
+     emmo: 0,
+     defaultEmmo: 30,
      extraFunctionWhenShot: ()=>{}
 
     }
