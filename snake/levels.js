@@ -318,7 +318,8 @@ const stages = [
             0, 1
         ],
         disableRotation: true,
-        chanceForGuns: 1,
+        chanceForGuns: 0.03,
+        maxGunsinGame: 10,
         stageFunctionRunOnce: () => {
             document.querySelector("table").style.setProperty("--transX", 20 * 275)
             window.snaka = createSnaka({
@@ -623,7 +624,7 @@ function newStage(isBonuStage = false) {
     if (level.chanceForGuns){
         chanceforGuns = level.chanceForGuns
         availableGuns = level.availableGuns || Object.values(weapons)
-        maxGunsinGame = gunsinGame || 3
+        maxGunsinGame = level.maxGunsinGame || 3
 
     }
 
@@ -911,7 +912,8 @@ function killSNAKA(snaka, noParole = false) {
 
 // called every turn
 function maybeCreateGun(){
-    if (!localStorage.getItem("explained_guns")){
+    if (!localStorage.getItem("explained_guns") && time > 5){
+        pauseGame()
         alerto("This level has guns!", "Click S to switch between them and A to shoot!")
         localStorage.setItem("explained_guns", JSON.stringify("explained."))
     }
@@ -920,7 +922,7 @@ function maybeCreateGun(){
         if (Math.random() < chanceforGuns){
             const av = findAvailables();
             const gun = choice(availableGuns)
-            updateMap(choice(av), `extra-media/${gun.image}.jpg`)
+            updateMap(choice(av), `<img src="extra-media/${gun.image}.jpg">`)
             gunsinGame++
         }
     }

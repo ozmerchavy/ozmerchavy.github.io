@@ -361,6 +361,10 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
 
 
   else if (newHeadContent.includes("<img")){
+    if (!localStorage.getItem("explained_guns")){
+      alerto("This level has guns!", "Click S to switch between them and A to shoot!")
+      localStorage.setItem("explained_guns", JSON.stringify("explained."))
+  }
     const gunpic = newHeadContent.split(`extra-media/`)[1].split(".jpg")[0]
     const gun = findGunByImage(gunpic)
     gun.emmo += gun.defaultEmmo
