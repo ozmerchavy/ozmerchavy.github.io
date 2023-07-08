@@ -906,11 +906,14 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
         
     }
 
-
+    let newThingtoPut = Graphics.emptys
+    if (newHeadContent.includes("img")){
+        newThingtoPut = newHeadContent // preserving guns. practically it moves them to the back but thats ok I guess
+    }
     snaka.snakeArray.unshift(newHead);
     if (snaka.cantEatApples || (newHeadContent != Graphics.apple)) {
         const lastPos = snaka.snakeArray.pop();
-        updateMap(lastPos, Graphics.emptys);
+        updateMap(lastPos, newThingtoPut ); 
     }
 
 
@@ -995,6 +998,7 @@ function shoot(gun){
         isAppleWhenDies: false, hasBackup: false, goPattern: "straight", currentDir: snake.currentDir, 
         canKill: creaturesOnBoard, speedFactor: gun.speed, avoidWalls: false, diesIfTouchesSnake: false
     })
+    updateMap(snake.snakeArray[0], gun.bulletEmoji)
     gun.extraFunctionWhenShot()
     document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
     gun.emmo--
