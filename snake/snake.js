@@ -37,7 +37,6 @@ const defaultValues = {
 	disableSizeChange: false,
   disableRotation: false, 
   bgImage: "",
-  snakaPredator: "🚨"
 
 
 }
@@ -63,7 +62,6 @@ const Graphics = {
   disableRotation: false, 
   bgImage: "",
   heart: "❤️",
-  snakaPredator: defaultValues.snakaPredator
 
 };
 
@@ -168,6 +166,10 @@ function getDirection(object, target) {
   const [targetX, targetY] = target;
   const diffX = targetX - objX;
   const diffY = targetY - objY;
+
+  if (diffY == 0 && diffX ==0){
+    return undefined
+  }
 
   if (Math.abs(diffX) > Math.abs(diffY)) {
     return [diffX > 0 ? 1 : -1, 0];
@@ -521,7 +523,6 @@ function nextTurn() {
 
 async function restart() {
   Graphics.emptys = defaultValues.emptysCells
-  Graphics.snakaPredator = defaultValues.snakaPredator
   maxApplesAtOnce = defaultValues.maxApplesAtOnce;
   maxSpeed = defaultValues.maxSpeed
   chanceForDivineFruit = defaultValues.chanceForDivineFruit

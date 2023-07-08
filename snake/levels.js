@@ -20,10 +20,10 @@ const stages = [
         stageFunctionRunOnce: () => {
             if (localStorage.getItem("saved_game")) {
                 const saves = JSON.parse(localStorage.getItem("saved_game")).saves
-                if (saves > 0){
+                if (saves > 0) {
                     pauseGame()
                     alerto(`Try to get to 140 points`, `You have a saved game with ${saves} saves! you can get there any time if you click 's'`)
-    
+
                 }
             }
             document.body.addEventListener("keyup", function (event) {
@@ -48,7 +48,7 @@ const stages = [
         alertoText: "Try to get to 140 points",
         doorSymbol: "🎡",
         tableEmptys: "⬛"
-       
+
 
     },
     {
@@ -181,7 +181,7 @@ const stages = [
         bgColorTable: "#674264",
         bgColor: "#2d0b1b",
         stageFunctionRunOnce: () => {
-            window.snaka = createSnaka({body:"🌺", head:"🏵️"})
+            window.snaka = createSnaka({body: "🌺", head: "🏵️"})
 
         },
         stageFunctionEveryTurn: () => {
@@ -194,7 +194,7 @@ const stages = [
                 if (!localStorage.getItem("saved_game")) {
                     stringIftheWerentSavedbefore = "when you die and restart, you will be instructed in tunnel stage regarding SAVES."
                 }
-                
+
                 alerto("Snaka is so happy!", `thanks for keeping her safe. She gave you ❤️, her score, and TWO SAVES to space level. ${stringIftheWerentSavedbefore} Keep going now to 650!`)
                 addLife()
                 saveGame(2, 8, 400)
@@ -224,47 +224,69 @@ const stages = [
             localStorage.setItem("saved_game", JSON.stringify(snake))
         }
 
-    },
-    {levelName: "Jail",
-    levelNo: 10,
-    maxAppples: 0,
-    chanceForDivineFruit: 0,
-    level_fps: 8,
-    maxSpeed: 20,
-    minScoretoGetDoor: 750,
-    alertoText: "How did we end up here??",
-    doorSymbol: "🔗",
-    apple: "🚬",
-    bgColorTable: "#211212",
-    bgColor: "#473e3e",
-    map: jail,
-    stageFunctionRunOnce: () => {
-        window.snaka = createSnaka({body:"🌺", head:"🏵️", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[32,3], [33,3], [34,3]], target: "snake", targetEfficiency: 0.2 })
-    },
-    stageFunctionEveryTurn: () => {
-        if (time == 7) {
-            specialerto("Snaka is stuck!", "We got to save her!", 450, -250, 40, {title: "Use the divine fruits", msg: "", x: 630, y: 430, size: 42})
+    }, {
+        levelName: "Jail",
+        levelNo: 10,
+        maxAppples: 0,
+        chanceForDivineFruit: 0,
+        level_fps: 8,
+        maxSpeed: 20,
+        minScoretoGetDoor: 750,
+        alertoText: "How did we end up here??",
+        doorSymbol: "🔗",
+        apple: "🚬",
+        bgColorTable: "#211212",
+        bgColor: "#473e3e",
+        map: jail,
+        stageFunctionRunOnce: () => {
+            window.snaka = createSnaka({
+                body: "🌺",
+                head: "🏵️",
+                cantEatApples: true,
+                diesIfTouchesSnake: false,
+                initialArray: [
+                    [
+                        32, 3
+                    ],
+                    [
+                        33, 3
+                    ],
+                    [
+                        34, 3
+                    ]
+                ],
+                target: "snake",
+                targetEfficiency: 0.2
+            })
+        },
+        stageFunctionEveryTurn: () => {
+            if (time == 7) {
+                specialerto("Snaka is stuck!", "We got to save her!", 450, -250, 40, {
+                    title: "Use the divine fruits",
+                    msg: "",
+                    x: 630,
+                    y: 430,
+                    size: 42
+                })
+
+            }
+            if (time == 8) {
+                Graphics.disableSizeChange = true
+
+            }
+            if (!window.snaka.isDead && (window.snaka.snakeArray[0][0] < 6 || window.snaka.snakeArray[0][1] > 4)) {
+                pauseGame()
+                alerto("You saved snaka!!", `Thanks for keeping her safe. She gave you a ❤️, 50 points, and THREE SAVES to space level.  Keep going now! you need 850 points`)
+                killSNAKA(snaka, true)
+                maxApplesAtOnce = 20
+                addLife()
+                saveGame(3, 8, 400)
+                snake.score += 50
+            }
+
 
         }
-        if (time == 8){
-            Graphics.disableSizeChange = true
-
-        }
-        if (!window.snaka.isDead && (window.snaka.snakeArray[0][0] < 6 || window.snaka.snakeArray[0][1] > 4 )) {
-            pauseGame()
-            alerto("You saved snaka!!", `Thanks for keeping her safe. She gave you a ❤️, 50 points, and THREE SAVES to space level.  Keep going now! you need 850 points`)
-            killSNAKA(snaka, true)
-            maxApplesAtOnce = 20
-            addLife()
-            saveGame(3, 8, 400)
-            snake.score += 50
-        }
-
-
-    }
-    },
-
-    {
+    }, {
 
         levelName: "On the Run",
         levelNo: 11,
@@ -273,27 +295,76 @@ const stages = [
         maxAppples: 0,
         chanceForDivineFruit: 0,
         level_fps: 10,
-        maxSpeed: 20, 
+        maxSpeed: 20,
         minScoretoGetDoor: 850,
         alertoText: "The police is after you. RUN!",
         doorSymbol: "🦌",
         apple: choice(foods),
         bgColorTable: "#02290C",
-        bgImage:"run",
+        bgImage: "run",
         bgColor: "#000000",
-        customSnakeArr: [[3, 2], [3,3], [3,4]],
-        customSnakeDir: [0,1],
-        disableRotation: true, 
-        stageFunctionRunOnce: ()=>{
-            document.querySelector("table").style.setProperty("--transX", 20*265)
-            window.snaka = createSnaka({body:"🌺", head:"🏵️", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[5,2], [5,3], [5,4]], target: "snake", targetEfficiency: 0.2, currentDir:[0,1]})
-            window.cop1 = createSnaka({head: "🚨", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[9,9]], goPattern: undefined, targetEfficiency: 0.05, speedFactor: 0.33})
-        }, 
-        
-        stageFunctionEveryTurn:()=>{
-            cop1.target = "snake"
-   
-    }
+        customSnakeArr: [
+            [
+                3, 2
+            ],
+            [
+                3, 3
+            ],
+            [
+                3, 4
+            ]
+        ],
+        customSnakeDir: [
+            0, 1
+        ],
+        disableRotation: true,
+        stageFunctionRunOnce: () => {
+            document.querySelector("table").style.setProperty("--transX", 20 * 265)
+            window.snaka = createSnaka({
+                body: "🌺",
+                head: "🏵️",
+                cantEatApples: true,
+                diesIfTouchesSnake: false,
+                initialArray: [
+                    [
+                        5, 2
+                    ],
+                    [
+                        5, 3
+                    ],
+                    [
+                        5, 4
+                    ]
+                ],
+                target: "snake",
+                targetEfficiency: 0.5,
+                currentDir: [0, 1]
+            })
+            window.cop1 = createSnaka({
+                head: "🚨",
+                body: "🚨",
+                cantEatApples: true,
+                diesIfTouchesSnake: false,
+                initialArray: [
+                    [
+                        9, 9
+                    ],
+                    [
+                        9, 8
+                    ]
+                ],
+                goPattern: undefined,
+                targetEfficiency: 0.1,
+                speedFactor: 0.4, 
+                hasBackup: false,
+                canKill: [snaka]
+            })
+        },
+
+        stageFunctionEveryTurn: () => {
+            cop1.target = snaka.snakeArray[1]
+
+        }
 
     }
 ]
@@ -417,8 +488,7 @@ const bonusStages = [
         bgColor: "#0e2072",
         apple: "🐠",
         map: oceanmap
-    }, 
-    {
+    }, {
         levelName: "Acropolis",
         level_fps: 9,
         maxSpeed: 14,
@@ -431,9 +501,6 @@ const bonusStages = [
 
 
 ]
-
-
-
 
 
 // /////////////////////////////////////////////////////////////////////////////////
@@ -533,10 +600,10 @@ function newStage(isBonuStage = false) {
     let customSnakeArr = false
     let customSnakeDir = false
 
-    if (level.customSnakeArr){
+    if (level.customSnakeArr) {
         customSnakeArr = level.customSnakeArr
     }
-    if (level.customSnakeDir){
+    if (level.customSnakeDir) {
         customSnakeDir = level.customSnakeDir
     }
     switchToNewMap(levelMap, customSnakeArr, customSnakeDir)
@@ -544,7 +611,7 @@ function newStage(isBonuStage = false) {
         Graphics.disableSizeChange = true
 
     }
-    if (level.disableRotation){
+    if (level.disableRotation) {
         Graphics.disableRotation = true
 
     }
@@ -636,7 +703,7 @@ if (custoMap) {
 // allows you to add another snakes to game, they move randomly for now
 // this function rotates snake-like things, its a helper function
 function __rotateSNAKA(currentDir, direction) {
-  
+
     let rotateDir = direction == "right" ? [1, -1] : [-1, 1];
     return [
         currentDir[1] * rotateDir[0],
@@ -656,118 +723,119 @@ function createSnaka({
     targetEfficiency = 1,
     speedFactor = 1,
     isAppleWhenDies = true,
-    hasBackup = true
-  }) {
+    hasBackup = true,
+    canKill = []
+}) {
     const snaka = {
-      body,
-      head,
-      currentDir,
-      snakeArray: initialArray || [
-        midMap, vec2dAdd(midMap, [1, 0]),
-        vec2dAdd(midMap, [2, 0])
-      ],
-      goPattern,
-      target,
-      targetEfficiency,
-      diesIfTouchesSnake,
-      cantEatApples,
-      isDead: false,
-      isAppleWhenDies,
-      speedFactor
+        body,
+        head,
+        currentDir,
+        snakeArray: initialArray || [
+            midMap, vec2dAdd(midMap, [1, 0]),
+            vec2dAdd(midMap, [2, 0])
+        ],
+        goPattern,
+        target,
+        targetEfficiency,
+        diesIfTouchesSnake,
+        cantEatApples,
+        isDead: false,
+        isAppleWhenDies,
+        speedFactor,
+        canKill
     };
-    if (hasBackup){
+    if (hasBackup) {
         snaka.backup = copy(snaka)
     }
-  
+
     if (initialArray) {
-      snaka.snakeArray = initialArray;
+        snaka.snakeArray = initialArray;
     }
-  creaturesOnBoard.push(snaka)
+    creaturesOnBoard.push(snaka)
     return snaka;
-  }
-  
+}
+
 
 // this function moves a SNAKA after it is created, needs to run every turn
-function moveSNAKA(snaka, diretion = undefined) {
-    if (snaka.isDead){
+function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
+    if (snaka.isDead) {
         return
     }
 
-    if (snaka.speedFactor != 1){
-        if (snaka.speedFactor < 1){
-            const sleepEvery =  Math.round(1/ snaka.speedFactor)
-            if (time % sleepEvery == 0){
+    if (snaka.speedFactor != 1) {
+        if (snaka.speedFactor < 1) {
+            const sleepEvery = Math.round(1 / snaka.speedFactor)
+            if (time % sleepEvery == 0) {
                 return
-            }
-        else {
-            for (let i = 0; i< snaka.speedFactor -1; i++){
-                moveSNAKA(snaka)
-            }
+            } 
         }
+        else if (!justOnce) {
+            for (let i = 0; i < snaka.speedFactor; i++) {
+                moveSNAKA(snaka, undefined, true)
+            }
         }
 
     }
-    
-    if (diretion == "straight" || snaka.goPattern == "straight"){
-        //do nothing to currentdir
-    }
-    else if (diretion == "right" || diretion == "left") {
+
+    if (diretion == "straight" || snaka.goPattern == "straight") { // do nothing to currentdir
+    } else if (diretion == "right" || diretion == "left") {
         snaka.currentDir = __rotateSNAKA(snaka.currentDir, diretion);
-    }
-    else if (snaka.goPattern == "imitate"){
+    } else if (snaka.goPattern == "imitate") {
 
-        if (!String(snake.snakeArray).includes(String(snaka.snakeArray[0]))){
-        // if imitates snake, braking the imitate if he touches her to avoid colliding
+        if (!String(snake.snakeArray).includes(String(snaka.snakeArray[0]))) { // if imitates snake, braking the imitate if he touches her to avoid colliding
             snaka.currentDir = snake.currentDir
         }
-        
 
-    }
-    else if (snaka.goPattern == "mirror"){
+
+    } else if (snaka.goPattern == "mirror") {
         snaka.currentDir[0] = snake.currentDir[0] * -1
         snaka.currentDir[1] = snake.currentDir[1] * -1
-    }
- 
+    } else if (snaka.target) {
 
-    else if (snaka.target){
-        
         if (snaka.targetEfficiency >= 1 || Math.random() <= snaka.targetEfficiency) {
             let target = snaka.target;
             if (target === "snake") {
-              target = snake.snakeArray[snake.snakeArray.length - 1];
+                target = snake.snakeArray[snake.snakeArray.length - 1];
             }
-            snaka.currentDir = getDirection(snaka.snakeArray[0], target);
-          }
-          
-        
-    }
+            let path =  getDirection(snaka.snakeArray[0], target);
+            if (!path){// happens only when reched destination
+                snaka.target == undefined
+                path = __rotateSNAKA(snaka.currentDir, choice(["right", "left"]));
+            } 
+            snaka.currentDir = path 
 
-     else if (Math.random() > 0.92) {
+        }
+
+
+    } else if (Math.random() > 0.92) {
         snaka.currentDir = __rotateSNAKA(snaka.currentDir, choice(["right", "left"]));
 
     }
-    
-    
+
+
     const headloc = snaka.snakeArray[0];
     const newHead = vec2dAdd(headloc, snaka.currentDir);
     const newHeadContent = map[newHead[0]] ?. [newHead[1]];
 
-
+    for (let obj of snaka.canKill){
+        if (creaturesOnBoard.includes(obj)){
+            if (String(obj.snakeArray).includes(headloc)){
+                killSNAKA(obj)
+            }
+        }
+   
+    }
 
     // trying to avoid things
     if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
-        moveSNAKA(snaka, choice(["right", "left"
-        ]))
-             return
-        }
-        
-    
-
+        moveSNAKA(snaka, choice(["right", "left"]), true)
+        return
+    }
 
 
     // snaka dies if you touch her
     if (snaka.diesIfTouchesSnake && JSON.stringify(snaka.snakeArray).includes(snake.snakeArray[0])) {
-       killSNAKA(snaka)
+        killSNAKA(snaka)
         // game becomes faster every time she dies
         if (fps < maxSpeed) {
             fps += 1
@@ -776,7 +844,6 @@ function moveSNAKA(snaka, diretion = undefined) {
 
         return
     }
-
 
 
     snaka.snakeArray.unshift(newHead);
@@ -795,34 +862,39 @@ function moveSNAKA(snaka, diretion = undefined) {
 }
 
 
+function killSNAKA(snaka, noParole = false) {
 
+    let insteadies
 
-function killSNAKA(snaka, noParole = false ){
-
-    let insteadies 
-
-    if (snaka.isAppleWhenDies){
+    if (snaka.isAppleWhenDies) {
         insteadies = Graphics.apple
-    }
-    else (insteadies = Graphics.emptys)
+    } else 
+        (insteadies = Graphics.emptys)
+
+    
 
     for (const ij of snaka.snakeArray) {
-        if (!snake.snakeArray.includes(ij)){ updateMap(ij, insteadies)};
+        if (!snake.snakeArray.includes(ij)) {
+            updateMap(ij, insteadies)
+        };
         snaka.isDead = true
     }
 
-    if (!noParole && snaka.backup) {
+    if (! noParole && snaka.backup) {
         snaka.snakeArray = copy(snaka.backup.snakeArray)
         snaka.currentDir = snaka.backup.currentDir
         snaka.isDead = false
-    }
-    else {
-        creaturesOnBoard
+    } else {
+        let indexToRemove = creaturesOnBoard.indexOf(snaka);
+        // Step 2: Remove the object from the array
+        if (indexToRemove > -1) {
+            creaturesOnBoard.splice(indexToRemove, 1);
+        }
+
+
     }
 
 }
-
-
 
 
 // /////////////////////////////////////////////////////////////////////////////////
@@ -832,11 +904,15 @@ function killSNAKA(snaka, noParole = false ){
 // (saves only level and score)
 function saveGame(saves = 2, specificLevel = false, specificScore = false) {
     const retrieved = localStorage.getItem("saved_game")
-    if (retrieved){
+    if (retrieved) {
         const retrievedData = JSON.parse(retrieved)
         saves += Number(retrievedData.saves)
     }
-    localStorage.setItem("saved_game", JSON.stringify({score: specificScore || snake.score, level: specificLevel || snake.level, saves: saves}))
+    localStorage.setItem("saved_game", JSON.stringify({
+        score: specificScore || snake.score,
+        level: specificLevel || snake.level,
+        saves: saves
+    }))
 }
 
 function retrieveGame() {
@@ -845,7 +921,7 @@ function retrieveGame() {
         return
     }
 
-    if (snake.level == 0){
+    if (snake.level == 0) {
         pauseGame()
         alerto("Not yet!", "You can only use saves after tunnel stage!")
         return
@@ -877,50 +953,49 @@ function retrieveGame() {
 
 function specialerto(title, msg, x, y, size, nextAlerto = undefined) {
     pauseGame();
-  
+
     const taboole = document.querySelector("table");
     const currentStyles = {
-      transX: taboole.style.getPropertyValue("--transX"),
-      transY: taboole.style.getPropertyValue("--transY"),
-      size: taboole.style.getPropertyValue("--size"),
-      go: taboole.style.getPropertyValue("--go")
+        transX: taboole.style.getPropertyValue("--transX"),
+        transY: taboole.style.getPropertyValue("--transY"),
+        size: taboole.style.getPropertyValue("--size"),
+        go: taboole.style.getPropertyValue("--go")
     };
-  
+
     taboole.style.setProperty("--transX", x);
     taboole.style.setProperty("--transY", y);
     taboole.style.setProperty("--size", size);
     taboole.style.setProperty("--go", 0);
-  
+
     window.isInSpecialerto = true;
     window.nextAlertoObj = nextAlerto;
-  
+
     alerto(title, msg);
-  
+
     const formSubmitHandler = (e) => {
-      e.preventDefault();
-  
-      if (window.isInSpecialerto) {
-        const alertoElement = document.querySelector(".alerto");
-        alertoElement.removeEventListener("submit", formSubmitHandler);
-        alertoElement.removeAttribute("open");
-  
-        taboole.style.setProperty("--transX", currentStyles.transX);
-        taboole.style.setProperty("--transY", currentStyles.transY);
-        taboole.style.setProperty("--go", currentStyles.go);
-        taboole.style.setProperty("--size", currentStyles.size);
-  
-        if (!window.nextAlertoObj) {
-          window.isInSpecialerto = false;
-        } else {
-          const nextAlerto = window.nextAlertoObj;
-          specialerto(nextAlerto.title, nextAlerto.msg, nextAlerto.x, nextAlerto.y, nextAlerto.size, nextAlerto.nextAlerto);
+        e.preventDefault();
+
+        if (window.isInSpecialerto) {
+            const alertoElement = document.querySelector(".alerto");
+            alertoElement.removeEventListener("submit", formSubmitHandler);
+            alertoElement.removeAttribute("open");
+
+            taboole.style.setProperty("--transX", currentStyles.transX);
+            taboole.style.setProperty("--transY", currentStyles.transY);
+            taboole.style.setProperty("--go", currentStyles.go);
+            taboole.style.setProperty("--size", currentStyles.size);
+
+            if (!window.nextAlertoObj) {
+                window.isInSpecialerto = false;
+            } else {
+                const nextAlerto = window.nextAlertoObj;
+                specialerto(nextAlerto.title, nextAlerto.msg, nextAlerto.x, nextAlerto.y, nextAlerto.size, nextAlerto.nextAlerto);
+            }
         }
-      }
     };
-  
+
     const alertoForm = document.querySelector(".alerto");
     if (alertoForm) {
-      alertoForm.addEventListener("submit", formSubmitHandler);
+        alertoForm.addEventListener("submit", formSubmitHandler);
     }
-  }
-  
+}
