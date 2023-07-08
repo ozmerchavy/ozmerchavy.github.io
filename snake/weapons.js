@@ -4,16 +4,16 @@ const weapons = {
      bulletEmoji: "📍" ,
      speed: 2,
      emmo: 0,
-     defaultEmmo: 10,
+     defaultEmmo: 3,
      extraFunctionWhenShot: ()=>{}
 
     },
     waterGun:{
         image: "water-gun",
         bulletEmoji: "💦" ,
-        speed: 1.5,
+        speed: 3,
         emmo: 0,
-        defaultEmmo: 15,
+        defaultEmmo: 4,
         extraFunctionWhenShot: ()=>{
         }
    

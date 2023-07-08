@@ -288,11 +288,10 @@ const stages = [
         rows: 10,
         cols: 200,
         maxAppples: 0,
-        chanceForDivineFruit: 0.1,
         level_fps: 12,
         maxSpeed: 20,
         minScoretoGetDoor: 850,
-        alertoText: "The police is after you. RUN! You will win if snaka gets to the other side. She's following you. Don't hesitate to shoot the police! ",
+        alertoText: "The police is after Snaka. RUN! You will win if Snaka gets to the other side. She's following you. Don't hesitate to shoot the police! They cannot harm you but they can kill Snaka and make her go back  ",
         doorSymbol: "🦌",
         apple: choice(foods),
         bgColorTable: "#02290C",
@@ -316,12 +315,15 @@ const stages = [
         chanceForGuns: 0.1,
         maxGunsinGame: 5,
         stageFunctionRunOnce: () => {
+            addLife()
+            addLife()
             document.querySelector("table").style.setProperty("--transX", 20 * 100)
             window.snaka = createSnaka({
                 body: "🌺",
                 head: "🏵️",
                 cantEatApples: true,
                 diesIfTouchesSnake: false,
+                isAppleWhenDies: false,
                 initialArray: [
                     [
                         5, 2
@@ -335,12 +337,14 @@ const stages = [
                 ],
                 target: "snake",
                 targetEfficiency: 0.13,
+                speedFactor: 0.25,
                 currentDir: [0, 1]
             })
             window.cop1 = createSnaka({
                 head: "🚨",
                 body: "🚨",
                 cantEatApples: true,
+                isAppleWhenDies: true,
                 diesIfTouchesSnake: false,
                 initialArray: [
                     [
@@ -359,6 +363,7 @@ const stages = [
             window.cop2 = createSnaka({
                 head: "🚨",
                 body: "🚨",
+                isAppleWhenDies: true,
                 cantEatApples: true,
                 diesIfTouchesSnake: false,
                 initialArray: [
@@ -374,11 +379,37 @@ const stages = [
                 speedFactor: 0.5, 
                 hasBackup: false,
                 canKill: [snaka]
-            })
+            }),
             window.cop3 = createSnaka({
+                head: "🚨",
+                body: "🚨",
+                isAppleWhenDies: true,
+                cantEatApples: true,
+                diesIfTouchesSnake: false,
+                initialArray: [
+                    [
+                        4, 171
+                    ],
+                    [
+                        4, 172
+                    ],
+                    [
+                        4, 173
+                    ],
+
+                ],
+                goPattern: undefined,
+                targetEfficiency: 0.3,
+                speedFactor: 0.5, 
+                hasBackup: false,
+                canKill: [snaka]
+            })
+            window.cop4 = createSnaka({
                 head: "🚨",
                 body: "🚔",
                 cantEatApples: true,
+                isAppleWhenDies: false,
+
                 diesIfTouchesSnake: false,
                 initialArray: [
                     [
@@ -394,21 +425,16 @@ const stages = [
                 ],
                 goPattern: undefined,
                 targetEfficiency: 0.5,
-                hasBackup: false,
+                hasBackup: true,
                 canKill: [snaka]
             }),
-            window.cops = [cop1,cop2, cop3]
+            window.cops = [cop1,cop2, cop3, cop4]
         },
 
         stageFunctionEveryTurn: () => {
-            if (window.cops.length == 0){
-                pauseGame()
-                alerto("You KILLED ALL THE COPS", "You are crazy. RUN AWAY WITH SNAKA!")
-                snaka.targetEfficiency = 0.8                
-            }
             for (const cop of window.cops){
                 if (cop.isDead){
-                    snake.score += 15
+                    snake.score += 5
                     window.cops.splice(window.cops.indexOf(cop),1)
                 }
                 cop.target = snaka.snakeArray[1]
@@ -425,28 +451,7 @@ const stages = [
         }
 
     }
-    // ,
-
-    // {
-    //     levelName: "First Date",
-    //     levelNo: 9,
-    //     rows: 40,
-    //     cols: 40,
-    //     maxAppples: 50,
-    //     chanceForDivineFruit: .02,
-    //     level_fps: 8,
-    //     maxSpeed: 20,
-    //     minScoretoGetDoor: 562,
-    //     alertoText: "Welcome to a very special level",
-    //     doorSymbol: "💜",
-    //     apple: "💖",
-    //     bgColorTable: "#674264",
-    //     bgColor: "#2d0b1b",
-    //     stageFunctionRunOnce: () => {
-    //         window.snaka = createSnaka({body: "🌺", head: "🏵️"})
-
-    //     }}
-
+    
 ]
 
 
