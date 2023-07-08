@@ -523,6 +523,7 @@ function nextTurn() {
     moveSNAKA(obj)
   }
 
+
 }
 
 async function restart() {
@@ -536,6 +537,8 @@ async function restart() {
   Graphics.bgImage = defaultValues.bgImage
   Graphics.apple = choice(foods)
   document.querySelector("#emmo").innerText = ""
+  document.querySelector("#gun").innerText = ""
+
 
 
   let oldMap
@@ -686,9 +689,11 @@ function checkKey(e) {
     let idx = snake.equipment.indexOf(snake.currentlyEquipped) + 1
     snake.currentlyEquipped = snake.equipment[idx]
     document.querySelector("#emmo").innerText = ""
+    document.querySelector("#gun").innerText = ""
     if (snake.currentlyEquipped){
       const gun = snake.currentlyEquipped
       document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
+      document.querySelector("#gun").src = `extra-media/${gun.image}.jpg`
     }
     
 
