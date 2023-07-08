@@ -535,6 +535,8 @@ async function restart() {
   Graphics.bgColorTable = defaultValues.bgColorTable
   Graphics.bgImage = defaultValues.bgImage
   Graphics.apple = choice(foods)
+  document.querySelector("#emmo").innerText = ""
+
 
   let oldMap
   if (!custuMapasString){
@@ -683,9 +685,16 @@ function checkKey(e) {
   else if (e.key === "s"){
     let idx = snake.equipment.indexOf(snake.currentlyEquipped) + 1
     snake.currentlyEquipped = snake.equipment[idx]
+    document.querySelector("#emmo").innerText = ""
+    if (snake.currentlyEquipped){
+      const gun = snake.currentlyEquipped
+      document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
+    }
+    
+
   }
 
-  else if (e.key === "d"){
+  else if (e.key === "a"){
     if (snake.currentlyEquipped){
       const gun = snake.currentlyEquipped
       shoot(gun)

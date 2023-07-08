@@ -184,6 +184,20 @@ body, html {
 
 }
 
+
+.emmo { 
+    top: 15rem;
+    position: absolute;
+    font-size: 2rem;;
+    right: 3rem;
+    margin: 0;
+    color: #ddf;
+    padding: 0;
+    writing-mode: vertical-rl;
+    max-height: 75%;
+
+}
+
 .high-score {
     position: absolute;
     font-size: 5rem;

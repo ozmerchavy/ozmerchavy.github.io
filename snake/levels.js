@@ -910,6 +910,7 @@ function shoot(gun){
         canKill: creaturesOnBoard, speedFactor: gun.speed, avoidWalls: false, diesIfTouchesSnake: false
     })
     gun.extraFunctionWhenShot()
+    document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
     gun.emmo--
 }
 
