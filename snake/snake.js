@@ -364,13 +364,14 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
     
     const gunpic = newHeadContent.split(`extra-media/`)[1].split(".jpg")[0]
     const gun = findGunByImage(gunpic)
-    gun.emmo += gun.defaultEmmo
-    let isThereAlready = snake.equipment.indexOf(gun)
+    let isThereAlready = snake.equipment.map(g=>g && g.image).indexOf(gunpic) 
+    //filtering by name bc of saved games that dont have referenced objs
     if (isThereAlready == -1){
       isThereAlready = snake.equipment.push(gun) -1
     }
-    gunsinGame--
+    snake.equipment[isThereAlready].emmo += gun.defaultEmmo
     equip(isThereAlready)
+    gunsinGame--
 
   } 
   
@@ -736,6 +737,9 @@ function checkKey(e) {
       const gun = snake.currentlyEquipped
       shoot(gun)
     }
+  }
+  if (e.key === 'q') {
+    retrieveGame()
   }
 }
 

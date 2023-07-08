@@ -22,15 +22,10 @@ const stages = [
                 const saves = JSON.parse(localStorage.getItem("saved_game")).saves
                 if (saves > 0) {
                     pauseGame()
-                    alerto(`Try to get to 140 points`, `You have a saved game with ${saves} saves! you can get there any time if you click 's'`)
+                    alerto(`Try to get to 140 points`, `You have a saved game with ${saves} saves! you can get there any time if you click Q`)
 
                 }
             }
-            document.body.addEventListener("keyup", function (event) {
-                if (event.key === 's' || event.keyCode === 83) {
-                    retrieveGame()
-                }
-            })
         }
 
 
@@ -1045,6 +1040,8 @@ function saveGame(saves = 2, specificLevel = false, specificScore = false) {
     localStorage.setItem("saved_game", JSON.stringify({
         score: specificScore || snake.score,
         level: specificLevel || snake.level,
+        lives: snake.life,
+        equipment: snake.equipment,
         saves: saves
     }))
 }
@@ -1055,11 +1052,6 @@ function retrieveGame() {
         return
     }
 
-    if (snake.level == 0) {
-        pauseGame()
-        alerto("Not yet!", "You can only use saves after tunnel stage!")
-        return
-    }
     const retrievedData = JSON.parse(retrieved)
     if (Number(retrievedData.saves) == 0) {
         pauseGame()
@@ -1067,14 +1059,19 @@ function retrieveGame() {
         return
 
     }
-
+    snake.equipment = retrievedData.equipment
     snake.score = Number(retrievedData.score)
+    snake.life = Number(retrievedData.lives)
+    document.querySelector("#life").innerText = "❤️".repeat(snake.life - 1)
     if (retrievedData.level >= 0) {
+        
         snake.level = retrievedData.level - 1 // becuase we now do nextstage which adds back a level
         localStorage.setItem("saved_game", JSON.stringify({
             score: Number(retrievedData.score),
             level: Number(retrievedData.level),
-            saves: Number(retrievedData.saves) - 1
+            lives: snake.life,
+            equipment: snake.equipment,
+            saves: Number(retrievedData.saves) - 1,
         }))
 
         newStage()
