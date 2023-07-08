@@ -297,7 +297,7 @@ const stages = [
         level_fps: 10,
         maxSpeed: 20,
         minScoretoGetDoor: 850,
-        alertoText: "The police is after you. RUN!",
+        alertoText: "The police is after you. RUN! You will win if snaka gets to the other side. She's following you. Don't hesitate to shoot the police! ",
         doorSymbol: "🦌",
         apple: choice(foods),
         bgColorTable: "#02290C",
@@ -339,14 +339,14 @@ const stages = [
                     ]
                 ],
                 target: "snake",
-                targetEfficiency: 0.5,
+                targetEfficiency: 0.2,
                 currentDir: [0, 1]
             })
             window.cop1 = createSnaka({
                 head: "🚨",
                 body: "🚨",
                 cantEatApples: true,
-                diesIfTouchesSnake: false,
+                diesIfTouchesSnake: true,
                 initialArray: [
                     [
                         9, 9
@@ -356,15 +356,67 @@ const stages = [
                     ]
                 ],
                 goPattern: undefined,
-                targetEfficiency: 0.1,
-                speedFactor: 0.4, 
+                targetEfficiency: 0.2,
+                speedFactor: 0.5, 
                 hasBackup: false,
                 canKill: [snaka]
             })
+            window.cop2 = createSnaka({
+                head: "🚨",
+                body: "🚨",
+                cantEatApples: true,
+                diesIfTouchesSnake: true,
+                initialArray: [
+                    [
+                        4, 131
+                    ],
+                    [
+                        4, 132
+                    ]
+                ],
+                goPattern: undefined,
+                targetEfficiency: 0.2,
+                speedFactor: 0.5, 
+                hasBackup: false,
+                canKill: [snaka]
+            })
+            window.cop3 = createSnaka({
+                head: "🚨",
+                body: "🚔",
+                cantEatApples: true,
+                diesIfTouchesSnake: false,
+                initialArray: [
+                    [
+                        3, 214
+                    ],
+                    [
+                        3, 215
+                    ],
+                    [
+                        3, 216
+                    ],
+                    [3,217]
+                ],
+                goPattern: undefined,
+                targetEfficiency: 0.2,
+                speedFactor: 0.25, 
+                hasBackup: false,
+                canKill: [snaka]
+            }),
+            window.cops = [cop1,cop2, cop3]
         },
 
         stageFunctionEveryTurn: () => {
-            cop1.target = snaka.snakeArray[1]
+            if (window.cops.length == 0){
+                pauseGame()
+                alerto("You KILLED ALL THE COPS", "You are crazy. RUN AWAY WITH SNAKA!")
+                snaka.targetEfficiency = 0.8                
+            }
+            for (const cop of window.cops){
+                cop.target = snaka.snakeArray[1]
+                
+            }
+        
 
         }
 
