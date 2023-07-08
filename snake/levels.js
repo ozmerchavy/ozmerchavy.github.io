@@ -314,7 +314,7 @@ const stages = [
         ],
         disableRotation: true,
         chanceForGuns: 0.1,
-        maxGunsinGame: 15,
+        maxGunsinGame: 5,
         stageFunctionRunOnce: () => {
             document.querySelector("table").style.setProperty("--transX", 20 * 100)
             window.snaka = createSnaka({
@@ -334,7 +334,7 @@ const stages = [
                     ]
                 ],
                 target: "snake",
-                targetEfficiency: 0.2,
+                targetEfficiency: 0.13,
                 currentDir: [0, 1]
             })
             window.cop1 = createSnaka({
@@ -351,7 +351,7 @@ const stages = [
                     ]
                 ],
                 goPattern: undefined,
-                targetEfficiency: 0.2,
+                targetEfficiency: 0.3,
                 speedFactor: 0.5, 
                 hasBackup: false,
                 canKill: [snaka]
@@ -370,7 +370,7 @@ const stages = [
                     ]
                 ],
                 goPattern: undefined,
-                targetEfficiency: 0.2,
+                targetEfficiency: 0.3,
                 speedFactor: 0.5, 
                 hasBackup: false,
                 canKill: [snaka]
@@ -393,8 +393,7 @@ const stages = [
                     [3,188]
                 ],
                 goPattern: undefined,
-                targetEfficiency: 0.2,
-                speedFactor: 0.25, 
+                targetEfficiency: 0.5,
                 hasBackup: false,
                 canKill: [snaka]
             }),
@@ -409,10 +408,17 @@ const stages = [
             }
             for (const cop of window.cops){
                 if (cop.isDead){
+                    snake.score += 15
                     window.cops.splice(window.cops.indexOf(cop),1)
                 }
                 cop.target = snaka.snakeArray[1]
                 
+            }
+            if (snaka.snakeArray[0][1] > 190){
+                pauseGame()
+                alerto("you and Snaka managed to escape!", "you get 2 saves to this very state!")
+                saveGame(2)
+                newStage()
             }
         
 
