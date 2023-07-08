@@ -292,10 +292,12 @@ const stages = [
             window.turns = 0
             document.querySelector("table").style.setProperty("--transX", 20*265)
             window.snaka = createSnaka({body:"🌺", head:"🏵️", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[5,2], [5,3], [5,4]], target: "snake", targetEfficiency: 0.2, currentDir:[0,1] })
+            window.cop1 = createSnaka({head: "🚨", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[9,9]], goPattern: undefined, targetEfficiency: 0.05})
         }, 
         
         stageFunctionEveryTurn:()=>{
             window.turns++
+            cop1.target = "snake"
    
     }
 
@@ -660,6 +662,7 @@ function createSnaka({
     targetEfficiency = 1,
     predators = [],
     isAppleWhenDies = true,
+    slow = false,
     hasBackup = true
   }) {
     const snaka = {
@@ -709,7 +712,7 @@ function moveSNAKA(snaka, diretion = undefined) {
         // if imitates snake, braking the imitate if he touches her to avoid colliding
             snaka.currentDir = snake.currentDir
         }
- 
+        
 
     }
     else if (snaka.goPattern == "mirror"){
