@@ -112,7 +112,10 @@ const snake = {
 	], // up
 	life: 1,
 	score: 0,
-	level: 0
+	level: 0,
+  equipment: [undefined],
+  currentlyEquipped: undefined
+
 };
 let requeue = [];
 let initialFps = defaultValues.initialFps
@@ -229,6 +232,7 @@ function switchToNewMap(newmap, customSnakeArr = false,  customSnakeDir = false)
   table.style.setProperty("--transX", 0);
   Graphics.disableSizeChange = defaultValues.disableSizeChange
   Graphics.disableRotation = defaultValues.disableRotation
+  
   stageFunctionEveryTurn = () =>{}
   creaturesOnBoard = []
 
@@ -548,6 +552,8 @@ async function restart() {
   
   snake.currentDir = [-1, 0]; //up
   snake.score = 0 
+  snake.equipment = [undefined]
+  snake.currentlyEquipped = snake.equipment[0]
   await sleep(350);
   snake.life = 1;
   paintMap();
@@ -670,6 +676,19 @@ function checkKey(e) {
     }
     else{
       document.location=document.location.href.split("?tiny")[0]
+    }
+
+  }
+
+  else if (e.key === "s"){
+    let idx = snake.equipment.indexOf(snake.currentlyEquipped) + 1
+    snake.currentlyEquipped = snake.equipment[idx]
+  }
+
+  else if (e.key === "d"){
+    if (snake.currentlyEquipped){
+      const gun = snake.currentlyEquipped
+      shoot(gun)
     }
   }
 }
