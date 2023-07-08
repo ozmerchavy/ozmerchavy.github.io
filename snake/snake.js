@@ -61,7 +61,7 @@ const Graphics = {
 	disableSizeChange: false,
   disableRotation: false, 
   bgImage: "",
-  heart: "❤️",
+  heart: "❤️"
 
 };
 

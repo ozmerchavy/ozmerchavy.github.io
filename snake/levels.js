@@ -319,7 +319,7 @@ const stages = [
         ],
         disableRotation: true,
         stageFunctionRunOnce: () => {
-            document.querySelector("table").style.setProperty("--transX", 20 * 265)
+            document.querySelector("table").style.setProperty("--transX", 20 * 275)
             window.snaka = createSnaka({
                 body: "🌺",
                 head: "🏵️",
@@ -724,7 +724,8 @@ function createSnaka({
     speedFactor = 1,
     isAppleWhenDies = true,
     hasBackup = true,
-    canKill = []
+    canKill = [],
+    avoidWalls = true
 }) {
     const snaka = {
         body,
@@ -742,7 +743,8 @@ function createSnaka({
         isDead: false,
         isAppleWhenDies,
         speedFactor,
-        canKill
+        canKill,
+        avoidWalls
     };
     if (hasBackup) {
         snaka.backup = copy(snaka)
@@ -818,7 +820,7 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
     const newHeadContent = map[newHead[0]] ?. [newHead[1]];
 
     for (let obj of snaka.canKill){
-        if (creaturesOnBoard.includes(obj)){
+        if (creaturesOnBoard.includes(obj) && obj != snaka){
             if (String(obj.snakeArray).includes(headloc)){
                 killSNAKA(obj)
             }
@@ -828,6 +830,9 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
     // trying to avoid things
     if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
+        if (!snaka.avoidWalls){
+            return killSNAKA(snaka)
+        }
         moveSNAKA(snaka, choice(["right", "left"]), true)
         return
     }
@@ -835,14 +840,8 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
     // snaka dies if you touch her
     if (snaka.diesIfTouchesSnake && JSON.stringify(snaka.snakeArray).includes(snake.snakeArray[0])) {
-        killSNAKA(snaka)
-        // game becomes faster every time she dies
-        if (fps < maxSpeed) {
-            fps += 1
-        }
-
-
-        return
+        return killSNAKA(snaka)
+        
     }
 
 
@@ -895,6 +894,26 @@ function killSNAKA(snaka, noParole = false) {
     }
 
 }
+
+
+// /////////////////////////////////////////////////////////////////////////////////
+// /                          W E A P O N S     F U N C T I O N S                ///
+// /////////////////////////////////////////////////////////////////////////////////
+
+
+function shoot(gun){
+    if (gun.emmo == 0){
+        return
+    }
+    createSnaka({head: gun.bulletEmoji, cantEatApples: true, initialArray: [snake.snakeArray[0]]    , 
+        isAppleWhenDies: false, hasBackup: false, goPattern: "straight", currentDir: snake.currentDir, 
+        canKill: creaturesOnBoard, speedFactor: gun.speed, avoidWalls: false, diesIfTouchesSnake: false
+    })
+    gun.extraFunctionWhenShot()
+    gun.emmo--
+}
+
+
 
 
 // /////////////////////////////////////////////////////////////////////////////////
