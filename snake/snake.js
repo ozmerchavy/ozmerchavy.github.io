@@ -80,8 +80,8 @@ let isSecretDoorOpenAlready = false
 let custuMapasString = ""
 let custoMap = ""
 let stageFunctionEveryTurn = ()=>{}
+let creaturesOnBoard = []
 
-/// to do: expand this feature:
 
 
 
@@ -126,10 +126,10 @@ const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
 
 const directsVecs = {
-  "up": [-1,0], 
-  "right": [0,1],
-  "down": [1,0],
-  "left": [0, -1]    
+  up: [-1,0], 
+  right: [0,1],
+  down: [1,0],
+  left: [0, -1]    
 }
 
 // /////////////////////////////////////////////////////////////////////////////////
@@ -227,6 +227,7 @@ function switchToNewMap(newmap, customSnakeArr = false,  customSnakeDir = false)
   Graphics.disableSizeChange = defaultValues.disableSizeChange
   Graphics.disableRotation = defaultValues.disableRotation
   stageFunctionEveryTurn = () =>{}
+  creaturesOnBoard = []
 
 
   // nextTurn()
@@ -511,6 +512,9 @@ function nextTurn() {
     isGodMode = Date.now() < godModeEndTime;
   }
   stageFunctionEveryTurn()
+  for (const obj of creaturesOnBoard){
+    moveSNAKA(obj)
+  }
 
 }
 
@@ -602,7 +606,11 @@ function newStage(){
   //I kept this function so this js fle could work by itself
 }
 
+function moveSNAKA(){
+    //New stage functionality is in a different file, so this function is gonna get ran over
+  //I kept this function so this js fle could work by itself
 
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////////

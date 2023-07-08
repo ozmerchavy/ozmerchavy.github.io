@@ -182,20 +182,15 @@ const stages = [
         bgColor: "#2d0b1b",
         stageFunctionRunOnce: () => {
             window.turns = 0
-            window.snaka = createSnaka("🌺", "🏵️"),
-            window.snakaBackUp = copy(snaka)
+            window.snaka = createSnaka({body:"🌺", head:"🏵️"})
 
         },
         stageFunctionEveryTurn: () => {
             window.turns ++
-
-            if (window.turns >= 20 && !window.byeSnaka) {
-                moveSNAKA(snaka, undefined, window.snakaBackUp)
-            }
-            if (window.turns == 20) {
+            if (window.turns == 5) {
                 specialerto("This is snaka", "She is very shy, and very hungry. Your goal is to let her eat 31 apples. Every time you touch her she will start over", 140, 0, 30)
             }
-            if (window.snaka.snakeArray.length > 31 && !window.byeSnaka) {
+            if (window.snaka.snakeArray.length > 31 && !snaka.isDead) {
                 pauseGame()
                 let stringIftheWerentSavedbefore = ""
                 if (!localStorage.getItem("saved_game")) {
@@ -208,7 +203,7 @@ const stages = [
                 for (const ij of snaka.snakeArray) {
                     updateMap(ij, Graphics.apple);
                 }
-                window.byeSnaka = true
+                window.snaka.isDead = true
                 snake.score += 31
             }
 
@@ -247,35 +242,25 @@ const stages = [
     map: jail,
     stageFunctionRunOnce: () => {
         window.turns = 0
-        window.snaka = createSnaka("🌺", "🏵️", true, false, [[32,3], [33,3], [34,3]]),
-        window.snakaBackUp = copy(window.snaka)
-        window.byeSnaka = false
+        window.snaka = createSnaka({body:"🌺", head:"🏵️", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[32,3], [33,3], [34,3]], target: "snake", targetEfficiency: 0.7 })
     },
     stageFunctionEveryTurn: () => {
         window.turns ++
-
-        if (window.turns >= 5 && !window.byeSnaka) {
-            moveSNAKA(snaka, undefined, window.snakaBackUp)
-        }
-        if (window.turns == 10) {
+        if (window.turns == 7) {
             specialerto("Snaka is stuck!", "We got to save her!", 450, -250, 40, {title: "Use the divine fruits", msg: "", x: 630, y: 430, size: 42})
 
         }
-        if (window.turns == 13){
+        if (window.turns == 6){
             Graphics.disableSizeChange = true
 
         }
-        if (!window.byeSnaka && (window.snaka.snakeArray[0][0] < 6 || window.snaka.snakeArray[0][1] > 4 )) {
+        if (!window.snaka.isDead && (window.snaka.snakeArray[0][0] < 6 || window.snaka.snakeArray[0][1] > 4 )) {
             pauseGame()
-            
             alerto("You saved snaka!!", `Thanks for keeping her safe. She gave you a ❤️, 50 points, and THREE SAVES to space level.  Keep going now! you need 850 points`)
+            killSNAKA(snaka, true)
             maxApplesAtOnce = 20
             addLife()
             saveGame(3, 8, 400)
-            for (const ij of snaka.snakeArray) {
-                updateMap(ij, Graphics.apple);
-            }
-            window.byeSnaka = true
             snake.score += 50
         }
 
@@ -306,36 +291,12 @@ const stages = [
         stageFunctionRunOnce: ()=>{
             window.turns = 0
             document.querySelector("table").style.setProperty("--transX", 20*265)
-            window.snaka = createSnaka("🌺", "🏵️", true, false, [[5,2], [5,3], [5,4]])
-            window.snaka.currentDir = [0,1]
-            window.snakaBackUp = copy(window.snaka)
-
-
+            window.snaka = createSnaka({body:"🌺", head:"🏵️", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[5,2], [5,3], [5,4]], target: "snake", targetEfficiency: 0.2, currentDir:[0,1] })
         }, 
         
         stageFunctionEveryTurn:()=>{
             window.turns++
-
-
-
-            let snakasTrust = 0.1
-            let behavior
-            let ran = Math.random()
-                if (ran <= snakasTrust){
-                    behavior = `towards_snake`
-                }
-                else {
-                    behavior = "straight"
-                }
-                moveSNAKA(window.snaka, behavior, undefined, 1 )
-
-            
-            
-
-
-
-
-
+   
     }
 
     }
@@ -474,6 +435,9 @@ const bonusStages = [
 
 
 ]
+
+
+
 
 
 // /////////////////////////////////////////////////////////////////////////////////
@@ -684,45 +648,62 @@ function __rotateSNAKA(currentDir, direction) {
     ];
 }
 
-function createSnaka(body, head, cantEatApples = false, diesIfTouchesSnake = true, initialArray=false, hasPredators = true) {
+function createSnaka({
+    body,
+    head,
+    cantEatApples = false,
+    diesIfTouchesSnake = true,
+    initialArray = false,
+    currentDir = directsVecs.up,
+    goPattern = undefined,
+    target = undefined,
+    targetEfficiency = 1,
+    predators = [],
+    isAppleWhenDies = true,
+    hasBackup = true
+  }) {
     const snaka = {
-        snakeArray: [
-            midMap, vec2dAdd(midMap, [1, 0]),
-            vec2dAdd(midMap, [2, 0])
-        ],
-        currentDir: [
-            -1, 0
-        ],
-        body: body,
-        head: head,
-        diesIfTouchesSnake: diesIfTouchesSnake,
-        cantEatApples: cantEatApples, 
-        isDead: false,
-        hasPredator: hasPredators
-
+      body,
+      head,
+      currentDir,
+      snakeArray: initialArray || [
+        midMap, vec2dAdd(midMap, [1, 0]),
+        vec2dAdd(midMap, [2, 0])
+      ],
+      goPattern,
+      target,
+      targetEfficiency,
+      diesIfTouchesSnake,
+      cantEatApples,
+      isDead: false,
+      predators,
+      isAppleWhenDies,
+    };
+    if (hasBackup){
+        snaka.backup = copy(snaka)
     }
-    if (initialArray){
-       snaka.snakeArray = initialArray     
+  
+    if (initialArray) {
+      snaka.snakeArray = initialArray;
     }
-
-    return snaka
-}
-
+  creaturesOnBoard.push(snaka)
+    return snaka;
+  }
+  
 
 // this function moves a SNAKA after it is created, needs to run every turn
-function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIfGotStuck = 0) {
+function moveSNAKA(snaka, diretion = undefined) {
     if (snaka.isDead){
         return
     }
     
-
-    if (rotation == "straight"){
+    if (diretion == "straight" || snaka.goPattern == "straight"){
         //do nothing to currentdir
     }
-    else if (rotation == "right" || rotation == "left") {
-        snaka.currentDir = __rotateSNAKA(snaka.currentDir, rotation);
+    else if (diretion == "right" || diretion == "left") {
+        snaka.currentDir = __rotateSNAKA(snaka.currentDir, diretion);
     }
-    else if (rotation == "imitate"){
+    else if (snaka.goPattern == "imitate"){
 
         if (!String(snake.snakeArray).includes(String(snaka.snakeArray[0]))){
         // if imitates snake, braking the imitate if he touches her to avoid colliding
@@ -731,27 +712,26 @@ function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIf
  
 
     }
-    else if (rotation == "mirror"){
+    else if (snaka.goPattern == "mirror"){
         snaka.currentDir[0] = snake.currentDir[0] * -1
         snaka.currentDir[1] = snake.currentDir[1] * -1
     }
-    else if (rotation && rotation.includes("abs_")){
-        const direct = rotation.split("abs_")[1]
-        snaka.currentDir = directsVecs[direct]
-    }
-    else if (rotation && rotation.includes("towards_")){
-        let target = rotation.split("towards_")[1]
-        if (target == "snake"){
-            target = snake.snakeArray[snake.snakeArray.length-1]
-        }
-        else {
-            target = JSON.parse(target)
+ 
 
-        }
-        snaka.currentDir = getDirection(snaka.snakeArray[0], target)
+    else if (snaka.target){
+        
+        if (snaka.targetEfficiency >= 1 || Math.random() <= snaka.targetEfficiency) {
+            let target = snaka.target;
+            if (target === "snake") {
+              target = snake.snakeArray[snake.snakeArray.length - 1];
+            }
+            snaka.currentDir = getDirection(snaka.snakeArray[0], target);
+          }
+          
+        
     }
 
-     else if (Math.random() > 0.9) {
+     else if (Math.random() > 0.92) {
         snaka.currentDir = __rotateSNAKA(snaka.currentDir, choice(["right", "left"]));
 
     }
@@ -762,35 +742,30 @@ function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIf
     const newHeadContent = map[newHead[0]] ?. [newHead[1]];
 
 
+
     // trying to avoid things
     if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
-        if (triesIfGotStuck < 20) { // / preventing stack overflow
-            moveSNAKA(snaka, choice(["right", "left"]), backupSnaka, triesIfGotStuck + 1)
+        moveSNAKA(snaka, choice(["right", "left"
+        ]))
+             return
         }
-        return
-    }
+        
+    
 
 
 
     // snaka dies if you touch her
     if (snaka.diesIfTouchesSnake && JSON.stringify(snaka.snakeArray).includes(snake.snakeArray[0])) {
-        for (const ij of snaka.snakeArray) {
-            updateMap(ij, Graphics.apple);
-            snaka.isDead = true
-        }
+       killSNAKA(snaka)
         // game becomes faster every time she dies
         if (fps < maxSpeed) {
             fps += 1
-        }
-        if (backupSnaka) {
-            snaka.snakeArray = copy(backupSnaka.snakeArray)
-            snaka.currentDir = backupSnaka.currentDir
-            snaka.isDead = false
         }
 
 
         return
     }
+
 
 
     snaka.snakeArray.unshift(newHead);
@@ -799,11 +774,40 @@ function moveSNAKA(snaka, rotation = undefined, backupSnaka = undefined, triesIf
         updateMap(lastPos, Graphics.emptys);
     }
 
+
     for (const ij of snaka.snakeArray) {
         updateMap(ij, snaka.body);
     }
     updateMap(newHead, snaka.head);
 
+
+}
+
+
+
+
+function killSNAKA(snaka, noParole = false ){
+
+    let insteadies 
+
+    if (snaka.isAppleWhenDies){
+        insteadies = Graphics.apple
+    }
+    else (insteadies = Graphics.emptys)
+
+    for (const ij of snaka.snakeArray) {
+        if (!snake.snakeArray.includes(ij)){ updateMap(ij, insteadies)};
+        snaka.isDead = true
+    }
+
+    if (!noParole && snaka.backup) {
+        snaka.snakeArray = copy(snaka.backup.snakeArray)
+        snaka.currentDir = snaka.backup.currentDir
+        snaka.isDead = false
+    }
+    else {
+        creaturesOnBoard
+    }
 
 }
 
@@ -868,13 +872,13 @@ function specialerto(title, msg, x, y, size, nextAlerto = undefined) {
       transX: taboole.style.getPropertyValue("--transX"),
       transY: taboole.style.getPropertyValue("--transY"),
       size: taboole.style.getPropertyValue("--size"),
-      rotation: taboole.style.getPropertyValue("--rotation")
+      go: taboole.style.getPropertyValue("--go")
     };
   
     taboole.style.setProperty("--transX", x);
     taboole.style.setProperty("--transY", y);
     taboole.style.setProperty("--size", size);
-    taboole.style.setProperty("--rotation", 0);
+    taboole.style.setProperty("--go", 0);
   
     window.isInSpecialerto = true;
     window.nextAlertoObj = nextAlerto;
@@ -891,7 +895,7 @@ function specialerto(title, msg, x, y, size, nextAlerto = undefined) {
   
         taboole.style.setProperty("--transX", currentStyles.transX);
         taboole.style.setProperty("--transY", currentStyles.transY);
-        taboole.style.setProperty("--rotation", currentStyles.rotation);
+        taboole.style.setProperty("--go", currentStyles.go);
         taboole.style.setProperty("--size", currentStyles.size);
   
         if (!window.nextAlertoObj) {
