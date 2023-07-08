@@ -286,10 +286,10 @@ const stages = [
         levelName: "On the Run",
         levelNo: 11,
         rows: 10,
-        cols: 500,
+        cols: 200,
         maxAppples: 0,
-        chanceForDivineFruit: 0,
-        level_fps: 14,
+        chanceForDivineFruit: 0.1,
+        level_fps: 12,
         maxSpeed: 20,
         minScoretoGetDoor: 850,
         alertoText: "The police is after you. RUN! You will win if snaka gets to the other side. She's following you. Don't hesitate to shoot the police! ",
@@ -316,7 +316,7 @@ const stages = [
         chanceForGuns: 0.1,
         maxGunsinGame: 15,
         stageFunctionRunOnce: () => {
-            document.querySelector("table").style.setProperty("--transX", 20 * 275)
+            document.querySelector("table").style.setProperty("--transX", 20 * 100)
             window.snaka = createSnaka({
                 body: "🌺",
                 head: "🏵️",
@@ -382,15 +382,15 @@ const stages = [
                 diesIfTouchesSnake: false,
                 initialArray: [
                     [
-                        3, 214
+                        3, 185
                     ],
                     [
-                        3, 215
+                        3, 186
                     ],
                     [
-                        3, 216
+                        3, 187
                     ],
-                    [3,217]
+                    [3,188]
                 ],
                 goPattern: undefined,
                 targetEfficiency: 0.2,
@@ -408,6 +408,9 @@ const stages = [
                 snaka.targetEfficiency = 0.8                
             }
             for (const cop of window.cops){
+                if (cop.isDead){
+                    window.cops.splice(window.cops.indexOf(cop),1)
+                }
                 cop.target = snaka.snakeArray[1]
                 
             }
