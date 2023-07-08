@@ -31,7 +31,7 @@ td img {
 }
 td:has(img){
     position: relative;
-    border: 0.2px solid white;
+    border: 0.3px solid white;
   
 }
 
@@ -56,6 +56,7 @@ table {
 
 table .⬛ {
     color: transparent;
+    
 }
 table .⬜️ {
     color: transparent;
@@ -68,9 +69,19 @@ table .🔑 {
     border: 0.2px solid white;
   }
 
-  table .❤️ {
+table .❤️ {
     border: 0.2px solid white;
   }
+
+  table .🏀 {
+    color: transparent;
+    background-image: url("extra-media/bullet.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+
+
 
 body {
     --size: 30;

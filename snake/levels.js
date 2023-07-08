@@ -291,7 +291,7 @@ const stages = [
         level_fps: 12,
         maxSpeed: 20,
         minScoretoGetDoor: 850,
-        alertoText: "The police is after Snaka. RUN! You will win if Snaka gets to the other side. She's following you. Don't hesitate to shoot the police! They cannot harm you but they can kill Snaka and make her go back  ",
+        alertoText: "The police is after Snaka. RUN! You will win if Snaka gets to the other side. She's following you. Don't hesitate to shoot the police!",
         doorSymbol: "🦌",
         apple: choice(foods),
         bgColorTable: "#02290C",
@@ -315,8 +315,7 @@ const stages = [
         chanceForGuns: 0.1,
         maxGunsinGame: 5,
         stageFunctionRunOnce: () => {
-            addLife()
-            addLife()
+           
             document.querySelector("table").style.setProperty("--transX", 20 * 100)
             window.snaka = createSnaka({
                 body: "🌺",
@@ -432,6 +431,14 @@ const stages = [
         },
 
         stageFunctionEveryTurn: () => {
+            if (time == 4){
+                pauseGame()
+                addLife()
+                addLife()
+                addLife()
+                alerto("You get three ❤️", "The police cannot harm you but they can kill Snaka and set her back")
+            }
+           
             for (const cop of window.cops){
                 if (cop.isDead){
                     snake.score += 5
@@ -907,8 +914,8 @@ function shoot(gun){
     })
     updateMap(snake.snakeArray[0], Graphics.head)
     gun.extraFunctionWhenShot()
-    document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
     gun.emmo--
+    document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
 }
 
 

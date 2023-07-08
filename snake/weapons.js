@@ -17,5 +17,15 @@ const weapons = {
         extraFunctionWhenShot: ()=>{
         }
    
+       },
+       waterGun:{
+        image: "huntingun",
+        bulletEmoji: "🏀" ,
+        speed: 6,
+        emmo: 0,
+        defaultEmmo: 2,
+        extraFunctionWhenShot: ()=>{
+        }
+   
        }
 }
