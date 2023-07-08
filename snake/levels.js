@@ -424,11 +424,28 @@ const stages = [
 
         }
 
-    },
-
-    {
-        
     }
+    // ,
+
+    // {
+    //     levelName: "First Date",
+    //     levelNo: 9,
+    //     rows: 40,
+    //     cols: 40,
+    //     maxAppples: 50,
+    //     chanceForDivineFruit: .02,
+    //     level_fps: 8,
+    //     maxSpeed: 20,
+    //     minScoretoGetDoor: 562,
+    //     alertoText: "Welcome to a very special level",
+    //     doorSymbol: "💜",
+    //     apple: "💖",
+    //     bgColorTable: "#674264",
+    //     bgColor: "#2d0b1b",
+    //     stageFunctionRunOnce: () => {
+    //         window.snaka = createSnaka({body: "🌺", head: "🏵️"})
+
+    //     }}
 
 ]
 
@@ -505,7 +522,14 @@ function newStage(isBonuStage = false) {
         level = choice(bonusStages)
 
     } else {
-        level = stages[snake.level]
+        if (snake.level>= stages.length){
+            level = choice(bonusStages)
+
+        }
+        else {
+            level = stages[snake.level]
+
+        }
     }
     if (typeof(isBonuStage) == "string") {
         if (isBonuStage == "test") {
@@ -876,7 +900,7 @@ function shoot(gun){
         isAppleWhenDies: false, hasBackup: false, goPattern: "straight", currentDir: snake.currentDir, 
         canKill: creaturesOnBoard, speedFactor: gun.speed, avoidWalls: false, diesIfTouchesSnake: false
     })
-    updateMap(snake.snakeArray[0], gun.bulletEmoji)
+    updateMap(snake.snakeArray[0], Graphics.head)
     gun.extraFunctionWhenShot()
     document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
     gun.emmo--
