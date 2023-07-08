@@ -431,12 +431,11 @@ const stages = [
         },
 
         stageFunctionEveryTurn: () => {
-            if (time == 4){
+            if (time == 1){
                 pauseGame()
                 addLife()
                 addLife()
-                addLife()
-                alerto("You get three ❤️", "The police cannot harm you but they can kill Snaka and set her back")
+                alerto("You get two ❤️", "The police cannot harm you but they can kill Snaka and set her back")
             }
            
             for (const cop of window.cops){
@@ -768,7 +767,14 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
     } else if (snaka.goPattern == "mirror") {
         snaka.currentDir[0] = snake.currentDir[0] * -1
         snaka.currentDir[1] = snake.currentDir[1] * -1
-    } else if (snaka.target) {
+    } 
+    else if (snaka.goPattern == "mostlyStraight"){
+        if (Math.random() > 0.97) {
+            snaka.currentDir = __rotateSNAKA(snaka.currentDir, choice(["right", "left"]));
+    
+    }}
+    
+    else if (snaka.target) {
 
         if (snaka.targetEfficiency >= 1 || Math.random() <= snaka.targetEfficiency) {
             let target = snaka.target;
@@ -908,12 +914,12 @@ function shoot(gun){
         
         return equip(indexToRemove-1)
     }
-    createSnaka({head: gun.bulletEmoji, cantEatApples: true, initialArray: [snake.snakeArray[0]]    , 
+    const bullet = createSnaka({head: gun.bulletEmoji, cantEatApples: true, initialArray: [snake.snakeArray[0]], 
         isAppleWhenDies: false, hasBackup: false, goPattern: "straight", currentDir: snake.currentDir, 
         canKill: creaturesOnBoard, speedFactor: gun.speed, avoidWalls: false, diesIfTouchesSnake: false
     })
     updateMap(snake.snakeArray[0], Graphics.head)
-    gun.extraFunctionWhenShot()
+    gun.extraFunctionWhenShot(bullet)
     gun.emmo--
     document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
 }

@@ -81,6 +81,13 @@ table .❤️ {
   }
 
 
+  table .🦆{
+    color: transparent;
+    background-image: url("extra-media/duckbomb.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
 
 
 body {

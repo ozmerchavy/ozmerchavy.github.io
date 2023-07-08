@@ -18,14 +18,27 @@ const weapons = {
         }
    
        },
-       waterGun:{
+       huntingun:{
         image: "huntingun",
         bulletEmoji: "🏀" ,
         speed: 6,
         emmo: 0,
         defaultEmmo: 2,
         extraFunctionWhenShot: ()=>{
-        }
+        },
+    },
+
+
+        duck:{
+            image: "duck",
+            bulletEmoji: "🦆" ,
+            speed: 2,
+            emmo: 0,
+            defaultEmmo: 1,
+            extraFunctionWhenShot: (bullet)=>{  
+                bullet.goPattern = "mostlyStraight"
+                bullet.avoidWalls = true
+            }
    
        }
 }
