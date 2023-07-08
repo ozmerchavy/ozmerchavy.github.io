@@ -903,7 +903,13 @@ function killSNAKA(snaka, noParole = false) {
 
 function shoot(gun){
     if (gun.emmo == 0){
-        return
+        let indexToRemove = snake.equipment.indexOf(gun);
+        // Step 2: Remove the object from the array
+        if (indexToRemove > -1) {
+            snake.equipment.splice(indexToRemove, 1);
+        }
+        
+        return equip(indexToRemove-1)
     }
     createSnaka({head: gun.bulletEmoji, cantEatApples: true, initialArray: [snake.snakeArray[0]]    , 
         isAppleWhenDies: false, hasBackup: false, goPattern: "straight", currentDir: snake.currentDir, 

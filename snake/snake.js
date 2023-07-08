@@ -358,7 +358,7 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
     const gunpic = newHeadContent.split(`extra-media/`)[1].split(".jpg")[0]
     const gun = findGunByImage(gunpic)
     gun.emmo += gun.defaultEmmo
-    const equipindex = snake.equipment.push(gun)
+    const equipindex = snake.equipment.push(gun) -1
     equip(equipindex)
 
   } 
@@ -646,7 +646,7 @@ function findGunByImage(image) {
 function equip(idx){
   snake.currentlyEquipped = snake.equipment[idx]
   document.querySelector("#emmo").innerText = ""
-  document.querySelector("#gun").innerText = ""
+  document.querySelector("#gun").src = ""
   if (snake.currentlyEquipped){
     const gun = snake.currentlyEquipped
     document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
