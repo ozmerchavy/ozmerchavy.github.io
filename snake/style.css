@@ -21,9 +21,23 @@ td {
     overflow: hidden;
 
 }
+td img {
+        max-width:calc(var(--size)*1px);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      
+}
+td:has(img){
+    position: relative;
+    border: 0.2px solid white;
+  
+}
 
 [apple-device] td {
     padding-inline: calc(calc(var(--size) / 6.667) * 1px);
+
 
 }
 
