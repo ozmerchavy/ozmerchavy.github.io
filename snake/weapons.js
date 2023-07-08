@@ -15,7 +15,6 @@ const weapons = {
         emmo: 0,
         defaultEmmo: 15,
         extraFunctionWhenShot: ()=>{
-            updateMap(snake.snakeArray[0], "💦")
         }
    
        }
