@@ -208,7 +208,7 @@ const stages = [
 
         }
 
-    }, {
+    },{
         levelName: "Big Game",
         levelNo: 9,
         rows: 50,
@@ -318,6 +318,7 @@ const stages = [
             0, 1
         ],
         disableRotation: true,
+        chanceForGuns: 1,
         stageFunctionRunOnce: () => {
             document.querySelector("table").style.setProperty("--transX", 20 * 275)
             window.snaka = createSnaka({
@@ -618,6 +619,14 @@ function newStage(isBonuStage = false) {
     if (! isBonuStage) {
         snake.level += 1
     }
+
+    if (level.chanceForGuns){
+        chanceforGuns = level.chanceForGuns
+        availableGuns = level.availableGuns || Object.values(weapons)
+        maxGunsinGame = gunsinGame || 3
+
+    }
+
     maxApplesAtOnce = level.maxAppples || 0
     chanceForDivineFruit = level.chanceForDivineFruit || 0
     initialFps = level.level_fps || defaultValues.initialFps
@@ -900,6 +909,23 @@ function killSNAKA(snaka, noParole = false) {
 // /                          W E A P O N S     F U N C T I O N S                ///
 // /////////////////////////////////////////////////////////////////////////////////
 
+// called every turn
+function maybeCreateGun(){
+    if (!localStorage.getItem("explained_guns")){
+        alerto("This level has guns!", "Click S to switch between them and A to shoot!")
+        localStorage.setItem("explained_guns", JSON.stringify("explained."))
+    }
+
+    if (chanceforGuns && gunsinGame < maxGunsinGame){
+        if (Math.random() < chanceforGuns){
+            const av = findAvailables();
+            const gun = choice(availableGuns)
+            updateMap(choice(av), `extra-media/${gun.image}.jpg`)
+            gunsinGame++
+        }
+    }
+
+}
 
 function shoot(gun){
     if (gun.emmo == 0){
@@ -920,6 +946,30 @@ function shoot(gun){
     gun.emmo--
 }
 
+
+function findGunByImage(image) {
+    for (const weapon in weapons) {
+      if (weapons.hasOwnProperty(weapon)) {
+        const weaponObj = weapons[weapon];
+        if (weaponObj.image === image) {
+          return weaponObj;
+        }
+      }
+    }
+    return null; // Return null if no matching gun is found
+  }
+  
+  function equip(idx){
+    snake.currentlyEquipped = snake.equipment[idx]
+    document.querySelector("#emmo").innerText = ""
+    document.querySelector("#gun").src = ""
+    if (snake.currentlyEquipped){
+      const gun = snake.currentlyEquipped
+      document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
+      document.querySelector("#gun").src = `extra-media/${gun.image}.jpg`
+    }
+  
+  }
 
 
 

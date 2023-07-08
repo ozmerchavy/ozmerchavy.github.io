@@ -80,7 +80,10 @@ let custoMap = ""
 let stageFunctionEveryTurn = ()=>{}
 let creaturesOnBoard = []
 let time = 0
-
+let chanceforGuns = 0
+let availableGuns = []
+let gunsinGame = 0
+let maxGunsinGame = 0
 
 
 // for tiny mode
@@ -232,7 +235,10 @@ function switchToNewMap(newmap, customSnakeArr = false,  customSnakeDir = false)
   table.style.setProperty("--transX", 0);
   Graphics.disableSizeChange = defaultValues.disableSizeChange
   Graphics.disableRotation = defaultValues.disableRotation
-  
+  chanceforGuns = 0
+  availableGuns = []
+  gunsinGame = 0
+  maxGunsinGame = 0
   stageFunctionEveryTurn = () =>{}
   creaturesOnBoard = []
 
@@ -359,6 +365,7 @@ function moveSnakeorDie({ rotation = undefined, thruWalls = false } = {}) {
     const gun = findGunByImage(gunpic)
     gun.emmo += gun.defaultEmmo
     const equipindex = snake.equipment.push(gun) -1
+    gunsinGame--
     equip(equipindex)
 
   } 
@@ -508,6 +515,9 @@ function nextTurn() {
     maybeOpenDoor()
 
   }
+  if(!isTiny){
+    maybeCreateGun()
+  }
   moveSnakeorDie({  rotation: requeue.shift(), thruWalls: isGodMode });
 
   if (snake.life > 0) {
@@ -632,26 +642,21 @@ function moveSNAKA(){
 }
 
 function findGunByImage(image) {
-  for (const weapon in weapons) {
-    if (weapons.hasOwnProperty(weapon)) {
-      const weaponObj = weapons[weapon];
-      if (weaponObj.image === image) {
-        return weaponObj;
-      }
-    }
-  }
-  return null; // Return null if no matching gun is found
+    //New stage functionality is in a different file, so this function is gonna get ran over
+  //I kept this function so this js fle could work by itself
+
 }
 
 function equip(idx){
-  snake.currentlyEquipped = snake.equipment[idx]
-  document.querySelector("#emmo").innerText = ""
-  document.querySelector("#gun").src = ""
-  if (snake.currentlyEquipped){
-    const gun = snake.currentlyEquipped
-    document.querySelector("#emmo").innerText = gun.bulletEmoji.repeat(gun.emmo)
-    document.querySelector("#gun").src = `extra-media/${gun.image}.jpg`
-  }
+    //New stage functionality is in a different file, so this function is gonna get ran over
+  //I kept this function so this js fle could work by itself
+
+}
+
+function maybeCreateGun(){
+      //New stage functionality is in a different file, so this function is gonna get ran over
+  //I kept this function so this js fle could work by itself
+
 
 }
 ///////////////////////////////////////////////////////////////////////////////////
