@@ -170,7 +170,7 @@ const stages = [
         levelNo: 9,
         rows: 40,
         cols: 40,
-        maxAppples: 40,
+        maxAppples: 50,
         chanceForDivineFruit: .02,
         level_fps: 8,
         maxSpeed: 20,
@@ -181,13 +181,11 @@ const stages = [
         bgColorTable: "#674264",
         bgColor: "#2d0b1b",
         stageFunctionRunOnce: () => {
-            window.turns = 0
             window.snaka = createSnaka({body:"🌺", head:"🏵️"})
 
         },
         stageFunctionEveryTurn: () => {
-            window.turns ++
-            if (window.turns == 5) {
+            if (time == 5) {
                 specialerto("This is snaka", "She is very shy, and very hungry. Your goal is to let her eat 31 apples. Every time you touch her she will start over", 140, 0, 30)
             }
             if (window.snaka.snakeArray.length > 31 && !snaka.isDead) {
@@ -241,16 +239,14 @@ const stages = [
     bgColor: "#473e3e",
     map: jail,
     stageFunctionRunOnce: () => {
-        window.turns = 0
-        window.snaka = createSnaka({body:"🌺", head:"🏵️", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[32,3], [33,3], [34,3]], target: "snake", targetEfficiency: 0.7 })
+        window.snaka = createSnaka({body:"🌺", head:"🏵️", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[32,3], [33,3], [34,3]], target: "snake", targetEfficiency: 0.2 })
     },
     stageFunctionEveryTurn: () => {
-        window.turns ++
-        if (window.turns == 7) {
+        if (time == 7) {
             specialerto("Snaka is stuck!", "We got to save her!", 450, -250, 40, {title: "Use the divine fruits", msg: "", x: 630, y: 430, size: 42})
 
         }
-        if (window.turns == 6){
+        if (time == 8){
             Graphics.disableSizeChange = true
 
         }
@@ -289,14 +285,12 @@ const stages = [
         customSnakeDir: [0,1],
         disableRotation: true, 
         stageFunctionRunOnce: ()=>{
-            window.turns = 0
             document.querySelector("table").style.setProperty("--transX", 20*265)
-            window.snaka = createSnaka({body:"🌺", head:"🏵️", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[5,2], [5,3], [5,4]], target: "snake", targetEfficiency: 0.2, currentDir:[0,1] })
-            window.cop1 = createSnaka({head: "🚨", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[9,9]], goPattern: undefined, targetEfficiency: 0.05})
+            window.snaka = createSnaka({body:"🌺", head:"🏵️", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[5,2], [5,3], [5,4]], target: "snake", targetEfficiency: 0.2, currentDir:[0,1]})
+            window.cop1 = createSnaka({head: "🚨", cantEatApples: true, diesIfTouchesSnake: false, initialArray: [[9,9]], goPattern: undefined, targetEfficiency: 0.05, speedFactor: 0.33})
         }, 
         
         stageFunctionEveryTurn:()=>{
-            window.turns++
             cop1.target = "snake"
    
     }
@@ -660,9 +654,8 @@ function createSnaka({
     goPattern = undefined,
     target = undefined,
     targetEfficiency = 1,
-    predators = [],
+    speedFactor = 1,
     isAppleWhenDies = true,
-    slow = false,
     hasBackup = true
   }) {
     const snaka = {
@@ -679,8 +672,8 @@ function createSnaka({
       diesIfTouchesSnake,
       cantEatApples,
       isDead: false,
-      predators,
       isAppleWhenDies,
+      speedFactor
     };
     if (hasBackup){
         snaka.backup = copy(snaka)
@@ -698,6 +691,21 @@ function createSnaka({
 function moveSNAKA(snaka, diretion = undefined) {
     if (snaka.isDead){
         return
+    }
+
+    if (snaka.speedFactor != 1){
+        if (snaka.speedFactor < 1){
+            const sleepEvery =  Math.round(1/ snaka.speedFactor)
+            if (time % sleepEvery == 0){
+                return
+            }
+        else {
+            for (let i = 0; i< snaka.speedFactor -1; i++){
+                moveSNAKA(snaka)
+            }
+        }
+        }
+
     }
     
     if (diretion == "straight" || snaka.goPattern == "straight"){

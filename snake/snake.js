@@ -81,7 +81,7 @@ let custuMapasString = ""
 let custoMap = ""
 let stageFunctionEveryTurn = ()=>{}
 let creaturesOnBoard = []
-
+let time = 0
 
 
 
@@ -219,6 +219,7 @@ function switchToNewMap(newmap, customSnakeArr = false,  customSnakeDir = false)
   }
 
   requeue = [] // restarting snake should reset the action queue
+  time = 0
   isSecretDoorOpenAlready = false
   createTable(map)
   let table = document.querySelector("table");
@@ -751,6 +752,7 @@ async function mainLoop() {
     while (isPaused) {
       await sleep(10)
     }
+    time++
     const timeStart = performance.now();
     nextTurn();
     const timePassed = performance.now() - timeStart;
