@@ -294,7 +294,7 @@ const stages = [
         cols: 500,
         maxAppples: 0,
         chanceForDivineFruit: 0,
-        level_fps: 10,
+        level_fps: 14,
         maxSpeed: 20,
         minScoretoGetDoor: 850,
         alertoText: "The police is after you. RUN! You will win if snaka gets to the other side. She's following you. Don't hesitate to shoot the police! ",
@@ -318,8 +318,8 @@ const stages = [
             0, 1
         ],
         disableRotation: true,
-        chanceForGuns: 0.03,
-        maxGunsinGame: 10,
+        chanceForGuns: 0.1,
+        maxGunsinGame: 15,
         stageFunctionRunOnce: () => {
             document.querySelector("table").style.setProperty("--transX", 20 * 275)
             window.snaka = createSnaka({
@@ -346,7 +346,7 @@ const stages = [
                 head: "🚨",
                 body: "🚨",
                 cantEatApples: true,
-                diesIfTouchesSnake: true,
+                diesIfTouchesSnake: false,
                 initialArray: [
                     [
                         9, 9
@@ -365,7 +365,7 @@ const stages = [
                 head: "🚨",
                 body: "🚨",
                 cantEatApples: true,
-                diesIfTouchesSnake: true,
+                diesIfTouchesSnake: false,
                 initialArray: [
                     [
                         4, 131
