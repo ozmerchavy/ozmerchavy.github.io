@@ -363,11 +363,16 @@ const stages = [
                 cop.target = snaka.snakeArray[1]
                 
             }
+            let timeWon
             if (snaka.snakeArray[0][1] > 185){
                 pauseGame()
                 alerto("you and Snaka managed to escape!", "you get 2 saves to this very state!")
                 saveGame(2)
+                timeWon = time  
+            }
+            if (timeWon && time == (timeWon+1)){
                 newStage()
+
             }
         
 
@@ -919,10 +924,10 @@ function createSuperCop(initialLocationArray,canKillArray, head = "🚨", body =
         diesIfTouchesSnake: false,
         initialArray: initialLocationArray,
         goPattern: undefined,
-        targetEfficiency: 0.4,
-        speedFactor: 0.125,
+        targetEfficiency: 0.5,
         revive: true,
-        reviveAfter: 75,
+        reviveAfter: 150,
+        speedFactor: 0.1,
         canKill: canKillArray
     })
 }
