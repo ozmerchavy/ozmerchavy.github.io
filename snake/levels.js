@@ -339,96 +339,11 @@ const stages = [
                 speedFactor: 0.125,
                 currentDir: [0, 1]
             })
-            window.cop1 = createSnaka({
-                head: "🚨",
-                body: "🚨",
-                cantEatApples: true,
-                isAppleWhenDies: true,
-                diesIfTouchesSnake: false,
-                initialArray: [
-                    [
-                        9, 9
-                    ],
-                    [
-                        9, 8
-                    ]
-                ],
-                goPattern: undefined,
-                targetEfficiency: 0.3,
-                speedFactor: 0.5, 
-                revive: false,
-                canKill: [snaka]
-            })
-            window.cop2 = createSnaka({
-                head: "🚨",
-                body: "🚨",
-                isAppleWhenDies: true,
-                cantEatApples: true,
-                diesIfTouchesSnake: false,
-                initialArray: [
-                    [
-                        4, 131
-                    ],
-                    [
-                        4, 132
-                    ]
-                ],
-                goPattern: undefined,
-                targetEfficiency: 0.3,
-                speedFactor: 0.5, 
-                revive: false,
-                canKill: [snaka]
-            }),
-            window.cop3 = createSnaka({
-                head: "🚨",
-                body: "🚨",
-                isAppleWhenDies: true,
-                cantEatApples: true,
-                diesIfTouchesSnake: false,
-                initialArray: [
-                    [
-                        4, 171
-                    ],
-                    [
-                        4, 172
-                    ],
-                    [
-                        4, 173
-                    ],
-
-                ],
-                goPattern: undefined,
-                targetEfficiency: 0.3,
-                speedFactor: 0.5, 
-                revive: false,
-                canKill: [snaka]
-            })
-            window.cop4 = createSnaka({
-                head: "🚨",
-                body: "🚔",
-                cantEatApples: true,
-                isAppleWhenDies: false,
-
-                diesIfTouchesSnake: false,
-                initialArray: [
-                    [
-                        3, 185
-                    ],
-                    [
-                        3, 186
-                    ],
-                    [
-                        3, 187
-                    ],
-                    [3,188]
-                ],
-                goPattern: undefined,
-                targetEfficiency: 0.4,
-                speedFactor: 0.125,
-
-                revive: true,
-                canKill: [snaka]
-            }),
+            window.cop1 = createCop([[ 9, 9],[9, 8]], [snaka])
+            window.cop2 = createCop([[ 4, 131],[4, 132]], [snaka])
+            window.cop3 = createSuperCop([[4, 171],[4, 172],[4, 173],], [snaka])
+            window.cop4 = createSuperCop([[3, 185],[3, 186],[3, 187],[3,188]], [snaka])
+      
             window.cops = [cop1,cop2, cop3, cop4]
         },
 
@@ -448,7 +363,7 @@ const stages = [
                 cop.target = snaka.snakeArray[1]
                 
             }
-            if (snaka.snakeArray[0][1] > 190){
+            if (snaka.snakeArray[0][1] > 185){
                 pauseGame()
                 alerto("you and Snaka managed to escape!", "you get 2 saves to this very state!")
                 saveGame(2)
@@ -968,6 +883,49 @@ function findGunByImage(image) {
   
   }
 
+
+
+
+
+
+// /////////////////////////////////////////////////////////////////////////////////
+// /                          C U S T O M      B O T S                           ///
+// /////////////////////////////////////////////////////////////////////////////////
+
+function createCop(initialLocationArray, canKillArray, headBody ="🚨"){
+    return createSnaka({
+        head: headBody,
+        body: headBody,
+        cantEatApples: true,
+        isAppleWhenDies: true,
+        diesIfTouchesSnake: false,
+        initialArray: initialLocationArray,
+        goPattern: undefined,
+        targetEfficiency: 0.3,
+        speedFactor: 0.5, 
+        revive: false,
+        canKill: canKillArray
+    })
+}
+
+
+
+function createSuperCop(initialLocationArray,canKillArray, head = "🚨", body ="🚔" ){
+    return createSnaka({
+        head,
+        body,
+        cantEatApples: true,
+        isAppleWhenDies: false,
+        diesIfTouchesSnake: false,
+        initialArray: initialLocationArray,
+        goPattern: undefined,
+        targetEfficiency: 0.4,
+        speedFactor: 0.125,
+        revive: true,
+        reviveAfter: 75,
+        canKill: canKillArray
+    })
+}
 
 
 // /////////////////////////////////////////////////////////////////////////////////
