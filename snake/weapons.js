@@ -5,6 +5,7 @@ const weapons = {
      speed: 2,
      emmo: 0,
      defaultEmmo: 4,
+     breakWalls: false,
      extraFunctionWhenShot: ()=>{}
 
     },
@@ -14,6 +15,7 @@ const weapons = {
         speed: 3,
         emmo: 0,
         defaultEmmo: 5,
+        breakWalls: false,
         extraFunctionWhenShot: ()=>{
         }
    
@@ -24,6 +26,7 @@ const weapons = {
         speed: 6,
         emmo: 0,
         defaultEmmo: 3,
+        breakWalls: 2,
         extraFunctionWhenShot: ()=>{
         },
     },
@@ -35,6 +38,7 @@ const weapons = {
             speed: 2,
             emmo: 0,
             defaultEmmo: 1,
+            breakWalls: false,
             extraFunctionWhenShot: (bullet)=>{  
                 bullet.goPattern = "mostlyStraight"
                 bullet.avoidWalls = true

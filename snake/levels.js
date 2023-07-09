@@ -390,12 +390,22 @@ const stages = [
         level_fps: 12,
         maxSpeed: 20,
         minScoretoGetDoor: 710, 
-        alertoText: "Crap! You do not have how to pay the movie! You guys have to rob the bank",
+        alertoText: "Crap! You do not have how to pay the movie! You guys have to rob the bank! Note: \nYou can touch snaka but must beware the security guards!\nThe hunting gun could break walls!",
         doorSymbol: "🏦",
         apple: "🪙",
-        bgColor: "gray",
-        bgColorTable: "black",
+        bgColor: "#000000ab",
+        bgColorTable: "#6e6e6e",
+        availableGuns: [weapons.huntingun, weapons.gun],
+        maxGunsinGame: 3,
+        map: bank,
+        disableRotation: true,
+        customSnakeArr:[[48,24],[47,24], [46,24]],
+    
+
         stageFunctionRunOnce: () => {
+            document.querySelector("table").style.setProperty("--transX", 300)
+            document.querySelector("table").style.setProperty("--transY", -500)
+
             window.snaka = createSnaka({
                 body: "🌺",
                 head: "🏵️",
@@ -403,25 +413,13 @@ const stages = [
                 diesIfTouchesSnake: false,
                 revive: true,
                 reviveAfter: 10,
-                gunsinGame: true,
-                maxGunsinGame: 5,
-                initialArray: [
-                    [
-                        22, 21
-                    ],
-                    [
-                        23, 21
-                    ],
-                    [
-                        24, 21
-                    ]
-                ],
+                initialArray: [[48,22],[47,22], [46,22]],
                 currentDir: directsVecs.up,
                target: "snake",
-               targetEfficiency: 0.1,
+               targetEfficiency: 0.05,
                
             })
-            window.securityGuy = createCop([[40,49], [40,48]], [snaka, snake], "🕶️")
+            window.securityGuy = createCop([[12,2], [12,3], [12,4]], [snaka, snake], "🕶️")
             window.securityGuy.target == "snake"
 
         }
@@ -560,8 +558,8 @@ function newStage(isBonuStage = false) {
         snake.level += 1
     }
 
-    if (level.chanceForGuns){
-        chanceforGuns = level.chanceForGuns
+    if (level.chanceForGuns || level.maxGunsinGame){
+        chanceforGuns = level.chanceForGuns || 0.05
         availableGuns = level.availableGuns || Object.values(weapons)
         maxGunsinGame = level.maxGunsinGame || 3
 
@@ -673,11 +671,12 @@ function createSnaka({
     speedFactor = 1,
     isAppleWhenDies = true,
     revive = true,
-    reviveAfter = 5,
+    reviveAfter = 0,
     canKill = [],
     avoidWalls = true,
     diesWhenKills = false,
     getPointsforApplesEaten = false,
+    breakWalls = false
 
 }) {
     const snaka = {
@@ -701,6 +700,7 @@ function createSnaka({
         diesWhenKills,
         reviveAfter,
         getPointsforApplesEaten,
+        breakWalls
     };
     if (revive) {
         snaka.backup = copy(snaka)
@@ -799,16 +799,21 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
                 }
                 if (snaka.diesWhenKills){
-                    killSNAKA(snaka)
+                    
+                    return killSNAKA(snaka)
                 }
             }
         }
    
     }
 
+    if (snaka.breakWalls && newHeadContent == Graphics.wall ){
+        snaka.breakWalls--
+    }   
 
+    
     // trying to avoid things
-    if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
+    else if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
         if (!snaka.avoidWalls){
             return killSNAKA(snaka)
         }
@@ -839,8 +844,10 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
 
     for (const ij of snaka.snakeArray) {
+        
         updateMap(ij, snaka.body);
     }
+    
     updateMap(newHead, snaka.head);
 
 
@@ -848,6 +855,7 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
 
 function killSNAKA(snaka, noParole = false) {
+
 
     snaka.recentDeathTime = time
     snaka.isDead = true
@@ -922,8 +930,8 @@ function shoot(gun){
         return equip(indexToRemove-1)
     }
     const bullet = createSnaka({head: gun.bulletEmoji, cantEatApples: true, initialArray: [snake.snakeArray[0]], 
-        isAppleWhenDies: false, revive: false, goPattern: "straight", currentDir: snake.currentDir, 
-        canKill: creaturesOnBoard, speedFactor: gun.speed, avoidWalls: false, diesIfTouchesSnake: false, diesWhenKills: true
+        isAppleWhenDies: false, revive: false, goPattern: "straight", currentDir: snake.currentDir, reviveAfter:0, 
+        canKill: creaturesOnBoard, speedFactor: gun.speed, avoidWalls: false, diesIfTouchesSnake: false, diesWhenKills: true, breakWalls:gun.breakWalls
     })
     updateMap(snake.snakeArray[0], Graphics.head)
     gun.extraFunctionWhenShot(bullet)
