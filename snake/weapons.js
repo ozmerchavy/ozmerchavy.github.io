@@ -22,7 +22,7 @@ const weapons = {
        },
        huntingun:{
         image: "huntingun",
-        bulletEmoji: "🏀" ,
+        bulletEmoji: "⬤" ,
         speed: 6,
         emmo: 0,
         defaultEmmo: 3,

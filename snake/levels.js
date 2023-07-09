@@ -269,6 +269,7 @@ const stages = [
         disableRotation: true,
         chanceForGuns: 0.1,
         maxGunsinGame: 5,
+        availableGuns: Object.values(weapons).slice(0,5),
         stageFunctionRunOnce: () => {
            
             document.querySelector("table").style.setProperty("--transX", 20 * 100)
@@ -421,9 +422,7 @@ const stages = [
                
             })
             window.securityGuy = createCop([[12,2], [12,3], [12,4],[12,5],[12,6],[12,7]], [snaka, snake], "🕶️")
-            window.securityGuy1 = createCop([[11,2], [11,3], [11,4],[11,5],[11,6],[11,7]], [snaka, snake], "🕶️")
             window.securityGuy.target == "snake"
-            window.securityGuy1.target == "snake"
 
         }
     
