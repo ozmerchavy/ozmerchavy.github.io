@@ -336,7 +336,7 @@ const stages = [
                 ],
                 target: "snake",
                 targetEfficiency: 0.13,
-                speedFactor: 0.25,
+                speedFactor: 0.125,
                 currentDir: [0, 1]
             })
             window.cop1 = createSnaka({
@@ -356,7 +356,7 @@ const stages = [
                 goPattern: undefined,
                 targetEfficiency: 0.3,
                 speedFactor: 0.5, 
-                hasBackup: false,
+                revive: false,
                 canKill: [snaka]
             })
             window.cop2 = createSnaka({
@@ -376,7 +376,7 @@ const stages = [
                 goPattern: undefined,
                 targetEfficiency: 0.3,
                 speedFactor: 0.5, 
-                hasBackup: false,
+                revive: false,
                 canKill: [snaka]
             }),
             window.cop3 = createSnaka({
@@ -398,9 +398,9 @@ const stages = [
 
                 ],
                 goPattern: undefined,
-                targetEfficiency: 0.4,
+                targetEfficiency: 0.3,
                 speedFactor: 0.5, 
-                hasBackup: false,
+                revive: false,
                 canKill: [snaka]
             })
             window.cop4 = createSnaka({
@@ -423,9 +423,10 @@ const stages = [
                     [3,188]
                 ],
                 goPattern: undefined,
-                targetEfficiency: 0.5,
+                targetEfficiency: 0.4,
                 speedFactor: 0.125,
-                hasBackup: true,
+
+                revive: true,
                 canKill: [snaka]
             }),
             window.cops = [cop1,cop2, cop3, cop4]
@@ -699,10 +700,12 @@ function createSnaka({
     targetEfficiency = 1,
     speedFactor = 1,
     isAppleWhenDies = true,
-    hasBackup = true,
+    revive = true,
+    reviveAfter = 5,
     canKill = [],
     avoidWalls = true,
-    diesWhenKills = false
+    diesWhenKills = false,
+
 }) {
     const snaka = {
         body,
@@ -722,9 +725,10 @@ function createSnaka({
         speedFactor,
         canKill,
         avoidWalls,
-        diesWhenKills
+        diesWhenKills,
+        reviveAfter
     };
-    if (hasBackup) {
+    if (revive) {
         snaka.backup = copy(snaka)
     }
 
@@ -738,8 +742,12 @@ function createSnaka({
 
 // this function moves a SNAKA after it is created, needs to run every turn
 function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
-    if (snaka.isDead) {
+    if (snaka.isDead && snaka.backup && snaka.recentDeathTime) {
+        if (time > (snaka.recentDeathTime + snaka.reviveAfter))
+        revive(snaka)
+        else {
         return
+    }
     }
 
     if (snaka.speedFactor != 1) {
@@ -853,7 +861,8 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
 
 function killSNAKA(snaka, noParole = false) {
-
+    snaka.recentDeathTime = time
+    snaka.isDead = true
     let insteadies
 
     if (snaka.isAppleWhenDies) {
@@ -867,14 +876,9 @@ function killSNAKA(snaka, noParole = false) {
         if (!snake.snakeArray.includes(ij)) {
             updateMap(ij, insteadies)
         };
-        snaka.isDead = true
     }
 
-    if (! noParole && snaka.backup) {
-        snaka.snakeArray = copy(snaka.backup.snakeArray)
-        snaka.currentDir = snaka.backup.currentDir
-        snaka.isDead = false
-    } else {
+    if (noParole || !snaka.backup) { 
         let indexToRemove = creaturesOnBoard.indexOf(snaka);
         // Step 2: Remove the object from the array
         if (indexToRemove > -1) {
@@ -884,6 +888,13 @@ function killSNAKA(snaka, noParole = false) {
 
     }
 
+}
+
+
+function revive(snaka){
+        snaka.snakeArray = copy(snaka.backup.snakeArray)
+        snaka.currentDir = snaka.backup.currentDir
+        snaka.isDead = false
 }
 
 
@@ -923,7 +934,7 @@ function shoot(gun){
         return equip(indexToRemove-1)
     }
     const bullet = createSnaka({head: gun.bulletEmoji, cantEatApples: true, initialArray: [snake.snakeArray[0]], 
-        isAppleWhenDies: false, hasBackup: false, goPattern: "straight", currentDir: snake.currentDir, 
+        isAppleWhenDies: false, revive: false, goPattern: "straight", currentDir: snake.currentDir, 
         canKill: creaturesOnBoard, speedFactor: gun.speed, avoidWalls: false, diesIfTouchesSnake: false, diesWhenKills: true
     })
     updateMap(snake.snakeArray[0], Graphics.head)
