@@ -22,7 +22,7 @@ const stages = [
                 const saves = JSON.parse(localStorage.getItem("saved_game")).saves
                 if (saves > 0) {
                     pauseGame()
-                    alerto(`Try to get to 140 points`, `You have a saved game with ${saves} saves! you can get there any time if you click Q`)
+                    alerto(`Welcome to ${stages[0].levelName} Stage!`, `${stages[0].alertoText}.\nYou have a saved game with ${saves} saves! you can get there any time if you click Q`)
 
                 }
             }
@@ -65,7 +65,7 @@ const stages = [
 
     },
    
-    , {
+     {
         levelName: "Hell",
         levelNo: 4,
         rows: 40,
@@ -139,7 +139,7 @@ const stages = [
         level_fps: 8,
         maxSpeed: 20,
         minScoretoGetDoor: 415,
-        alertoText: "Welcome to a very special level",
+        alertoText: "Welcome to a very special stage",
         doorSymbol: "💜",
         apple: "🌿",
         bgColorTable: "#674264",
@@ -151,6 +151,8 @@ const stages = [
         stageFunctionEveryTurn: () => {
             if (time == 5) {
                 specialerto("This is snaka", "She is very shy, and very hungry. Your goal is to let her eat 31 apples. Every time you touch her she will start over", 140, 0, 30)
+                Graphics.disableSizeChange =  true
+
             }
             if (window.snaka.snakeArray.length > 31 && !snaka.isDead) {
                 pauseGame()
@@ -331,7 +333,55 @@ const stages = [
 
         }
 
+    },
+    {
+        levelName: "First Date",
+        levelNo: 11,
+        rows: 45,
+        cols: 45,
+        maxAppples: 30,
+        chanceForDivineFruit: 0.005,
+        level_fps: 12,
+        maxSpeed: 20,
+        minScoretoGetDoor: 1000, // bc it is not how you get to that stage.
+        alertoText: "It's your first date! Collect 710 points to proceed. Rules:\n Do not touch Snaka! You would die\n You get her points as well",
+        doorSymbol: "🎥",
+        apple: "🍿",
+        stageFunctionRunOnce: () => {
+            window.snaka = createSnaka({
+                body: "🌺",
+                head: "🏵️",
+                cantEatApples: false,
+                diesIfTouchesSnake: true,
+                revive: true,
+                reviveAfter: 0,
+                initialArray: [
+                    [
+                        22, 21
+                    ],
+                    [
+                        23, 21
+                    ],
+                    [
+                        24, 21
+                    ]
+                ],
+                currentDir: directsVecs.down,
+               goPattern: "mirror",
+               getPointsforApplesEaten: true,
+            })
+
+        },
+        stageFunctionEveryTurn:()=>{
+            if (snaka.isDead){
+                reduceLife()
+            }
+        }
+    
+    
     }
+
+    
     
 ]
 
@@ -578,6 +628,7 @@ function createSnaka({
     canKill = [],
     avoidWalls = true,
     diesWhenKills = false,
+    getPointsforApplesEaten = false,
 
 }) {
     const snaka = {
@@ -599,7 +650,8 @@ function createSnaka({
         canKill,
         avoidWalls,
         diesWhenKills,
-        reviveAfter
+        reviveAfter,
+        getPointsforApplesEaten
     };
     if (revive) {
         snaka.backup = copy(snaka)
@@ -722,6 +774,10 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
         const lastPos = snaka.snakeArray.pop();
         updateMap(lastPos, newThingtoPut ); 
     }
+    else if (snaka.getPointsforApplesEaten && newHeadContent ==Graphics.apple){
+        snake.score++
+        
+    }
 
 
     for (const ij of snaka.snakeArray) {
@@ -734,6 +790,7 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
 
 function killSNAKA(snaka, noParole = false) {
+
     snaka.recentDeathTime = time
     snaka.isDead = true
     let insteadies
