@@ -336,7 +336,7 @@ const stages = [
                 ],
                 target: "snake",
                 targetEfficiency: 0.13,
-                speedFactor: 0.125,
+                speedFactor: 0.25,
                 currentDir: [0, 1]
             })
             window.cop1 = createSnaka({
@@ -398,7 +398,7 @@ const stages = [
 
                 ],
                 goPattern: undefined,
-                targetEfficiency: 0.3,
+                targetEfficiency: 0.4,
                 speedFactor: 0.5, 
                 hasBackup: false,
                 canKill: [snaka]
@@ -423,7 +423,7 @@ const stages = [
                     [3,188]
                 ],
                 goPattern: undefined,
-                targetEfficiency: 0.4,
+                targetEfficiency: 0.5,
                 speedFactor: 0.125,
                 hasBackup: true,
                 canKill: [snaka]
