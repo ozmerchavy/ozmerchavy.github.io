@@ -56,7 +56,7 @@ const stages = [
         level_fps: 11,
         maxSpeed: 22,
         minScoretoGetDoor: 140,
-        alertoText: "The weird cave, get to 190 points for next stage",
+        alertoText: "The weird cave, get to 200 points for next stage",
         doorSymbol: "⛰",
         tableEmptys: "⬛",
         bgColorTable: "#191f03",
@@ -64,24 +64,8 @@ const stages = [
 
 
     },
-    {
-        levelName: "Banana World",
-        levelNo: 3,
-        rows: 25,
-        cols: 25,
-        maxAppples: 25,
-        chanceForDivineFruit: .01,
-        level_fps: 20,
-        maxSpeed: 23,
-        minScoretoGetDoor: 190,
-        alertoText: "In the Banana world it is hard to even eat one banana. you need to get to 215 to get out.",
-        doorSymbol: "🌻",
-        bgColor: "#181502",
-        apple: "🍌",
-        bgColorTable: "#f4e8b8"
-
-
-    }, {
+   
+    , {
         levelName: "Hell",
         levelNo: 4,
         rows: 40,
@@ -90,8 +74,8 @@ const stages = [
         chanceForDivineFruit: .01,
         level_fps: 10,
         maxSpeed: 26,
-        minScoretoGetDoor: 215,
-        alertoText: "Good luck and stuff. You could be saved very shortly, look for the rainbow, you only need 230 points.",
+        minScoretoGetDoor: 200,
+        alertoText: "Good luck and stuff. You could be saved very shortly, look for the rainbow, you only need 220 points.",
         doorSymbol: "💀",
         tableEmptys: "💀",
         bgColor: "#910000",
@@ -106,38 +90,23 @@ const stages = [
         chanceForDivineFruit: .01,
         level_fps: 8,
         maxSpeed: 20,
-        minScoretoGetDoor: 230,
-        alertoText: "Here is heaven, enjoy! and get to 335 points(!!) it is possible with bonus stages",
-        doorSymbol: "🌈",
-        apple: "☁️",
+        minScoretoGetDoor: 220,
+        alertoText: "Here is heaven, enjoy! and get to 300 points(!!) it is possible with bonus stages",
+        doorSymbol: "☁️",
+        apple: "🌈",
         bgColorTable: "#513538 "
 
     }, {
-        levelName: "Mint",
-        levelNo: 6,
-        maxAppples: 35,
-        chanceForDivineFruit: .013,
-        level_fps: 11,
-        maxSpeed: 23,
-        minScoretoGetDoor: 335,
-        alertoText: "You are literally addicated if you made it here, you need help and 400 points.",
-        doorSymbol: "🌱",
-        bgColor: "black",
-        bgColorTable: "#113209 ",
-        apple: "🌿",
-        map: half
-
-    }, {
         levelName: "Outer Space!",
-        levelNo: 7,
+        levelNo: 6,
         rows: 50,
         cols: 50,
         maxAppples: 50,
         chanceForDivineFruit: .01,
         level_fps: 12,
         maxSpeed: 25,
-        minScoretoGetDoor: 400,
-        alertoText: "The aliens are giving you one extra life!! ❤️ you need 500 points",
+        minScoretoGetDoor: 300,
+        alertoText: "The aliens are giving you one extra life!! ❤️ you need 360 points",
         doorSymbol: "🛸",
         bgColor: "black",
         bgColorTable: "#00000080 ",
@@ -148,13 +117,13 @@ const stages = [
         }
     }, {
         levelName: "Another World",
-        levelNo: 8,
+        levelNo: 7,
         maxAppples: 25,
         chanceForDivineFruit: .008,
         level_fps: 12,
         maxSpeed: 25,
-        minScoretoGetDoor: 500,
-        alertoText: "You got to a different world. (Get 562 points)",
+        minScoretoGetDoor: 360,
+        alertoText: "You got to a different world. (Get 415 points)",
         doorSymbol: "🏕️ ",
         bgColorTable: "#5f5f4477",
         apple: "✨",
@@ -162,17 +131,17 @@ const stages = [
         map: anotherWorldMap
     }, {
         levelName: "First Love",
-        levelNo: 9,
+        levelNo: 8,
         rows: 40,
         cols: 40,
         maxAppples: 50,
         chanceForDivineFruit: .02,
         level_fps: 8,
         maxSpeed: 20,
-        minScoretoGetDoor: 562,
+        minScoretoGetDoor: 415,
         alertoText: "Welcome to a very special level",
         doorSymbol: "💜",
-        apple: "💖",
+        apple: "🌿",
         bgColorTable: "#674264",
         bgColor: "#2d0b1b",
         stageFunctionRunOnce: () => {
@@ -190,7 +159,7 @@ const stages = [
                     stringIftheWerentSavedbefore = "when you die and restart, you will be instructed in tunnel stage regarding SAVES."
                 }
 
-                alerto("Snaka is so happy!", `thanks for keeping her safe. She gave you ❤️, her score, and TWO SAVES to space level. ${stringIftheWerentSavedbefore} Keep going now to 650!`)
+                alerto("Snaka is so happy!", `thanks for keeping her safe. She gave you ❤️, her score, and TWO SAVES to space level. ${stringIftheWerentSavedbefore} Keep going now to 500!`)
                 addLife()
                 saveGame(2, 8, 400)
                 for (const ij of snaka.snakeArray) {
@@ -203,31 +172,15 @@ const stages = [
 
         }
 
-    },{
-        levelName: "Big Game",
-        levelNo: 9,
-        rows: 50,
-        cols: 50,
-        maxAppples: 40,
-        chanceForDivineFruit: .14,
-        level_fps: 12,
-        maxSpeed: 24,
-        minScoretoGetDoor: 650,
-        alertoText: "Get to 750 points for next stage",
-        doorSymbol: "🚅",
-        stageFunctionRunOnce: () => {
-            localStorage.setItem("saved_game", JSON.stringify(snake))
-        }
-
     }, {
         levelName: "Jail",
-        levelNo: 10,
+        levelNo: 9,
         maxAppples: 0,
         chanceForDivineFruit: 0,
         level_fps: 8,
         maxSpeed: 20,
-        minScoretoGetDoor: 750,
-        alertoText: "How did we end up here??",
+        minScoretoGetDoor: 500,
+        alertoText: "OH NO! Snaka got caught eating weed from the previous stage! it is YOUR fault! You got to get her out of jail",
         doorSymbol: "🔗",
         apple: "🚬",
         bgColorTable: "#211212",
@@ -271,7 +224,7 @@ const stages = [
             }
             if (!window.snaka.isDead && (window.snaka.snakeArray[0][0] < 6 || window.snaka.snakeArray[0][1] > 4)) {
                 pauseGame()
-                alerto("You saved snaka!!", `Thanks for keeping her safe. She gave you a ❤️, 50 points, and THREE SAVES to space level.  Keep going now! you need 850 points`)
+                alerto("You saved snaka!!", `Thanks for keeping her safe. She gave you a ❤️, 50 points, and THREE SAVES to space level.  Keep going now! you need 610 points`)
                 killSNAKA(snaka, true)
                 maxApplesAtOnce = 20
                 addLife()
@@ -284,14 +237,14 @@ const stages = [
     }, {
 
         levelName: "On the Run",
-        levelNo: 11,
+        levelNo: 10,
         rows: 10,
         cols: 200,
         maxAppples: 0,
         level_fps: 12,
         maxSpeed: 20,
-        minScoretoGetDoor: 850,
-        alertoText: "The police is after Snaka. RUN! You will win if Snaka gets to the other side. She's following you. Don't hesitate to shoot the police!",
+        minScoretoGetDoor: 610,
+        alertoText: "The police is after Snaka. Rules:\n  You win if Snaka gets to the right edge. She's following you. \n If you touch her or the cops, nothing happens, but when they get her she dies and goes back to the start",
         doorSymbol: "🦌",
         apple: choice(foods),
         bgColorTable: "#02290C",
@@ -352,7 +305,7 @@ const stages = [
                 pauseGame()
                 addLife()
                 addLife()
-                alerto("You get two ❤️", "The police cannot harm you but they can kill Snaka and set her back")
+                alerto("You get two ❤️", "Don't hesitate to shoot the cops!")
             }
            
             for (const cop of window.cops){
