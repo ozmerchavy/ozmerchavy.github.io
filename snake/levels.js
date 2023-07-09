@@ -354,6 +354,7 @@ const stages = [
                 head: "🏵️",
                 cantEatApples: false,
                 diesIfTouchesSnake: true,
+                isAppleWhenDies: false,
                 revive: true,
                 reviveAfter: 0,
                 initialArray: [
@@ -391,11 +392,11 @@ const stages = [
         level_fps: 9,
         maxSpeed: 15,
         minScoretoGetDoor: 710, 
-        alertoText: "Crap! You do not have how to pay the movie! You guys have to rob the bank! Note: \nYou can touch snaka but must beware the security guards!\nThe hunting gun could break walls!",
+        alertoText: "Crap! You do not have how to pay the movie, You guys have to rob the bank! Note: \nYou can touch snaka but must beware the security guards!\nThe hunting gun could break walls!",
         doorSymbol: "🏦",
         apple: "🪙",
-        bgColor: "#000000ab",
-        bgColorTable: "#6e6e6e",
+        bgColor: "#6c6c6c",
+        bgColorTable: "black",
         availableGuns: [weapons.huntingun, weapons.gun],
         maxGunsinGame: 10,
         map: bank,
@@ -414,15 +415,20 @@ const stages = [
                 diesIfTouchesSnake: false,
                 revive: true,
                 reviveAfter: 10,
-                speedFactor: 0.5,
+                speedFactor: 0.125,
                 initialArray: [[48,22],[47,22], [46,22]],
                 currentDir: directsVecs.up,
                target: "snake",
-               targetEfficiency: 0.05,
+               targetEfficiency: 0.08,
                
             })
-            window.securityGuy = createCop([[12,2], [12,3], [12,4],[12,5],[12,6],[12,7]], [snaka, snake], "🕶️")
+            window.securityGuy = createCop([[12,2], [12,3], [12,4],[12,5],[12,6]], [snaka, snake], "⚙️")
+            window.securityGuy2 = createCop([[10,2], [10,3], [10,4],[10,5]], [snaka, snake], "⚙️")
             window.securityGuy.target == "snake"
+            window.securityGuy2.target == "snake"
+            window.banker1 = createCitizon("🫣", "📞", [[5,23],[5,24],[5,25]], [11,67])
+            window.banker2 = createCitizon("🫣", "📞", [[5,15],[5,14],[5,16]], [11,67])
+            window.banker3 = createCitizon("🫣", "📞", [[5,6],[5,5],[5,4]], [11,67])
 
         }
     
@@ -1013,6 +1019,22 @@ function createSuperCop(initialLocationArray,canKillArray, head = "🚨", body =
         reviveAfter: 150,
         speedFactor: 0.1,
         canKill: canKillArray
+    })
+}
+
+
+
+function createCitizon(head, body, initialLocationArray, target){
+    return createSnaka({
+        head,
+        body, 
+        cantEatApples: true,
+        initialArray: initialLocationArray,
+        targetEfficiency: 0.8,
+        revive: false,
+        speedFactor: 0.5,
+        diesIfTouchesSnake: false,
+        target
     })
 }
 
