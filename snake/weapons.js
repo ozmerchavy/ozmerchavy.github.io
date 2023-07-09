@@ -4,7 +4,7 @@ const weapons = {
      bulletEmoji: "📍" ,
      speed: 2,
      emmo: 0,
-     defaultEmmo: 3,
+     defaultEmmo: 4,
      extraFunctionWhenShot: ()=>{}
 
     },
@@ -13,7 +13,7 @@ const weapons = {
         bulletEmoji: "💦" ,
         speed: 3,
         emmo: 0,
-        defaultEmmo: 4,
+        defaultEmmo: 5,
         extraFunctionWhenShot: ()=>{
         }
    
@@ -23,7 +23,7 @@ const weapons = {
         bulletEmoji: "🏀" ,
         speed: 6,
         emmo: 0,
-        defaultEmmo: 2,
+        defaultEmmo: 3,
         extraFunctionWhenShot: ()=>{
         },
     },

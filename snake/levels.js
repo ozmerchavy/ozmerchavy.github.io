@@ -336,7 +336,7 @@ const stages = [
                 ],
                 target: "snake",
                 targetEfficiency: 0.13,
-                speedFactor: 0.25,
+                speedFactor: 0.125,
                 currentDir: [0, 1]
             })
             window.cop1 = createSnaka({
@@ -423,7 +423,8 @@ const stages = [
                     [3,188]
                 ],
                 goPattern: undefined,
-                targetEfficiency: 0.5,
+                targetEfficiency: 0.4,
+                speedFactor: 0.125,
                 hasBackup: true,
                 canKill: [snaka]
             }),
@@ -700,7 +701,8 @@ function createSnaka({
     isAppleWhenDies = true,
     hasBackup = true,
     canKill = [],
-    avoidWalls = true
+    avoidWalls = true,
+    diesWhenKills = false
 }) {
     const snaka = {
         body,
@@ -719,7 +721,8 @@ function createSnaka({
         isAppleWhenDies,
         speedFactor,
         canKill,
-        avoidWalls
+        avoidWalls,
+        diesWhenKills
     };
     if (hasBackup) {
         snaka.backup = copy(snaka)
@@ -769,7 +772,7 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
         snaka.currentDir[1] = snake.currentDir[1] * -1
     } 
     else if (snaka.goPattern == "mostlyStraight"){
-        if (Math.random() > 0.97) {
+        if (Math.random() > 0.99) {
             snaka.currentDir = __rotateSNAKA(snaka.currentDir, choice(["right", "left"]));
     
     }}
@@ -805,6 +808,9 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
         if (creaturesOnBoard.includes(obj) && obj != snaka){
             if (String(obj.snakeArray).includes(headloc)){
                 killSNAKA(obj)
+                if (snaka.diesWhenKills){
+                    killSNAKA(obj)
+                }
             }
         }
    
@@ -887,13 +893,15 @@ function killSNAKA(snaka, noParole = false) {
 
 // called every turn
 function maybeCreateGun(){
-    if (!localStorage.getItem("explained_guns") && time > 5){
-        pauseGame()
-        alerto("This level has guns!", "Click S to switch between them and A to shoot!")
-        localStorage.setItem("explained_guns", JSON.stringify("explained."))
-    }
+    
 
     if (chanceforGuns && gunsinGame < maxGunsinGame){
+        if (!localStorage.getItem("guns_were_explained") && time > 10){
+            pauseGame()
+            alerto("This level has guns!", "Click S to switch between them and A to shoot!")
+            localStorage.setItem("guns_were_explained", JSON.stringify("explained!"))
+        }
+        
         if (Math.random() < chanceforGuns){
             const av = findAvailables();
             const gun = choice(availableGuns)
@@ -916,7 +924,7 @@ function shoot(gun){
     }
     const bullet = createSnaka({head: gun.bulletEmoji, cantEatApples: true, initialArray: [snake.snakeArray[0]], 
         isAppleWhenDies: false, hasBackup: false, goPattern: "straight", currentDir: snake.currentDir, 
-        canKill: creaturesOnBoard, speedFactor: gun.speed, avoidWalls: false, diesIfTouchesSnake: false
+        canKill: creaturesOnBoard, speedFactor: gun.speed, avoidWalls: false, diesIfTouchesSnake: false, diesWhenKills: true
     })
     updateMap(snake.snakeArray[0], Graphics.head)
     gun.extraFunctionWhenShot(bullet)
