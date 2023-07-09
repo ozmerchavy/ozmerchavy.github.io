@@ -379,7 +379,56 @@ const stages = [
         }
     
     
+    },
+    {
+        levelName: "Bank Stage",
+        levelNo: 11,
+        rows: 50,
+        cols: 60,
+        maxAppples: 30,
+        chanceForDivineFruit: 0.16,
+        level_fps: 12,
+        maxSpeed: 20,
+        minScoretoGetDoor: 710, 
+        alertoText: "Crap! You do not have how to pay the movie! You guys have to rob the bank",
+        doorSymbol: "🏦",
+        apple: "🪙",
+        bgColor: "gray",
+        bgColorTable: "black",
+        stageFunctionRunOnce: () => {
+            window.snaka = createSnaka({
+                body: "🌺",
+                head: "🏵️",
+                cantEatApples: true,
+                diesIfTouchesSnake: false,
+                revive: true,
+                reviveAfter: 10,
+                gunsinGame: true,
+                maxGunsinGame: 5,
+                initialArray: [
+                    [
+                        22, 21
+                    ],
+                    [
+                        23, 21
+                    ],
+                    [
+                        24, 21
+                    ]
+                ],
+                currentDir: directsVecs.up,
+               target: "snake",
+               targetEfficiency: 0.1,
+               
+            })
+            window.securityGuy = createCop([[40,49], [40,48]], [snaka, snake], "🕶️")
+            window.securityGuy.target == "snake"
+
+        }
+    
+    
     }
+
 
     
     
@@ -620,7 +669,7 @@ function createSnaka({
     currentDir = directsVecs.up,
     goPattern = undefined,
     target = undefined,
-    targetEfficiency = 1,
+    targetEfficiency = 0.15,
     speedFactor = 1,
     isAppleWhenDies = true,
     revive = true,
@@ -651,7 +700,7 @@ function createSnaka({
         avoidWalls,
         diesWhenKills,
         reviveAfter,
-        getPointsforApplesEaten
+        getPointsforApplesEaten,
     };
     if (revive) {
         snaka.backup = copy(snaka)
@@ -731,23 +780,32 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
         snaka.currentDir = __rotateSNAKA(snaka.currentDir, choice(["right", "left"]));
 
     }
-
+    
 
     const headloc = snaka.snakeArray[0];
     const newHead = vec2dAdd(headloc, snaka.currentDir);
     const newHeadContent = map[newHead[0]] ?. [newHead[1]];
 
     for (let obj of snaka.canKill){
-        if (creaturesOnBoard.includes(obj) && obj != snaka){
+        if ( !obj.isDead && obj != snaka){
             if (String(obj.snakeArray).includes(headloc)){
-                killSNAKA(obj)
-                if (snaka.diesWhenKills){
+                if (obj == snake){
+                    if (!snake.isDead && !isGodMode){
+                        reduceLife()
+                    }
+                }
+                else {
                     killSNAKA(obj)
+
+                }
+                if (snaka.diesWhenKills){
+                    killSNAKA(snaka)
                 }
             }
         }
    
     }
+
 
     // trying to avoid things
     if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
