@@ -227,7 +227,7 @@ const stages = [
             if (!window.snaka.isDead && (window.snaka.snakeArray[0][0] < 6 || window.snaka.snakeArray[0][1] > 4)) {
                 pauseGame()
                 alerto("You saved snaka!!", `Thanks for keeping her safe. She gave you a ❤️, 50 points, and THREE SAVES to space level.  Keep going now! you need 610 points`)
-                killSNAKA(snaka, true)
+                killObj(snaka, true)
                 maxApplesAtOnce = 20
                 addLife()
                 saveGame(3, 8, 400)
@@ -387,8 +387,8 @@ const stages = [
         cols: 60,
         maxAppples: 30,
         chanceForDivineFruit: 0.16,
-        level_fps: 12,
-        maxSpeed: 20,
+        level_fps: 9,
+        maxSpeed: 15,
         minScoretoGetDoor: 710, 
         alertoText: "Crap! You do not have how to pay the movie! You guys have to rob the bank! Note: \nYou can touch snaka but must beware the security guards!\nThe hunting gun could break walls!",
         doorSymbol: "🏦",
@@ -396,7 +396,7 @@ const stages = [
         bgColor: "#000000ab",
         bgColorTable: "#6e6e6e",
         availableGuns: [weapons.huntingun, weapons.gun],
-        maxGunsinGame: 3,
+        maxGunsinGame: 10,
         map: bank,
         disableRotation: true,
         customSnakeArr:[[48,24],[47,24], [46,24]],
@@ -409,18 +409,21 @@ const stages = [
             window.snaka = createSnaka({
                 body: "🌺",
                 head: "🏵️",
-                cantEatApples: true,
+                cantEatApples: false,
                 diesIfTouchesSnake: false,
                 revive: true,
                 reviveAfter: 10,
+                speedFactor: 0.5,
                 initialArray: [[48,22],[47,22], [46,22]],
                 currentDir: directsVecs.up,
                target: "snake",
                targetEfficiency: 0.05,
                
             })
-            window.securityGuy = createCop([[12,2], [12,3], [12,4]], [snaka, snake], "🕶️")
+            window.securityGuy = createCop([[12,2], [12,3], [12,4],[12,5],[12,6],[12,7]], [snaka, snake], "🕶️")
+            window.securityGuy1 = createCop([[11,2], [11,3], [11,4],[11,5],[11,6],[11,7]], [snaka, snake], "🕶️")
             window.securityGuy.target == "snake"
+            window.securityGuy1.target == "snake"
 
         }
     
@@ -716,20 +719,13 @@ function createSnaka({
 
 // this function moves a SNAKA after it is created, needs to run every turn
 function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
-    if (snaka.isDead && snaka.backup && snaka.recentDeathTime) {
-        if (time > (snaka.recentDeathTime + snaka.reviveAfter))
-        revive(snaka)
-        else {
-        return
-    }
-    }
-
     if (snaka.speedFactor != 1) {
         if (snaka.speedFactor < 1) {
             const sleepEvery = Math.round(1 / snaka.speedFactor)
             if (time % sleepEvery == 0) {
                 return
-            } 
+            }
+    
         }
         else if (!justOnce) {
             for (let i = 0; i < snaka.speedFactor; i++) {
@@ -739,12 +735,23 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
     }
 
+    if (snaka.isDead) {
+        if (snaka.backup && snaka.recentDeathTime){
+            if (time > (snaka.recentDeathTime + snaka.reviveAfter)){
+                revive(snaka)
+            }
+        }
+
+        return
+    }
+    
+
     if (diretion == "straight" || snaka.goPattern == "straight") { // do nothing to currentdir
     } else if (diretion == "right" || diretion == "left") {
         snaka.currentDir = __rotateSNAKA(snaka.currentDir, diretion);
     } else if (snaka.goPattern == "imitate") {
 
-        if (!String(snake.snakeArray).includes(String(snaka.snakeArray[0]))) { // if imitates snake, braking the imitate if he touches her to avoid colliding
+        if (!checkCollision(snaka, snake)) { // if imitates snake, braking the imitate if he touches her to avoid colliding
             snaka.currentDir = snake.currentDir
         }
 
@@ -788,19 +795,21 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
     for (let obj of snaka.canKill){
         if ( !obj.isDead && obj != snaka){
-            if (String(obj.snakeArray).includes(headloc)){
+            if (checkCollision(snaka, obj)){
                 if (obj == snake){
                     if (!snake.isDead && !isGodMode){
                         reduceLife()
                     }
-                }
+                
+                } 
+                
                 else {
-                    killSNAKA(obj)
+                    killObj(obj)
 
                 }
                 if (snaka.diesWhenKills){
-                    
-                    return killSNAKA(snaka)
+                    return killObj(snaka)
+                     
                 }
             }
         }
@@ -815,7 +824,7 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
     // trying to avoid things
     else if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
         if (!snaka.avoidWalls){
-            return killSNAKA(snaka)
+            return killObj(snaka)
         }
         moveSNAKA(snaka, choice(["right", "left"]), true)
         return
@@ -823,8 +832,9 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
 
     // snaka dies if you touch her
-    if (snaka.diesIfTouchesSnake && JSON.stringify(snaka.snakeArray).includes(snake.snakeArray[0])) {
-        return killSNAKA(snaka)
+    if (snaka.diesIfTouchesSnake && checkCollision(snaka, snake)) {
+
+        return killObj(snaka)
         
     }
 
@@ -851,32 +861,31 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
     updateMap(newHead, snaka.head);
 
 
+
 }
 
 
-function killSNAKA(snaka, noParole = false) {
+function killObj(obj, noParole = false) {
+    if (obj.head == weapons.huntingun.bulletEmoji || obj.head == weapons.gun.bulletEmoji ){
+    }
 
-
-    snaka.recentDeathTime = time
-    snaka.isDead = true
+    obj.recentDeathTime = time
+    obj.isDead = true
     let insteadies
 
-    if (snaka.isAppleWhenDies) {
+    if (obj.isAppleWhenDies) {
         insteadies = Graphics.apple
     } else 
         (insteadies = Graphics.emptys)
+    const checklist = obj.snakeArray
 
-    
 
-    for (const ij of snaka.snakeArray) {
-        if (!snake.snakeArray.includes(ij)) {
-            updateMap(ij, insteadies)
-        };
+    for (const ij of checklist) {
+        updateMap(ij, insteadies)
     }
 
-    if (noParole || !snaka.backup) { 
-        let indexToRemove = creaturesOnBoard.indexOf(snaka);
-        // Step 2: Remove the object from the array
+    if (noParole || !obj.backup) { 
+        let indexToRemove = creaturesOnBoard.indexOf(obj);
         if (indexToRemove > -1) {
             creaturesOnBoard.splice(indexToRemove, 1);
         }
@@ -1013,6 +1022,18 @@ function createSuperCop(initialLocationArray,canKillArray, head = "🚨", body =
 // /                         O T H E R    F U N C T I O N S                      ///
 // /////////////////////////////////////////////////////////////////////////////////
 
+
+function checkCollision(obj1, obj2) {
+    for (let pos1 of obj1.snakeArray) {
+      for (let pos2 of obj2.snakeArray) {
+        if (pos1[0] === pos2[0] && pos1[1] === pos2[1]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
 // (saves only level and score)
 function saveGame(saves = 2, specificLevel = false, specificScore = false) {
     const retrieved = localStorage.getItem("saved_game")
@@ -1113,3 +1134,4 @@ function specialerto(title, msg, x, y, size, nextAlerto = undefined) {
         alertoForm.addEventListener("submit", formSubmitHandler);
     }
 }
+
