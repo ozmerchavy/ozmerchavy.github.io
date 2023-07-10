@@ -405,9 +405,9 @@ const stages = [
     
 
         stageFunctionRunOnce: () => {
+            window.bankRobbed = false
             document.querySelector("table").style.setProperty("--transX", 300)
             document.querySelector("table").style.setProperty("--transY", -500)
-
             window.snaka = createSnaka({
                 body: "🌺",
                 head: "🏵️",
@@ -432,13 +432,21 @@ const stages = [
             window.banker2 = createCitizon("🫣", "🫣", [[5,15],[5,14],[5,16]], [11,63])
             window.banker3 = createCitizon("🫣", "🫣", [[5,6],[5,5],[5,4]], [11,65])
 
+        },
+        stageFunctionEveryTurn:()=>{
+            if (bankRobbed && !isGodMode){
+                newStage()
+            }
+
+            if (time>30 && isGodMode){
+                bankRobbed = true
+            }
         }
-    
     
     }
 
-
     
+
     
 ]
 
