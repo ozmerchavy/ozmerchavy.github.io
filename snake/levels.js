@@ -726,7 +726,7 @@ function createSnaka({
 
 // this function moves a SNAKA after it is created, needs to run every turn
 function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
-    if (snaka.speed != 1) {
+    if (snaka.speed != 1  & snaka.speed !=0) {
         if (snaka.speed < 1) {
             if(snaka.speed<0.5){
                 snaka.speed = 0.5
@@ -744,6 +744,8 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
         }
 
     }
+
+
 
 
   
@@ -799,6 +801,9 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
         snaka.currentDir = __rotateSNAKA(snaka.currentDir, choice(["right", "left"]));
 
     }
+    if (snaka.speed == 0){
+        snaka.currentDir = [0,0]
+    }
     
 
     const headloc = snaka.snakeArray[0];
@@ -839,8 +844,8 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
         if (!snaka.avoidWalls){
             return killObj(snaka)
         }
-        moveSNAKA(snaka, choice(["right", "left"]), true)
-        return
+        return moveSNAKA(snaka, choice(["right", "left"]), true)
+        
     }
 
 
@@ -856,7 +861,7 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
         newThingtoPut = newHeadContent // preserving guns. practically it moves them to the back but thats ok I guess
     }
     snaka.snakeArray.unshift(newHead);
-    if (snaka.cantEatApples || (newHeadContent != Graphics.apple)) {
+    if ((snaka.cantEatApples || (newHeadContent != Graphics.apple)) && !snaka.speed == 0) {
         const lastPos = snaka.snakeArray.pop();
         updateMap(lastPos, newThingtoPut ); 
     }
@@ -872,7 +877,6 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
     }
     
     updateMap(newHead, snaka.head);
-
 
 
 }
