@@ -443,7 +443,53 @@ const stages = [
             }
         }
     
-    }
+    },
+
+    {
+        levelName: "Second Date - Picnic",
+        levelNo: 12,
+        rows: 30,
+        cols: 30,
+        maxAppples: 30,
+        chanceForDivineFruit: 0.005,
+        level_fps: 13,
+        maxSpeed: 20,
+        minScoretoGetDoor: 800, // it is not how you get to that stage though.
+        alertoText: "Congrats for breaking into the bank locks! You and Snaka can enjoy some mice in your picnic 🧺. Don't Worry, you can touch Snaka now, she does not mind",
+        doorSymbol: "🧺",
+        apple: "🐁",
+        bgImage: "picnic",
+        bgColorTable: "black",
+        stageFunctionRunOnce: () => {
+            window.snaka = createSnaka({
+                body: "🌺",
+                head: "🏵️",
+                cantEatApples: false,
+                diesIfTouchesSnake: false,
+                isAppleWhenDies: false,
+                revive: true,
+                reviveAfter: 0,
+                initialArray: [
+                    [
+                        22, 21
+                    ],
+                    [
+                        23, 21
+                    ],
+                    [
+                        24, 21
+                    ]
+                ],
+                currentDir: directsVecs.down,
+               getPointsforApplesEaten: true,
+            })
+
+        },
+ 
+        
+    
+    
+    },
 
     
 
