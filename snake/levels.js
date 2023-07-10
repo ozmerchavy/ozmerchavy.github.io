@@ -841,10 +841,16 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
     
     // trying to avoid things
     else if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
-        if (!snaka.avoidWalls){
+        if (snaka.avoidWalls && !newHeadContent == Graphics.body){
+            return moveSNAKA(snaka, choice(["right", "left"]), true)
+        }
+        else if (newHeadContent == Graphics.body && !snaka.diesIfTouchesSnake){
+            // save her if she doesnt die from snake
+        }
+        else{
+
             return killObj(snaka)
         }
-        return moveSNAKA(snaka, choice(["right", "left"]), true)
         
     }
 
@@ -1044,7 +1050,7 @@ function createCitizon(head, body, initialLocationArray, target){
         initialArray: initialLocationArray,
         targetEfficiency: 0.5,
         revive: false,
-        speed: 0.,
+        speed: 0.5,
         diesIfTouchesSnake: false,
         canKill:[],
         target
