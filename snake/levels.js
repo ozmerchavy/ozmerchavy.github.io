@@ -292,7 +292,7 @@ const stages = [
                 ],
                 target: "snake",
                 targetEfficiency: 0.13,
-                speedFactor: 0.125,
+                speed: 0.85,
                 currentDir: [0, 1]
             })
             window.cop1 = createCop([[ 9, 9],[9, 8]], [snaka])
@@ -389,7 +389,7 @@ const stages = [
         cols: 60,
         maxAppples: 30,
         chanceForDivineFruit: 0,
-        level_fps: 9,
+        level_fps: 12,
         maxSpeed: 15,
         minScoretoGetDoor: 710, 
         alertoText: "Crap! You do not have how to pay the movie, You guys have to rob the bank! Note: \nYou can touch snaka but must beware the security guards!\nThe hunting gun could break walls!",
@@ -417,7 +417,7 @@ const stages = [
                 getPointsforApplesEaten: true,
                 revive: true,
                 reviveAfter: 10,
-                speedFactor: 0.125,
+                speed: 0.85,
                 initialArray: [[48,22],[47,22], [46,22]],
                 currentDir: directsVecs.up,
                target: "snake",
@@ -678,7 +678,7 @@ function createSnaka({
     goPattern = undefined,
     target = undefined,
     targetEfficiency = 0.15,
-    speedFactor = 1,
+    speed = 1,
     isAppleWhenDies = true,
     revive = true,
     reviveAfter = 0,
@@ -704,7 +704,7 @@ function createSnaka({
         cantEatApples,
         isDead: false,
         isAppleWhenDies,
-        speedFactor,
+        speed,
         canKill,
         avoidWalls,
         diesWhenKills,
@@ -726,16 +726,19 @@ function createSnaka({
 
 // this function moves a SNAKA after it is created, needs to run every turn
 function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
-    if (snaka.speedFactor != 1) {
-        if (snaka.speedFactor < 1) {
-            const sleepEvery = Math.round(1 / snaka.speedFactor)
-            if (time % sleepEvery == 0) {
+    if (snaka.speed != 1) {
+        if (snaka.speed < 1) {
+            if(snaka.speed<0.5){
+                snaka.speed = 0.5
+            }
+            const sleepEvery = Math.round(1/(1-snaka.speed))
+            if (time % sleepEvery ==0){
                 return
             }
     
         }
         else if (!justOnce) {
-            for (let i = 0; i < snaka.speedFactor; i++) {
+            for (let i = 0; i < snaka.speed; i++) {
                 moveSNAKA(snaka, undefined, true)
             }
         }
@@ -950,7 +953,7 @@ function shoot(gun){
     }
     const bullet = createSnaka({head: gun.bulletEmoji, cantEatApples: true, initialArray: [snake.snakeArray[0]], 
         isAppleWhenDies: false, revive: false, goPattern: "straight", currentDir: snake.currentDir, reviveAfter:0, 
-        canKill: creaturesOnBoard, speedFactor: gun.speed, avoidWalls: false, diesIfTouchesSnake: false, diesWhenKills: true, breakWalls:gun.breakWalls
+        canKill: creaturesOnBoard, speed: gun.speed, avoidWalls: false, diesIfTouchesSnake: false, diesWhenKills: true, breakWalls:gun.breakWalls
     })
     updateMap(snake.snakeArray[0], Graphics.head)
     gun.extraFunctionWhenShot(bullet)
@@ -1002,7 +1005,7 @@ function createCop(initialLocationArray, canKillArray, headBody ="🚨"){
         initialArray: initialLocationArray,
         goPattern: undefined,
         targetEfficiency: 0.3,
-        speedFactor: 0.5, 
+        speed: 0.7, 
         revive: false,
         canKill: canKillArray
     })
@@ -1022,7 +1025,7 @@ function createSuperCop(initialLocationArray,canKillArray, head = "🚨", body =
         targetEfficiency: 0.5,
         revive: true,
         reviveAfter: 150,
-        speedFactor: 0.1,
+        speed: 0.9,
         canKill: canKillArray
     })
 }
@@ -1037,7 +1040,7 @@ function createCitizon(head, body, initialLocationArray, target){
         initialArray: initialLocationArray,
         targetEfficiency: 0.5,
         revive: false,
-        speedFactor: 0.5,
+        speed: 0.,
         diesIfTouchesSnake: false,
         canKill:[],
         target
