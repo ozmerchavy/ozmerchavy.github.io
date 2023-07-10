@@ -389,8 +389,8 @@ const stages = [
         cols: 60,
         maxAppples: 30,
         chanceForDivineFruit: 0,
-        level_fps: 12,
-        maxSpeed: 15,
+        level_fps: 10,
+        maxSpeed: 13,
         minScoretoGetDoor: 710, 
         alertoText: "Crap! You do not have how to pay the movie, You guys have to rob the bank! Note: \nYou can touch snaka but must beware the security guards!\nThe hunting gun could break walls!",
         doorSymbol: "🏦",
@@ -1022,10 +1022,10 @@ function createSuperCop(initialLocationArray,canKillArray, head = "🚨", body =
         diesIfTouchesSnake: false,
         initialArray: initialLocationArray,
         goPattern: undefined,
-        targetEfficiency: 0.5,
+        targetEfficiency: 0.45,
         revive: true,
         reviveAfter: 150,
-        speed: 0.9,
+        speed: 0.7,
         canKill: canKillArray
     })
 }
