@@ -26,7 +26,7 @@ const weapons = {
         speed: 6,
         emmo: 0,
         defaultEmmo: 3,
-        breakWalls: 2,
+        breakWalls: 1,
         extraFunctionWhenShot: ()=>{
         },
     },
@@ -44,5 +44,23 @@ const weapons = {
                 bullet.avoidWalls = true
             }
    
-       }
+       },
+
+    //    bomb: {
+    //     image: "bomb",
+    //         bulletEmoji: "💣" ,
+    //         speed: 2,
+    //         emmo: 0,
+    //         defaultEmmo: 5,
+    //         breakWalls: 0,
+    //         extraFunctionWhenShot: (bullet)=>{
+    //             const currentCreatures = creaturesOnBoard.slice(0,-1)
+    //             const boom = findNeighbors(bullet.snakeArray[0]) 
+    //             boom.forEach(x=>{createSnaka({initialArray:x,body: "🦽", head:"🦽", canKill: currentCreatures, diesWhenKills:true, isAppleWhenDies:false, speedFactor: 0, cantEatApples:true, breakWalls: 2})})
+    //             killObj(bullet)
+                
+    //         }
+   
+    //    }
+       
 }

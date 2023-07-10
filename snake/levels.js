@@ -388,17 +388,17 @@ const stages = [
         rows: 50,
         cols: 60,
         maxAppples: 30,
-        chanceForDivineFruit: 0.16,
+        chanceForDivineFruit: 0,
         level_fps: 9,
         maxSpeed: 15,
         minScoretoGetDoor: 710, 
         alertoText: "Crap! You do not have how to pay the movie, You guys have to rob the bank! Note: \nYou can touch snaka but must beware the security guards!\nThe hunting gun could break walls!",
         doorSymbol: "🏦",
-        apple: "🪙",
+        apple: "💵",
         bgColor: "#6c6c6c",
         bgColorTable: "black",
-        availableGuns: [weapons.huntingun, weapons.gun],
-        maxGunsinGame: 10,
+        availableGuns: [weapons.huntingun, weapons.gun, weapons.bomb],
+        maxGunsinGame: 20,
         map: bank,
         disableRotation: true,
         customSnakeArr:[[48,24],[47,24], [46,24]],
@@ -413,6 +413,8 @@ const stages = [
                 head: "🏵️",
                 cantEatApples: false,
                 diesIfTouchesSnake: false,
+                isAppleWhenDies: true,
+                getPointsforApplesEaten: true,
                 revive: true,
                 reviveAfter: 10,
                 speedFactor: 0.125,
@@ -424,11 +426,11 @@ const stages = [
             })
             window.securityGuy = createCop([[12,2], [12,3], [12,4],[12,5],[12,6]], [snaka, snake], "⚙️")
             window.securityGuy2 = createCop([[10,2], [10,3], [10,4],[10,5]], [snaka, snake], "⚙️")
-            window.securityGuy.target == "snake"
-            window.securityGuy2.target == "snake"
-            window.banker1 = createCitizon("🫣", "📞", [[5,23],[5,24],[5,25]], [11,67])
-            window.banker2 = createCitizon("🫣", "📞", [[5,15],[5,14],[5,16]], [11,67])
-            window.banker3 = createCitizon("🫣", "📞", [[5,6],[5,5],[5,4]], [11,67])
+            window.securityGuy.target = "snake"
+            window.securityGuy2.target = "snake"
+            window.banker1 = createCitizon("🫣", "🫣", [[5,23],[5,24],[5,25]], [11,67])
+            window.banker2 = createCitizon("🫣", "🫣", [[5,15],[5,14],[5,16]], [11,63])
+            window.banker3 = createCitizon("🫣", "🫣", [[5,6],[5,5],[5,4]], [11,65])
 
         }
     
@@ -740,6 +742,8 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
     }
 
+
+  
     if (snaka.isDead) {
         if (snaka.backup && snaka.recentDeathTime){
             if (time > (snaka.recentDeathTime + snaka.reviveAfter)){
@@ -796,6 +800,7 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
     const headloc = snaka.snakeArray[0];
     const newHead = vec2dAdd(headloc, snaka.currentDir);
+  
     const newHeadContent = map[newHead[0]] ?. [newHead[1]];
 
     for (let obj of snaka.canKill){
@@ -1030,10 +1035,11 @@ function createCitizon(head, body, initialLocationArray, target){
         body, 
         cantEatApples: true,
         initialArray: initialLocationArray,
-        targetEfficiency: 0.8,
+        targetEfficiency: 0.5,
         revive: false,
         speedFactor: 0.5,
         diesIfTouchesSnake: false,
+        canKill:[],
         target
     })
 }
@@ -1054,6 +1060,25 @@ function checkCollision(obj1, obj2) {
     }
     return false;
   }
+
+  function findNeighbors(coordinates) {
+    const [x, y] = coordinates;
+    const neighbors = [];
+  
+    for (let i = x - 1; i <= x + 1; i++) {
+      for (let j = y - 1; j <= y + 1; j++) {
+        if (i >= 0 && i < map.length && j >= 0 && j < map[0].length && !(i === x && j === y)) {
+          neighbors.push([i,j]);
+        }
+      }
+    }
+  
+    return neighbors;
+  }
+  
+  
+  
+  
 
 // (saves only level and score)
 function saveGame(saves = 2, specificLevel = false, specificScore = false) {
