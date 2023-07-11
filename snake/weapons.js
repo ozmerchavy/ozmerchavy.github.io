@@ -60,7 +60,7 @@ const weapons = {
             for (const side of ["right", "left"]){
                 const loc = vec2dAdd(snake.snakeArray[0],getRightOrLeft(snake.currentDir,side))
                 anotherbullet = createSnaka({head: weapons.accordion.bulletEmoji, cantEatApples: true, initialArray: [loc], 
-                    isAppleWhenDies: false, revive: false, goPattern: "straight", currentDir: snake.currentDir, reviveAfter:0, breakWalls: 1,
+                    isAppleWhenDies: false, revive: false, goPattern: "straight", currentDir: snake.currentDir, reviveAfter:0,
                     canKill: creaturesOnBoard, speed: bullet.speed, avoidWalls: false, diesIfTouchesSnake: false, diesWhenKills: true, breakWalls:bullet.breakWalls
                 })
     
@@ -86,13 +86,30 @@ const weapons = {
             }
        
 
-       }
-
+       }},
+       evilEye: {
+        image: "evilEye",
+        bulletEmoji: "🧿",
+        speed: 2,
+        emmo: 0,
+        defaultEmmo: 3,
+        breakWalls: 0,
+        extraFunctionWhenShot:(r)=>{
+            for (const side of ["right", "left"]){
+                const directo = getRightOrLeft(snake.currentDir,side)
+                const loc = vec2dAdd(snake.snakeArray[0],directo)
+                anotherbullet = createSnaka({head: weapons.evilEye.bulletEmoji, cantEatApples: true, initialArray: [loc], 
+                    isAppleWhenDies: false, revive: false, goPattern: "straight", currentDir: directo, reviveAfter:0,
+                    canKill: creaturesOnBoard, speed: r.speed, avoidWalls: false, diesIfTouchesSnake: false, diesWhenKills: true, breakWalls:r.breakWalls
+                })
+                
+            }
+            killObj(r)
 
 }
 
 
-}
+}}
 
 
 
