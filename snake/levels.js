@@ -395,7 +395,7 @@ const stages = [
         alertoText: "Crap! You do not have how to pay the movie, You guys have to rob the bank! Note: \nYou can touch snaka but must beware the security guards!\nThe hunting gun could break walls!",
         doorSymbol: "🏦",
         apple: "💵",
-        bgColor: "#6c6c6c",
+        bgColor: "#094408",
         bgColorTable: "black",
         availableGuns: [weapons.huntingun, weapons.gun],
         maxGunsinGame: 20,
@@ -438,7 +438,7 @@ const stages = [
                 newStage()
             }
 
-            if (time>30 && isGodMode){
+            if (time>30 && snake.snakeArray[0][0]>36&&snake.snakeArray[0][1]>49){
                 bankRobbed = true
             }
         }
@@ -454,7 +454,7 @@ const stages = [
         chanceForDivineFruit: 0.005,
         level_fps: 13,
         maxSpeed: 20,
-        minScoretoGetDoor: 800, // it is not how you get to that stage though.
+        minScoretoGetDoor: 800, // it is not how you get to that stage though.We assume about 750 by now.
         alertoText: "Congrats for breaking into the bank locks! You and Snaka can enjoy some mice in your picnic 🧺. Don't Worry, you can touch Snaka now, she does not mind",
         doorSymbol: "🧺",
         apple: "🐁",
@@ -880,6 +880,7 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
                 }
                 if (snaka.diesWhenKills){
+
                     return killObj(snaka)
                      
                 }
@@ -895,13 +896,13 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
     
     // trying to avoid things
     else if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
-        if (snaka.avoidWalls && !newHeadContent == Graphics.body){
-            return moveSNAKA(snaka, choice(["right", "left"]), true)
+        if (snaka.avoidWalls && newHeadContent != Graphics.body){
+            return moveSNAKA(snaka, choice(["right", "left"]), false)
         }
         else if (newHeadContent == Graphics.body && !snaka.diesIfTouchesSnake){
             // save her if she doesnt die from snake
         }
-        else{
+        else {
 
             return killObj(snaka)
         }
