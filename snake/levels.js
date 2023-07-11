@@ -897,7 +897,7 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
     // trying to avoid things
     else if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
         if (snaka.avoidWalls && newHeadContent != Graphics.body){
-            return moveSNAKA(snaka, choice(["right", "left"]), false)
+            return moveSNAKA(snaka, choice(["right", "left"]), true)
         }
         else if (newHeadContent == Graphics.body && !snaka.diesIfTouchesSnake){
             // save her if she doesnt die from snake
@@ -1116,6 +1116,14 @@ function createCitizon(head, body, initialLocationArray, target){
 // /////////////////////////////////////////////////////////////////////////////////
 // /                         O T H E R    F U N C T I O N S                      ///
 // /////////////////////////////////////////////////////////////////////////////////
+
+function getRightOrLeft(currentDir, direction) {
+    let rotateDir = direction == "right" ? [1, -1] : [-1, 1];
+
+return [currentDir[1] * rotateDir[0], currentDir[0] * rotateDir[1]]}
+
+
+
 
 
 function checkCollision(obj1, obj2) {
