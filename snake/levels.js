@@ -454,8 +454,8 @@ const stages = [
         chanceForDivineFruit: 0.005,
         level_fps: 13,
         maxSpeed: 20,
-        minScoretoGetDoor: 800, // it is not how you get to that stage though.We assume about 750 by now.
-        alertoText: "Congrats for breaking into the bank locks! You and Snaka can enjoy some mice in your picnic 🧺. Don't Worry, you can touch Snaka now, she does not mind",
+        minScoretoGetDoor: 800, // it is not how you get to that stage though. We assume about almost 800 by now.
+        alertoText: "Congrats for breaking into the bank locks! You and Snaka can enjoy some mice in your picnic 🧺. Don't Worry, you can touch Snaka now, she does not mind.\nGet to 890 points.",
         doorSymbol: "🧺",
         apple: "🐁",
         bgImage: "picnic",
@@ -490,6 +490,64 @@ const stages = [
     
     
     },
+
+    {
+        levelName: "Back home",
+        levelNo: 2,
+        rows: 40,
+        cols: 40,
+        maxAppples: 16,
+        chanceForDivineFruit: .2,
+        level_fps: 11,
+        maxSpeed: 23,
+        minScoretoGetDoor: 890,
+        alertoText: "Time to show Snaka home, but beware of the cops, tey are everywhere!",
+        doorSymbol: "🏠",
+        maxGunsinGame: 3,
+        apple: choice(foods),
+        stageFunctionRunOnce: ()=>{
+            window.snaka = createSnaka({
+                body: "🌺",
+                head: "🏵️",
+                cantEatApples: false,
+                diesIfTouchesSnake: false,
+                isAppleWhenDies: false,
+                revive: true,
+                reviveAfter: 0,
+                initialArray: [
+                    [
+                        22, 21
+                    ],
+                    [
+                        23, 21
+                    ],
+                    [
+                        24, 21
+                    ]
+                ],
+                currentDir: directsVecs.down,
+               getPointsforApplesEaten: true,
+            })
+           
+            window.cop2 = createSnaka({
+                head: "🚨",
+                body: "🚨",
+                cantEatApples: true,
+                isAppleWhenDies: true,
+                diesIfTouchesSnake: false,
+                initialArray: [[29,29],[29,28],[29,27]],
+                goPattern: undefined,
+                speed: 0.5, 
+                revive: true,
+                reviveAfter: 150,
+                canKill: [snaka, snake]
+            })        
+            
+
+        },
+
+
+    }
 
     
 
@@ -1066,7 +1124,7 @@ function findGunByImage(image) {
 // /                          C U S T O M      B O T S                           ///
 // /////////////////////////////////////////////////////////////////////////////////
 
-function createCop(initialLocationArray, canKillArray, headBody ="🚨"){
+function createCop(initialLocationArray, canKillArray, headBody ="🚨", revive=false){
     return createSnaka({
         head: headBody,
         body: headBody,
@@ -1077,7 +1135,7 @@ function createCop(initialLocationArray, canKillArray, headBody ="🚨"){
         goPattern: undefined,
         targetEfficiency: 0.3,
         speed: 0.7, 
-        revive: false,
+        revive,
         canKill: canKillArray
     })
 }
