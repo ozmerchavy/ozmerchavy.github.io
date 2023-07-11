@@ -397,7 +397,7 @@ const stages = [
         apple: "💵",
         bgColor: "#094408",
         bgColorTable: "black",
-        availableGuns: [weapons.huntingun, weapons.gun],
+        availableGuns: [weapons.huntingun, weapons.gun, weapons.rocket],
         maxGunsinGame: 20,
         map: bank,
         disableRotation: true,
