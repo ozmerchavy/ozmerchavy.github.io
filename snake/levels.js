@@ -36,7 +36,7 @@ const stages = [
         rows: 22,
         cols: 19,
         maxAppples: 20,
-        chanceForDivineFruit: .25,
+        chanceForDivineFruit: .28,
         level_fps: 20,
         maxSpeed: 27,
         minScoretoGetDoor: 100,
@@ -150,7 +150,7 @@ const stages = [
         },
         stageFunctionEveryTurn: () => {
             if (time == 5) {
-                specialerto("This is snaka", "She is very shy, and very hungry. Your goal is to let her eat 31 apples. Every time you touch her she will start over", 140, 0, 30)
+                specialerto("This is snaka", "She is very shy, and very HUNGRY for WEED. Your goal is to let her eat 31 WEEDs. Every time you touch her she will start over", 140, 0, 30)
                 Graphics.disableSizeChange =  true
 
             }
@@ -206,7 +206,7 @@ const stages = [
                     ]
                 ],
                 target: "snake",
-                targetEfficiency: 0.2
+                targetEfficiency: 0.04
             })
         },
         stageFunctionEveryTurn: () => {
@@ -228,7 +228,8 @@ const stages = [
                 pauseGame()
                 alerto("You saved snaka!!", `Thanks for keeping her safe. She gave you a ❤️, 50 points, and THREE SAVES to space level.  Keep going now! you need 610 points`)
                 killObj(snaka, true)
-                maxApplesAtOnce = 20
+                maxApplesAtOnce = 25
+                chanceForDivineFruit = 0.2
                 addLife()
                 saveGame(3, 8, 400)
                 snake.score += 50
@@ -240,7 +241,7 @@ const stages = [
 
         levelName: "On the Run",
         levelNo: 10,
-        rows: 10,
+        rows: 14,
         cols: 200,
         maxAppples: 0,
         level_fps: 12,
@@ -268,8 +269,8 @@ const stages = [
         ],
         disableRotation: true,
         chanceForGuns: 0.1,
-        maxGunsinGame: 5,
-        availableGuns: Object.values(weapons).slice(0,5),
+        maxGunsinGame:  7,
+        availableGuns: Object.values(weapons).slice(0,4),
         stageFunctionRunOnce: () => {
            
             document.querySelector("table").style.setProperty("--transX", 20 * 100)
@@ -292,7 +293,7 @@ const stages = [
                 ],
                 target: "snake",
                 targetEfficiency: 0.13,
-                speed: 0.85,
+                speed: 0.75,
                 currentDir: [0, 1]
             })
             window.cop1 = createCop([[ 9, 9],[9, 8]], [snaka])
@@ -301,6 +302,8 @@ const stages = [
             window.cop4 = createSuperCop([[3, 185],[3, 186],[3, 187],[3,188]], [snaka])
       
             window.cops = [cop1,cop2, cop3, cop4]
+            window.timeWon = undefined
+
         },
 
         stageFunctionEveryTurn: () => {
@@ -312,21 +315,16 @@ const stages = [
             }
            
             for (const cop of window.cops){
-                if (cop.isDead){
-                    snake.score += 5
-                    window.cops.splice(window.cops.indexOf(cop),1)
-                }
                 cop.target = snaka.snakeArray[1]
                 
             }
-            let timeWon
-            if (snaka.snakeArray[0][1] > 185){
+            if ((snaka.snakeArray[0][1] > 185) &&  !window.timeWon){
                 pauseGame()
                 alerto("you and Snaka managed to escape!", "you get 2 saves to this very state!")
                 saveGame(2)
-                timeWon = time  
+                window.timeWon = time  
             }
-            if (timeWon && time == (timeWon+1)){
+            if (window.timeWon && time == (timeWon+1)){
                 newStage()
 
             }
@@ -529,7 +527,7 @@ const stages = [
                getPointsforApplesEaten: true,
             })
            
-            window.cop2 = createSnaka({
+            window.cop1 = createSnaka({
                 head: "🚨",
                 body: "🚨",
                 cantEatApples: true,
@@ -546,8 +544,13 @@ const stages = [
 
         },
 
-
+        stageFunctionEveryTurn: ()=>{
+            if (snake.snakeArray.length>25){
+                window.cop1.backup = undefined
+            }
+        }
     }
+
 
     
 
@@ -1133,8 +1136,8 @@ function createCop(initialLocationArray, canKillArray, headBody ="🚨", revive=
         diesIfTouchesSnake: false,
         initialArray: initialLocationArray,
         goPattern: undefined,
-        targetEfficiency: 0.3,
-        speed: 0.7, 
+        targetEfficiency: 0.4,
+        speed: 0.75, 
         revive,
         canKill: canKillArray
     })
@@ -1151,10 +1154,10 @@ function createSuperCop(initialLocationArray,canKillArray, head = "🚨", body =
         diesIfTouchesSnake: false,
         initialArray: initialLocationArray,
         goPattern: undefined,
-        targetEfficiency: 0.45,
+        targetEfficiency: 0.6,
         revive: true,
-        reviveAfter: 150,
-        speed: 0.7,
+        reviveAfter: 275,
+        speed: 0.8,
         canKill: canKillArray
     })
 }
