@@ -17,6 +17,7 @@ const weapons = {
         defaultEmmo: 5,
         breakWalls: false,
         extraFunctionWhenShot: ()=>{
+          
         }
    
        },
@@ -28,6 +29,7 @@ const weapons = {
         defaultEmmo: 3,
         breakWalls: 1,
         extraFunctionWhenShot: ()=>{
+            
         },
     },
 
@@ -42,7 +44,62 @@ const weapons = {
             extraFunctionWhenShot: (bullet)=>{  
                 bullet.goPattern = "mostlyStraight"
                 bullet.avoidWalls = true
+                
             }
    
+       },
+
+       accordion: {
+        image: "accordion",
+        bulletEmoji: "🪗" ,
+        speed: 2,
+        emmo: 0,
+        defaultEmmo: 2,
+        breakWalls: 1,
+        extraFunctionWhenShot: (bullet)=>{
+            for (const side of ["right", "left"]){
+                const loc = vec2dAdd(snake.snakeArray[0],getRightOrLeft(snake.currentDir,side))
+                anotherbullet = createSnaka({head: weapons.accordion.bulletEmoji, cantEatApples: true, initialArray: [loc], 
+                    isAppleWhenDies: false, revive: false, goPattern: "straight", currentDir: snake.currentDir, reviveAfter:0, breakWalls: 1,
+                    canKill: creaturesOnBoard, speed: bullet.speed, avoidWalls: false, diesIfTouchesSnake: false, diesWhenKills: true, breakWalls:bullet.breakWalls
+                })
+    
+            }
+          
+        }
+
+       },
+
+       rocket: {
+        image: "rocket",
+        bulletEmoji: "🚀",
+        speed: 3,
+        emmo: 0,
+        defaultEmmo: 1,
+        breakWalls: 2,
+        extraFunctionWhenShot:(r)=>{
+            const target = creaturesOnBoard.filter(c=>c.canKill.includes(snake))[0]?.snakeArray[0]
+            if (target){
+                r.target = target
+                r.goPattern = undefined
+                r.targetEfficiency = 1
+            }
+       
+
        }
+
+
+}
+
+
+}
+
+
+
+
+
+
+function testWeapons(){
+    Object.values(weapons).forEach(w=> w.emmo = 20)
+    snake.equipment = Object.values(weapons)
 }

@@ -740,7 +740,8 @@ function createSnaka({
     avoidWalls = true,
     diesWhenKills = false,
     getPointsforApplesEaten = false,
-    breakWalls = false
+    breakWalls = false,
+    functionWhenDies = undefined
 
 }) {
     const snaka = {
@@ -764,7 +765,8 @@ function createSnaka({
         diesWhenKills,
         reviveAfter,
         getPointsforApplesEaten,
-        breakWalls
+        breakWalls,
+        functionWhenDies
     };
     if (revive) {
         snaka.backup = copy(snaka)
@@ -779,7 +781,8 @@ function createSnaka({
 
 
 // this function moves a SNAKA after it is created, needs to run every turn
-function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
+function 
+moveSNAKA(snaka, diretion = undefined, justOnce = false) {
     if (snaka.speed != 1  & snaka.speed !=0) {
         if (snaka.speed < 1) {
             if(snaka.speed<0.5){
@@ -912,7 +915,6 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
     // snaka dies if you touch her
     if (snaka.diesIfTouchesSnake && checkCollision(snaka, snake)) {
-
         return killObj(snaka)
         
     }
@@ -944,6 +946,9 @@ function moveSNAKA(snaka, diretion = undefined, justOnce = false) {
 
 
 function killObj(obj, noParole = false) {
+    if (obj.functionWhenDies){
+        obj.functionWhenDies(obj)
+    }
     if (obj.head == weapons.huntingun.bulletEmoji || obj.head == weapons.gun.bulletEmoji ){
     }
 
@@ -1020,6 +1025,7 @@ function shoot(gun){
         isAppleWhenDies: false, revive: false, goPattern: "straight", currentDir: snake.currentDir, reviveAfter:0, 
         canKill: creaturesOnBoard, speed: gun.speed, avoidWalls: false, diesIfTouchesSnake: false, diesWhenKills: true, breakWalls:gun.breakWalls
     })
+
     updateMap(snake.snakeArray[0], Graphics.head)
     gun.extraFunctionWhenShot(bullet)
     gun.emmo--
