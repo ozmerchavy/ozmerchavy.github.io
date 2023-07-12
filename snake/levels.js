@@ -960,7 +960,7 @@ moveSNAKA(snaka, diretion = undefined, justOnce = false) {
     
     // trying to avoid things
     else if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
-        if (snaka.avoidWalls && newHeadContent != Graphics.body){
+        if (snaka.avoidWalls){
             return moveSNAKA(snaka, choice(["right", "left"]), true)
         }
         else if (newHeadContent == Graphics.body && !snaka.diesIfTouchesSnake){
