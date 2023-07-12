@@ -270,7 +270,7 @@ const stages = [
         disableRotation: true,
         chanceForGuns: 0.1,
         maxGunsinGame:  7,
-        availableGuns: Object.values(weapons).slice(0,4),
+        availableGuns: Object.values(weapons).slice(0,5),
         stageFunctionRunOnce: () => {
            
             document.querySelector("table").style.setProperty("--transX", 20 * 100)
@@ -802,7 +802,8 @@ function createSnaka({
     diesWhenKills = false,
     getPointsforApplesEaten = false,
     breakWalls = false,
-    functionWhenDies = undefined
+    functionWhenDies = undefined,
+    interactionInsteadOFKillingaCanKillObject = undefined
 
 }) {
     const snaka = {
@@ -827,7 +828,8 @@ function createSnaka({
         reviveAfter,
         getPointsforApplesEaten,
         breakWalls,
-        functionWhenDies
+        functionWhenDies,
+        interactionInsteadOFKillingaCanKillObject
     };
     if (revive) {
         snaka.backup = copy(snaka)
@@ -940,7 +942,12 @@ moveSNAKA(snaka, diretion = undefined, justOnce = false) {
                 } 
                 
                 else {
-                    killObj(obj)
+                    if (snaka.interactionInsteadOFKillingaCanKillObject){
+                        snaka.interactionInsteadOFKillingaCanKillObject(obj)
+                    }
+                    else {
+                        killObj(obj)
+                    }
 
                 }
                 if (snaka.diesWhenKills){
@@ -960,7 +967,7 @@ moveSNAKA(snaka, diretion = undefined, justOnce = false) {
     
     // trying to avoid things
     else if (newHeadContent === undefined || (newHeadContent == Graphics.wall || newHeadContent == Graphics.body)) {
-        if (snaka.avoidWalls){
+        if (snaka.avoidWalls &&  snaka.speed != 0 ){
             return moveSNAKA(snaka, choice(["right", "left"]), true)
         }
         else if (newHeadContent == Graphics.body && !snaka.diesIfTouchesSnake){
@@ -1042,6 +1049,7 @@ function killObj(obj, noParole = false) {
 
 function revive(snaka){
         snaka.snakeArray = copy(snaka.backup.snakeArray)
+        snaka.speed = snaka.backup.speed
         snaka.currentDir = snaka.backup.currentDir
         snaka.isDead = false
 }

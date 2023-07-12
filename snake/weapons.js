@@ -9,6 +9,29 @@ const weapons = {
      extraFunctionWhenShot: ()=>{}
 
     },
+    smallFreezer: {
+        image: "iceBox",
+        bulletEmoji: "🧊",
+        speed: 4,
+        emmo: 0,
+        defaultEmmo:8,
+        breakWalls: 0,
+        extraFunctionWhenShot:(r)=>{
+            r.interactionInsteadOFKillingaCanKillObject = (victim)=>{
+                let originalGuy = copy(victim) 
+                victim.speed = 0
+                victim.backup = originalGuy 
+                victim.reviveAfter = 0
+                setTimeout((victim)=>{
+                    killObj(victim)
+    
+                }
+            ,3000, victim)
+    
+       }},
+    
+    
+    },
     waterGun:{
         image: "water-gun",
         bulletEmoji: "💦" ,
@@ -110,6 +133,30 @@ const weapons = {
 
 
 },
+strongfreezer: {
+    image: "snow",
+    bulletEmoji: "❄️",
+    speed: 4,
+    emmo: 0,
+    defaultEmmo:3,
+    breakWalls: 0,
+    extraFunctionWhenShot:(r)=>{
+        r.interactionInsteadOFKillingaCanKillObject = (victim)=>{
+            let originalGuy = copy(victim) 
+            victim.speed = 0
+            victim.backup = originalGuy 
+            victim.reviveAfter = 0
+            setTimeout((victim)=>{
+                killObj(victim)
+
+            }
+        ,9000, victim)
+
+   }},
+
+
+},
+
 
 
 }
