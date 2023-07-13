@@ -9,29 +9,30 @@ const weapons = {
      extraFunctionWhenShot: ()=>{}
 
     },
-    smallFreezer: {
-        image: "iceBox",
-        bulletEmoji: "🧊",
-        speed: 4,
-        emmo: 0,
-        defaultEmmo:8,
-        breakWalls: 0,
-        extraFunctionWhenShot:(r)=>{
-            r.interactionInsteadOFKillingaCanKillObject = (victim)=>{
-                let originalGuy = copy(victim) 
-                victim.speed = 0
-                victim.backup = originalGuy 
-                victim.reviveAfter = 0
-                setTimeout((victim)=>{
-                    killObj(victim)
+    // smallFreezer: {
+    //     image: "iceBox",
+    //     bulletEmoji: "🧊",
+    //     speed: 4,
+    //     emmo: 0,
+    //     defaultEmmo:8,
+    //     breakWalls: 0,
+    //     extraFunctionWhenShot:(r)=>{
+    //         r.interactionInsteadOFKillingaCanKillObject = (victim)=>{
+    //             let originalGuy = copy(victim) 
+    //             victim.speed = 0
+    //             victim.backup = originalGuy 
+    //             victim.reviveAfter = 0
+    //             victim.canKill = []
+    //             setTimeout((victim)=>{
+    //                 killObj(victim)
     
-                }
-            ,3000, victim)
+    //             }
+    //         ,4000, victim)
     
-       }},
+    //    }},
     
     
-    },
+    // },
     waterGun:{
         image: "water-gun",
         bulletEmoji: "💦" ,
@@ -133,30 +134,56 @@ const weapons = {
 
 
 },
-strongfreezer: {
-    image: "snow",
-    bulletEmoji: "❄️",
+// strongfreezer: {
+//     image: "snow",
+//     bulletEmoji: "❄️",
+//     speed: 4,
+//     emmo: 0,
+//     defaultEmmo:3,
+//     breakWalls: 0,
+//     extraFunctionWhenShot:(r)=>{
+//         r.interactionInsteadOFKillingaCanKillObject = (victim)=>{
+//             let originalGuy = copy(victim) 
+//             victim.speed = 0
+//             victim.backup = originalGuy 
+//             victim.reviveAfter = 0
+//             setTimeout((victim)=>{
+//                 killObj(victim)
+
+//             }
+//         ,10000, victim)
+
+//    }},
+
+
+// },
+
+uzi: {
+    image: "uzi",
+    bulletEmoji: "🎈",
     speed: 4,
     emmo: 0,
-    defaultEmmo:3,
+    defaultEmmo:13,
     breakWalls: 0,
     extraFunctionWhenShot:(r)=>{
+
+        godModeEndTime = Date.now() + 2000 
         r.interactionInsteadOFKillingaCanKillObject = (victim)=>{
-            let originalGuy = copy(victim) 
-            victim.speed = 0
-            victim.backup = originalGuy 
-            victim.reviveAfter = 0
-            setTimeout((victim)=>{
-                killObj(victim)
+            if (victim.snakeArray.length >3){
+                let loc =victim.snakeArray.shift()
+                let loc2 = victim.snakeArray.shift()
+                updateMap(loc, Graphics.emptys)
+                updateMap(loc2, Graphics.emptys)
 
             }
-        ,9000, victim)
+            else {
+                killObj(victim)
+            }
 
    }},
 
 
 },
-
 
 
 }
@@ -167,6 +194,7 @@ strongfreezer: {
 
 
 function testWeapons(){
-    Object.values(weapons).forEach(w=> w.emmo = 20)
+    Object.values(weapons).forEach(w=> w.emmo = 30)
     snake.equipment = Object.values(weapons)
+    equip(0)
 }
