@@ -64,17 +64,21 @@ table .⬜️ {
 }
 
 
-
-table .🔑 {
+table .❤️, .🔑 {
     border: 0.2px solid white;
   }
 
-table .❤️ {
-    border: 0.2px solid white;
-  }
+table .🪗 {
+    color: transparent;
+
+    background-image: url("extra-media/accordy.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
 
   table .⬤ {
-    color: transparent;
+    /* color: transparent; */
     background-image: url("extra-media/bullet.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -90,6 +94,11 @@ table .❤️ {
     background-image: url("extra-media/duckbomb.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+  }
+
+  table .☁️{
+    border: 0.2px solid rgb(196, 0, 173);
+
   }
 
 
