@@ -229,7 +229,7 @@ const stages = [
                 alerto("You saved snaka!!", `Thanks for keeping her safe. She gave you a ❤️, 50 points, and THREE SAVES to space level.  Keep going now! you need 610 points`)
                 killObj(snaka, true)
                 maxApplesAtOnce = 25
-                chanceForDivineFruit = 0.2
+                chanceForDivineFruit = 0.26
                 addLife()
                 saveGame(3, 8, 400)
                 snake.score += 50
