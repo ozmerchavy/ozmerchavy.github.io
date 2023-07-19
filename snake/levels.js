@@ -491,7 +491,7 @@ const stages = [
 
     {
         levelName: "Back home",
-        levelNo: 2,
+        levelNo: 13,
         rows: 40,
         cols: 40,
         maxAppples: 16,
@@ -499,7 +499,7 @@ const stages = [
         level_fps: 11,
         maxSpeed: 23,
         minScoretoGetDoor: 890,
-        alertoText: "Time to show Snaka home, but beware of the cops, tey are everywhere!",
+        alertoText: "Time to show Snaka home, but beware of the cops, tey are everywhere! Get to 960 points",
         doorSymbol: "🏠",
         maxGunsinGame: 3,
         apple: choice(foods),
@@ -549,7 +549,43 @@ const stages = [
                 window.cop1.backup = undefined
             }
         }
-    }
+    },
+
+    {
+        levelName: "Bachelor Party",
+        levelNo: 14,
+        maxAppples: 30,
+        chanceForDivineFruit: .13,
+        level_fps: 11,
+        maxSpeed: 23,
+        minScoretoGetDoor: 960,
+        alertoText: "Snaka said YES!🌺🌺🏵️ time to celebrate with friends. No special rules, just dont hit the walls bc youre DRUNK!.",
+        doorSymbol: "🎉",
+        apple: "🍾",
+        map: party,
+        bgColorTable: "#130214de",
+        bgColor: "transparent", 
+        disableRotation: true,
+        bgImage: "party",
+        stageFunctionRunOnce: ()=>{
+            createCitizon("☸️","🌀", [[0,1],[0,2],[0,3],[0,4]], undefined)    
+            createCitizon("☸️","🌀", [[0,1],[0,2],[0,3],[0,4]], undefined) 
+            createCitizon("☸️","🌀", [[0,1],[0,2],[0,3],[0,4]], undefined) 
+            createCitizon("☸️","🌀", [[0,1],[0,2],[0,3],[0,4]], undefined) 
+            window.curretRotation = 1
+            
+
+        },
+        stageFunctionEveryTurn: ()=>{
+          if (time % 150 == 0){
+            window.curretRotation = window.curretRotation*-1
+          }
+            let ro = document.querySelector("table").style.getPropertyValue("--rotation");
+            document.querySelector("table").style.setProperty("--rotation", Number(ro) + 7*window.curretRotation);  
+          }
+
+        }
+
 
 
     
