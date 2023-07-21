@@ -555,11 +555,11 @@ const stages = [
         levelName: "Bachelor Party",
         levelNo: 14,
         maxAppples: 30,
-        chanceForDivineFruit: .13,
+        chanceForDivineFruit: .27,
         level_fps: 11,
         maxSpeed: 23,
         minScoretoGetDoor: 960,
-        alertoText: "Snaka said YES!🌺🌺🏵️ time to celebrate with friends. No special rules, just dont hit the walls bc youre DRUNK!.",
+        alertoText: "Snaka said YES!🌺🌺🏵️ you get a ❤️. Time to celebrate with friends. No special rules, and you may touch them. just dont hit the walls bc youre DRUNK!.",
         doorSymbol: "🎉",
         apple: "🍾",
         map: party,
@@ -569,10 +569,11 @@ const stages = [
         bgImage: "party",
         stageFunctionRunOnce: ()=>{
             createCitizon("☸️","🌀", [[0,1],[0,2],[0,3],[0,4]], undefined)    
-            createCitizon("☸️","🌀", [[0,1],[0,2],[0,3],[0,4]], undefined) 
-            createCitizon("☸️","🌀", [[0,1],[0,2],[0,3],[0,4]], undefined) 
-            createCitizon("☸️","🌀", [[0,1],[0,2],[0,3],[0,4]], undefined) 
+            createCitizon("🕰️","🌀", [[0,1],[0,2],[0,3],[0,4]], undefined) 
+            createCitizon("🐽","🌀", [[0,1],[0,2],[0,3],[0,4]], undefined) 
+            createCitizon("🌹","🌀", [[0,1],[0,2],[0,3],[0,4]], undefined) 
             window.curretRotation = 1
+            addLife()
             
 
         },
@@ -581,7 +582,7 @@ const stages = [
             window.curretRotation = window.curretRotation*-1
           }
             let ro = document.querySelector("table").style.getPropertyValue("--rotation");
-            document.querySelector("table").style.setProperty("--rotation", Number(ro) + 7*window.curretRotation);  
+            document.querySelector("table").style.setProperty("--rotation", Number(ro) + 3*window.curretRotation);  
           }
 
         }
