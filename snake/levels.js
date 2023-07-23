@@ -585,8 +585,8 @@ const stages = [
             document.querySelector("table").style.setProperty("--rotation", Number(ro) + 3*window.curretRotation);  
           }
 
-        }
-
+        },
+  
 
 
     
