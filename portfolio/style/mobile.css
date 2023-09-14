@@ -1,58 +1,73 @@
 
 
-@media (max-width: 854px) {
-  header .profile-img {
-      display: none;
-  }
-  nav {
-      --pad-x: 5;
-      --pad-y: 10;
-  }
-  nav ul {
-      justify-content: space-between;
-
-      gap: .5rem;
-      margin-top: 1rem;
-  }
-  body {
-      padding-inline: .5rem;
-      padding-block: 1.5rem;
-  }
-
-  .grid {
-      --min-column-size: 10rem;
-      font-size: .6em;
-  }
-
-  .grid img {
-      width: 50%;
-  }
-
-  .skills img {
-      width: 30%;
-  }
-  
-  .skills-grid {
-      --min-column-size: 8rem;
-      grid-column-gap: 0rem;
-      grid-row-gap: 2rem;
-  }
-}
-
 
 @media (max-width: 800px) {
-
+    *{
+        /* outline: 2px solid plum; */
+    }
   body {
+    padding: 0;
     margin: 0; 
+  }
+  main {
     max-width: 100vw;
   }
 
   header {
-      min-height: calc(100vh - 4rem);
-      min-height: 50vh; 
+      min-height: 50vh;
+      padding-inline :20px ;
+      position: relative;
+      justify-content: center;
+      width: 100%;
+  }
+
+h1 {
+    text-align: center;
+}
+  
+
+
+  .profile-img {
+    position: absolute;
+    bottom: 4rem;
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    max-width: 60%;
+
+  }
+
+  nav {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+
+  }
+
+  nav .tab-marker {
+    transform: scaleX(0.8) scaleY(0.94);
+  }
+
+  nav ul{
+    font-size: .7rem;
+    justify-content: space-evenly;
+    margin: 0;
+    gap: 0;
+ 
   }
 
 
+.carousel-grids{
+    margin-top: .65rem;
+    max-width: 100vw;
+    margin-inline: 0;
+}
+
+  .grid {
+    --min-column-size: 10rem;
+    font-size: .6em;
+    gap: 1px;
+    max-width: 100vw;
+}
 
   .grid img {
       width: 60%;
