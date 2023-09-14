@@ -1,0 +1,155 @@
+
+/*EDUCATION*/
+
+.education {
+  margin-top: 10rem;
+  text-align: center;   
+}
+
+
+
+
+.education p {
+  font-size: 0.9rem;
+  line-height: 1.4rem;
+}
+
+.education p .mainshtik{
+  font-size: 1.1rem;
+}
+
+
+
+.certificates {
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+  padding-top: 5rem;
+  
+
+}
+
+.certificates div img{
+  max-width: 200px;
+  aspect-ratio: 1;
+  transition: all 200ms ease-in;
+
+}
+
+.certificates div img:hover{
+  transform: scale(1.05);
+}
+
+
+
+/*SKILLS*/
+.skills {
+  margin-top: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.skills h2 {
+  text-align: center;
+}
+
+.skills-grid {
+  --min-column-size: 12rem;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--min-column-size), 100%), 1fr));
+}
+
+.skills .skill-icon {
+  aspect-ratio: 3 / 1;
+}
+
+.skills img {
+  width: 20%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin-inline: auto;
+}
+
+
+
+/* CONTACT*/
+
+.contact {
+  text-align: center;
+  margin-top: 10rem;
+}
+
+
+.contact div {
+   margin-top: 4rem;
+   display: flex;
+   justify-content: center;
+   gap: 4rem;
+}
+
+.contact a {
+  color:#fff;
+  background: var(--second-color);
+  border-radius:4px;
+  text-align:center;
+  text-decoration:none;
+  font-family: 'Font Awesome 5 Free';
+  position: relative;
+  display: inline-block;
+  width:40px;
+  height:28px;
+  padding-top:12px;
+  margin:0 2px;
+  transition: all .5s;
+}
+
+.contact a:hover {
+  background: var(--grid-item-desc-bg);
+  cursor: pointer;
+
+}
+
+/* pop-up text */
+
+.contact a span {
+
+  color: var(--menu-font-color);
+  position:absolute;
+  font-family:sans-serif;
+  bottom:0;
+  left:-25px;
+  right:-25px;
+  padding:5px 7px;
+  z-index:-1;
+  font-size:1rem;
+  border-radius:2px;
+  background: var(--second-color);
+  visibility:hidden;
+  opacity:0;
+  transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+
+/* text pops up when icon is in hover state */
+
+a:hover span {
+  bottom:50px;
+  visibility:visible;
+  opacity:1;
+}
+
+
+.my-email{
+  font-size: 0.8rem;
+  
+  font-weight: 500;
+  border-radius: 4px;
+  max-width: 50%;
+  margin-inline: auto;
+  margin-top: 4rem;
+  color: white;
+  background-color: var(--second-color);
+}

@@ -43,7 +43,8 @@
 @media (max-width: 800px) {
 
   body {
-      padding-inline: 0rem;
+    margin: 0; 
+    max-width: 100vw;
   }
 
   header {
@@ -51,9 +52,7 @@
       min-height: 50vh; 
   }
 
-  /* .grid {
-      --min-column-size: 6rem;
-  } */
+
 
   .grid img {
       width: 60%;

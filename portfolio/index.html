@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
         <link rel="stylesheet" href="style/animation.css">
         <link rel="stylesheet" href="style/cards.css">
@@ -18,12 +19,13 @@
         <link rel="stylesheet" href="style/miscellaneous.css">
         <link rel="stylesheet" href="style/mobile.css">
         <link rel="stylesheet" href="style/nav.css">
-        <link rel="stylesheet" href="style/skills-and-education.css">
+        <link rel="stylesheet" href="style/education-skills-contact.css">
 
         
         <script defer src="tab-marker.js"></script>
         <script defer src="type-animation.js"></script>
         <script defer src="code.js"></script>
+        <script defer src="copyEmail.js"></script>
     </head>
 
     <body>
@@ -34,7 +36,7 @@
                 <div class="header-content">
                     <div class="aboutme">
                         <h1>Oz Merchavy</h1>
-                        <div id="descriptionTexts">
+                        <div id="descriptionTexts" class="descriptive-text">
                             <p>
                                 <!-- Communications -->
                                 With over 5 years of proven expertise as a dynamic marketing and communications director, 
@@ -275,8 +277,8 @@
             <section class="education">
                 <h2>Education</h2>
                 <div class="certificates">
-                <div> <img src="media\skills\awsCertificate.png" alt=""><p>AWS Cloud Architect 2023</p></div>
-                <div> <img src="media\skills\munDegree.jpg" alt=""><p>Bechelour degree Memorial University 2024</p></div>
+                    <div> <img src="media\skills\munDegree.jpg" alt=""><p><span class="mainshtik">Bachelor of Music </span><br> expected 2024</p></div>
+                <div> <a href="https://www.credly.com/badges/5c9d7a7d-12fb-4d57-8100-155cf5c38fa3/public_url"><img src="media\skills\awsCertificate.png" alt=""></a><p><span class="mainshtik">AWS Solutions Architect </span><br> achieved 2023</p></div>
             </div>
             </section>
 
@@ -384,6 +386,20 @@
 
             </div>
         </section>
+
+        <section class="contact" id="contact">
+            <h2>Contact Me</h2>
+            <div>
+                <a type="button" id="email-link" data-address="ozmerchavy2@gmail.com"><span>Email</span>✉</a>
+                <a href="https://www.linkedin.com/in/ozmerchavy/" target="_blank"><span>LinkedIn</span>L</a>
+                <a href="https://github.com/ozmerchavy2?tab=repositories" target="_blank"><span>Github</span>G</a>
+              </div>
+              
+              <p id="placeforemail" class="my-email"></p>
+
+        </section>
+
+
 
 
     </body>
