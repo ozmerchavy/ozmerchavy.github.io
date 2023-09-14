@@ -37,9 +37,7 @@
     scale: 1.03;
 }
 
-.grid:is(.coding, .piano) .card:hover .texts {
-    transform: translateY(50px);
-}
+
 
 .grid:is(.coding, .piano) .lil-img {
     width: 100%;
