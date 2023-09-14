@@ -1,0 +1,64 @@
+
+.skills {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.skills h2 {
+  text-align: center;
+
+}
+
+.skills-grid {
+  --min-column-size: 12rem;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--min-column-size), 100%), 1fr));
+}
+
+.skills .skill-icon {
+  aspect-ratio: 3 / 1;
+}
+
+.skills img {
+  width: 20%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin-inline: auto;
+}
+
+
+
+/*EDUCATION*/
+
+.education {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  text-align: center; 
+  align-items: center; 
+
+
+}
+
+.education h2 {
+margin: auto
+}
+
+
+.certificates {
+  display: flex;
+  gap: 10rem;
+  flex-direction: row;
+  align-content: space-between;
+
+  
+
+}
+
+.certificates div img{
+  max-width: 200px;
+  aspect-ratio: 1;
+}

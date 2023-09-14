@@ -1,0 +1,33 @@
+
+/******* GRID *******/
+
+.grid {
+  --min-column-size: 15rem;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--min-column-size), 100%), 1fr));
+}
+
+/******* carousel-grids *******/
+
+.carousel-grids {
+  padding: 8px;
+  margin-inline: -11px;
+
+  --gap: 1rem;
+  display: grid;
+  gap: var(--gap);
+  grid-auto-flow: column; 
+  grid-auto-columns: 100%;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+
+  overflow: hidden;
+
+  scroll-behavior: smooth;
+}
+
+.carousel-grids > * {
+  scroll-snap-align: start;
+  width: calc(var(--gap) + 100%);
+}
