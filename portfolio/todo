@@ -12,6 +12,8 @@ communications cards
 
 grids
 1. allow different number of itmes in each subgrid 
+2. check if using normal overflowing div over 'scroll-snap-type: x mandatory'
+   can make safari smooth
 
 msc
 1. add section "Education"
