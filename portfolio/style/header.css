@@ -4,10 +4,6 @@ header .aboutme {
   margin: 0;
 }
 
-header .aboutme h1 {
-  margin-bottom: 3rem;
-}
-
 header .aboutme .descriptive-text {
   min-height: 8rem;
 }
@@ -26,7 +22,7 @@ header img {
 header {
   display: grid;
   grid-template-areas:
-    "aboutme NOTHING"
+    "aboutme profile-img"
     "nav profile-img";
   grid-template-columns: 1fr 1fr;
 }
@@ -56,11 +52,14 @@ nav {
       "nav";
     grid-template-columns: 1fr;
   }
+  header .aboutme .descriptive-text {
+    min-height: 11rem;
+  }
   .profile-img {
     padding-left: 0;
     width: 88%;
     margin-inline: auto;
-    margin-bottom: 4rem; 
+    margin-bottom: 2rem; 
   }
   nav {
     padding-right: 0;
