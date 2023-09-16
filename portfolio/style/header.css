@@ -5,7 +5,7 @@ header .aboutme {
 }
 
 header .aboutme .descriptive-text {
-  min-height: 8rem;
+  min-height: 10rem;
 }
 
 header .profile-img img:not(.hidden) {
