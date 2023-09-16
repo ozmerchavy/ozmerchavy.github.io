@@ -1,13 +1,3 @@
-
-/******* GRID *******/
-
-.grid {
-  --min-column-size: 15rem;
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(var(--min-column-size), 100%), 1fr));
-}
-
 /******* carousel-grids *******/
 
 .carousel-grids {
@@ -27,7 +17,17 @@
   scroll-behavior: smooth;
 }
 
-.carousel-grids > * {
+
+/******* GRID *******/
+
+.grid {
+  --min-column-size: 15rem;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--min-column-size), 100%), 1fr));
+}
+
+.carousel-grids > .grid {
   scroll-snap-align: start;
   width: calc(var(--gap) + 100%);
 }
