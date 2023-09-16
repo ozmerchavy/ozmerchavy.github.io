@@ -1,12 +1,12 @@
 const nav = document.querySelector('nav');
 const tabMarker = document.querySelector('nav .tab-marker');
 
-let __readOnly_currentlySelectedTab;
+let __readOnly_currentlySelectedTab_li;
 
 function __moveTabMarkerTo(li) {
   const cssLi = getComputedStyle(li);
-  const padX = cssLi.getPropertyValue('--pad-x');
-  const padY = cssLi.getPropertyValue('--pad-y');
+  const padX = cssLi.getPropertyValue('--marker-pad-x');
+  const padY = cssLi.getPropertyValue('--marker-pad-y');
 
   const { width, height, left, top } = li.getBoundingClientRect();
 
@@ -18,12 +18,12 @@ function __moveTabMarkerTo(li) {
   nav.style.setProperty("--marker-left", left - navRect.left - padX);
   nav.style.setProperty("--marker-top", top - navRect.top - padY);
 
-  __readOnly_currentlySelectedTab = li;
+  __readOnly_currentlySelectedTab_li = li;
 } 
 
 // fix tab marker on layout shift (page resize, font change, etc)
 new PerformanceObserver(() => {
-  __readOnly_currentlySelectedTab &&
-    __moveTabMarkerTo(__readOnly_currentlySelectedTab);
+  __readOnly_currentlySelectedTab_li &&
+    __moveTabMarkerTo(__readOnly_currentlySelectedTab_li);
 }).observe({ type: 'layout-shift', buffered: true });
 

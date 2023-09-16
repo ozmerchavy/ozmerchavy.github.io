@@ -56,15 +56,14 @@ main {
     margin: auto;
     flex-direction: column;
     gap: 0;
-
 }
 
 section {
-    margin-top: 4rem;
+    margin-top: 3rem;
 }
   
 .hidden {
-    /* visibility: hidden; MUST not write that to not kill querySelectors*/ 
+    /* visibility: hidden; MUST not write that, to not kill querySelectors */ 
     height: 0;
     margin: 0;
     padding: 0;
@@ -72,50 +71,3 @@ section {
     position: absolute;
     pointer-events: none;
 }
-
-/******* HEADER *******/
-
-header{
-    display: flex;
-    flex-direction: row;
-    gap: 3rem;
-    padding-left: 20px;
-    font-size: 1.1rem;
-    min-height: 45vh;
-}
-
-header > * {
-    flex-basis: 0;
-    flex-grow: 1;
-}
-
-.header-content {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    line-height: 1.4;
-    margin: 0;
-}
-
-
-.profile-img{
-    display: flex;
-}
-
-
-header img {
-    border-radius: 4px;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    margin-top: auto;
-    padding-bottom: 0;
-}
-
-.profile-img img:not(.hidden) {
-    visibility: visible;
-    height: auto;
-    animation: slideLeft 300ms ease-in;
-}
-  

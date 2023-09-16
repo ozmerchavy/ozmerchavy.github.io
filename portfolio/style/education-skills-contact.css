@@ -1,46 +1,35 @@
-
 /*EDUCATION*/
 
 .education {
   margin-top: 10rem;
-  text-align: center;   
+  text-align: center;
 }
-
-
-
 
 .education p {
   font-size: 0.9rem;
   line-height: 1.4rem;
 }
 
-.education p .mainshtik{
+.education p .mainshtik {
   font-size: 1.1rem;
 }
-
-
 
 .certificates {
   display: flex;
   justify-content: space-around;
   min-width: 100%;
   padding-top: 5rem;
-  
-
 }
 
-.certificates div img{
-  max-width: 200px;
+.certificates div img {
+  max-width: 150px;
   aspect-ratio: 1;
   transition: all 200ms ease-in;
-
 }
 
-.certificates div img:hover{
-  transform: scale(1.05);
+.certificates div img:hover {
+  transform: scale(1.04);
 }
-
-
 
 /*SKILLS*/
 .skills {
@@ -73,8 +62,6 @@
   margin-inline: auto;
 }
 
-
-
 /* CONTACT*/
 
 .contact {
@@ -82,69 +69,56 @@
   margin-top: 10rem;
 }
 
-
 .contact div {
-   margin-top: 4rem;
-   display: flex;
-   justify-content: center;
-   gap: 4rem;
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
 }
 
 .contact a {
-  color:#fff;
-  background: var(--second-color);
-  border-radius:4px;
-  text-align:center;
-  text-decoration:none;
-  font-family: 'Font Awesome 5 Free';
   position: relative;
   display: inline-block;
-  width:40px;
-  height:28px;
-  padding-top:12px;
-  margin:0 2px;
-  transition: all .5s;
+  width: 35px;
+  aspect-ratio: 1;
+  margin: 0 2px;
+  transition: all 0.5s;
 }
 
 .contact a:hover {
-  background: var(--grid-item-desc-bg);
   cursor: pointer;
-
 }
 
 /* pop-up text */
 
 .contact a span {
-
   color: var(--menu-font-color);
-  position:absolute;
-  font-family:sans-serif;
-  bottom:0;
-  left:-25px;
-  right:-25px;
-  padding:5px 7px;
-  z-index:-1;
-  font-size:1rem;
-  border-radius:2px;
+  position: absolute;
+  font-family: sans-serif;
+  bottom: 0;
+  left: -25px;
+  right: -25px;
+  padding: 5px 7px;
+  z-index: -1;
+  font-size: 1rem;
+  border-radius: 2px;
   background: var(--second-color);
-  visibility:hidden;
-  opacity:0;
-  transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-
 
 /* text pops up when icon is in hover state */
 
 a:hover span {
-  bottom:50px;
-  visibility:visible;
-  opacity:1;
+  bottom: 50px;
+  visibility: visible;
+  opacity: 1;
 }
 
-
-.my-email{
+.my-email {
   font-size: 0.8rem;
-  
+
   font-weight: 500;
   border-radius: 4px;
   max-width: 50%;

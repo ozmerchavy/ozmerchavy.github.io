@@ -1,6 +1,5 @@
 const carouselGrids = document.querySelector('.carousel-grids');
 const profileImages = [...document.querySelectorAll('.profile-img img')];
-let currentSectionidx = 0
 
 function __gotoSection(numSection) {
   const subGrid = document.querySelector(`.carousel-grids > :nth-child(${numSection})`);
@@ -37,16 +36,20 @@ function __changeOverallColors(numSection) {
   const secondColor = subGridStyles.getPropertyValue('--second-color'); 
   const fontColor =   subGridStyles.getPropertyValue('--font-color'); 
   const navTextColor =   subGridStyles.getPropertyValue('--menu-font-color'); 
-  const descriptionBG =   subGridStyles.getPropertyValue('--grid-item-desc-bg'); 
+  // const descriptionBG =   subGridStyles.getPropertyValue('--grid-item-desc-bg'); 
 
   const tabMarkers = document.querySelectorAll('nav li');
 
   document.body.style.backgroundColor = bgColor;
-  document.body.style.color = fontColor ? fontColor : __isLightColor(__parseCssColor(bgColor)) ? 'black' : 'white';
-  for (const tab of tabMarkers){
+
+  const [almostBlack, almostWhite] = ['rgb(0 0 0 / .9)', 'rgb(255 255 255 / .9)'];
+  document.body.style.color = fontColor || 
+    __isLightColor(__parseCssColor(bgColor)) ? almostBlack : almostWhite;
+  
+    for (const tab of tabMarkers){
     tab.style.color =  document.body.style.color
   }
-  __readOnly_currentlySelectedTab.style.color = navTextColor || document.body.style.color
+  __readOnly_currentlySelectedTab_li.style.color = navTextColor || document.body.style.color
   document.documentElement.style.setProperty("--second-color", secondColor);
 }
   
@@ -60,6 +63,13 @@ function __changeProfileImage(numSection){
 
 }
 
+document.querySelectorAll('nav li').forEach((li) => {
+  li.addEventListener('click', () => {
+    const numSection = [...nav.querySelectorAll('li')].indexOf(li) + 1;
+    changeToSection(numSection)
+  });
+});
+
 function changeToSection(numSection){
   //elimminateGridSelectoruponMotion
   document.querySelector(".grid-marker").style.minWidth = 0
@@ -71,16 +81,6 @@ function changeToSection(numSection){
   __typeRelevantText(numSection)
   __changeProfileImage(numSection)
 }
-
-
-document.querySelectorAll('nav li').forEach((li) => {
-  li.addEventListener('click', () => {
-    const numSection = [...nav.querySelectorAll('li')].indexOf(li) + 1;
-    changeToSection(numSection)
-    currentSectionidx = numSection -1
-  });
-});
-
 
 // initally the first section should be selected
 changeToSection(1);

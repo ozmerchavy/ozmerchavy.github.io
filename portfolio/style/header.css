@@ -1,0 +1,72 @@
+header .aboutme {
+  text-align: left;
+  line-height: 1.4;
+  margin: 0;
+}
+
+header .aboutme h1 {
+  margin-bottom: 3rem;
+}
+
+header .aboutme .descriptive-text {
+  min-height: 8rem;
+}
+
+header .profile-img img:not(.hidden) {
+  /* todo: if going to tab on left side, slideRight */
+  animation: slideLeft 300ms ease-in;
+}
+
+header img {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+}
+
+header {
+  display: grid;
+  grid-template-areas:
+    "aboutme NOTHING"
+    "nav profile-img";
+  grid-template-columns: 1fr 1fr;
+}
+
+.aboutme {
+  grid-area: aboutme;
+}
+
+.profile-img {
+  grid-area: profile-img;
+  padding-left: 2rem;
+  align-self: end;
+}
+
+nav {
+  grid-area: nav;
+  padding-right: 2rem;
+  align-self: end;
+}
+
+
+@media (max-width: 850px) {
+  header {
+    grid-template-areas:
+      "aboutme"
+      "profile-img"
+      "nav";
+    grid-template-columns: 1fr;
+  }
+  .profile-img {
+    padding-left: 0;
+    width: 88%;
+    margin-inline: auto;
+    margin-bottom: 4rem; 
+  }
+  nav {
+    padding-right: 0;
+  }
+  nav ul {
+    justify-content: space-evenly;
+    gap: 7%;
+  }
+}
