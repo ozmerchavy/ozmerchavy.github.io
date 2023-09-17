@@ -11,7 +11,7 @@
 
   height: 600px;
   /* height is set programmatically via JavaScript!
-   * it's only estimated here is to avoid sudden jumps when the grids load.
+   * it's only estimated here, to avoid sudden jumps when the grids load.
    */
 
   scroll-behavior: smooth;
@@ -19,7 +19,7 @@
 
 /******* GRID *******/
 
-.grid {
+.carousel-grids > .grid {
   --min-column-size: 15rem;
   display: grid;
   gap: 1.5rem;

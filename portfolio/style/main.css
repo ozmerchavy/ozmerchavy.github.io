@@ -36,6 +36,11 @@
     --grid-item-desc-bg: #2A2839;
 }
 
+html, body {
+    /* hides sideways overlow caused by hidden grids */
+    position: relative;
+    overflow-x: hidden;
+}
 
 body{
     display: flex;
@@ -45,10 +50,10 @@ body{
     background-color: var(--bg-color);
     padding: 5rem;
     gap: 3rem;
-    --body-transition: 250ms linear;
-    transition: all var(--body-transition);
-}
 
+    /* for smooth background color shift */;
+    transition: all 250ms linear;
+}
 
 main {
     display: flex;
