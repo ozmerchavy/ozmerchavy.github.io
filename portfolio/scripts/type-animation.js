@@ -4,16 +4,17 @@ const descriptionTexts = [...descriptionsElement.querySelectorAll("p")].map(x=>x
 
 const typingSpeed = 13 //ms
 
-let pendingTypeTimeout = null;
+let typingPendingTimeout = null;
 
 function type(text, idx = 0) {
   descriptionsElement.innerText = text.slice(0, idx);
   if (idx < text.length) {
-    pendingTypeTimeout = setTimeout(() => type(text, idx + 1), typingSpeed); 
+    typingPendingTimeout = setTimeout(() => type(text, idx + 1), typingSpeed); 
   }
 }
 
 function __typeRelevantText(numSection){
-  clearTimeout(pendingTypeTimeout);
-  type(descriptionTexts[numSection - 1]);
+  clearTimeout(typingPendingTimeout);
+  typingPendingTimeout = setTimeout(
+    () => type(descriptionTexts[numSection - 1]), 200);
 }
