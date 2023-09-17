@@ -71,10 +71,6 @@ document.querySelectorAll('nav li').forEach((li) => {
 });
 
 function changeToSection(numSection){
-  //elimminateGridSelectoruponMotion
-  document.querySelector(".grid-marker").style.minWidth = 0
-  document.querySelector(".grid-marker").style.minHeight = 0
-
   __moveTabMarkerTo(document.querySelector(`nav li:nth-child(${numSection})`));
   __gotoSection(numSection);
   __changeOverallColors(numSection);
