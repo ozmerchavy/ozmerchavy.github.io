@@ -1,22 +1,21 @@
-tab-marker
-1. align with left of grid -- Done
+# tab-marker
+1. ~~align with left of grid~~
 
-make navbar responsive
+# navbar
+1. ~~make navbar responsive~~
 
-loading animation to make people anticipate (which is the oppositie of cipate) what's to come
+# communications cards 
+1. ~~prettification: text ltr font~~
+2. ~~add hover thingy (only a little bit something)~~
+3. ~~on folding back up, it goes over the text~~
 
-communications cards 
-1. prettification: text ltr font -- Done
-2. add hover thingy (only a little bit something) -- Done
-3. on folding back up, it goes over the text -- Done
-
-grids
+# grids
 1. allow different number of itmes in each subgrid 
-2. check if using normal overflowing div over 'scroll-snap-type: x mandatory'
-   can make safari smooth
+2. check if using normal overflowing div over 'scroll-snap-type: x mandatory' can make safari smooth
 
-msc
+# msc
 1. add section "Education"
 2. make it responsive 
 3. make --font-color work
-
+4. loading animation to make people anticipate (which is the oppositie of cipate) what's to come
+5. add favicon
