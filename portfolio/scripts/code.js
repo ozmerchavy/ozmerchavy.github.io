@@ -3,14 +3,14 @@ const profileImages = [...document.querySelectorAll('.profile-img img')];
 const gridsArr = [...gridsContainer.querySelectorAll('.carousel-grids > .grid')];
 
 function adjustGridsContainerHeight() {
-  // const gridsHeights = gridsArr.map((grid) => grid.offsetHeight);
   requestAnimationFrame(() => {
+    // the requestAnimationFrame is a patch needed for chromium.
     const gridsHeights = gridsArr.map((grid) => grid.offsetHeight);
     gridsContainer.style.height = `${Math.max(...gridsHeights)}px`;
   });
-  // todo in order to really optimize for the poor safari,
-  // instead of using ResizeObserver (which fires ~35 times when a card grows with animation),
-  // we can just use the card click event, and grow the container to its calculated future height.
+  // todo in order to really optimize for poor safari,
+  // instead of using ResizeObserver (which fires ~35 times when a card is animated to grow),
+  // we can hook to the card click event, and grow the container to its calculated future height.
 }
 adjustGridsContainerHeight();
 const gridsResizeObserver = new ResizeObserver(adjustGridsContainerHeight);
