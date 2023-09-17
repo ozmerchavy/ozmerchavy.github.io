@@ -4,19 +4,18 @@
   padding: 8px;
   margin-inline: -11px;
 
-  --gap: 1rem;
-  display: grid;
-  gap: var(--gap);
-  grid-auto-flow: column; 
-  grid-auto-columns: 100%;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
+  --carousel-gap: 1rem;
 
-  overflow: hidden;
+  position: relative;
+  overflow-x: hidden;
+
+  height: 600px;
+  /* height is set programmatically via JavaScript!
+   * it's only estimated here is to avoid sudden jumps when the grids load.
+   */
 
   scroll-behavior: smooth;
 }
-
 
 /******* GRID *******/
 
@@ -28,6 +27,18 @@
 }
 
 .carousel-grids > .grid {
-  scroll-snap-align: start;
-  width: calc(var(--gap) + 100%);
+  position: absolute;
+  width: 100%;
+}
+
+.carousel-grids > .grid:nth-child(1) {
+  left: 0;
+}
+
+.carousel-grids > .grid:nth-child(2) {
+  left: calc(var(--carousel-gap) + 100%);
+}
+
+.carousel-grids > .grid:nth-child(3) {
+  left: calc(var(--carousel-gap) * 2 + 200%);
 }

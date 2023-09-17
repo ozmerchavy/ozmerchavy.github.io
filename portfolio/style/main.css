@@ -5,8 +5,8 @@
 }
 
 :root {
-    --bg-color: #f8f2ec;
-    --second-color: #1B074B;
+    --bg-color: #edeff5;
+    --second-color: #6471A5;
     --grid-item-desc-bg: #e7e2f277;
     --menu-font-color: #e7e2f2;
 }
@@ -62,10 +62,7 @@ section {
 }
   
 .hidden {
-    /* visibility: hidden; MUST not write that, to not kill querySelectors */ 
-    height: 0;
-    margin: 0;
-    padding: 0;
+    /* do NOT use 'visibility: hidden', is kills querySelectors */ 
     opacity: 0;
     position: absolute;
     pointer-events: none;
