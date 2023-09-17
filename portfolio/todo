@@ -19,3 +19,4 @@
 3. make --font-color work
 4. loading animation to make people anticipate (which is the oppositie of cipate) what's to come
 5. add favicon
+6. prevent descriptionTexts from flickering on page load
