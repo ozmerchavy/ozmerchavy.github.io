@@ -74,3 +74,5 @@ function changeToSection(numSection){
 // initally the first section should be selected
 changeToSection(1);
 
+// attempt to solve safari load issues
+requestAnimationFrame(() => changeToSection(1));
