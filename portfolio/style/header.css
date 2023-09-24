@@ -4,8 +4,14 @@ header .aboutme {
   margin: 0;
 }
 
+h1 {
+  font-weight: 500;
+}
+
 header .aboutme .descriptive-text {
   min-height: 10rem;
+  font-size: 1.15rem;
+
 }
 
 header .profile-img img:not(.hidden) {
@@ -25,10 +31,12 @@ header {
     "aboutme profile-img"
     "nav profile-img";
   grid-template-columns: 1fr 1fr;
+  
 }
 
 .aboutme {
   grid-area: aboutme;
+  
 }
 
 .profile-img {
