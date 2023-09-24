@@ -19,6 +19,9 @@ function __moveTabMarkerTo(li) {
   nav.style.setProperty("--marker-top", top - navRect.top - padY);
 
   __readOnly_currentlySelectedTab_li = li;
+
+  // addint a handy selector to the body: [data-tab="piano"]
+  document.body.dataset.tab = li.textContent.toLowerCase();
 } 
 
 // fix tab marker on layout shift (page resize, font change, etc)

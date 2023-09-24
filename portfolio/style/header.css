@@ -11,7 +11,11 @@ h1 {
 header .aboutme .descriptive-text {
   min-height: 11rem;
   font-size: 1.15rem;
+}
 
+[data-tab="piano"] header .aboutme .descriptive-text {
+  padding-bottom: 2rem;
+  color: magenta !important;
 }
 
 header .profile-img img:not(.hidden) {

@@ -1,3 +1,4 @@
+
 .grid .card {
     position: relative;
     border-radius: 8px;
@@ -39,6 +40,11 @@
 }
 
 
+.grid:is(.coding, .piano) a {
+    display: contents;
+    color: inherit;
+}
+
 .grid:is(.coding, .piano) .lil-img {
     width: 100%;
     height: 100%;
@@ -56,7 +62,10 @@
 .grid:is(.coding, .piano) .texts {
     position: absolute;
     bottom: 0;
-    padding: 1.3rem;
+    --_padding: 1.3rem;
+    padding: var(--_padding);
+    width: calc(100% - var(--_padding) * 2);
+    text-align: center;
 }
 
 

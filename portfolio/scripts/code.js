@@ -7,6 +7,8 @@ function adjustGridsContainerHeight() {
     // the requestAnimationFrame is a patch needed for chromium.
     const gridsHeights = gridsArr.map((grid) => grid.offsetHeight);
     gridsContainer.style.height = `${Math.max(...gridsHeights)}px`;
+    // const idx = [...__readOnly_currentlySelectedTab_li.parentElement.children].indexOf(__readOnly_currentlySelectedTab_li)
+    // gridsContainer.style.height = gridsArr[idx].offsetHeight;
   });
   // todo in order to really optimize for poor safari,
   // instead of using ResizeObserver (which fires ~35 times when a card is animated to grow),

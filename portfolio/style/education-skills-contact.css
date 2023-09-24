@@ -1,9 +1,16 @@
 /*EDUCATION*/
 
+
+h2{
+  font-weight: 500;
+
+}
 .education {
   margin-top: 10rem;
   text-align: center;
 }
+
+
 
 .education p {
   font-size: 0.9rem;

@@ -7,7 +7,7 @@
   --carousel-gap: 1rem;
 
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 
   height: 600px;
   /* height is set programmatically via JavaScript!

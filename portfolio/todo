@@ -11,20 +11,22 @@
 
 # grids
 1. allow different number of itmes in each subgrid 
-2. check if using normal overflowing div over 'scroll-snap-type: x mandatory' can make safari smooth
+2. ~~check if using normal overflowing div over 'scroll-snap-type: x mandatory' can make safari smooth~~
 
 # msc
-1. add section "Education"
-2. make it responsive 
+1. ~~add section "Education"~~
+2. ~~make it responsive~~ 
 3. make --font-color work
 4. loading animation to make people anticipate (which is the oppositie of cipate) what's to come
 5. add favicon
 6. prevent descriptionTexts from flickering on page load
 7. mobile - make profile pic and nav bar same width as grid
+8. mobile - decrease body padding
 
 # cards
-1. Make h3 in cards be aligned with the arrow in the other one
-2. Consider making them inside the card only if the card is larger
-3. On mobile, unblur, only show 
-4. In coding to make the h3s in the button of cards and only upon click the sentence under is written with type animation
+1. ~~Make h3 in cards be aligned with the arrow in the other one~~
+2. ~~Consider making them inside the card only if the card is larger~~
+3. ~~On mobile, unblur, only show~~ 
+4. ~~In coding to make the h3s in the button of cards and only upon click the sentence under is written with type animation~~
 5. 2 on mobile, and to make it readable, the cards could expand more (in communications). In coding it will anyway just be h3 unless clicked  
+
