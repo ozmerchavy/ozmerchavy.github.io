@@ -95,6 +95,7 @@
 }
 
 .grid.communications .card {
+    background-color: #f8f9fb /* fallback for safari*/;
     background-color: color-mix(in srgb, var(--bg-color) 40%, white);
 }
 
