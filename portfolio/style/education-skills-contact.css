@@ -77,11 +77,13 @@ h2{
 }
 
 .contact div {
-  margin-top: 4rem;
+  margin-top: 3rem;
   display: flex;
   justify-content: center;
   gap: 5rem;
 }
+
+
 
 .contact a {
   position: relative;
@@ -130,7 +132,26 @@ a:hover span {
   border-radius: 4px;
   max-width: 50%;
   margin-inline: auto;
-  margin-top: 4rem;
+  margin-top: 2rem;
   color: white;
   background-color: var(--second-color);
+}
+
+.resume {
+  text-align: center;
+  line-height: 1.5;
+}
+
+.resume button {
+  padding: 10px 20px;
+  border: 1px solid currentColor;
+  background-color: transparent;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer !important;
+  transition: all 200ms;
+}
+
+.resume button:hover {
+  scale: 1.02;
 }

@@ -1,33 +1,22 @@
-# tab-marker
-1. ~~align with left of grid~~
-
-# navbar
-1. ~~make navbar responsive~~
-
-# communications cards 
-1. ~~prettification: text ltr font~~
-2. ~~add hover thingy (only a little bit something)~~
-3. ~~on folding back up, it goes over the text~~
 
 # grids
 1. allow different number of itmes in each subgrid 
-2. ~~check if using normal overflowing div over 'scroll-snap-type: x mandatory' can make safari smooth~~
-3. add window resize oberserver like there's with the tab-marker; currently on resize grids are spilling into each other
+2. add window resize oberserver like there's with the tab-marker; currently on resize grids are spilling into each other
 
 # msc
-1. ~~add section "Education"~~
-2. ~~make it responsive~~ 
 3. make --font-color work
 4. loading animation to make people anticipate (which is the oppositie of cipate) what's to come
 5. add favicon
 6. prevent descriptionTexts from flickering on page load
-7. mobile - make profile pic and nav bar same width as grid
 8. mobile - decrease body padding
 
 # cards
-1. ~~Make h3 in cards be aligned with the arrow in the other one~~
-2. ~~Consider making them inside the card only if the card is larger~~
-3. ~~On mobile, unblur, only show~~ 
-4. ~~In coding to make the h3s in the button of cards and only upon click the sentence under is written with type animation~~
-5. 2 on mobile, and to make it readable, the cards could expand more (in communications). In coding it will anyway just be h3 unless clicked  
+1. 2 on mobile, and to make it readable, the cards could expand more (in communications). In coding it will anyway just be h3 unless clicked  
+
+
+# page 
+1. url params to correct tab
+2. download resume docx.
+3. button to jump to contact me.
+
 

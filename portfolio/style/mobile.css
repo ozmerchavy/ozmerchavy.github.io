@@ -8,7 +8,7 @@
   }
   .profile-img {
     padding-left: 0;
-    width: 100%;
+    width: 88%;
     margin-inline: auto;
     margin-bottom: 2rem; 
   }
@@ -22,6 +22,12 @@
 }
 
 @media (max-width: 650px) {
+  h1 {
+    text-align: center;
+  }
+  .profile-img {
+    width: 100%;
+  }
   .grid {
     --min-column-size: 10rem;
   }
@@ -35,8 +41,17 @@
     flex-direction: column;
     gap: 3rem;
   }
+  
   header .aboutme .descriptive-text {
     min-height: 11rem;
+  }
+
+  .skills-grid {
+    --min-column-size: 5rem;
+  }
+
+  .skills img {
+    width: 40%;
   }
 }
 
@@ -47,12 +62,9 @@
   .grid {
     gap: .5rem;
   }
-  .skills-grid {
-    --min-column-size: 8rem;
-  }
+
   nav ul {
     font-size: 0.8rem;
     font-weight: 500;
-
   }
 }
