@@ -29,7 +29,8 @@
 }
 
 .grid:is(.coding) .card:not(:hover) .lil-img {
-    filter: blur(2.5px) grayscale(60%);
+    filter: grayscale(60%);
+    /* filter: blur(2.5px) */
 }
 
 
@@ -60,7 +61,8 @@
 
 
 .grid:is(.coding, .piano) .texts .title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    font-weight: 500;
     margin-bottom: 0.5rem;
 }
 
@@ -135,13 +137,13 @@
 
 .grid.communications .title {
     font-size: 1rem;
-    font-weight: 900;
+    font-weight: 600;
     margin-top: 21px;
     margin-bottom: 12px;
 }
 
 .grid.communications .body-text {
-    font-size: 1rem;
+    font-size: .96rem;
     line-height: 1.4;
 }
 
