@@ -12,6 +12,7 @@
 # grids
 1. allow different number of itmes in each subgrid 
 2. ~~check if using normal overflowing div over 'scroll-snap-type: x mandatory' can make safari smooth~~
+3. add window resize oberserver like there's with the tab-marker; currently on resize grids are spilling into each other
 
 # msc
 1. ~~add section "Education"~~

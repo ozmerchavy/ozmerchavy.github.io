@@ -25,6 +25,9 @@
   .grid {
     --min-column-size: 10rem;
   }
+  nav ul {
+    justify-content: space-between;
+  }
 }
 
 @media (max-width: 600px) {

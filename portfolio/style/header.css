@@ -13,10 +13,7 @@ header .aboutme .descriptive-text {
   font-size: 1.15rem;
 }
 
-[data-tab="piano"] header .aboutme .descriptive-text {
-  padding-bottom: 2rem;
-  color: magenta !important;
-}
+
 
 header .profile-img img:not(.hidden) {
   /* todo: if going to tab on left side, slideRight */

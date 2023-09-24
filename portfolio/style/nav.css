@@ -20,7 +20,7 @@ nav ul {
   gap: 4rem;
   padding: 0;
   margin-bottom: 0;
-  margin-left: calc(var(--marker-pad-x) * 1px);
+  margin-inline: calc(var(--marker-pad-x) * 1px);
 } 
 
 nav li {
