@@ -142,16 +142,17 @@ a:hover span {
   line-height: 1.5;
 }
 
-.resume button {
+.resume .download {
   padding: 10px 20px;
+  color: inherit;
   border: 1px solid currentColor;
   background-color: transparent;
   border-radius: 6px;
   font-size: 1rem;
-  cursor: pointer !important;
+  cursor: pointer;
   transition: all 200ms;
 }
 
-.resume button:hover {
+.resume .download:hover {
   scale: 1.02;
 }
