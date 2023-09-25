@@ -114,6 +114,7 @@
 .grid.communications .card {
     background-color: #f8f9fb /* fallback for safari*/;
     background-color: color-mix(in srgb, var(--bg-color) 40%, white);
+    --exapnded-height: 180px;
 }
 
 .grid.communications .lil-text-content {
@@ -124,7 +125,7 @@
 }
 
 .grid.communications .card.expanded .lil-text-content {
-    height: 170px;
+    height: var(--exapnded-height);
 }
 
 .grid.communications .text-content {
@@ -143,7 +144,7 @@
 }
 
 .grid.communications .card.expanded .text-content {
-    height: 170px;
+    height: var(--exapnded-height);
 }
 
 .grid.communications .text-content {
@@ -157,7 +158,7 @@
 }
 
 .grid.communications .subtitle {
-    font-size: .8rem;
+    font-size: .9rem;
     font-weight: 200;
     margin-bottom: 12px;
     margin-top: -12px;
