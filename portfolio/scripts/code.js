@@ -75,8 +75,24 @@ function changeToSection(numSection){
   __changeProfileImage(numSection)
 }
 
+
+
+const sections = ["communications", "coding", "piano"]
+
+function findParamIndexInArray(array, paramName) {
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  for (const paramName of urlParams.keys()) {
+    if (array.includes(paramName)) {
+      return array.indexOf(paramName) + 1;
+    }
+  }
+
+}
+const relevantSection = findParamIndexInArray(sections) || 1
+
 // initally the first section should be selected
-changeToSection(1);
+changeToSection(relevantSection);
 
 // attempt to solve safari load issues
-requestAnimationFrame(() => changeToSection(1));
+requestAnimationFrame(() => changeToSection(relevantSection));
