@@ -10,8 +10,6 @@ h2{
   text-align: center;
 }
 
-
-
 .education p {
   font-size: 0.9rem;
   line-height: 1.4rem;
@@ -35,7 +33,7 @@ h2{
 }
 
 .certificates div img:hover {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
 /*SKILLS*/
@@ -67,6 +65,10 @@ h2{
   object-fit: cover;
   display: block;
   margin-inline: auto;
+}
+
+.skill-icon:hover::after {
+  
 }
 
 /* CONTACT*/

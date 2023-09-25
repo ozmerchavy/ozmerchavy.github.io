@@ -153,9 +153,17 @@
 .grid.communications .title {
     font-size: 1rem;
     font-weight: 600;
-    margin-top: 21px;
-    margin-bottom: 12px;
+    margin-top: 18px;
 }
+
+.grid.communications .subtitle {
+    font-size: .8rem;
+    font-weight: 200;
+    margin-bottom: 12px;
+    margin-top: -12px;
+}
+
+
 
 .grid.communications .body-text {
     font-size: .96rem;
