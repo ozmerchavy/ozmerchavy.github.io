@@ -57,6 +57,7 @@ h2{
 
 .skills .skill-icon {
   aspect-ratio: 3 / 1;
+  cursor: pointer;
 }
 
 .skills img {
@@ -67,8 +68,19 @@ h2{
   margin-inline: auto;
 }
 
+.skill-icon::after {
+  content: '';
+  position: absolute;
+  color: transparent;
+  transition: all 300ms linear;
+  transition-delay: 0.5s;
+  translate: 40% 0;
+}
+
 .skill-icon:hover::after {
-  
+  content: attr(data-tooltip);
+  color: currentColor;
+  translate: 40% 10px;
 }
 
 /* CONTACT*/
