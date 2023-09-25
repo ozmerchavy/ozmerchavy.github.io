@@ -83,8 +83,6 @@ h2{
   gap: 5rem;
 }
 
-
-
 .contact a {
   position: relative;
   display: inline-block;
@@ -92,10 +90,15 @@ h2{
   aspect-ratio: 1;
   margin: 0 2px;
   transition: all 0.5s;
+  color: inherit;
 }
 
 .contact a:hover {
   cursor: pointer;
+}
+
+.contact svg path {
+  fill: currentColor;
 }
 
 /* pop-up text */
@@ -119,7 +122,7 @@ h2{
 
 /* text pops up when icon is in hover state */
 
-a:hover span {
+.contact a:hover span {
   bottom: 50px;
   visibility: visible;
   opacity: 1;
