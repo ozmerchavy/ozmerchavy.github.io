@@ -3,6 +3,11 @@ const tabMarker = document.querySelector('nav .tab-marker');
 
 let __readOnly_currentlySelectedTab_li;
 
+function __currentGridIndex() {
+  const li = __readOnly_currentlySelectedTab_li;
+  return [...li.parentElement.children].indexOf(li);
+}
+
 function __moveTabMarkerTo(li) {
   const cssLi = getComputedStyle(li);
   const padX = cssLi.getPropertyValue('--marker-pad-x');
