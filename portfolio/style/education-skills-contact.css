@@ -156,6 +156,7 @@ h2{
   margin-inline: auto;
   transition: 200ms;
   box-shadow: rgba(99, 99, 99, 0.15) 0px 2px 8px 0px;
+  user-select: none;
 }
 
 .resume .download:hover {
