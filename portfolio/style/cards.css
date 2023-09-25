@@ -36,7 +36,7 @@
 
 
 .grid:is(.piano,) .card:not(:hover) .lil-img {
-    filter: grayscale(55%) brightness(0.7);
+    filter: grayscale(35%) brightness(0.9);
 }
 
 
