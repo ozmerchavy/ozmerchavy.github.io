@@ -148,11 +148,18 @@ a:hover span {
   border: 1px solid currentColor;
   background-color: transparent;
   border-radius: 6px;
-  font-size: 1rem;
   cursor: pointer;
-  transition: all 200ms;
+  width: fit-content;
+  margin-inline: auto;
+  transition: 200ms;
+  box-shadow: rgba(99, 99, 99, 0.15) 0px 2px 8px 0px;
 }
 
 .resume .download:hover {
   scale: 1.02;
+}
+
+.resume .download:active {
+  /* you need SOME sort of click indication */
+  translate: 0 1px;
 }
