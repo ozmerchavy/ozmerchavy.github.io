@@ -75,18 +75,30 @@
 }
 
 
+
 .grid:is(.coding, .piano) .texts .title {
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
 }
+.grid:is( .piano) .texts .title {
+    font-size: 1rem;
+    font-weight: 400;
+}
 
-.grid:is(.coding, .piano) .texts .parag{
-    font-size: .9rem;
+
+.grid:is(.coding,) .texts .parag{
+    font-size: .8rem;
     
 }
 
 
+.grid:is(.piano) .texts .parag{
+    font-size: .75rem;
+    opacity: 0.9;
+    font-weight: 300;
+    
+}
 
 
 /*---------------------------------------------------------------
