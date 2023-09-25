@@ -26,12 +26,13 @@
 }
 
 .grid:is(.coding, .piano) * {
-    transition: all 300ms ease-in-out;
+  transition-property: filter, scale, height;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
 }
 
 .grid:is(.coding,) .card:not(:hover) .lil-img {
     filter: grayscale(60%);
-    /* filter: blur(2.5px) */
 }
 
 
