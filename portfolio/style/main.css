@@ -49,7 +49,7 @@ body{
     margin: auto;
     background-color: var(--bg-color);
     padding-inline: 5rem;
-    padding-top: 4rem;
+    padding-block: 4rem;
     /* for smooth background color shift */;
     transition: all 250ms linear;
 }
