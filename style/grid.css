@@ -1,0 +1,44 @@
+/******* carousel-grids *******/
+
+.carousel-grids {
+  padding: 8px;
+  margin-inline: -11px;
+
+  --carousel-gap: 1rem;
+
+  position: relative;
+  overflow: hidden;
+
+  height: 600px;
+  /* height is set programmatically via JavaScript!
+   * it's only estimated here, to avoid sudden jumps when the grids load.
+   */
+
+  scroll-behavior: smooth;
+}
+
+/******* GRID *******/
+
+.carousel-grids > .grid {
+  --min-column-size: 15rem;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--min-column-size), 100%), 1fr));
+}
+
+.carousel-grids > .grid {
+  position: absolute;
+  width: 100%;
+}
+
+.carousel-grids > .grid:nth-child(1) {
+  left: 0;
+}
+
+.carousel-grids > .grid:nth-child(2) {
+  left: calc(var(--carousel-gap) + 100%);
+}
+
+.carousel-grids > .grid:nth-child(3) {
+  left: calc(var(--carousel-gap) * 2 + 200%);
+}

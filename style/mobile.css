@@ -1,0 +1,70 @@
+@media (max-width: 850px) {
+  header {
+    grid-template-areas:
+      "aboutme"
+      "profile-img"
+      "nav";
+    grid-template-columns: 1fr;
+  }
+  .profile-img {
+    padding-left: 0;
+    width: 88%;
+    margin-inline: auto;
+    margin-bottom: 2rem; 
+  }
+  nav {
+    padding-right: 0;
+  }
+  nav ul {
+    justify-content: space-evenly;
+    gap: 7%;
+  }
+}
+
+@media (max-width: 650px) {
+  h1 {
+    text-align: center;
+  }
+  .profile-img {
+    width: 100%;
+  }
+  .grid {
+    --min-column-size: 10rem;
+  }
+  nav ul {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 600px) {
+  .certificates {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  header .aboutme .descriptive-text {
+    min-height: 11rem;
+  }
+
+  .skills-grid {
+    --min-column-size: 5rem;
+  }
+
+  .skills img {
+    width: 40%;
+  }
+}
+
+@media (max-width: 550px) {
+  body {
+    padding: 12%;
+  }
+  .grid {
+    gap: .5rem;
+  }
+
+  nav ul {
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+}

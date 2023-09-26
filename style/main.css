@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+* {
+    font-family: "Quicksand", sans-serif;
+    box-sizing: content-box;
+}
+
+:root {
+    --bg-color: #edeff5;
+    --second-color: #6471A5;
+    --grid-item-desc-bg: #e7e2f277;
+    --menu-font-color: #e7e2f2;
+}
+
+/* Communications */
+.carousel-grids > :nth-child(1) {
+    --bg-color: #edeff5;
+    --second-color: #6471A5;
+    --not-second-color: rgba(255, 255, 255, 0.05);
+    --grid-item-desc-bg: #C4C1A4;
+    --menu-font-color: white;
+}
+
+/* Coding */
+.carousel-grids > :nth-child(2) {
+    --bg-color: #453e50;
+    --second-color: #6471A5;    
+    /* --font-color :white; */
+    --grid-item-desc-bg: #399fe470;
+}
+
+
+/* Piano */
+.carousel-grids > :nth-child(3) {
+    --bg-color: #090806;
+    --second-color: #6471A5;
+    --grid-item-desc-bg: #2A2839;
+}
+
+html, body {
+    /* hides sideways overlow caused by hidden grids */
+    position: relative;
+    overflow-x: hidden;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    width: min(75%, 1000px);
+    margin: auto;
+    background-color: var(--bg-color);
+    padding-inline: 5rem;
+    padding-block: 4rem;
+    /* for smooth background color shift */;
+    transition: all 250ms linear;
+}
+
+main {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    gap: 0;
+}
+
+section {
+    margin-top: 3rem;
+}
+
+section:not(:last-of-type) {
+    margin-bottom: 1rem;
+}
+  
+.hidden {
+    /* do NOT use 'visibility: hidden', is kills querySelectors */ 
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
