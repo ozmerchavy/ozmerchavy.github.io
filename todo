@@ -6,7 +6,6 @@
 # msc
 3. make --font-color work
 5. add favicon
-6. prevent descriptionTexts from flickering on page load
 8. mobile - decrease body padding
 
 # cards
