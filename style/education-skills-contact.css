@@ -26,13 +26,13 @@
   flex: 1;
 }
 
-.certificates div img {
+.certificates img {
   max-width: 150px;
   aspect-ratio: 1;
   transition: all 200ms ease-in;
 }
 
-.certificates div img:hover {
+.certificates .aws img:hover {
   transform: scale(1.03);
 }
 

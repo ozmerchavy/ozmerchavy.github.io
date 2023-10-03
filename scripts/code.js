@@ -2,6 +2,8 @@ const gridsContainer = document.querySelector('.carousel-grids');
 const profileImages = [...document.querySelectorAll('.profile-img img')];
 const gridsArr = [...gridsContainer.querySelectorAll('.carousel-grids > .grid')];
 
+const cards = [...document.querySelectorAll('.grid.communications .card')];
+
 function adjustGridsContainerHeight() {
   // the requestAnimationFrame is a patch needed for chromium.
   requestAnimationFrame(() => {
@@ -43,7 +45,7 @@ function __changeOverallColors(numSection) {
   document.body.style.color = fontColor || 
     isLightColor(parseCssColor(bgColor)) ? almostBlack : almostWhite;
   
-    for (const tab of tabMarkers){
+  for (const tab of tabMarkers) {
     tab.style.color =  document.body.style.color
   }
   __readOnly_currentlySelectedTab_li.style.color = navTextColor || document.body.style.color
@@ -71,8 +73,13 @@ function changeToSection(numSection){
   __moveTabMarkerTo(document.querySelector(`nav li:nth-child(${numSection})`));
   __gotoSection(numSection);
   __changeOverallColors(numSection);
-  __typeRelevantText(numSection)
-  __changeProfileImage(numSection)
+  __typeRelevantText(numSection);
+  __changeProfileImage(numSection);
+  if (numSection > 1) {
+    cards.forEach((card) => {
+      card.classList.remove('expanded');
+    });
+  }
 }
 
 
