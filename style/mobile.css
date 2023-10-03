@@ -34,12 +34,21 @@
   nav ul {
     justify-content: space-between;
   }
+  .certificate img {
+    width: max(20vw, 75px);
+  }
+  .certificate p {
+    font-size: 0.818182rem;
+    line-height: 1.4rem;
+  }
+  .certificate p .certificate-title {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 600px) {
   .certificates {
-    flex-direction: column;
-    gap: 3rem;
+    gap: 1rem;
   }
   
   header .aboutme .descriptive-text {

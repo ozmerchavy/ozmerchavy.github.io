@@ -1,21 +1,17 @@
 /*EDUCATION*/
 
 
-h2{
-  font-weight: 500;
-
-}
 .education {
   margin-top: 10rem;
   text-align: center;
 }
 
-.education p {
+.certificate p {
   font-size: 0.9rem;
   line-height: 1.4rem;
 }
 
-.education p .mainshtik {
+.certificate p .certificate-title {
   font-size: 1.1rem;
 }
 
@@ -24,6 +20,10 @@ h2{
   justify-content: space-around;
   min-width: 100%;
   padding-top: 5rem;
+}
+
+.certificates > * {
+  flex: 1;
 }
 
 .certificates div img {

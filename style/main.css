@@ -75,3 +75,6 @@ section:not(:last-of-type) {
     position: absolute;
     pointer-events: none;
 }
+h2{
+    font-weight: 500;
+}
