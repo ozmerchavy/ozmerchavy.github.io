@@ -40,6 +40,7 @@ html, body {
     /* hides sideways overlow caused by hidden grids */
     position: relative;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 body{
