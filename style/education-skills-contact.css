@@ -129,10 +129,9 @@
 
 .my-email {
   font-size: 0.8rem;
-
   font-weight: 500;
   border-radius: 4px;
-  max-width: 50%;
+  width: fit-content;
   margin-inline: auto;
   margin-top: 2rem;
   color: white;

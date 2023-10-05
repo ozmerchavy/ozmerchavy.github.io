@@ -14,7 +14,7 @@ emailLink.addEventListener("click", () => {
         placeforemail.innerText = "ozmerchavy2@gmail.com"
     })
     .finally(() => {
-        placeforemail.style.padding = "10px"
+        placeforemail.style.padding = "10px 20px"
         // scroll to bottom
         // window.scrollTo(0, document.body.scrollHeight);
     });
