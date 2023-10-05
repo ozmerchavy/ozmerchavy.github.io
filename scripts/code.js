@@ -75,11 +75,13 @@ function changeToSection(numSection){
   __changeOverallColors(numSection);
   __typeRelevantText(numSection);
   __changeProfileImage(numSection);
-  if (numSection > 1) {
-    cards.forEach((card) => {
-      card.classList.remove('expanded');
-    });
-  }
+  setTimeout(() => {
+    if (numSection > 1) {
+      cards.forEach((card) => {
+        card.classList.remove('expanded');
+      });
+    }
+  }, 300);
 }
 
 
