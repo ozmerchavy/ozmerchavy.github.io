@@ -166,3 +166,8 @@
   /* you need SOME sort of click indication */
   translate: 0 1px;
 }
+
+.copyright {
+text-align: center;
+margin-top: 1rem;
+}
