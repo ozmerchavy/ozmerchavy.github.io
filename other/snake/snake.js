@@ -446,7 +446,7 @@ function die() {
     }
     alerto(`You have a new record of ${score}!`, "machmi");
   } else {
-    alerto("You die, you loser piece of sh*t", "maaliv");
+    alerto("This is unfortunate, you died.", "maaliv");
   }
   document.querySelector(".high-score").classList.remove("secret");
 }

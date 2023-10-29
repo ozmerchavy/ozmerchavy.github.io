@@ -160,7 +160,7 @@ btnShare.addEventListener("click", () => {
     } else {
         const link = `${
             document.location.host
-        }/snake/?m=${zippedMapString}&b=${bgColor}&t=${bgColorTable}&a=${numApples}`
+        }/other/snake/?m=${zippedMapString}&b=${bgColor}&t=${bgColorTable}&a=${numApples}`
         resultElm.innerText = link
         navigator.clipboard.writeText(resultElm.innerText).then(() => alert("copied link to clipboard!"));
     }
