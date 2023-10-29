@@ -7,8 +7,6 @@ const quotes = {
     "machmi": [
         "You are awesome",
         "Good Job", 
-        "Steve Job",
-        "Ok Job not bad"
     ],
     "tunnelStage":[
         "The longest tunnel in the world is the Gotthard Base Tunnel in Switzerland, measuring 35.5 miles (57 kilometers) in length.",
