@@ -33,12 +33,10 @@ header {
     "aboutme profile-img"
     "nav profile-img";
   grid-template-columns: 1fr 1fr;
-  
 }
 
 .aboutme {
   grid-area: aboutme;
-  
 }
 
 .profile-img {
