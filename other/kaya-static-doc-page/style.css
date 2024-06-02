@@ -1,0 +1,219 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Khand", sans-serif;
+}
+
+:root {
+  --primary-dark-color: #97b5cc;
+  --primary-light-color: #4779ac;
+
+  --box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+
+
+
+  --page-background-color: #1c1d1f;
+  --page-foreground-color: #d2dbde;
+  --page-secondary-foreground-color: #b5bec3;
+  --separator-color: #38393b;
+  --side-nav-background: #252628;
+
+  --code-background: #2a2c2f;
+
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  font-family: "Khand", sans-serif;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  background-color: var(--page-background-color);
+  color: var(--page-foreground-color);
+  position: relative;
+}
+
+.back {
+
+  max-width: 85px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease-in-out;
+
+}
+
+.back:hover {
+  transform: scale(1.1);
+  transition: all 0.1s ease-in-out;
+
+}
+
+.back img {
+  /* make it white: */
+  filter: brightness(0) invert(1);
+}
+
+.go-back {
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  line-height: 0.7;
+}
+
+.go-back:visited {
+  text-decoration: none;
+  color: white;
+}
+
+
+/* main content */
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 4rem;
+}
+
+
+header {
+    margin-block: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10%;
+    padding-block: 10px;
+    border-bottom: 1px solid var(--separator-color);
+
+}
+
+.titles { 
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.5;
+    font-family: Hind;
+    color: var(--page-secondary-foreground-color)
+}
+
+.main-img {
+  flex:1.7;
+
+}
+
+
+.main-img img {
+  display: block;
+  margin-inline: auto;
+  filter: brightness(0) saturate(100%) invert(48%) sepia(24%) saturate(1100%) hue-rotate(169deg) brightness(88%) contrast(84%);
+}
+
+
+
+
+/* grids */
+
+
+
+.sdks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1.5fr));
+  gap: 2rem;
+}
+
+.sdk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  gap: 1rem;
+  background-color: #ffffff09;
+  border-radius: 0.5rem;
+}
+
+.sdk:hover {
+  background-color: #ffffff1f;
+  cursor: pointer;
+}
+
+.sdk a {
+  font-family: "Khand";
+  font-size: 1.5rem;
+  font-weight: 200;
+  margin: 0;
+  text-decoration: none;
+  color: var(--page-foreground-color);
+
+}
+
+
+
+.sdk a:visited {
+  color: var(--page-foreground-color);
+}
+
+
+.sdk img {
+  width: 4rem;
+  filter: grayscale(85);
+}
+
+
+
+
+
+@media (max-width: 800px) {
+  main {
+    padding: 0 2rem;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .titles {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .main-img {
+    display: none;
+  }
+
+  .sdk {
+    padding: 1rem;
+  }
+
+  .sdk img {
+    width: 3rem;
+  }
+}
