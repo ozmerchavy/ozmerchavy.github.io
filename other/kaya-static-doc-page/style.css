@@ -116,12 +116,35 @@ h1 {
     font-weight: 700;
 }
 
+
+
+
 p {
     font-size: 1rem;
     font-weight: 300;
     line-height: 1.5;
     font-family: Hind;
     color: var(--page-secondary-foreground-color)
+}
+
+.version {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.version select {
+  background-color: var(--page-background-color);
+  min-width: 20ch;
+  height: max-content;
+  color: var(--page-foreground-color);
+  border: 1px solid var(--separator-color);
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 300;
+  border-radius: 0.5rem;
+
 }
 
 .main-img {
