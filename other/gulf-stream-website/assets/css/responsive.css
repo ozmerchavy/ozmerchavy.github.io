@@ -1,6 +1,13 @@
 /*---------------------------------------------------------------------------------
     Responsive css
 -----------------------------------------------------------------------------------*/
+
+@media only screen and (min-width: 2000px) {
+  .bx-home .basic-details .info {
+    padding-top: 35%;
+  }
+}
+
 @media only screen and (max-width: 1366px) {
   .bx-home:after {
     height: 200px;
@@ -26,95 +33,16 @@
     font-size: 13px;
     line-height: 19px;
   }
-  .bx-service-section .title h2, .bx-about-section .title h2, .bx-experience-section .title h2, .bx-portfolio-section .title h2, .bx-news-section .title h2, .bx-contact-section .title h2 {
+  .bx-service-section .title h2,
+  .bx-about-section .title h2,
+  .bx-experience-section .title h2,
+  .bx-portfolio-section .title h2,
+  .bx-news-section .title h2,
+  .bx-contact-section .title h2 {
     font-size: 33px;
   }
 }
-@media only screen and (max-width: 1199px) {
-  header .navbar-brand img {
-    width: 200px;
-  }
-  .bx-home:after {
-    height: 150px;
-  }
-  .bx-home .basic-details .info {
-    height: 80vh;
-  }
-  .bx-home .basic-details .info h1 {
-    font-size: 50px;
-  }
-  .bx-about-section .personal-detail .info {
-    font-size: 14px;
-  }
-  .bx-about-section .section-card .sr-no h6 {
-    font-size: 40px;
-  }
-  .bx-about-section .section-card .card-description .detailed-txt h5 {
-    font-size: 17px;
-  }
-  .bx-about-section .section-card .card-description .detailed-txt p {
-    font-size: 12px;
-  }
-  .bx-about-section .sec-img {
-    height: 100%;
-  }
-  .bx-about-section .sec-img img {
-    position: sticky;
-    top: 70px;
-  }
-  .bx-service-section .section-card .card-description .detailed-txt h5 {
-    font-size: 18px;
-  }
-  .bx-service-section .section-card .sr-no h6 {
-    padding-right: 20px;
-    font-size: 40px;
-  }
-  .bx-service-section .personal-detail {
-    padding: 25px 20px;
-  }
-  .bx-service-section .personal-detail .pb {
-    padding-bottom: 10px;
-  }
-  .bx-service-section .personal-detail .info {
-    font-size: 15px;
-    line-height: 28px;
-  }
-  .bx-service-section .personal-detail .detail {
-    font-size: 12px;
-    line-height: 28px;
-  }
-  .navbar-nav .nav-item a {
-    font-size: 13px;
-  }
-  .bx-experience-section .education h4 {
-    font-size: 18px;
-  }
-  .bx-experience-section .experience h4 {
-    font-size: 18px;
-  }
-  .bx-experience-section .timeline .timeline-item .timeline-content .timeline-info span {
-    font-size: 12px;
-  }
-  .bx-experience-section .timeline .timeline-item .timeline-content .timeline-title {
-    font-size: 16px;
-  }
-  .bx-experience-section .timeline .timeline-item .timeline-content .timeline-title .sub {
-    font-size: 12px;
-  }
-  .bx-portfolio-section .hovereffect:hover .info .fa-arrow-right {
-    padding: 6px;
-  }
-  .bx-news-section .news-slider {
-    max-width: 600px;
-  }
-  .bx-service-section .title h2, .bx-about-section .title h2, .bx-experience-section .title h2, .bx-portfolio-section .title h2, .bx-news-section .title h2, .bx-contact-section .title h2 {
-    font-size: 30px;
-  }
-  .bx-service-section .title p, .bx-about-section .title p, .bx-experience-section .title p, .bx-portfolio-section .title p, .bx-news-section .title p, .bx-contact-section .title p {
-    font-size: 13px;
-  }
-}
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 1200px) {
   .bx-home:after {
     height: 180px;
   }
@@ -136,24 +64,7 @@
     top: 200px;
     left: 60px;
   }
-  .navbar-dark .navbar-toggler {
-    padding: 0;
-    color: #232c3b;
-  }
-  .navbar-dark .navbar-toggler i {
-    color: #777;
-  }
-  .navbar-dark .navbar-toggler:focus {
-    outline: none;
-    -webkit-box-shadow: none;
-            box-shadow: none;
-  }
-  .navbar-dark form {
-    display: none;
-  }
-  .navbar-dark .custom-btn {
-    display: none;
-  }
+
   .navbar-collapse .navbar-nav {
     margin: 15px 0 !important;
     padding: 15px;
@@ -207,9 +118,14 @@
     max-width: 100%;
     position: unset;
     -webkit-transform: none;
-            transform: none;
+    transform: none;
   }
-  .bx-service-section .title h2, .bx-about-section .title h2, .bx-experience-section .title h2, .bx-portfolio-section .title h2, .bx-news-section .title h2, .bx-contact-section .title h2 {
+  .bx-service-section .title h2,
+  .bx-about-section .title h2,
+  .bx-experience-section .title h2,
+  .bx-portfolio-section .title h2,
+  .bx-news-section .title h2,
+  .bx-contact-section .title h2 {
     font-size: 26px;
   }
 }
@@ -228,29 +144,18 @@
   }
   .bx-home .profile-img {
     /* display: none; */
-    width: 300px;
-
+    width: min(100%, 300px);
   }
 
-  .profile-img-c {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
   .bx-home .basic-details .info {
-    height: 40vh;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    text-align: center;
+    flex-direction: column;
+    text-align: start;
+    width: 100%;
+    padding-inline: 35px;
+    gap: 0;
   }
+
   .bx-about-section .title {
     padding-top: 20px;
   }
@@ -262,11 +167,11 @@
     top: 0px;
     right: 0px;
   }
-  .bx-service-section .title h2 {
-    text-align: center;
-  }
-  .bx-portfolio-section .title {
-    text-align: center;
+
+  .profile-img-c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .bx-portfolio-section .portfolio-tabs {
     margin-bottom: 30px;
@@ -276,12 +181,17 @@
     margin: 0;
     font-size: 12px;
   }
+
+  .detailed-content {
+    padding-inline: 20px;
+  }
   .bx-experience-section:before {
     height: 90px;
   }
   .bx-experience-section .title {
     padding-top: 20px;
   }
+
   .bx-news-section {
     overflow: hidden;
   }
@@ -319,19 +229,24 @@
   .bg-clr .bx-footer-detail {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
   .bg-clr .bx-footer-detail .bx-privacy {
     -ms-flex-pack: distribute;
-        justify-content: space-around;
+    justify-content: space-around;
   }
   .bg-clr .bx-footer-detail .bx-copy {
     padding: 5px 0;
     text-align: center;
     margin-bottom: 16px;
   }
-  .bx-service-section .title h2, .bx-about-section .title h2, .bx-experience-section .title h2, .bx-portfolio-section .title h2, .bx-news-section .title h2, .bx-contact-section .title h2 {
+  .bx-service-section .title h2,
+  .bx-about-section .title h2,
+  .bx-experience-section .title h2,
+  .bx-portfolio-section .title h2,
+  .bx-news-section .title h2,
+  .bx-contact-section .title h2 {
     font-size: 24px;
   }
   .bx-contact-section form .form-group textarea {
@@ -345,8 +260,8 @@
   }
   .bg-clr .bx-footer-detail .bx-privacy {
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
 }
 @media only screen and (max-width: 575px) {
@@ -363,21 +278,11 @@
     width: 130px;
     height: 130px;
   }
-  .bx-home .basic-details {
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
 
   .bx-home .basic-details .info h1 {
     font-size: 40px;
   }
-  .bx-about-section .title {
-    text-align: center;
-  }
+
   .nav-sec .container-fluid {
     padding: 0;
   }
@@ -388,26 +293,46 @@
     font-size: 24px;
     line-height: 26px;
   }
-  .bx-service-section .title h2, .bx-about-section .title h2, .bx-experience-section .title h2, .bx-portfolio-section .title h2, .bx-news-section .title h2, .bx-contact-section .title h2 {
+  .bx-service-section .title h2,
+  .bx-about-section .title h2,
+  .bx-experience-section .title h2,
+  .bx-portfolio-section .title h2,
+  .bx-news-section .title h2,
+  .bx-contact-section .title h2 {
     font-size: 22px;
   }
 }
 @media only screen and (max-width: 480px) {
-  .bx-home .profile-img:after {
-    width: 105px;
-    height: 105px;
+
+  
+  .bx-home {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .bx-home .basic-details .info {
+    padding-top: 30%;
   }
   .bx-home .basic-details .info h1 {
     font-size: 36px;
-    line-height: 32px;
+    /* line-height: 32px; */
   }
   .bx-home .basic-details .info h2 {
+    font-size: 20px;
+    /* line-height: 22px; */
+  }
+
+  .bx-home .basic-details .info p {
     font-size: 18px;
-    line-height: 22px;
   }
-  .bx-home .basic-details .info .primary-color {
-    line-height: 50px;
+
+  
+  .bx-home .profile-img {
+    display: none;
   }
+
   .bx-home .bx-btn,
   .bx-home .bx-btn-1 {
     font-size: 13px;
@@ -443,7 +368,12 @@
   .bx-contact-section .title h2 {
     font-size: 30px;
   }
-  .bx-service-section .title h2, .bx-about-section .title h2, .bx-experience-section .title h2, .bx-portfolio-section .title h2, .bx-news-section .title h2, .bx-contact-section .title h2 {
+  .bx-service-section .title h2,
+  .bx-about-section .title h2,
+  .bx-experience-section .title h2,
+  .bx-portfolio-section .title h2,
+  .bx-news-section .title h2,
+  .bx-contact-section .title h2 {
     font-size: 20px;
   }
   .bx-service-section .section-card .sr-no {
@@ -452,8 +382,8 @@
   .bx-about-section .personal-detail .content {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
 }
 @media only screen and (max-width: 380px) {
@@ -471,9 +401,9 @@
     height: 90px;
   }
   .bx-home .profile-img .profile-detail:after {
-    top: 10%;
-    left: 14%;
   }
+  top: 10%;
+  left: 14%;
   .bx-service-section .personal-detail .content {
     display: block;
   }
@@ -482,6 +412,8 @@
   }
 }
 @media only screen and (max-width: 320px) {
+  
+
   .bx-home .basic-details .info h1 {
     font-size: 30px;
     line-height: 28px;

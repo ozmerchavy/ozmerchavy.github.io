@@ -3,8 +3,9 @@
 :root {
   --dark: #232c3b;
   --purple: #54428e;
-  --red: #f05145;
+  --red: #ef5146;
   --orange: #f68761;
+  --yellow: #f9d67a;
   --lame: #777;
   --almost-white: #f6f8ff;
 }
@@ -54,6 +55,10 @@ h6 {
 
 .dark {
   color: var(--dark) !important;
+}
+
+.yellow {
+  color: var(--yellow) !important;
 }
 
 .padding-tb-80 {
@@ -198,6 +203,7 @@ a {
   text-decoration: none;
   color: #fff;
 }
+
 
 .get-started {
   padding: 12px 30px;
@@ -795,7 +801,10 @@ header form .fa-solid {
   align-items: center;
 }
 .bx-home .profile-img .profile-detail img {
-  width: 100%;
+  width: min(100%, 600px);
+
+  position: absolute;
+  bottom: 0;
   z-index: 1;
 
 }
@@ -803,10 +812,13 @@ header form .fa-solid {
   /* max-width: 500px; */
   height: 90vh;
   display: flex;
-  gap: 10px;
   flex-direction: column;
+  gap: 10px;
   justify-content: top;
-  padding-top: 5rem;
+  padding-top: 20%;
+
+
+
 }
 .bx-home .basic-details .info .primary-color {
   color: var(--purple);
@@ -1308,7 +1320,7 @@ header form .fa-solid {
   -webkit-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
   margin: 0;
-  position: absolute;
+  /* position: relative; */
   top: 15px;
   right: 15px;
   display: -webkit-box;
@@ -1502,6 +1514,8 @@ header form .fa-solid {
 
 /** End event Section **/
 /** Start Contact Section **/
+
+
 .bx-contact-section .title {
   text-align: center;
 }
@@ -1569,6 +1583,8 @@ header form .fa-solid {
 .bx-contact-section .custom-btn {
   margin-top: 30px;
 }
+
+
 
 /** End Contact Section **/
 /*# sourceMappingURL=style.css.map */
