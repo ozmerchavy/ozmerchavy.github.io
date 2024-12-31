@@ -2,17 +2,60 @@
     Responsive css
 -----------------------------------------------------------------------------------*/
 
-@media only screen and (min-width: 2000px) {
-  .bx-home .basic-details .info {
-    padding-top: 35%;
+@media only screen and (min-width: 2200px) {
+  .michael-home .profile-img {
+    max-width: 1200px;
+  }
+  .michael-home .basic-details .info {
+    padding-top: 40%;
+  }
+  .michael-home .info .informatica {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+  }
+  h1 {
+    font-size: 90px;
+  }
+  .michael-home .info h2 {
+    font-size: 36px;
+  }
+  .michael-home .info .informatica p {
+    font-size: 26px;
+    line-height: 1.6;
+  }
+}
+
+@media only screen and (min-width: 1800px) {
+  .michael-home .profile-img {
+    max-width: 1000px;
+  }
+  .michael-home .basic-details .info {
+    padding-top: 35% !important;
+  }
+  .michael-home .info .informatica {
+    display: flex;
+    flex-direction: column;
+    gap: 20px !important;
+  }
+
+  h1 {
+    font-size: 70px !important;
+  }
+  .michael-home .info h2 {
+    font-size: 30px !important;
+  }
+  .michael-home .info .informatica p {
+    font-size: 24px !important;
+    line-height: 1.5 !important;
   }
 }
 
 @media only screen and (max-width: 1366px) {
-  .bx-home:after {
+  .michael-home:after {
     height: 200px;
   }
-  .bx-home .basic-details .info h1 {
+  .michael-home .basic-details .info h1 {
     font-size: 55px;
   }
   .education h4,
@@ -33,32 +76,32 @@
     font-size: 13px;
     line-height: 19px;
   }
-  .bx-service-section .title h2,
-  .bx-about-section .title h2,
-  .bx-experience-section .title h2,
-  .bx-portfolio-section .title h2,
-  .bx-news-section .title h2,
-  .bx-contact-section .title h2 {
+  .michael-service-section .title h2,
+  .michael-about-section .title h2,
+  .michael-experience-section .title h2,
+  .michael-portfolio-section .title h2,
+  .michael-news-section .title h2,
+  .michael-contact-section .title h2 {
     font-size: 33px;
   }
 }
-@media only screen and (max-width: 1200px) {
-  .bx-home:after {
+/* @media only screen and (max-width: 1200px) {
+  .michael-home:after {
     height: 180px;
   }
-  .bx-home .basic-details .info .primary-color {
+  .michael-home .basic-details .info .primary-color {
     font-size: 16px;
   }
-  .bx-home .basic-details .info h1 {
+  .michael-home .basic-details .info h1 {
     font-size: 45px;
   }
-  .bx-home .basic-details .info h2 {
+  .michael-home .basic-details .info h2 {
     font-size: 15px;
   }
-  .bx-home .basic-details .info p {
+  .michael-home .basic-details .info p {
     font-size: 14px;
   }
-  .bx-home .profile-img:after {
+  .michael-home .profile-img:after {
     width: 280px;
     height: 350px;
     top: 200px;
@@ -72,63 +115,63 @@
     border-radius: 30px;
     border: 1px solid #eee;
   }
-  .bx-about-section .title:after {
+  .michael-about-section .title:after {
     top: 50px;
     left: 50px;
   }
-  .bx-about-section .title:before {
+  .michael-about-section .title:before {
     top: 50px;
     right: 50px;
   }
-  .bx-about-section .title h2 {
+  .michael-about-section .title h2 {
     margin-bottom: 15px;
   }
-  .bx-about-section .sec-img img {
+  .michael-about-section .sec-img img {
     margin-bottom: 30px;
   }
-  .bx-experience-section .timeline .timeline-item .timeline-content {
+  .michael-experience-section .timeline .timeline-item .timeline-content {
     min-height: 200px;
   }
-  .bx-service-section .row {
+  .michael-service-section .row {
     margin-bottom: -30px;
   }
-  .bx-service-section .row .col-lg-4.col-md-12:not(:last-child) {
+  .michael-service-section .row .col-lg-4.col-md-12:not(:last-child) {
     margin-bottom: 30px;
   }
-  .bx-service-section .sec-img {
+  .michael-service-section .sec-img {
     margin-bottom: 30px;
   }
-  .bx-service-section .sec-img:before {
+  .michael-service-section .sec-img:before {
     display: none;
   }
-  .bx-service-section .section-card .sr-no h6 {
+  .michael-service-section .section-card .sr-no h6 {
     width: 60px;
     font-size: 35px;
   }
-  .bx-service-section .section-card .card-description .detailed-txt {
+  .michael-service-section .section-card .card-description .detailed-txt {
     padding-top: 20px;
   }
-  .bx-service-section .border-bottom {
+  .michael-service-section .border-bottom {
     display: none;
   }
-  .bx-news-section .news-right-img img {
+  .michael-news-section .news-right-img img {
     display: none;
   }
-  .bx-news-section .news-slider {
+  .michael-news-section .news-slider {
     max-width: 100%;
     position: unset;
     -webkit-transform: none;
     transform: none;
   }
-  .bx-service-section .title h2,
-  .bx-about-section .title h2,
-  .bx-experience-section .title h2,
-  .bx-portfolio-section .title h2,
-  .bx-news-section .title h2,
-  .bx-contact-section .title h2 {
+  .michael-service-section .title h2,
+  .michael-about-section .title h2,
+  .michael-experience-section .title h2,
+  .michael-portfolio-section .title h2,
+  .michael-news-section .title h2,
+  .michael-contact-section .title h2 {
     font-size: 26px;
   }
-}
+} */
 @media only screen and (max-width: 767px) {
   .padding-tb-80 {
     padding: 70px 0;
@@ -139,15 +182,21 @@
   .padding-b-80 {
     padding-bottom: 70px;
   }
-  .bx-home:after {
+  .michael-home:after {
     height: 150px;
   }
-  .bx-home .profile-img {
+
+  .flex-row {
+    flex-direction: column !important;
+    align-items: center;
+  }
+
+  .michael-home .profile-img {
     /* display: none; */
     width: min(100%, 300px);
   }
 
-  .bx-home .basic-details .info {
+  .michael-home .basic-details {
     display: flex;
     flex-direction: column;
     text-align: start;
@@ -156,14 +205,14 @@
     gap: 0;
   }
 
-  .bx-about-section .title {
+  .michael-about-section .title {
     padding-top: 20px;
   }
-  .bx-about-section .title:after {
+  .michael-about-section .title:after {
     top: 0px;
     left: 0px;
   }
-  .bx-about-section .title:before {
+  .michael-about-section .title:before {
     top: 0px;
     right: 0px;
   }
@@ -173,11 +222,11 @@
     justify-content: center;
     align-items: center;
   }
-  .bx-portfolio-section .portfolio-tabs {
+  .michael-portfolio-section .portfolio-tabs {
     margin-bottom: 30px;
     text-align: center;
   }
-  .bx-portfolio-section .portfolio-tabs ul li {
+  .michael-portfolio-section .portfolio-tabs ul li {
     margin: 0;
     font-size: 12px;
   }
@@ -185,33 +234,33 @@
   .detailed-content {
     padding-inline: 20px;
   }
-  .bx-experience-section:before {
+  .michael-experience-section:before {
     height: 90px;
   }
-  .bx-experience-section .title {
+  .michael-experience-section .title {
     padding-top: 20px;
   }
 
-  .bx-news-section {
+  .michael-news-section {
     overflow: hidden;
   }
-  .bx-news-section:before {
+  .michael-news-section:before {
     height: 90px;
   }
-  .bx-news-section .title {
+  .michael-news-section .title {
     padding-top: 20px;
   }
-  .bx-news-section .card .news-card-details h5 {
+  .michael-news-section .card .news-card-details h5 {
     font-size: 15px;
   }
-  .bx-news-section .card .news-card-details .primary-clr {
+  .michael-news-section .card .news-card-details .primary-clr {
     font-size: 12px;
     line-height: 10px;
   }
-  .bx-news-section .card .news-card-details .primary-clr span {
+  .michael-news-section .card .news-card-details .primary-clr span {
     font-size: 12px;
   }
-  .bx-news-section .card .read-more-btn {
+  .michael-news-section .card .read-more-btn {
     font-size: 12px;
   }
   .box-front .content-wrap h3 {
@@ -226,60 +275,60 @@
   .bg-clr {
     padding: 0;
   }
-  .bg-clr .bx-footer-detail {
+  .bg-clr .michael-footer-detail {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
   }
-  .bg-clr .bx-footer-detail .bx-privacy {
+  .bg-clr .michael-footer-detail .michael-privacy {
     -ms-flex-pack: distribute;
     justify-content: space-around;
   }
-  .bg-clr .bx-footer-detail .bx-copy {
+  .bg-clr .michael-footer-detail .michael-copy {
     padding: 5px 0;
     text-align: center;
     margin-bottom: 16px;
   }
-  .bx-service-section .title h2,
-  .bx-about-section .title h2,
-  .bx-experience-section .title h2,
-  .bx-portfolio-section .title h2,
-  .bx-news-section .title h2,
-  .bx-contact-section .title h2 {
+  .michael-service-section .title h2,
+  .michael-about-section .title h2,
+  .michael-experience-section .title h2,
+  .michael-portfolio-section .title h2,
+  .michael-news-section .title h2,
+  .michael-contact-section .title h2 {
     font-size: 24px;
   }
-  .bx-contact-section form .form-group textarea {
+  .michael-contact-section form .form-group textarea {
     margin-top: 30px;
   }
   footer.footer.bg-clr {
     padding: 30px 0;
   }
-  .bg-clr .bx-footer-detail .bx-copy {
+  .bg-clr .michael-footer-detail .michael-copy {
     padding: 0;
   }
-  .bg-clr .bx-footer-detail .bx-privacy {
+  .bg-clr .michael-footer-detail .michael-privacy {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
   }
 }
 @media only screen and (max-width: 575px) {
-  .bx-home #shape2 {
+  .michael-home #shape2 {
     left: 60px;
   }
-  .bx-home:after {
+  .michael-home:after {
     height: 120px;
   }
-  .bx-home .profile-img {
+  .michael-home .profile-img {
     max-width: 220px;
   }
-  .bx-home .profile-img:after {
+  .michael-home .profile-img:after {
     width: 130px;
     height: 130px;
   }
 
-  .bx-home .basic-details .info h1 {
+  .michael-home .basic-details .info h1 {
     font-size: 40px;
   }
 
@@ -293,93 +342,90 @@
     font-size: 24px;
     line-height: 26px;
   }
-  .bx-service-section .title h2,
-  .bx-about-section .title h2,
-  .bx-experience-section .title h2,
-  .bx-portfolio-section .title h2,
-  .bx-news-section .title h2,
-  .bx-contact-section .title h2 {
+  .michael-service-section .title h2,
+  .michael-about-section .title h2,
+  .michael-experience-section .title h2,
+  .michael-portfolio-section .title h2,
+  .michael-news-section .title h2,
+  .michael-contact-section .title h2 {
     font-size: 22px;
   }
 }
 @media only screen and (max-width: 480px) {
-
-  
-  .bx-home {
+  .michael-home {
     height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
-  .bx-home .basic-details .info {
+  .michael-home .basic-details .info {
     padding-top: 30%;
   }
-  .bx-home .basic-details .info h1 {
+  .michael-home .basic-details .info h1 {
     font-size: 36px;
     /* line-height: 32px; */
   }
-  .bx-home .basic-details .info h2 {
+  .michael-home .basic-details .info h2 {
     font-size: 20px;
     /* line-height: 22px; */
   }
 
-  .bx-home .basic-details .info p {
+  .michael-home .basic-details .info p {
     font-size: 18px;
   }
 
-  
-  .bx-home .profile-img {
+  .michael-home .profile-img {
     display: none;
   }
 
-  .bx-home .bx-btn,
-  .bx-home .bx-btn-1 {
+  .michael-home .michael-btn,
+  .michael-home .michael-btn-1 {
     font-size: 13px;
   }
-  .bx-home .custom-btn {
+  .michael-home .custom-btn {
     width: 120px;
     height: 36px;
   }
-  .bx-about-section .title h2 {
+  .michael-about-section .title h2 {
     font-size: 30px;
   }
-  .bx-about-section .title:after {
+  .michael-about-section .title:after {
     top: 0;
     left: 0;
   }
-  .bx-about-section .title:before {
+  .michael-about-section .title:before {
     top: 0;
     right: 0;
   }
-  .bx-service-section .title h2 {
+  .michael-service-section .title h2 {
     font-size: 30px;
     text-align: center;
   }
-  .bx-experience-section .title h2 {
+  .michael-experience-section .title h2 {
     font-size: 30px;
   }
-  .bx-portfolio-section .title h2 {
+  .michael-portfolio-section .title h2 {
     font-size: 30px;
   }
-  .bx-news-section .title h2 {
+  .michael-news-section .title h2 {
     font-size: 30px;
   }
-  .bx-contact-section .title h2 {
+  .michael-contact-section .title h2 {
     font-size: 30px;
   }
-  .bx-service-section .title h2,
-  .bx-about-section .title h2,
-  .bx-experience-section .title h2,
-  .bx-portfolio-section .title h2,
-  .bx-news-section .title h2,
-  .bx-contact-section .title h2 {
+  .michael-service-section .title h2,
+  .michael-about-section .title h2,
+  .michael-experience-section .title h2,
+  .michael-portfolio-section .title h2,
+  .michael-news-section .title h2,
+  .michael-contact-section .title h2 {
     font-size: 20px;
   }
-  .bx-service-section .section-card .sr-no {
+  .michael-service-section .section-card .sr-no {
     display: none;
   }
-  .bx-about-section .personal-detail .content {
+  .michael-about-section .personal-detail .content {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -387,34 +433,32 @@
   }
 }
 @media only screen and (max-width: 380px) {
-  .bx-home:after {
+  .michael-home:after {
     height: 100px;
   }
-  .bx-home .basic-details .info .buttons {
+  .michael-home .basic-details .info .buttons {
     display: block;
   }
-  .bx-home .basic-details .info .buttons a:last-child {
+  .michael-home .basic-details .info .buttons a:last-child {
     margin-top: 25px;
   }
-  .bx-home .profile-img:after {
+  .michael-home .profile-img:after {
     width: 88px;
     height: 90px;
   }
-  .bx-home .profile-img .profile-detail:after {
+  .michael-home .profile-img .profile-detail:after {
   }
   top: 10%;
   left: 14%;
-  .bx-service-section .personal-detail .content {
+  .michael-service-section .personal-detail .content {
     display: block;
   }
-  .bx-footer-detail .bx-privacy a {
+  .michael-footer-detail .michael-privacy a {
     margin: 0px;
   }
 }
 @media only screen and (max-width: 320px) {
-  
-
-  .bx-home .basic-details .info h1 {
+  .michael-home .basic-details .info h1 {
     font-size: 30px;
     line-height: 28px;
   }
