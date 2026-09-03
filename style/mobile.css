@@ -5,6 +5,10 @@
 }
 
 @media (max-width: 850px) {
+  body {
+    width: auto;
+    padding-inline: 3rem;
+  }
   .clients .clients-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -66,6 +70,9 @@
 }
 
 @media (max-width: 650px) {
+  body {
+    padding-inline: 2rem;
+  }
   h1 {
     text-align: center;
   }
@@ -127,7 +134,8 @@
 
 @media (max-width: 550px) {
   body {
-    padding: 12%;
+    padding-inline: 1.5rem;
+    padding-bottom: 2.5rem;
   }
   /* side by side leaves the description too narrow, so the logo sits next to the
    * job title and the description runs the full width underneath it */
