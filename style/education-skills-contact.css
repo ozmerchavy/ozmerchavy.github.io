@@ -29,13 +29,6 @@
   object-fit: cover;
   display: block;
   margin-inline: auto;
-  /* the opacity keeps the desaturated icons light instead of muddy grey blobs */
-  filter: grayscale(1) opacity(0.5);
-  transition: filter 150ms ease-in;
-}
-
-.skills .skill-icon:hover img {
-  filter: grayscale(0) opacity(1);
 }
 
 /* pop-up text */
@@ -53,7 +46,7 @@
   background: var(--second-color);
   visibility: hidden;
   opacity: 0;
-  transition: all 200ms ease-in-out;
+  transition: all 90ms ease-out;
 }
 
 .skills .skill-icon:hover span {
@@ -113,48 +106,22 @@
 }
 
 .contact a {
-  position: relative;
   display: inline-block;
   width: 35px;
   aspect-ratio: 1;
   margin: 0 2px;
-  transition: all 0.5s;
   color: inherit;
+  opacity: 0.85;
+  transition: opacity 200ms ease-in-out;
 }
 
 .contact a:hover {
   cursor: pointer;
+  opacity: 1;
 }
 
 .contact svg path {
   fill: currentColor;
-}
-
-/* pop-up text */
-
-.contact a span {
-  color: var(--menu-font-color);
-  position: absolute;
-  font-family: sans-serif;
-  bottom: 0;
-  left: -25px;
-  right: -25px;
-  padding: 5px 7px;
-  z-index: -1;
-  font-size: 1rem;
-  border-radius: 2px;
-  background: var(--second-color);
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-/* text pops up when icon is in hover state */
-
-.contact a:hover span {
-  bottom: 50px;
-  visibility: visible;
-  opacity: 1;
 }
 
 .my-email {

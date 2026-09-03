@@ -125,8 +125,9 @@
 }
 
 .pill-link svg {
-  width: 0.9rem;
-  height: 0.9rem;
+  /* the youtube mark is wider than tall, so it needs a roomier box than a plus sign */
+  width: 1.4rem;
+  height: 1.4rem;
 }
 
 .pill-link:hover {

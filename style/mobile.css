@@ -94,10 +94,6 @@
     gap: 1.25rem 1.5rem;
     grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
   }
-  /* colored icons only, no grayscale-to-color hover, on touch screens */
-  .skills img {
-    filter: none;
-  }
 }
 
 @media (max-width: 600px) {
