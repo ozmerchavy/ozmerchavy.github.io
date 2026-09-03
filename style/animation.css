@@ -12,13 +12,29 @@
 	}
 }
 
-@keyframes colorful {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    filter: hue-rotate(360deg);
-  }
+@keyframes fadeUp {
+	from {
+		transform: translateY(12px);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 
-
+@keyframes wiggle {
+    0% {
+        rotate: 0deg;
+    }
+    30% {
+        rotate: -10deg;
+    }
+    60% {
+        rotate: 10deg;
+    }
+    90% {
+        rotate: 0deg;
+    }
+}

@@ -1,62 +1,71 @@
+/******* GRID *******/
 
+.grid {
+    --min-column-size: 15rem;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--min-column-size), 100%), 1fr));
+}
+
+/* each card family sets its own aspect-ratio, since the client cards drop
+ * theirs when they open in order to fit their text */
 .grid .card {
     position: relative;
     border-radius: 8px;
     cursor: pointer;
-    margin: .75rem;
-    aspect-ratio: 30 /26;  
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
+.grid .card:hover {
+    scale: 1.03;
+}
+
+.grid .title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
 /*---------------------------------------------------------------
----                C O D I N G   +   P I A N O                --- 
+---                       V I D E O S                         ---
 ---------------------------------------------------------------*/
 
-.grid:is(.coding, .piano) .lil-img::after {
+.videos-grid .card {
+    aspect-ratio: 16 / 10;
+}
+
+.videos-grid .lil-img::after {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: 8px;
-    background: linear-gradient(to top, black, transparent);
     --color-bottom: rgb(0 0 0 / .7);
     --color-top: transparent;
-    background: linear-gradient(to top, 
-        var(--color-bottom) 0%, var(--color-bottom) 10%, 
+    background: linear-gradient(to top,
+        var(--color-bottom) 0%, var(--color-bottom) 10%,
         var(--color-top) 100%);
 }
 
-.grid:is(.coding, .piano) * {
-  transition-property: filter, scale, height;
+.videos-grid * {
+  transition-property: filter, scale, opacity;
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
 }
 
-.grid:is(.coding,) .card:not(:hover) .lil-img {
-    filter: grayscale(60%);
-}
-
-
-.grid:is(.piano,) .card:not(:hover) .lil-img {
+.videos-grid .card:not(:hover) .lil-img {
     filter: grayscale(35%) brightness(0.9);
 }
 
-
-.grid:is(.coding, .piano) .card:hover {
-    scale: 1.03;
-}
-
-
-.grid:is(.coding, .piano) a {
+.videos-grid a {
     display: contents;
     color: inherit;
 }
 
-.grid:is(.coding, .piano) .lil-img {
+.videos-grid .lil-img {
     width: 100%;
     height: 100%;
 }
 
-.grid:is(.coding, .piano) img {
+.videos-grid img {
     width: 100%;
     height: 100%;
     border-radius: 8px;
@@ -65,129 +74,121 @@
     object-fit: cover;
 }
 
-.grid:is(.coding, .piano) .texts {
+.videos-grid .play-badge {
+    position: absolute;
+    /* sits above centre so it stays clear of the caption at the bottom */
+    top: calc(40% - 1.2rem);
+    left: calc(50% - 1.2rem);
+    width: 2.4rem;
+    height: 2.4rem;
+    color: rgb(255 255 255 / .85);
+    opacity: .75;
+    pointer-events: none;
+}
+
+.videos-grid .card:hover .play-badge {
+    opacity: 1;
+}
+
+.videos-grid .texts {
     position: absolute;
     bottom: 0;
-    --_padding: 1.3rem;
+    --_padding: 1rem;
     padding: var(--_padding);
     width: calc(100% - var(--_padding) * 2);
     text-align: center;
+    color: rgb(255 255 255 / .95);
 }
 
-
-
-.grid:is(.coding, .piano) .texts .title {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-}
-.grid:is( .piano) .texts .title {
-    font-size: 1.1rem;
+.videos-grid .texts .title {
+    font-size: 0.95rem;
     font-weight: 400;
+    margin-bottom: 0.35rem;
 }
 
-
-.grid:is(.coding,) .texts .parag{
-    font-size: .8rem;
-    
-}
-
-
-.grid:is(.piano) .texts .parag{
+.videos-grid .texts .parag {
     font-size: .75rem;
     opacity: 0.9;
     font-weight: 300;
-    
 }
-
 
 /*---------------------------------------------------------------
----                C O M M U N I C A T I O N S                --- 
+---                       C L I E N T S                       ---
 ---------------------------------------------------------------*/
 
-.grid.communications .card {
-    aspect-ratio: 30 / 26; 
+.clients-grid {
+    /* an open card grows, and shouldn't stretch the others in its row */
+    align-items: start;
 }
 
-.grid.communications .lil-img {
+.clients-grid .card {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    /* leaves room for the chevron, which is pinned to the bottom */
+    padding-bottom: 3.25rem;
+    background-color: var(--panel-color);
+    --scale-time: 150ms;
+    transition: scale var(--scale-time);
+}
+
+.clients-grid .card:not(.expanded) {
+    aspect-ratio: 30 / 26;
+}
+
+.clients-grid .lil-img {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    min-height: 6.5rem;
 }
 
-.grid.communications img {
-    width: 40%;
+.clients-grid img {
+    /* the logos range from square to very wide wordmarks, so cap both axes */
+    width: 58%;
     height: auto;
-    object-fit: cover;
+    max-height: 5rem;
+    object-fit: contain;
     display: block;
 }
 
-.grid.communications .card {
-    background-color: #f8f9fb /* fallback for safari*/;
-    background-color: color-mix(in srgb, var(--bg-color) 40%, white);
-    --exapnded-height: 180px;
+/* the reveal: 0fr -> 1fr animates to whatever height the text actually needs,
+ * so the copy can be any length without being clipped */
+.clients-grid .lil-text-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 500ms ease-in-out;
 }
 
-.grid.communications .lil-text-content {
-    margin-top: -70px;
-    height: 0;
+.clients-grid .card.expanded .lil-text-content {
+    grid-template-rows: 1fr;
+}
+
+.clients-grid .text-content {
     overflow: hidden;
-    transition: height 700ms;
-}
-
-.grid.communications .card.expanded .lil-text-content {
-    height: var(--exapnded-height);
-}
-
-.grid.communications .text-content {
-    height: 0;
-    overflow: hidden;
-    transition: height 700ms;
-    transition-delay: 100ms;    
-}
-
-.grid.communications .card:not(.expanded) .text-content {
-    transition-delay: 0;
-}
-
-.grid.communications .card:not(.expanded) .lil-text-content {
-    transition-delay: 200ms;
-}
-
-.grid.communications .card.expanded .text-content {
-    height: var(--exapnded-height);
-}
-
-.grid.communications .text-content {
+    min-height: 0;
     text-align: center;
+    padding-inline: 1.25rem;
 }
 
-.grid.communications .title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-top: 18px;
+.clients-grid .title {
+    margin-top: 0;
 }
 
-.grid.communications .subtitle {
+.clients-grid .subtitle {
     font-size: .9rem;
     font-weight: 200;
     margin-bottom: 12px;
     margin-top: -12px;
 }
 
-
-
-.grid.communications .body-text {
-    font-size: .96rem;
+.clients-grid .body-text {
+    font-size: .9rem;
     line-height: 1.4;
 }
 
-.grid.communications .text-content {
-    padding-inline: 2rem;
-}
-
-.grid.communications .chevron {
+.clients-grid .chevron {
     position: absolute;
     bottom: 20px;
     left: calc(50% - 15px);
@@ -196,38 +197,14 @@
     transition: transform 700ms;
 }
 
-.grid.communications .card.expanded .chevron {
+.clients-grid .card.expanded .chevron {
     transform: rotate(0deg);
 }
 
-.grid.communications .card {
-    --scale-time: 150ms;
-    transition: scale var(--scale-time);
-}
-
-.grid.communications .card:hover {
-    scale: 1.03;
-}
-
-.grid.communications .card:hover:not(.expanded) .chevron {
+.clients-grid .card:hover:not(.expanded) .chevron {
     animation-name: wiggle;
     animation-duration: 400ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
     animation-delay: calc(var(--scale-time) * 7);
-}
-
-@keyframes wiggle {
-    0% {
-        rotate: 0deg;
-    }
-    30% {
-        rotate: -10deg;
-    }
-    60% {
-        rotate: 10deg;
-    }
-    90% {
-        rotate: 0deg;
-    }
 }

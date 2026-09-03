@@ -4,6 +4,7 @@ nav {
   --marker-width: 0;
   --marker-height: 0;
   --marker-left: 0;
+  --marker-top: 0;
   
   --marker-pad-x: 20;
   --marker-pad-y: 10;
@@ -26,6 +27,12 @@ nav ul {
 nav li {
   list-style: none;
   cursor: pointer;
+  white-space: nowrap;
+  transition: color 250ms linear;
+}
+
+nav li.selected {
+  color: var(--menu-font-color);
 }
 
 nav .tab-marker {

@@ -10,7 +10,7 @@
     padding-left: 0;
     width: 88%;
     margin-inline: auto;
-    margin-bottom: 2rem; 
+    margin-bottom: 2rem;
   }
   nav {
     padding-right: 0;
@@ -18,6 +18,41 @@
   nav ul {
     justify-content: space-evenly;
     gap: 7%;
+  }
+  .page > section {
+    margin-top: 6rem;
+  }
+  .booking-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .featured-video {
+    aspect-ratio: 16 / 11;
+  }
+  .featured-video::after {
+    background: linear-gradient(to top,
+      rgb(6 8 16 / .95) 0%,
+      rgb(6 8 16 / .6) 45%,
+      transparent 85%);
+  }
+  .featured-video .texts {
+    inset: auto 0 0 0;
+    width: auto;
+    padding: 1.5rem;
+    justify-content: flex-end;
+  }
+  .featured-video .title {
+    font-size: 1.3rem;
+  }
+  .awards-card {
+    padding: 2rem;
+  }
+  .awards-card ul {
+    columns: 1;
   }
 }
 
@@ -29,6 +64,10 @@
     width: 100%;
   }
   .grid {
+    --min-column-size: 10rem;
+  }
+  .clients .clients-grid,
+  .performances .videos-grid {
     --min-column-size: 10rem;
   }
   nav ul {
@@ -44,13 +83,29 @@
   .certificate p .certificate-title {
     font-size: 1rem;
   }
+  .experience .job {
+    grid-template-columns: 5.5rem 1fr;
+    gap: 1.25rem;
+  }
+  .experience .job-logo {
+    padding: 0.7rem;
+  }
+  .venues-grid {
+    gap: 1.25rem 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
+  }
+  /* colored icons only, no grayscale-to-color hover, on touch screens */
+  .skills img {
+    filter: none;
+  }
 }
 
 @media (max-width: 600px) {
   .certificates {
     gap: 1rem;
+    padding-inline: 0;
   }
-  
+
   header .aboutme .descriptive-text {
     min-height: 11rem;
   }
@@ -62,11 +117,23 @@
   .skills img {
     width: 40%;
   }
+
+  .contact .contact-links {
+    gap: 3rem;
+  }
 }
 
 @media (max-width: 550px) {
   body {
     padding: 12%;
+  }
+  /* side by side leaves the description too narrow to read, so stack it */
+  .experience .job {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+  .experience .job-logo {
+    width: 5rem;
   }
   .grid {
     gap: .5rem;
@@ -75,5 +142,13 @@
   nav ul {
     font-size: 0.8rem;
     font-weight: 500;
+  }
+
+  .page > section {
+    margin-top: 4.5rem;
+  }
+
+  .booking-card {
+    padding: 1.5rem;
   }
 }

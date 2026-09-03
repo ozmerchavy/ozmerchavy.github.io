@@ -1,22 +1,19 @@
-const emailLink = document.getElementById("email-link");
-const emailAddress = emailLink.getAttribute("data-address") || "ozmerchavy2@gmail.com";
+document.querySelectorAll('.email-link').forEach((emailLink) => {
+  const emailAddress = emailLink.dataset.address;
+  const placeForEmail = emailLink.closest('.contact').querySelector('.my-email');
 
-const placeforemail = document.getElementById("placeforemail")
-
-emailLink.addEventListener("click", () => {
+  emailLink.addEventListener('click', () => {
     const clipboardItem = new ClipboardItem({ "text/plain": new Blob([emailAddress], { type: "text/plain" }) });
 
     navigator.clipboard.write([clipboardItem])
-    .then(() => {
-        placeforemail.innerText = "Copied to Clipboard: " + emailAddress
-    })
-    .catch(() => {
-        placeforemail.innerText = "ozmerchavy2@gmail.com"
-    })
-    .finally(() => {
-        placeforemail.style.padding = "10px 20px"
-        // scroll to bottom
-        // window.scrollTo(0, document.body.scrollHeight);
-    });
+      .then(() => {
+        placeForEmail.innerText = "Copied to Clipboard: " + emailAddress
+      })
+      .catch(() => {
+        placeForEmail.innerText = emailAddress
+      })
+      .finally(() => {
+        placeForEmail.style.padding = "10px 20px"
+      });
+  });
 });
-

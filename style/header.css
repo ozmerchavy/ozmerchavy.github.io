@@ -4,17 +4,10 @@ header .aboutme {
   margin: 0;
 }
 
-h1 {
-  font-weight: 500;
-}
-
 header .aboutme .descriptive-text {
   min-height: 11rem;
   font-size: 1.15rem;
-
 }
-
-
 
 header .profile-img img:not(.hidden) {
   /* todo: if going to tab on left side, slideRight */

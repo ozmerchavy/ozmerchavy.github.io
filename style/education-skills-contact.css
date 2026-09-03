@@ -1,44 +1,6 @@
-/*EDUCATION*/
-
-
-.education {
-  margin-top: 10rem;
-  text-align: center;
-}
-
-.certificate p {
-  font-size: 0.9rem;
-  line-height: 1.4rem;
-}
-
-.certificate p .certificate-title {
-  font-size: 1.1rem;
-}
-
-.certificates {
-  display: flex;
-  justify-content: space-around;
-  min-width: 100%;
-  padding-top: 5rem;
-}
-
-.certificates > * {
-  flex: 1;
-}
-
-.certificates img {
-  max-width: 150px;
-  aspect-ratio: 1;
-  transition: all 200ms ease-in;
-}
-
-.certificates .aws img:hover {
-  transform: scale(1.03);
-}
-
 /*SKILLS*/
+
 .skills {
-  margin-top: 10rem;
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -56,6 +18,7 @@
 }
 
 .skills .skill-icon {
+  position: relative;
   aspect-ratio: 3 / 1;
   cursor: pointer;
 }
@@ -66,16 +29,83 @@
   object-fit: cover;
   display: block;
   margin-inline: auto;
+  /* the opacity keeps the desaturated icons light instead of muddy grey blobs */
+  filter: grayscale(1) opacity(0.5);
+  transition: filter 150ms ease-in;
+}
+
+.skills .skill-icon:hover img {
+  filter: grayscale(0) opacity(1);
+}
+
+/* pop-up text */
+
+.skills .skill-icon span {
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  translate: -50% 0;
+  padding: 4px 9px;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  border-radius: 2px;
+  color: var(--menu-font-color);
+  background: var(--second-color);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+}
+
+.skills .skill-icon:hover span {
+  bottom: 0;
+  visibility: visible;
+  opacity: 1;
+}
+
+/*EDUCATION*/
+
+.education {
+  text-align: center;
+}
+
+.certificate p {
+  font-size: 0.9rem;
+  line-height: 1.4rem;
+}
+
+.certificate p .certificate-title {
+  font-size: 1.1rem;
+}
+
+.certificates {
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+  padding-top: 5rem;
+  padding-inline: 2rem;
+}
+
+.certificates > * {
+  flex: 1;
+}
+
+.certificates img {
+  max-width: 150px;
+  aspect-ratio: 1;
+  transition: all 200ms ease-in;
+}
+
+.certificates .aws img:hover {
+  transform: scale(1.03);
 }
 
 /* CONTACT*/
 
 .contact {
   text-align: center;
-  margin-top: 10rem;
 }
 
-.contact div {
+.contact .contact-links {
   margin-top: 3rem;
   display: flex;
   justify-content: center;
@@ -138,35 +168,8 @@
   background-color: var(--second-color);
 }
 
-.resume {
-  text-align: center;
-  line-height: 1.5;
-}
-
-.resume .download {
-  padding: 10px 20px;
-  color: inherit;
-  border: 1px solid currentColor;
-  background-color: transparent;
-  border-radius: 6px;
-  cursor: pointer;
-  width: fit-content;
-  margin-inline: auto;
-  transition: 200ms;
-  box-shadow: rgba(99, 99, 99, 0.15) 0px 2px 8px 0px;
-  user-select: none;
-}
-
-.resume .download:hover {
-  scale: 1.02;
-}
-
-.resume .download:active {
-  /* you need SOME sort of click indication */
-  translate: 0 1px;
-}
-
-.copyright {
-text-align: center;
-margin-top: 1rem;
+.contact .location {
+  font-size: 0.9rem;
+  color: var(--muted-color);
+  margin-top: 1.5rem;
 }

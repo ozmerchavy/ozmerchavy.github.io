@@ -4,40 +4,39 @@
     box-sizing: content-box;
 }
 
-:root {
-    --bg-color: #edeff5;
-    --second-color: #6471A5;
-    --grid-item-desc-bg: #e7e2f277;
-    --menu-font-color: #e7e2f2;
-}
+/*---------------------------------------------------------------
+---                      T H E M E S                          ---
+--- One theme per tab. The active one is chosen by [data-tab],
+--- which tabs.js sets on the body.
+---------------------------------------------------------------*/
 
-/* Communications */
-.carousel-grids > :nth-child(1) {
+body {
     --bg-color: #edeff5;
     --second-color: #6471A5;
-    --not-second-color: rgba(255, 255, 255, 0.05);
-    --grid-item-desc-bg: #C4C1A4;
+    --font-color: rgb(0 0 0 / .9);
+    --muted-color: rgb(0 0 0 / .55);
+    /* kept as channels so panels can be faded, e.g. the awards backdrop */
+    --panel-rgb: 248 249 251;
+    --panel-color: rgb(var(--panel-rgb));
+    --hairline-color: rgb(0 0 0 / .1);
     --menu-font-color: white;
 }
 
-/* Coding */
-.carousel-grids > :nth-child(2) {
-    --bg-color: #453e50;
-    --second-color: #6471A5;    
-    /* --font-color :white; */
-    --grid-item-desc-bg: #399fe470;
+body[data-tab="piano"] {
+    --bg-color: #0b0d18;
+    --second-color: #6b74c4;
+    --font-color: rgb(255 255 255 / .9);
+    --muted-color: rgb(255 255 255 / .6);
+    --panel-rgb: 21 24 41;
+    --hairline-color: rgb(255 255 255 / .12);
 }
 
-
-/* Piano */
-.carousel-grids > :nth-child(3) {
-    --bg-color: #090806;
-    --second-color: #6471A5;
-    --grid-item-desc-bg: #2A2839;
-}
+/*---------------------------------------------------------------
+---                      L A Y O U T                          ---
+---------------------------------------------------------------*/
 
 html, body {
-    /* hides sideways overlow caused by hidden grids */
+    /* hides the sideways overflow of the sliding profile image */
     position: relative;
     overflow-x: hidden;
     scroll-behavior: smooth;
@@ -49,11 +48,12 @@ body{
     width: min(75%, 1000px);
     margin: auto;
     background-color: var(--bg-color);
+    color: var(--font-color);
     padding-inline: 5rem;
     padding-top: 4rem;
     padding-bottom: 1rem;
-    /* for smooth background color shift */;
-    transition: all 250ms linear;
+    /* for smooth background color shift between tabs */
+    transition: background-color 250ms linear, color 250ms linear;
 }
 
 main {
@@ -63,20 +63,36 @@ main {
     gap: 0;
 }
 
-section {
-    margin-top: 3rem;
+.page:not([hidden]) {
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp 350ms ease-out;
 }
 
-section:not(:last-of-type) {
-    margin-bottom: 1rem;
+.page > section {
+    margin-top: 8rem;
 }
-  
+
+.page > section:first-child {
+    margin-top: 4rem;
+}
+
+h1 {
+    font-weight: 500;
+}
+
+h2{
+    font-weight: 500;
+}
+
 .hidden {
-    /* do NOT use 'visibility: hidden', is kills querySelectors */ 
+    /* do NOT use 'visibility: hidden', is kills querySelectors */
     opacity: 0;
     position: absolute;
     pointer-events: none;
 }
-h2{
-    font-weight: 500;
+
+.copyright {
+    text-align: center;
+    margin-top: 1rem;
 }
