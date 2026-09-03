@@ -10,14 +10,14 @@
     padding-left: 0;
     width: 88%;
     margin-inline: auto;
+    margin-right: auto;
     margin-bottom: 2rem;
   }
   nav {
     padding-right: 0;
   }
   nav ul {
-    justify-content: space-evenly;
-    gap: 7%;
+    gap: 2.5rem;
   }
   .page > section {
     margin-top: 6rem;
@@ -70,9 +70,6 @@
   .performances .videos-grid {
     --min-column-size: 10rem;
   }
-  nav ul {
-    justify-content: space-between;
-  }
   .certificate img {
     width: max(20vw, 75px);
   }
@@ -123,13 +120,66 @@
   body {
     padding: 12%;
   }
-  /* side by side leaves the description too narrow to read, so stack it */
+  /* side by side leaves the description too narrow, so the logo sits next to the
+   * job title and the description runs the full width underneath it */
   .experience .job {
-    grid-template-columns: 1fr;
-    gap: 0.9rem;
+    grid-template-columns: 5rem 1fr;
+    column-gap: 1rem;
+    row-gap: 0;
+  }
+  .experience .job-text {
+    display: contents;
   }
   .experience .job-logo {
-    width: 5rem;
+    grid-column: 1;
+    grid-row: 1 / 4;
+    align-self: start;
+    padding: 0.6rem;
+  }
+  .experience .title,
+  .experience .subtitle,
+  .experience .period {
+    grid-column: 2;
+  }
+  .experience .body-text {
+    grid-column: 1 / -1;
+    margin-top: 0.6rem;
+  }
+  .experience .job + .job {
+    margin-top: 1.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--hairline-color);
+  }
+
+  /* two client cards per row, with room to breathe between rows */
+  .clients .clients-grid {
+    --min-column-size: 7.5rem;
+    column-gap: 0.7rem;
+    row-gap: 1.5rem;
+  }
+  .clients-grid .card {
+    padding-bottom: 2.6rem;
+  }
+  .clients-grid .lil-img {
+    min-height: 4.5rem;
+  }
+  .clients-grid img {
+    max-height: 3.25rem;
+  }
+  .clients-grid .text-content {
+    padding-inline: 0.55rem;
+  }
+  .clients-grid .body-text {
+    font-size: 0.8rem;
+  }
+  .clients-grid .subtitle {
+    font-size: 0.8rem;
+  }
+  .clients-grid .title {
+    font-size: 0.9rem;
+  }
+  .clients-grid .chevron {
+    bottom: 13px;
   }
   .grid {
     gap: .5rem;
