@@ -111,6 +111,15 @@
     font-weight: 300;
 }
 
+/* a card holding a playing video isn't a link to press anymore */
+.videos-grid .card.playing {
+    cursor: default;
+}
+
+.videos-grid .card.playing:hover {
+    scale: 1;
+}
+
 /*---------------------------------------------------------------
 ---                       C L I E N T S                       ---
 ---------------------------------------------------------------*/

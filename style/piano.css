@@ -96,6 +96,42 @@
   height: 0.9rem;
 }
 
+/*a video swapped in for its thumbnail (see scripts/video-embed.js)*/
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  border-radius: 8px;
+}
+
+/* the warm up copy has to be rendered for the browser to load it, so it is parked
+ * off screen at a pixel rather than hidden (see scripts/video-embed.js) */
+.player-warm-up {
+  position: fixed;
+  top: 0;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  pointer-events: none;
+}
+
+/* the crop, the gradient and the hover lift all belong to the thumbnail,
+ * and are only in the way once the player is there instead */
+.featured-video.playing {
+  aspect-ratio: 16 / 9;
+}
+
+.featured-video.playing::after {
+  content: none;
+}
+
+.featured-video.playing:hover {
+  scale: 1;
+}
+
 /*MORE PERFORMANCES*/
 
 .performances .subheading {
