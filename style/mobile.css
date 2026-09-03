@@ -86,6 +86,13 @@
   .performances .videos-grid {
     --min-column-size: 10rem;
   }
+  .performances .videos-grid {
+    grid-template-columns: 1fr;
+  }
+  .performances .videos-grid .card,
+  .performances .videos-grid .card.playing {
+    aspect-ratio: 16 / 9;
+  }
   .certificate img {
     width: max(20vw, 75px);
   }
