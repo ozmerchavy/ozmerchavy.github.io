@@ -45,7 +45,7 @@ html, body {
 body{
     display: flex;
     flex-direction: column;
-    width: min(75%, 1000px);
+    width: min(100%, 1000px);
     margin: auto;
     background-color: var(--bg-color);
     color: var(--font-color);
