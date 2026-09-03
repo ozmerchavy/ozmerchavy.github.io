@@ -61,6 +61,8 @@
 
 /*CLIENTS*/
 
+/* stated as a count, not a min width: auto-fit fitted five once the body hit
+ * its 1000px cap. eight cards, four per row. */
 .clients .clients-grid {
-  --min-column-size: 13rem;
+  grid-template-columns: repeat(4, 1fr);
 }

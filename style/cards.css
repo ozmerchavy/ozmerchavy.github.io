@@ -7,8 +7,7 @@
     grid-template-columns: repeat(auto-fit, minmax(min(var(--min-column-size), 100%), 1fr));
 }
 
-/* each card family sets its own aspect-ratio, since the client cards drop
- * theirs when they open in order to fit their text */
+/* each card family sets its own aspect-ratio */
 .grid .card {
     position: relative;
     border-radius: 8px;
@@ -122,52 +121,53 @@
 }
 
 .clients-grid .card {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    /* leaves room for the chevron, which is pinned to the bottom */
-    padding-bottom: 3.25rem;
+    /* the ratio is kept whether the card is open or not. it sets the collapsed
+     * size, and it gives .lil-img below a height that does not depend on the
+     * card growing, which is what stops the logo shifting on open. */
+    aspect-ratio: 30 / 26;
     background-color: var(--panel-color);
+    /* every card opens by exactly this much, so they all end up the same size.
+     * the copy is kept to a similar length so this stays tight. */
+    --reveal-height: 10.5rem;
     --scale-time: 150ms;
     transition: scale var(--scale-time);
 }
 
-.clients-grid .card:not(.expanded) {
-    aspect-ratio: 30 / 26;
-}
-
 .clients-grid .lil-img {
-    flex: 1;
+    /* 100% resolves against the ratio-derived height, not the grown height */
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 6.5rem;
 }
 
 .clients-grid img {
     /* the logos range from square to very wide wordmarks, so cap both axes */
     width: 58%;
     height: auto;
-    max-height: 5rem;
+    max-height: 40%;
     object-fit: contain;
     display: block;
 }
 
-/* the reveal: 0fr -> 1fr animates to whatever height the text actually needs,
- * so the copy can be any length without being clipped */
+/* the reveal is pulled up into the spare room under the logo so an open card is
+ * not overly tall. it must stay smaller than that gap or the copy would sit on
+ * top of the logo, so the mobile value is smaller (the cards are shorter there). */
 .clients-grid .lil-text-content {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 500ms ease-in-out;
+    margin-top: -3rem;
+    /* reserves the chevron's strip below the window, so the copy can never
+     * slide under the arrow, mid-animation or once open */
+    margin-bottom: 2.5rem;
+    height: 0;
+    overflow: hidden;
+    transition: height 500ms ease-in-out;
 }
 
 .clients-grid .card.expanded .lil-text-content {
-    grid-template-rows: 1fr;
+    height: var(--reveal-height);
 }
 
 .clients-grid .text-content {
-    overflow: hidden;
-    min-height: 0;
     text-align: center;
     padding-inline: 1.25rem;
 }

@@ -1,4 +1,13 @@
+@media (max-width: 1000px) {
+  .clients .clients-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 850px) {
+  .clients .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
   header {
     grid-template-areas:
       "aboutme"
@@ -151,23 +160,21 @@
     border-top: 1px solid var(--hairline-color);
   }
 
-  /* two client cards per row, with room to breathe between rows */
+  /* two client cards per row, with room to breathe between rows. stated
+   * explicitly, because auto-fit fell to three columns near 550px. */
   .clients .clients-grid {
-    --min-column-size: 7.5rem;
     column-gap: 0.7rem;
     row-gap: 1.5rem;
   }
-  .clients-grid .card {
-    padding-bottom: 2.6rem;
-  }
-  .clients-grid .lil-img {
-    min-height: 4.5rem;
+  .clients-grid .lil-text-content {
+    margin-top: -1.25rem;
+    margin-bottom: 2rem;
   }
   .clients-grid img {
     max-height: 3.25rem;
   }
   .clients-grid .text-content {
-    padding-inline: 0.55rem;
+    padding-inline: 0.5rem;
   }
   .clients-grid .body-text {
     font-size: 0.8rem;
