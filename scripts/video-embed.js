@@ -101,4 +101,5 @@ function warmUpWhenIdle() {
 
 // only worth doing on the tab that actually has videos on it
 if (document.body.dataset.tab === 'piano') warmUpWhenIdle();
-document.querySelector('nav [data-tab="piano"]').addEventListener('click', warmUpWhenIdle);
+// the landing pages have no tab bar, only the piano furniture
+document.querySelector('nav [data-tab="piano"]')?.addEventListener('click', warmUpWhenIdle);

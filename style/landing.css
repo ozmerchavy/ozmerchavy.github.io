@@ -1,0 +1,141 @@
+/* The location landing pages reuse the piano tab's furniture. What they need on
+ * top of it is a header without the tab switcher, and a few blocks that only
+ * exist here: the crumb, the areas list, the FAQ and the row of page links. */
+
+/*HEADER*/
+
+/* nothing is typed into the hero here, so no room has to be held for it */
+.landing-header .descriptive-text {
+  min-height: 0;
+}
+
+.landing-header h1 {
+  font-size: 2.4rem;
+  margin: 0.4rem 0 1.2rem;
+}
+
+.landing-header .descriptive-text p {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.crumb {
+  font-size: 0.85rem;
+  color: var(--muted-color);
+  margin: 0;
+}
+
+.crumb a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.crumb a:hover {
+  color: var(--second-color);
+}
+
+.landing-header .booking-button {
+  width: fit-content;
+  margin-top: 2rem;
+}
+
+/*AREAS SERVED*/
+
+.areas h2 {
+  margin-bottom: 1rem;
+}
+
+.areas .section-intro {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--muted-color);
+  margin: 0 0 2rem;
+}
+
+.area-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.area-list li {
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--hairline-color);
+  border-radius: 999px;
+  background-color: var(--panel-color);
+  font-size: 0.9rem;
+}
+
+.areas .footnote {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--muted-color);
+  margin: 1.8rem 0 0;
+}
+
+/*QUESTIONS*/
+
+.faq h2 {
+  margin-bottom: 1.8rem;
+}
+
+.faq-item {
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--hairline-color);
+}
+
+.faq-item:last-child {
+  border-bottom: 1px solid var(--hairline-color);
+}
+
+.faq-item h3 {
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin: 0 0 0.6rem;
+}
+
+.faq-item p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--muted-color);
+  margin: 0;
+}
+
+/*THE OTHER PAGES*/
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.pill-row .pill-link {
+  margin: 0;
+}
+
+@media (max-width: 850px) {
+  .landing-header h1 {
+    font-size: 2rem;
+  }
+  /* stacked, the hero button lands right on top of the photo */
+  .landing-header .booking-button {
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* the contact section sizes its anchors as icon buttons, which is not what the
+ * links out to the sibling pages want */
+.contact .pill-row .pill-link {
+  display: flex;
+  width: auto;
+  aspect-ratio: auto;
+  margin: 0;
+  opacity: 1;
+}

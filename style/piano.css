@@ -318,3 +318,20 @@
 .booking-button:hover {
   scale: 1.02;
 }
+
+/*LINKS INSIDE THE COPY*/
+
+.prose a,
+.areas .footnote a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--second-color);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  transition: color 200ms ease-in-out;
+}
+
+.prose a:hover,
+.areas .footnote a:hover {
+  color: var(--second-color);
+}
