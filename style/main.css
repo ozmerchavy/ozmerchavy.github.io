@@ -96,3 +96,18 @@ h2{
     text-align: center;
     margin-top: 1rem;
 }
+
+/* A quiet pointer to the unofficial-titles page. It has to be real, visible,
+ * crawlable text - a hidden link would be cloaking - so it is just small and
+ * muted, and sits in the fine print where nothing else competes for the eye. */
+.copyright .aside-link {
+    margin-left: 0.7rem;
+    font-size: 0.75rem;
+    color: var(--muted-color);
+    text-decoration: none;
+}
+
+.copyright .aside-link:hover {
+    color: var(--second-color);
+    text-decoration: underline;
+}

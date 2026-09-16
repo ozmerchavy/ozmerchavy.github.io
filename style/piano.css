@@ -322,7 +322,8 @@
 /*LINKS INSIDE THE COPY*/
 
 .prose a,
-.areas .footnote a {
+.areas .footnote a,
+.awards .footnote a {
   color: inherit;
   text-decoration: underline;
   text-decoration-color: var(--second-color);
@@ -332,6 +333,7 @@
 }
 
 .prose a:hover,
-.areas .footnote a:hover {
+.areas .footnote a:hover,
+.awards .footnote a:hover {
   color: var(--second-color);
 }

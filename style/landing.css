@@ -70,11 +70,26 @@
   font-size: 0.9rem;
 }
 
-.areas .footnote {
+.areas .footnote,
+.awards .footnote {
   font-size: 0.9rem;
   line-height: 1.7;
   color: var(--muted-color);
   margin: 1.8rem 0 0;
+}
+
+/*A PLAIN AWARDS CARD*/
+
+/* the awards card carries a dark piano photo behind it, which is right on the
+ * piano tab and wrong everywhere else: on a light theme it swallows the second
+ * column of the list. no-backdrop drops it for a flat panel. */
+.awards.no-backdrop .awards-card {
+  background-image: none;
+  border: 1px solid var(--hairline-color);
+}
+
+.awards.no-backdrop .awards-card::before {
+  display: none;
 }
 
 /*QUESTIONS*/
