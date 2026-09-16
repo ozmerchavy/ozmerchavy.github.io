@@ -1,0 +1,20 @@
+<!doctype html>
+<!--
+  The site is one page with two tabs, so /piano cannot be served on its own. This hands the
+  visitor to the real page with the piano tab asked for, and scripts/tabs.js puts /piano back
+  in the address bar once it is there.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Oz Merchavy &mdash; Piano</title>
+    <link rel="canonical" href="https://ozmerchavy.com/piano" />
+    <meta http-equiv="refresh" content="0; url=/?piano" />
+    <script>
+      location.replace('/?piano' + location.hash);
+    </script>
+  </head>
+  <body>
+    <p><a href="/?piano">Continue to Oz Merchavy&rsquo;s piano page</a>.</p>
+  </body>
+</html>
