@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="style/experience.css" />
     <link rel="stylesheet" href="style/piano.css" />
     <link rel="stylesheet" href="style/education-skills-contact.css" />
+    <link rel="stylesheet" href="style/booking-form.css" />
     <!-- mobile.css must be imported last to override other styles -->
     <link rel="stylesheet" href="style/mobile.css" />
 
@@ -20,6 +21,8 @@
     <script defer src="scripts/tabs.js"></script>
     <script defer src="scripts/copy-email.js"></script>
     <script defer src="scripts/video-embed.js"></script>
+    <script defer src="scripts/booking-form.js"></script>
+    <script src="https://web3forms.com/client/script.js" async defer></script>
 
     <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon" />
     <link rel="canonical" href="https://ozmerchavy.com/" />
@@ -1014,6 +1017,110 @@
 
         <section class="contact" id="piano-contact">
           <h2>Get in Touch</h2>
+
+          <p class="contact-intro">
+            Tell Oz about your event and he will get back to you. An email or a
+            message on any of the links below works just as well.
+          </p>
+
+          <form class="booking-form">
+            <input
+              type="hidden"
+              name="access_key"
+              value="edb39d2d-8f09-4129-9d98-913b21e537e6"
+            />
+            <input
+              type="hidden"
+              name="subject"
+              value="Piano enquiry from ozmerchavy.com"
+            />
+            <input
+              type="hidden"
+              name="from_name"
+              value="ozmerchavy.com"
+            />
+            <input
+              type="checkbox"
+              class="botcheck"
+              name="botcheck"
+              tabindex="-1"
+              autocomplete="off"
+            />
+
+            <div class="field">
+              <label for="booking-name">Name</label>
+              <input
+                id="booking-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="booking-email">Email</label>
+              <input
+                id="booking-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="booking-occasion">Occasion</label>
+              <input
+                id="booking-occasion"
+                name="occasion"
+                type="text"
+                placeholder="Wedding, concert, dinner&hellip;"
+              />
+            </div>
+
+            <div class="field">
+              <label for="booking-date">
+                Date <span class="optional">(if you have one)</span>
+              </label>
+              <input id="booking-date" name="event_date" type="date" />
+            </div>
+
+            <div class="field wide">
+              <label for="booking-message">Message</label>
+              <textarea
+                id="booking-message"
+                name="message"
+                rows="5"
+                placeholder="Where the event is, how long you need, and anything you would like played."
+                required
+              ></textarea>
+            </div>
+
+            <!-- web3forms' client script fills in the sitekey and loads hcaptcha -->
+            <div class="h-captcha" data-captcha="true" data-theme="dark"></div>
+
+            <button class="booking-button submit-button" type="submit">
+              <span class="label">Send</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 12h15m-6-6 6 6-6 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+
 
           <div class="contact-links">
             <a

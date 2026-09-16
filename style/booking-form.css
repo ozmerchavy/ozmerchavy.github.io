@@ -1,0 +1,150 @@
+/* The booking form in the contact section of the piano page and the two landing pages.
+ * It posts to web3forms (see scripts/booking-form.js), which mails the enquiry on. */
+
+.contact-intro {
+  max-width: 34rem;
+  margin: 1.5rem auto 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--muted-color);
+}
+
+.booking-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem 1.5rem;
+  margin-top: 2rem;
+  /* the contact section centres its contents, the form reads better ranged left */
+  text-align: left;
+}
+
+.booking-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.booking-form .field.wide,
+.booking-form .form-status {
+  grid-column: 1 / -1;
+}
+
+.booking-form label {
+  font-size: 0.85rem;
+  color: var(--muted-color);
+}
+
+.booking-form label .optional {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.booking-form input,
+.booking-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--hairline-color);
+  border-radius: 6px;
+  background-color: var(--panel-color);
+  color: inherit;
+  font-size: 0.95rem;
+  /* the form only ever sits on the dark piano theme, and the date picker and the
+   * textarea scrollbar are drawn by the browser, which needs telling */
+  color-scheme: dark;
+  transition: border-color 200ms ease-in-out;
+}
+
+.booking-form textarea {
+  resize: vertical;
+  min-height: 7rem;
+  line-height: 1.6;
+}
+
+.booking-form input::placeholder,
+.booking-form textarea::placeholder {
+  color: var(--muted-color);
+  opacity: 0.7;
+}
+
+.booking-form input:focus,
+.booking-form textarea:focus {
+  outline: none;
+  border-color: var(--second-color);
+}
+
+/* web3forms' spam trap: a field a person never sees, and so never fills in */
+.booking-form .botcheck {
+  display: none;
+}
+
+/* the hcaptcha box is a fixed size iframe, so it is centred rather than stretched */
+.booking-form .h-captcha {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+/* the response token rides along in the form, it is not something to draw as a field */
+.booking-form .h-captcha textarea {
+  display: none;
+}
+
+.booking-form .submit-button {
+  box-sizing: border-box;
+  grid-column: 1 / -1;
+  width: fit-content;
+  margin-inline: auto;
+  padding: 1rem 2.8rem;
+  border: 0;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.booking-form .submit-button svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.booking-form .submit-button:disabled {
+  cursor: default;
+  opacity: 0.6;
+  scale: 1;
+}
+
+.booking-form .form-status {
+  /* holding the line keeps the answer from nudging the page when it appears */
+  min-height: 1.3rem;
+  text-align: center;
+  margin: 0;
+  align-self: center;
+  font-size: 0.9rem;
+}
+
+/* lighter than --second-color, which is too dim to read at this size on the dark theme */
+.booking-form .form-status.success {
+  color: #9aa4e8;
+}
+
+.booking-form .form-status.error {
+  color: #e59595;
+}
+
+@media (max-width: 650px) {
+  .booking-form {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .booking-form .submit-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* hcaptcha draws at a fixed 303px, which is wider than the room left on the smallest phones */
+@media (max-width: 380px) {
+  .booking-form .h-captcha {
+    transform: scale(0.88);
+  }
+}
