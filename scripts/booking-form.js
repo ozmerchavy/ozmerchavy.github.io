@@ -19,13 +19,6 @@ document.querySelectorAll('.booking-form').forEach((form) => {
     event.preventDefault();
     if (button.disabled) return; // a second click while the first send is in the air
 
-    // web3forms turns the enquiry away without a captcha token, so it is worth saying so here
-    // rather than letting the send come back as a failure
-    const token = form.querySelector('textarea[name="h-captcha-response"]');
-    if (!token || !token.value) {
-      say('Please complete the "I am human" check first.', 'error');
-      return;
-    }
 
     button.disabled = true;
     buttonLabel.textContent = 'Sending\u2026';
@@ -47,7 +40,6 @@ document.querySelectorAll('.booking-form').forEach((form) => {
       say('That did not go through. Please email ' + FALLBACK_ADDRESS + ' instead.', 'error');
     } finally {
       // a token is only good for the one send, spent or not
-      window.hcaptcha && window.hcaptcha.reset();
       button.disabled = false;
       buttonLabel.textContent = 'Send';
     }

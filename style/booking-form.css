@@ -78,18 +78,6 @@
   display: none;
 }
 
-/* the hcaptcha box is a fixed size iframe, so it is centred rather than stretched */
-.booking-form .h-captcha {
-  grid-column: 1 / -1;
-  display: flex;
-  justify-content: center;
-  margin-top: 0.5rem;
-}
-
-/* the response token rides along in the form, it is not something to draw as a field */
-.booking-form .h-captcha textarea {
-  display: none;
-}
 
 .booking-form .submit-button {
   box-sizing: border-box;
@@ -139,12 +127,5 @@
   .booking-form .submit-button {
     width: 100%;
     justify-content: center;
-  }
-}
-
-/* hcaptcha draws at a fixed 303px, which is wider than the room left on the smallest phones */
-@media (max-width: 380px) {
-  .booking-form .h-captcha {
-    transform: scale(0.88);
   }
 }
