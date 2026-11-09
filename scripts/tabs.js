@@ -36,17 +36,14 @@ function changeToTab(index) {
   moveTabMarkerTo(li);
   typeRelevantText(index);
 
-
+  showTabInUrl(index);
 
   // a card left open shouldn't still be open when you come back to the tab
   expandableCards.forEach((card) => card.classList.remove('expanded'));
 }
 
 tabs.forEach((li, index) => {
-  li.addEventListener('click', (event) => {
-    if (event.target.closest('a')) return;
-    location.assign(index === 0 ? '/' : '/piano/');
-  });
+  li.addEventListener('click', () => changeToTab(index));
 });
 
 // keep the marker on its tab when the tabs resize (font finishes loading, page resize, etc).
@@ -55,12 +52,23 @@ new ResizeObserver(() => {
   currentlySelectedTab && moveTabMarkerTo(currentlySelectedTab);
 }).observe(nav);
 
-// Keep existing ?piano links working while serving the piano content at a real URL.
-const legacyParams = new URLSearchParams(location.search);
-if (legacyParams.has('piano')) {
-  legacyParams.delete('piano');
-  const query = legacyParams.toString();
-  location.replace('/piano/' + (query ? '?' + query : '') + location.hash);
-} else {
-  changeToTab(0);
+// a tab can be asked for by path (/piano) or, from the older links, by query (?piano)
+function tabIndexFromUrl() {
+  const path = location.pathname.replace(/^\/+|\/+$/g, '');
+  const params = [...new URLSearchParams(location.search).keys()];
+  const index = tabs.findIndex(
+    (li) => li.dataset.tab === path || params.includes(li.dataset.tab)
+  );
+  return index === -1 ? 0 : index;
 }
+
+// the address bar should name the tab you're looking at: / for the first one, /piano for the
+// next. this is also what turns an old ?piano link into /piano.
+function showTabInUrl(index) {
+  if (!location.protocol.startsWith('http')) return; // opened straight off the disk
+  const path = index === 0 ? '/' : '/' + tabs[index].dataset.tab;
+  history.replaceState(null, '', path + location.hash);
+}
+
+// initially the first tab should be selected, unless the url asks for another
+changeToTab(tabIndexFromUrl());
