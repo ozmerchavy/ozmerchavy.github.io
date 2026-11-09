@@ -1,0 +1,24 @@
+/* Loaded only by the standalone wedding checklist. */
+.music-guide { max-width: 850px; width: 100%; }
+.music-guide h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.18; margin: 1.5rem 0; }
+.music-guide p, .music-guide li { line-height: 1.85; }
+.music-guide li { margin-bottom: .7rem; }
+.music-guide .guide-intro { font-size: 1.2rem; }
+.music-guide a, .copyright a { color: #aeb8ff; text-underline-offset: .2em; }
+.guide-byline, .guide-print-note { color: var(--muted-color); font-size: .9rem; }
+.guide-contents { display: flex; flex-wrap: wrap; gap: .8rem 1.4rem; margin: 2rem 0; padding: 1.3rem 0; border-block: 1px solid var(--hairline-color); }
+.music-guide section { margin-top: 3.5rem; scroll-margin-top: 1rem; }
+.music-guide h2 { font-size: 1.6rem; }
+.table-scroll { overflow-x: auto; }
+.music-guide table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.music-guide th, .music-guide td { padding: .85rem; text-align: left; border: 1px solid var(--hairline-color); line-height: 1.5; }
+.music-guide th { background: var(--panel-color); }
+@media print {
+ body { background: white; color: black; width: auto; padding: 0; --hairline-color: #ccc; --muted-color: #333; --panel-color: #eee; }
+ .music-guide { max-width: none; }
+ .music-guide a { color: black; }
+ .guide-contents, .guide-print-note, .copyright { display: none !important; }
+ .music-guide h2 { break-after: avoid; }
+ .music-guide tr { break-inside: avoid; }
+ .table-scroll { overflow: visible; }
+}
