@@ -81,7 +81,7 @@ let warmUpFrame;
 function warmUpPlayer() {
   const connection = navigator.connection;
   const sparingData = connection?.saveData || /2g/.test(connection?.effectiveType ?? '');
-  if (warmUpFrame || sparingData) return;
+  if (!featuredLink || warmUpFrame || sparingData) return;
 
   warmUpFrame = document.createElement('iframe');
   warmUpFrame.className = 'player-warm-up';
